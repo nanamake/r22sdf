@@ -6,15 +6,6 @@ Implementation of pipeline FFT described in Verilog HDL.
 * Radix-2<sup>2</sup> single-path delay feedback (R2<sup>2</sup>SDF) architecture
 * Synthesizable with FPGA implementation software
 
-There are two kinds of configurations.
-
-* Basic configuration for small size FFT
-* Resource saving configuration for large size FFT
-
-
-In my environment, when the number of FFT points is greater than or equal to 256
- it is better to use the resource saving configuration.
-
 
 Interface
 ---------
@@ -44,6 +35,14 @@ For 64-point FFT, it is 71 clock cycles.
 Source Files
 ------------
 
+There are two kinds of configurations.
+
+* Basic configuration for small size FFT
+* Resource saving configuration for large size FFT
+
+In my environment, when the number of FFT points is greater than or equal to 256
+ it is better to use the resource saving configuration.
+
 For the basic configuration, use the following files.
 
 	FFT.v
@@ -59,6 +58,7 @@ For the basic configuration, use the following files.
 *SdfUnit2.v* is required if the number of FFT points is not a power of 4.
 To make a resource saving configuration, replace *SdfUnit.v* with *SdfUnit_TC.v*
  and add *TwiddleConvert.v*.
+
 
 Architecture
 ------------
