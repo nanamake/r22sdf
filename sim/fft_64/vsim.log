@@ -1,0 +1,13 @@
+# vsim +nowarnTSCALE -do vsim.do -l vsim.log -c TB 
+# Loading work.TB
+# Loading work.FFT
+# Loading work.SdfUnit
+# Loading work.Butterfly
+# Loading work.DelayBuffer
+# Loading work.Twiddle
+# Loading work.Multiply
+# do vsim.do 
+# add wave -r /*
+# run -all
+# ** Note: $finish    : stim.v(29)
+#    Time: 4490 ns  Iteration: 1  Instance: /TB
