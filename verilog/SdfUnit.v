@@ -78,9 +78,9 @@ reg             bf2_count_en;   //  Single-Path Data Count Enable
 reg [LOG_N-1:0] bf2_count;      //  Single-Path Data Count
 reg             bf2_start;      //  Single-Path Output Trigger
 wire            bf2_end;        //  End of Single-Path Data
-reg             bf2_odata_en;   //  2nd Butterfly Output Data Enable
 reg [WIDTH-1:0] bf2_odata_r;    //  2nd Butterfly Output Data (Real)
 reg [WIDTH-1:0] bf2_odata_i;    //  2nd Butterfly Output Data (Imag)
+reg             bf2_odata_en;   //  2nd Butterfly Output Data Enable
 
 //  Multiplication
 wire[1:0]       tw_sel;         //  Twiddle Select (2n/n/3n)
@@ -210,9 +210,16 @@ end
 assign  bf2_end = (bf2_count == (2**LOG_N-1));
 
 always @(posedge clock) begin
-    bf2_odata_en <= bf2_count_en;
     bf2_odata_r  <= bf2_sdout_r;
     bf2_odata_i  <= bf2_sdout_i;
+end
+
+always @(posedge clock or posedge reset) begin
+    if (reset) begin
+        bf2_odata_en <= 1'b0;
+    end else begin
+        bf2_odata_en <= bf2_count_en;
+    end
 end
 
 //----------------------------------------------------------------------
