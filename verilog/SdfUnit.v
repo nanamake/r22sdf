@@ -88,9 +88,11 @@ wire[LOG_N-3:0] tw_num;         //  Twiddle Number (n)
 wire[LOG_N-1:0] tw_addr;        //  Twiddle Table Address
 wire[WIDTH-1:0] tw_data_r;      //  Twiddle Data from Table (Real)
 wire[WIDTH-1:0] tw_data_i;      //  Twiddle Data from Table (Imag)
+reg             mu_addr_nz;     //  Multiplication Enable
+wire[WIDTH-1:0] mu_idata_r;     //  Multiplier Input (Real)
+wire[WIDTH-1:0] mu_idata_i;     //  Multiplier Input (Imag)
 wire[WIDTH-1:0] mu_mdata_r;     //  Multiplier Output (Real)
 wire[WIDTH-1:0] mu_mdata_i;     //  Multiplier Output (Imag)
-reg             mu_addr_nz;     //  Multiplication Enable
 reg [WIDTH-1:0] mu_odata_r;     //  Multiplication Output Data (Real)
 reg [WIDTH-1:0] mu_odata_i;     //  Multiplication Output Data (Imag)
 reg             mu_odata_en;    //  Multiplication Output Data Enable
@@ -107,12 +109,11 @@ always @(posedge clock or posedge reset) begin
 end
 assign  bf1_bf = idata_count[LOG_M-1];
 
-//  The following logic is redundant, but makes it easier to check the waveform.
-//  It may also reduce power consumption slightly.
-assign  bf1_x0_r = bf1_bf ? db1_dout_r : {WIDTH{1'b0}};
-assign  bf1_x0_i = bf1_bf ? db1_dout_i : {WIDTH{1'b0}};
-assign  bf1_x1_r = bf1_bf ? idata_r : {WIDTH{1'b0}};
-assign  bf1_x1_i = bf1_bf ? idata_i : {WIDTH{1'b0}};
+//  Set unknown value x for verification
+assign  bf1_x0_r = bf1_bf ? db1_dout_r : {WIDTH{1'bx}};
+assign  bf1_x0_i = bf1_bf ? db1_dout_i : {WIDTH{1'bx}};
+assign  bf1_x1_r = bf1_bf ? idata_r : {WIDTH{1'bx}};
+assign  bf1_x1_i = bf1_bf ? idata_i : {WIDTH{1'bx}};
 
 Butterfly #(.WIDTH(WIDTH)) BF1 (
     .x0_r   (bf1_x0_r   ),  //  i
@@ -163,12 +164,11 @@ always @(posedge clock) begin
     bf2_bf <= bf1_count[LOG_M-2];
 end
 
-//  The following logic is redundant, but makes it easier to check the waveform.
-//  It may also reduce power consumption slightly.
-assign  bf2_x0_r = bf2_bf ? db2_dout_r : {WIDTH{1'b0}};
-assign  bf2_x0_i = bf2_bf ? db2_dout_i : {WIDTH{1'b0}};
-assign  bf2_x1_r = bf2_bf ? bf1_odata_r : {WIDTH{1'b0}};
-assign  bf2_x1_i = bf2_bf ? bf1_odata_i : {WIDTH{1'b0}};
+//  Set unknown value x for verification
+assign  bf2_x0_r = bf2_bf ? db2_dout_r : {WIDTH{1'bx}};
+assign  bf2_x0_i = bf2_bf ? db2_dout_i : {WIDTH{1'bx}};
+assign  bf2_x1_r = bf2_bf ? bf1_odata_r : {WIDTH{1'bx}};
+assign  bf2_x1_i = bf2_bf ? bf1_odata_i : {WIDTH{1'bx}};
 
 Butterfly #(.WIDTH(WIDTH)) BF2 (
     .x0_r   (bf2_x0_r   ),  //  i
@@ -237,9 +237,16 @@ Twiddle TW (
     .data_i (tw_data_i  )   //  o
 );
 
+//  Set unknown value x for verification
+always @(posedge clock) begin
+    mu_addr_nz <= (tw_addr != {LOG_N{1'b0}});
+end
+assign  mu_idata_r = mu_addr_nz ? bf2_odata_r : {WIDTH{1'bx}};
+assign  mu_idata_i = mu_addr_nz ? bf2_odata_i : {WIDTH{1'bx}};
+
 Multiply #(.WIDTH(WIDTH)) MU (
-    .ar (bf2_odata_r),  //  i
-    .ai (bf2_odata_i),  //  i
+    .ar (mu_idata_r ),  //  i
+    .ai (mu_idata_i ),  //  i
     .br (tw_data_r  ),  //  i
     .bi (tw_data_i  ),  //  i
     .mr (mu_mdata_r ),  //  o
@@ -248,7 +255,6 @@ Multiply #(.WIDTH(WIDTH)) MU (
 
 //  When twiddle number n is not 0, multiplication is performed.
 always @(posedge clock) begin
-    mu_addr_nz <= (tw_addr != {LOG_N{1'b0}});
     mu_odata_r <= mu_addr_nz ? mu_mdata_r : bf2_odata_r;
     mu_odata_i <= mu_addr_nz ? mu_mdata_i : bf2_odata_i;
 end
