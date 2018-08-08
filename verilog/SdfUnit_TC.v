@@ -7,6 +7,7 @@ module SdfUnit #(
     parameter   WIDTH = 16,     //  Data Bit Length
     parameter   TC_EN = 1,      //  Twiddle Conversion Enable
     parameter   TW_FF = 1,      //  Use Twiddle Output Register
+    parameter   TC_FF = 1,      //  Use TwiddleConvert Output Register
     parameter   LP = 0          //  Power Saving
 )(
     input               clock,      //  Master Clock
@@ -32,6 +33,9 @@ endfunction
 
 localparam  LOG_N = log2(N);    //  Bit Length of N
 localparam  LOG_M = log2(M);    //  Bit Length of M
+
+//  When using Twiddle Conversion, start counting 1T earlier
+localparam  EARLY = TC_EN & TW_FF & TC_FF;
 
 //----------------------------------------------------------------------
 //  Internal Regs and Nets
@@ -79,8 +83,8 @@ wire[WIDTH-1:0] bf2_sdout_r;    //  Single-Path Data Output (Real)
 wire[WIDTH-1:0] bf2_sdout_i;    //  Single-Path Data Output (Imag)
 reg             bf2_count_en;   //  Single-Path Data Count Enable
 reg [LOG_N-1:0] bf2_count;      //  Single-Path Data Count
-wire            bf2_trig;       //  Single-Path Output Trigger
-reg             bf2_trig_ff;    //  Single-Path Output Trigger
+wire            bf2_start_comb; //  Single-Path Output Trigger
+reg             bf2_start_ff;   //  Single-Path Output Trigger
 wire            bf2_start;      //  Single-Path Output Trigger
 wire            bf2_end;        //  End of Single-Path Data
 reg [WIDTH-1:0] bf2_odata_r;    //  2nd Butterfly Output Data (Real)
@@ -98,8 +102,8 @@ wire[WIDTH-1:0] tw_data_r;      //  Twiddle Data from Table (Real)
 wire[WIDTH-1:0] tw_data_i;      //  Twiddle Data from Table (Imag)
 wire[WIDTH-1:0] tc_odata_r;     //  Twiddle Data from TwiddleConvert (Real)
 wire[WIDTH-1:0] tc_odata_i;     //  Twiddle Data from TwiddleConvert (Imag)
-reg             tw_addr_nz;     //  Multiplication Enable When not Using TC
-reg             tc_addr_nz;     //  Multiplication Enable When Using TC
+reg             tw_addr_nz;     //  Multiplication Enable
+reg             tw_addr_nz_1d;  //  Multiplication Enable
 wire            mu_addr_nz;     //  Multiplication Enable
 wire[WIDTH-1:0] mu_idata_r;     //  Multiplier Input (Real)
 wire[WIDTH-1:0] mu_idata_i;     //  Multiplier Input (Imag)
@@ -220,12 +224,12 @@ always @(posedge clock or posedge reset) begin
     end
 end
 
-assign  bf2_trig = (bf1_count == (2**(LOG_M-2)-1)) & bf1_count_en;
+assign  bf2_start_comb = (bf1_count == (2**(LOG_M-2)-1)) & bf1_count_en;
 always @(posedge clock) begin
-    bf2_trig_ff <= bf2_trig;
+    bf2_start_ff <= bf2_start_comb;
 end
-//  When using TwiddleConvert and Twiddle register, start counting 1T earlier
-assign  bf2_start = (TC_EN & TW_FF) ? bf2_trig : bf2_trig_ff;
+//  When using Twiddle Conversion, start counting 1T earlier
+assign  bf2_start = EARLY ? bf2_start_comb : bf2_start_ff;
 assign  bf2_end = (bf2_count == (2**LOG_N-1));
 
 always @(posedge clock) begin
@@ -239,7 +243,7 @@ always @(posedge clock or posedge reset) begin
         bf2_odata_en <= 1'b0;
     end else begin
         bf2_count_en_1d <= bf2_count_en;
-        bf2_odata_en <= (TC_EN & TW_FF) ? bf2_count_en_1d : bf2_count_en;
+        bf2_odata_en <= EARLY ? bf2_count_en_1d : bf2_count_en;
     end
 end
 
@@ -258,7 +262,7 @@ Twiddle #(.TW_FF(TW_FF)) TW (
     .data_i (tw_data_i  )   //  o
 );
 
-TwiddleConvert #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF)) TC (
+TwiddleConvert #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
     .clock  (clock      ),  //  i
     .iaddr  (tw_addr    ),  //  i
     .idata_r(tw_data_r  ),  //  i
@@ -272,12 +276,12 @@ assign  tw_addr_tc = TC_EN ? {3'd0, tc_oaddr} : tw_addr;
 assign  mu_tdata_r = TC_EN ? tc_odata_r : tw_data_r;
 assign  mu_tdata_i = TC_EN ? tc_odata_i : tw_data_i;
 
-//  When using TwiddleConvert and Twiddle register, address generated 1T Earlier
+//  When using Twiddle Conversion, address generated 1T Earlier
 always @(posedge clock) begin
     tw_addr_nz <= (tw_addr != {LOG_N{1'b0}});
-    tc_addr_nz <= tw_addr_nz;
+    tw_addr_nz_1d <= tw_addr_nz;
 end
-assign  mu_addr_nz = (TC_EN & TW_FF) ? tc_addr_nz : tw_addr_nz;
+assign  mu_addr_nz = EARLY ? tw_addr_nz_1d : tw_addr_nz;
 
 //  Set unknown value x for verification
 assign  mu_idata_r = mu_addr_nz ? bf2_odata_r : {WIDTH{1'bx}};

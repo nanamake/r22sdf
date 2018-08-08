@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Wed Aug 08 18:40:51 2018
+Thu Aug 09 04:12:26 2018
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -138,7 +138,7 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Aug 08 18:40:50 2018      ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 09 04:12:25 2018      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
@@ -545,68 +545,68 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                      ;
-+-----------------------------------------------------------------+-------------------------------------------------------+
-; Register name                                                   ; Reason for Removal                                    ;
-+-----------------------------------------------------------------+-------------------------------------------------------+
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_data_i[31]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]      ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_data_i[31]      ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_data_i[31]      ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[4,5]                     ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6] ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6] ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6] ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6] ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[1]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[2]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[4]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]       ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[11]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[12]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[14]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[17]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[24]      ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]      ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[18,24]                    ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[31] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[4,11,13,25]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[30] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[2,10,15,16,22]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[29] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[3,8]                      ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[28] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[7,12]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[27] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[5,9]                      ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[26] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[14,17]                    ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[23] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_r[6,19,20]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[21] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[0]                        ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_r[0]  ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[4,11,13,25]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[30] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[2,10,15,16,22]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[29] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[3,8]                      ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[28] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[7,12]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[27] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[5,9]                      ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[26] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[1,18]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[24] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[14,17]                    ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[23] ;
-; SdfUnit:SU4|TwiddleConvert:TC|odata_i[6,19,20]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|odata_i[21] ;
-; Total Number of Removed Registers = 140                         ;                                                       ;
-+-----------------------------------------------------------------+-------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                         ;
++-----------------------------------------------------------------+----------------------------------------------------------+
+; Register name                                                   ; Reason for Removal                                       ;
++-----------------------------------------------------------------+----------------------------------------------------------+
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_data_i[31]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]         ;
+; SdfUnit:SU2|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_data_i[31]         ;
+; SdfUnit:SU1|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_data_i[31]         ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU2|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU1|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[4,5]                     ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                   ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[1]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[2]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[4]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[11]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[12]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[14]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[17]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[24]         ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]         ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[18,24]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[31] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[30] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[29] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[28] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[27] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[26] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[23] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[21] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[0]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[0]  ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[30] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[29] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[28] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[27] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[26] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[1,18]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[24] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[23] ;
+; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[21] ;
+; Total Number of Removed Registers = 140                         ;                                                          ;
++-----------------------------------------------------------------+----------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -652,36 +652,36 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------------------------------------+-----------------------------------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_i[21]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_r[12]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_i[24]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_r[30]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[5]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[8]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[7]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[10]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[2]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[16]               ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|odata_i[8]  ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|odata_r[0]  ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|odata_i[11] ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|odata_r[3]  ;
-; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|odata_r[31] ;
-; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|odata_r[17] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|odata_i[15] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|odata_i[14] ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|odata_r[11] ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|odata_i[29] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|odata_i[13] ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|odata_r[28] ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|odata_i[1]  ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|odata_i[0]  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_i[21]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_r[12]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_i[24]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_r[30]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[5]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[8]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[7]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[10]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[2]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[16]                  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[8]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[0]  ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[11] ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[3]  ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[31] ;
+; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_r[17] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_i[15] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_i[14] ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_r[11] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_i[29] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_i[13] ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_r[28] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_i[1]  ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_i[0]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -794,6 +794,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH          ; 32    ; Signed Integer                  ;
 ; TC_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
+; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -859,6 +860,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LOG_N          ; 10    ; Signed Integer                                    ;
 ; WIDTH          ; 32    ; Signed Integer                                    ;
 ; TW_FF          ; 1     ; Signed Integer                                    ;
+; TC_FF          ; 1     ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -883,6 +885,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH          ; 32    ; Signed Integer                  ;
 ; TC_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
+; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -948,6 +951,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LOG_N          ; 10    ; Signed Integer                                    ;
 ; WIDTH          ; 32    ; Signed Integer                                    ;
 ; TW_FF          ; 1     ; Signed Integer                                    ;
+; TC_FF          ; 1     ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -972,6 +976,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH          ; 32    ; Signed Integer                  ;
 ; TC_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
+; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -1037,6 +1042,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LOG_N          ; 10    ; Signed Integer                                    ;
 ; WIDTH          ; 32    ; Signed Integer                                    ;
 ; TW_FF          ; 1     ; Signed Integer                                    ;
+; TC_FF          ; 1     ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1061,6 +1067,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH          ; 32    ; Signed Integer                  ;
 ; TC_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
+; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -1126,6 +1133,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LOG_N          ; 10    ; Signed Integer                                    ;
 ; WIDTH          ; 32    ; Signed Integer                                    ;
 ; TW_FF          ; 1     ; Signed Integer                                    ;
+; TC_FF          ; 1     ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1150,6 +1158,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH          ; 32    ; Signed Integer                  ;
 ; TC_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
+; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
@@ -1215,6 +1224,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LOG_N          ; 10    ; Signed Integer                                    ;
 ; WIDTH          ; 32    ; Signed Integer                                    ;
 ; TW_FF          ; 1     ; Signed Integer                                    ;
+; TC_FF          ; 1     ; Signed Integer                                    ;
 +----------------+-------+---------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -2563,7 +2573,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:49     ;
+; Top            ; 00:00:47     ;
 +----------------+--------------+
 
 
@@ -2573,7 +2583,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Wed Aug 08 18:39:35 2018
+    Info: Processing started: Thu Aug 09 04:11:14 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft1024_32b.v
@@ -2592,7 +2602,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file rtl/twi
     Info (12023): Found entity 1: Twiddle
 Info (12127): Elaborating entity "FFT" for the top level hierarchy
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU1"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(251): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF1"
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 33 to match size of target (32)
@@ -2608,19 +2618,19 @@ Warning (10230): Verilog HDL assignment warning at Multiply.v(27): truncated val
 Warning (10230): Verilog HDL assignment warning at Multiply.v(28): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(29): truncated value with size 64 to match size of target (32)
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU2"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(251): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU3"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(251): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU4"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(251): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU5"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(251): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB2"
 Info (19000): Inferred 10 megafunctions from design logic
@@ -2893,8 +2903,8 @@ Info (21057): Implemented 7632 device resources after synthesis - the final reso
     Info (21062): Implemented 128 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 14 warnings
     Info: Peak virtual memory: 818 megabytes
-    Info: Processing ended: Wed Aug 08 18:40:51 2018
-    Info: Elapsed time: 00:01:16
-    Info: Total CPU time (on all processors): 00:01:14
+    Info: Processing ended: Thu Aug 09 04:12:26 2018
+    Info: Elapsed time: 00:01:12
+    Info: Total CPU time (on all processors): 00:01:09
 
 
