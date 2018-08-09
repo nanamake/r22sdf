@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Thu Aug 09 04:12:26 2018
+Fri Aug 10 00:53:37 2018
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  28. Parameter Settings for User Entity Instance: SdfUnit:SU1|Butterfly:BF2
  29. Parameter Settings for User Entity Instance: SdfUnit:SU1|DelayBuffer:DB2
  30. Parameter Settings for User Entity Instance: SdfUnit:SU1|Twiddle:TW
- 31. Parameter Settings for User Entity Instance: SdfUnit:SU1|TwiddleConvert:TC
+ 31. Parameter Settings for User Entity Instance: SdfUnit:SU1|TwiddleConvert8:TC
  32. Parameter Settings for User Entity Instance: SdfUnit:SU1|Multiply:MU
  33. Parameter Settings for User Entity Instance: SdfUnit:SU2
  34. Parameter Settings for User Entity Instance: SdfUnit:SU2|Butterfly:BF1
@@ -44,7 +44,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  36. Parameter Settings for User Entity Instance: SdfUnit:SU2|Butterfly:BF2
  37. Parameter Settings for User Entity Instance: SdfUnit:SU2|DelayBuffer:DB2
  38. Parameter Settings for User Entity Instance: SdfUnit:SU2|Twiddle:TW
- 39. Parameter Settings for User Entity Instance: SdfUnit:SU2|TwiddleConvert:TC
+ 39. Parameter Settings for User Entity Instance: SdfUnit:SU2|TwiddleConvert8:TC
  40. Parameter Settings for User Entity Instance: SdfUnit:SU2|Multiply:MU
  41. Parameter Settings for User Entity Instance: SdfUnit:SU3
  42. Parameter Settings for User Entity Instance: SdfUnit:SU3|Butterfly:BF1
@@ -52,7 +52,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  44. Parameter Settings for User Entity Instance: SdfUnit:SU3|Butterfly:BF2
  45. Parameter Settings for User Entity Instance: SdfUnit:SU3|DelayBuffer:DB2
  46. Parameter Settings for User Entity Instance: SdfUnit:SU3|Twiddle:TW
- 47. Parameter Settings for User Entity Instance: SdfUnit:SU3|TwiddleConvert:TC
+ 47. Parameter Settings for User Entity Instance: SdfUnit:SU3|TwiddleConvert8:TC
  48. Parameter Settings for User Entity Instance: SdfUnit:SU3|Multiply:MU
  49. Parameter Settings for User Entity Instance: SdfUnit:SU4
  50. Parameter Settings for User Entity Instance: SdfUnit:SU4|Butterfly:BF1
@@ -60,7 +60,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  52. Parameter Settings for User Entity Instance: SdfUnit:SU4|Butterfly:BF2
  53. Parameter Settings for User Entity Instance: SdfUnit:SU4|DelayBuffer:DB2
  54. Parameter Settings for User Entity Instance: SdfUnit:SU4|Twiddle:TW
- 55. Parameter Settings for User Entity Instance: SdfUnit:SU4|TwiddleConvert:TC
+ 55. Parameter Settings for User Entity Instance: SdfUnit:SU4|TwiddleConvert8:TC
  56. Parameter Settings for User Entity Instance: SdfUnit:SU4|Multiply:MU
  57. Parameter Settings for User Entity Instance: SdfUnit:SU5
  58. Parameter Settings for User Entity Instance: SdfUnit:SU5|Butterfly:BF1
@@ -68,7 +68,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  60. Parameter Settings for User Entity Instance: SdfUnit:SU5|Butterfly:BF2
  61. Parameter Settings for User Entity Instance: SdfUnit:SU5|DelayBuffer:DB2
  62. Parameter Settings for User Entity Instance: SdfUnit:SU5|Twiddle:TW
- 63. Parameter Settings for User Entity Instance: SdfUnit:SU5|TwiddleConvert:TC
+ 63. Parameter Settings for User Entity Instance: SdfUnit:SU5|TwiddleConvert8:TC
  64. Parameter Settings for User Entity Instance: SdfUnit:SU5|Multiply:MU
  65. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0
  66. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0
@@ -104,14 +104,9 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  96. altshift_taps Parameter Settings by Entity Instance
  97. lpm_mult Parameter Settings by Entity Instance
  98. Port Connectivity Checks: "SdfUnit:SU5|Multiply:MU"
- 99. Port Connectivity Checks: "SdfUnit:SU5|Twiddle:TW"
-100. Port Connectivity Checks: "SdfUnit:SU4|Twiddle:TW"
-101. Port Connectivity Checks: "SdfUnit:SU3|Twiddle:TW"
-102. Port Connectivity Checks: "SdfUnit:SU2|Twiddle:TW"
-103. Port Connectivity Checks: "SdfUnit:SU1|Twiddle:TW"
-104. Post-Synthesis Netlist Statistics for Top Partition
-105. Elapsed Time Per Partition
-106. Analysis & Synthesis Messages
+ 99. Post-Synthesis Netlist Statistics for Top Partition
+100. Elapsed Time Per Partition
+101. Analysis & Synthesis Messages
 
 
 
@@ -138,7 +133,7 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Aug 09 04:12:25 2018      ;
+; Analysis & Synthesis Status        ; Successful - Fri Aug 10 00:53:36 2018      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
@@ -263,7 +258,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; rtl/Butterfly.v                  ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/Butterfly.v        ;         ;
 ; rtl/DelayBuffer.v                ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/DelayBuffer.v      ;         ;
 ; rtl/Multiply.v                   ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/Multiply.v         ;         ;
-; rtl/TwiddleConvert.v             ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/TwiddleConvert.v   ;         ;
+; rtl/TwiddleConvert8.v            ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/TwiddleConvert8.v  ;         ;
 ; rtl/Twiddle1024_32B.v            ; yes             ; User Verilog HDL File                                 ; C:/Users/ishiba/Desktop/r22sdf/quartus/fft_1024/rtl/Twiddle1024_32B.v  ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                                          ; c:/altera/14.0/quartus/libraries/megafunctions/altsyncram.tdf          ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                                          ; c:/altera/14.0/quartus/libraries/megafunctions/stratix_ram_block.inc   ;         ;
@@ -402,7 +397,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW                                                                                            ; work         ;
 ;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                     ; work         ;
 ;             |altsyncram_3qu:auto_generated|    ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated                                       ; work         ;
-;       |TwiddleConvert:TC|                      ; 335 (335)         ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|TwiddleConvert:TC                                                                                     ; work         ;
+;       |TwiddleConvert8:TC|                     ; 335 (335)         ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC                                                                                    ; work         ;
 ;       |lpm_mult:Mult0|                         ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0                                                                                        ; work         ;
 ;          |multcore:mult_core|                  ; 25 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
 ;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
@@ -435,7 +430,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW                                                                                            ; work         ;
 ;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                     ; work         ;
 ;             |altsyncram_cou:auto_generated|    ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated                                       ; work         ;
-;       |TwiddleConvert:TC|                      ; 334 (334)         ; 72 (72)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|TwiddleConvert:TC                                                                                     ; work         ;
+;       |TwiddleConvert8:TC|                     ; 334 (334)         ; 72 (72)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC                                                                                    ; work         ;
 ;       |lpm_mult:Mult0|                         ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0                                                                                        ; work         ;
 ;          |multcore:mult_core|                  ; 22 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
 ;             |mpar_add:padder|                  ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
@@ -466,7 +461,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
 ;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
 ;       |Twiddle:TW|                             ; 50 (50)           ; 49 (49)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Twiddle:TW                                                                                            ; work         ;
-;       |TwiddleConvert:TC|                      ; 330 (330)         ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|TwiddleConvert:TC                                                                                     ; work         ;
+;       |TwiddleConvert8:TC|                     ; 330 (330)         ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC                                                                                    ; work         ;
 ;       |lpm_mult:Mult0|                         ; 17 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0                                                                                        ; work         ;
 ;          |multcore:mult_core|                  ; 17 (8)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
 ;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
@@ -494,7 +489,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                    ; work         ;
 ;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
 ;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
-;       |TwiddleConvert:TC|                      ; 14 (14)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|TwiddleConvert:TC                                                                                     ; work         ;
+;       |TwiddleConvert8:TC|                     ; 14 (14)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC                                                                                    ; work         ;
 ;       |lpm_mult:Mult0|                         ; 13 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0                                                                                        ; work         ;
 ;          |multcore:mult_core|                  ; 13 (4)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
 ;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
@@ -545,68 +540,68 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                         ;
-+-----------------------------------------------------------------+----------------------------------------------------------+
-; Register name                                                   ; Reason for Removal                                       ;
-+-----------------------------------------------------------------+----------------------------------------------------------+
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_data_i[31]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]         ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_data_i[31]         ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_data_i[31]         ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[0]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU2|TwiddleConvert:TC|ff_iaddr[1]                       ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU3|TwiddleConvert:TC|ff_iaddr[2,3]                     ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[4,5]                     ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                   ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_iaddr[6]    ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[1]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[2]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[4]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[11]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[12]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[14]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[17]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[24]         ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]         ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[18,24]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[31] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[30] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[29] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[28] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[27] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[26] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[23] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[21] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[0]                     ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[0]  ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[30] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[29] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[28] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[27] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[26] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[1,18]                  ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[24] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[23] ;
-; SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[21] ;
-; Total Number of Removed Registers = 140                         ;                                                          ;
-+-----------------------------------------------------------------+----------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                          ;
++-----------------------------------------------------------------+-----------------------------------------------------------+
+; Register name                                                   ; Reason for Removal                                        ;
++-----------------------------------------------------------------+-----------------------------------------------------------+
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_data_i[31]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]          ;
+; SdfUnit:SU2|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_data_i[31]          ;
+; SdfUnit:SU1|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_data_i[31]          ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU2|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU1|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU2|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU2|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[2,3]                    ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[2,3]                    ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[4,5]                    ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_r[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
+; SdfUnit:SU4|Twiddle:TW|ff_data_i[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[1]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[2]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[4]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[11]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_i[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[12]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[14]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[17]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[24]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_data_r[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]          ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[18,24]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[31] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[4,11,13,25]           ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[30] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[2,10,15,16,22]        ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[29] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[3,8]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[28] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[7,12]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[27] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[5,9]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[26] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[14,17]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[23] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[6,19,20]              ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[21] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[0]                    ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[0]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[4,11,13,25]           ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[30] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[2,10,15,16,22]        ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[29] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[3,8]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[28] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[7,12]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[27] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[5,9]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[26] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[1,18]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[24] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[14,17]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[23] ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[6,19,20]              ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[21] ;
+; Total Number of Removed Registers = 140                         ;                                                           ;
++-----------------------------------------------------------------+-----------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -652,36 +647,36 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------------------------------------+-----------------------------------------+------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_i[21]                  ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_r[12]                  ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_i[24]                  ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_r[30]                  ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[5]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[8]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[7]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[10]                  ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[2]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[16]                  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[8]  ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[0]  ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_i[11] ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[3]  ;
-; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert:TC|ff_odata_r[31] ;
-; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_r[17] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_i[15] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert:TC|ff_odata_i[14] ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_r[11] ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_i[29] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert:TC|ff_odata_i[13] ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_r[28] ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_i[1]  ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert:TC|ff_odata_i[0]  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_i[21]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_r[12]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_i[24]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_r[30]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[5]                    ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[8]                    ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[7]                    ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[10]                   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[2]                    ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[16]                   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[8]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[0]  ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[11] ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[3]  ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[31] ;
+; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_r[17] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_i[15] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_i[14] ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_r[11] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_i[29] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_i[13] ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_r[28] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_i[1]  ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_i[0]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -792,7 +787,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; N              ; 1024  ; Signed Integer                  ;
 ; M              ; 1024  ; Signed Integer                  ;
 ; WIDTH          ; 32    ; Signed Integer                  ;
-; TC_EN          ; 1     ; Signed Integer                  ;
+; T4_EN          ; 0     ; Signed Integer                  ;
+; T8_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
 ; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
@@ -852,16 +848,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: SdfUnit:SU1|TwiddleConvert:TC ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; LOG_N          ; 10    ; Signed Integer                                    ;
-; WIDTH          ; 32    ; Signed Integer                                    ;
-; TW_FF          ; 1     ; Signed Integer                                    ;
-; TC_FF          ; 1     ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SdfUnit:SU1|TwiddleConvert8:TC ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; LOG_N          ; 10    ; Signed Integer                                     ;
+; WIDTH          ; 32    ; Signed Integer                                     ;
+; TW_FF          ; 1     ; Signed Integer                                     ;
+; TC_FF          ; 1     ; Signed Integer                                     ;
++----------------+-------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -883,7 +879,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; N              ; 1024  ; Signed Integer                  ;
 ; M              ; 256   ; Signed Integer                  ;
 ; WIDTH          ; 32    ; Signed Integer                  ;
-; TC_EN          ; 1     ; Signed Integer                  ;
+; T4_EN          ; 0     ; Signed Integer                  ;
+; T8_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
 ; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
@@ -943,16 +940,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: SdfUnit:SU2|TwiddleConvert:TC ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; LOG_N          ; 10    ; Signed Integer                                    ;
-; WIDTH          ; 32    ; Signed Integer                                    ;
-; TW_FF          ; 1     ; Signed Integer                                    ;
-; TC_FF          ; 1     ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SdfUnit:SU2|TwiddleConvert8:TC ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; LOG_N          ; 10    ; Signed Integer                                     ;
+; WIDTH          ; 32    ; Signed Integer                                     ;
+; TW_FF          ; 1     ; Signed Integer                                     ;
+; TC_FF          ; 1     ; Signed Integer                                     ;
++----------------+-------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -974,7 +971,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; N              ; 1024  ; Signed Integer                  ;
 ; M              ; 64    ; Signed Integer                  ;
 ; WIDTH          ; 32    ; Signed Integer                  ;
-; TC_EN          ; 1     ; Signed Integer                  ;
+; T4_EN          ; 0     ; Signed Integer                  ;
+; T8_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
 ; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
@@ -1034,16 +1032,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: SdfUnit:SU3|TwiddleConvert:TC ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; LOG_N          ; 10    ; Signed Integer                                    ;
-; WIDTH          ; 32    ; Signed Integer                                    ;
-; TW_FF          ; 1     ; Signed Integer                                    ;
-; TC_FF          ; 1     ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SdfUnit:SU3|TwiddleConvert8:TC ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; LOG_N          ; 10    ; Signed Integer                                     ;
+; WIDTH          ; 32    ; Signed Integer                                     ;
+; TW_FF          ; 1     ; Signed Integer                                     ;
+; TC_FF          ; 1     ; Signed Integer                                     ;
++----------------+-------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1065,7 +1063,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; N              ; 1024  ; Signed Integer                  ;
 ; M              ; 16    ; Signed Integer                  ;
 ; WIDTH          ; 32    ; Signed Integer                  ;
-; TC_EN          ; 1     ; Signed Integer                  ;
+; T4_EN          ; 0     ; Signed Integer                  ;
+; T8_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
 ; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
@@ -1125,16 +1124,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: SdfUnit:SU4|TwiddleConvert:TC ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; LOG_N          ; 10    ; Signed Integer                                    ;
-; WIDTH          ; 32    ; Signed Integer                                    ;
-; TW_FF          ; 1     ; Signed Integer                                    ;
-; TC_FF          ; 1     ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SdfUnit:SU4|TwiddleConvert8:TC ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; LOG_N          ; 10    ; Signed Integer                                     ;
+; WIDTH          ; 32    ; Signed Integer                                     ;
+; TW_FF          ; 1     ; Signed Integer                                     ;
+; TC_FF          ; 1     ; Signed Integer                                     ;
++----------------+-------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1156,7 +1155,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; N              ; 1024  ; Signed Integer                  ;
 ; M              ; 4     ; Signed Integer                  ;
 ; WIDTH          ; 32    ; Signed Integer                  ;
-; TC_EN          ; 1     ; Signed Integer                  ;
+; T4_EN          ; 0     ; Signed Integer                  ;
+; T8_EN          ; 1     ; Signed Integer                  ;
 ; TW_FF          ; 1     ; Signed Integer                  ;
 ; TC_FF          ; 1     ; Signed Integer                  ;
 ; LP             ; 0     ; Signed Integer                  ;
@@ -1216,16 +1216,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: SdfUnit:SU5|TwiddleConvert:TC ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; LOG_N          ; 10    ; Signed Integer                                    ;
-; WIDTH          ; 32    ; Signed Integer                                    ;
-; TW_FF          ; 1     ; Signed Integer                                    ;
-; TC_FF          ; 1     ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SdfUnit:SU5|TwiddleConvert8:TC ;
++----------------+-------+----------------------------------------------------+
+; Parameter Name ; Value ; Type                                               ;
++----------------+-------+----------------------------------------------------+
+; LOG_N          ; 10    ; Signed Integer                                     ;
+; WIDTH          ; 32    ; Signed Integer                                     ;
+; TW_FF          ; 1     ; Signed Integer                                     ;
+; TC_FF          ; 1     ; Signed Integer                                     ;
++----------------+-------+----------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -2492,51 +2492,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------+
-; Port Connectivity Checks: "SdfUnit:SU5|Twiddle:TW" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; addr[9..7] ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
-
-
-+----------------------------------------------------+
-; Port Connectivity Checks: "SdfUnit:SU4|Twiddle:TW" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; addr[9..7] ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
-
-
-+----------------------------------------------------+
-; Port Connectivity Checks: "SdfUnit:SU3|Twiddle:TW" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; addr[9..7] ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
-
-
-+----------------------------------------------------+
-; Port Connectivity Checks: "SdfUnit:SU2|Twiddle:TW" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; addr[9..7] ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
-
-
-+----------------------------------------------------+
-; Port Connectivity Checks: "SdfUnit:SU1|Twiddle:TW" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; addr[9..7] ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
-
-
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
@@ -2573,7 +2528,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:47     ;
+; Top            ; 00:00:42     ;
 +----------------+--------------+
 
 
@@ -2583,7 +2538,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Thu Aug 09 04:11:14 2018
+    Info: Processing started: Fri Aug 10 00:52:34 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft1024_32b.v
@@ -2596,13 +2551,13 @@ Info (12021): Found 1 design units, including 1 entities, in source file rtl/del
     Info (12023): Found entity 1: DelayBuffer
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/multiply.v
     Info (12023): Found entity 1: Multiply
-Info (12021): Found 1 design units, including 1 entities, in source file rtl/twiddleconvert.v
-    Info (12023): Found entity 1: TwiddleConvert
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/twiddleconvert8.v
+    Info (12023): Found entity 1: TwiddleConvert8
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/twiddle1024_32b.v
     Info (12023): Found entity 1: Twiddle
 Info (12127): Elaborating entity "FFT" for the top level hierarchy
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU1"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(257): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF1"
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 33 to match size of target (32)
@@ -2611,26 +2566,26 @@ Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated va
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB2"
 Info (12128): Elaborating entity "Twiddle" for hierarchy "SdfUnit:SU1|Twiddle:TW"
-Info (12128): Elaborating entity "TwiddleConvert" for hierarchy "SdfUnit:SU1|TwiddleConvert:TC"
+Info (12128): Elaborating entity "TwiddleConvert8" for hierarchy "SdfUnit:SU1|TwiddleConvert8:TC"
 Info (12128): Elaborating entity "Multiply" for hierarchy "SdfUnit:SU1|Multiply:MU"
 Warning (10230): Verilog HDL assignment warning at Multiply.v(26): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(27): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(28): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(29): truncated value with size 64 to match size of target (32)
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU2"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(257): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU3"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(257): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU4"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(257): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU5"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(255): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(257): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB2"
 Info (19000): Inferred 10 megafunctions from design logic
@@ -2902,9 +2857,9 @@ Info (21057): Implemented 7632 device resources after synthesis - the final reso
     Info (21064): Implemented 634 RAM segments
     Info (21062): Implemented 128 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 14 warnings
-    Info: Peak virtual memory: 818 megabytes
-    Info: Processing ended: Thu Aug 09 04:12:26 2018
-    Info: Elapsed time: 00:01:12
-    Info: Total CPU time (on all processors): 00:01:09
+    Info: Peak virtual memory: 801 megabytes
+    Info: Processing ended: Fri Aug 10 00:53:37 2018
+    Info: Elapsed time: 00:01:03
+    Info: Total CPU time (on all processors): 00:01:01
 
 

@@ -57,7 +57,12 @@ For the basic configuration, use the following files.
  and the data bit length.
 *SdfUnit2.v* is required if the number of FFT points is not a power of 4.
 To make a resource saving configuration, replace *SdfUnit.v* with *SdfUnit_TC.v*
- and add *TwiddleConvert.v*.
+ and add *TwiddleConvert4.v* or *TwiddleConvert8.v*.
+
+*TwiddleConvert4* reduces the table size of *Twiddle* to 1/4.
+Likewise, *TwiddleConvert8* reduces it to 1/8, but requires more additional logic
+ than *TwiddleConvert4*.
+*TwiddleConvert8* is used by default, but *TwiddleConvert4* may be better in some cases.
 
 
 Architecture

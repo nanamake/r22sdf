@@ -5,7 +5,8 @@ module SdfUnit #(
     parameter   N = 64,         //  Number of FFT Point
     parameter   M = 64,         //  Twiddle Resolution
     parameter   WIDTH = 16,     //  Data Bit Length
-    parameter   TC_EN = 1,      //  Twiddle Conversion Enable
+    parameter   T4_EN = 0,      //  Use TwiddleConvert4
+    parameter   T8_EN = 1,      //  Use TwiddleConvert8
     parameter   TW_FF = 1,      //  Use Twiddle Output Register
     parameter   TC_FF = 1,      //  Use TwiddleConvert Output Register
     parameter   LP = 0          //  Power Saving
@@ -35,6 +36,7 @@ localparam  LOG_N = log2(N);    //  Bit Length of N
 localparam  LOG_M = log2(M);    //  Bit Length of M
 
 //  When using Twiddle Conversion, start counting 1T earlier
+localparam  TC_EN = T4_EN | T8_EN;
 localparam  EARLY = TC_EN & TW_FF & TC_FF;
 
 //----------------------------------------------------------------------
@@ -96,7 +98,7 @@ reg             bf2_count_en_1d;//  Single-Path Data Enable When Using TC
 wire[1:0]       tw_sel;         //  Twiddle Select (2n/n/3n)
 wire[LOG_N-3:0] tw_num;         //  Twiddle Number (n)
 wire[LOG_N-1:0] tw_addr;        //  Twiddle Table Address
-wire[LOG_N-4:0] tc_oaddr;       //  Twiddle Address from TwiddleConvert
+wire[LOG_N-1:0] tc_oaddr;       //  Twiddle Address from TwiddleConvert
 wire[LOG_N-1:0] tw_addr_tc;     //  Twiddle Address after TC_EN Switch
 wire[WIDTH-1:0] tw_data_r;      //  Twiddle Data from Table (Real)
 wire[WIDTH-1:0] tw_data_i;      //  Twiddle Data from Table (Imag)
@@ -262,17 +264,33 @@ Twiddle #(.TW_FF(TW_FF)) TW (
     .data_i (tw_data_i  )   //  o
 );
 
-TwiddleConvert #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
-    .clock  (clock      ),  //  i
-    .iaddr  (tw_addr    ),  //  i
-    .idata_r(tw_data_r  ),  //  i
-    .idata_i(tw_data_i  ),  //  i
-    .oaddr  (tc_oaddr   ),  //  o
-    .odata_r(tc_odata_r ),  //  o
-    .odata_i(tc_odata_i )   //  o
-);
+generate if (T4_EN) begin
+    TwiddleConvert4 #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
+        .clock  (clock      ),  //  i
+        .iaddr  (tw_addr    ),  //  i
+        .idata_r(tw_data_r  ),  //  i
+        .idata_i(tw_data_i  ),  //  i
+        .oaddr  (tc_oaddr   ),  //  o
+        .odata_r(tc_odata_r ),  //  o
+        .odata_i(tc_odata_i )   //  o
+    );
+end else if (T8_EN) begin
+    TwiddleConvert8 #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
+        .clock  (clock      ),  //  i
+        .iaddr  (tw_addr    ),  //  i
+        .idata_r(tw_data_r  ),  //  i
+        .idata_i(tw_data_i  ),  //  i
+        .oaddr  (tc_oaddr   ),  //  o
+        .odata_r(tc_odata_r ),  //  o
+        .odata_i(tc_odata_i )   //  o
+    );
+end else begin
+    assign  tc_oaddr = {LOG_N{1'bx}};
+    assign  tc_odata_r = {WIDTH{1'bx}};
+    assign  tc_odata_i = {WIDTH{1'bx}};
+end endgenerate
 
-assign  tw_addr_tc = TC_EN ? {3'd0, tc_oaddr} : tw_addr;
+assign  tw_addr_tc = TC_EN ? tc_oaddr : tw_addr;
 assign  mu_tdata_r = TC_EN ? tc_odata_r : tw_data_r;
 assign  mu_tdata_i = TC_EN ? tc_odata_i : tw_data_i;
 

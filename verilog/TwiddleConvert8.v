@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------
-//  TwiddleConvert: Convert Twiddle Number and Value to Save Resources
+//  TwiddleConvert8: Convert Twiddle Value to Reduce Table Size to 1/8
 //----------------------------------------------------------------------
-module TwiddleConvert #(
+module TwiddleConvert8 #(
     parameter   LOG_N = 6,      //  Address Bit Length
     parameter   WIDTH = 16,     //  Data Bit Length
     parameter   TW_FF = 1,      //  Use Twiddle Output Register
@@ -11,7 +11,7 @@ module TwiddleConvert #(
     input   [LOG_N-1:0] iaddr,      //  Twiddle Number
     input   [WIDTH-1:0] idata_r,    //  Twiddle Value (Real)
     input   [WIDTH-1:0] idata_i,    //  Twiddle Value (Imag)
-    output  [LOG_N-4:0] oaddr,      //  Converted Twiddle Number
+    output  [LOG_N-1:0] oaddr,      //  Converted Twiddle Number
     output  [WIDTH-1:0] odata_r,    //  Converted Twiddle Value (Real)
     output  [WIDTH-1:0] odata_i     //  Converted Twiddle Value (Imag)
 );
@@ -29,6 +29,7 @@ reg [WIDTH-1:0] ff_odata_r;
 reg [WIDTH-1:0] ff_odata_i;
 
 //  Convert Twiddle Number
+assign  oaddr[LOG_N-1:LOG_N-3] = 3'd0;
 assign  oaddr[LOG_N-4:0] = iaddr[LOG_N-3] ? -iaddr[LOG_N-4:0] : iaddr[LOG_N-4:0];
 
 //  Convert Twiddle Value
@@ -39,6 +40,9 @@ assign  sel_addr = TW_FF ? ff_iaddr : iaddr;
 
 always @* begin
     if (sel_addr[LOG_N-4:0] == {LOG_N-3{1'b0}}) begin
+        //  When twiddle number n is 0, multiplication is not performed.
+        //  Setting wn_r[0] = 0 and wn_i[0] = 0 makes it easier to check the waveform.
+        //  It may also reduce power consumption slightly.
         case (sel_addr[LOG_N-1:LOG_N-3])
         3'd0    : {mx_odata_r, mx_odata_i} <= {{WIDTH{1'b0}}, {WIDTH{1'b0}}};
         3'd1    : {mx_odata_r, mx_odata_i} <= { COSMQ       , -COSMQ       };

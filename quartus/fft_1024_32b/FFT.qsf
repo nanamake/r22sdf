@@ -6,7 +6,7 @@ set_global_assignment -name VERILOG_FILE rtl/SdfUnit_TC.v
 set_global_assignment -name VERILOG_FILE rtl/Butterfly.v
 set_global_assignment -name VERILOG_FILE rtl/DelayBuffer.v
 set_global_assignment -name VERILOG_FILE rtl/Multiply.v
-set_global_assignment -name VERILOG_FILE rtl/TwiddleConvert.v
+set_global_assignment -name VERILOG_FILE rtl/TwiddleConvert8.v
 set_global_assignment -name VERILOG_FILE rtl/Twiddle1024_32B.v
 
 set_global_assignment -name LAST_QUARTUS_VERSION 14.0
