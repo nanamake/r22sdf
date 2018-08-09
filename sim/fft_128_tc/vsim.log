@@ -5,9 +5,9 @@
 # Loading work.Butterfly
 # Loading work.DelayBuffer
 # Loading work.Twiddle
-# Loading work.TwiddleConvert
 # Loading work.Multiply
 # Loading work.SdfUnit2
+# Loading work.TwiddleConvert8
 # do vsim.do 
 # add wave -r /*
 # run -all

@@ -15,6 +15,6 @@ vlog \
     $rtl_dir/Butterfly.v \
     $rtl_dir/DelayBuffer.v \
     $rtl_dir/Multiply.v \
-    $rtl_dir/TwiddleConvert.v \
+    $rtl_dir/TwiddleConvert8.v \
     $rtl_dir/Twiddle128.v \
     $tb_dir/TB128.v

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Wed Aug 08 18:31:06 2018
+Fri Aug 10 06:37:04 2018
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -100,13 +100,13 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Aug 08 18:31:06 2018      ;
+; Analysis & Synthesis Status        ; Successful - Fri Aug 10 06:37:04 2018      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 1,902                                      ;
-;     Total combinational functions  ; 1,859                                      ;
+; Total logic elements               ; 1,838                                      ;
+;     Total combinational functions  ; 1,795                                      ;
 ;     Dedicated logic registers      ; 589                                        ;
 ; Total registers                    ; 589                                        ;
 ; Total pins                         ; 68                                         ;
@@ -282,16 +282,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 1,902       ;
+; Estimated Total logic elements              ; 1,838       ;
 ;                                             ;             ;
-; Total combinational functions               ; 1859        ;
+; Total combinational functions               ; 1795        ;
 ; Logic element usage by number of LUT inputs ;             ;
 ;     -- 4 input functions                    ; 366         ;
 ;     -- 3 input functions                    ; 833         ;
-;     -- <=2 input functions                  ; 660         ;
+;     -- <=2 input functions                  ; 596         ;
 ;                                             ;             ;
 ; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 815         ;
+;     -- normal mode                          ; 751         ;
 ;     -- arithmetic mode                      ; 1044        ;
 ;                                             ;             ;
 ; Total registers                             ; 589         ;
@@ -303,8 +303,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Embedded Multiplier 9-bit elements          ; 24          ;
 ; Maximum fan-out node                        ; clock~input ;
 ; Maximum fan-out                             ; 749         ;
-; Total fan-out                               ; 8684        ;
-; Average fan-out                             ; 3.14        ;
+; Total fan-out                               ; 8556        ;
+; Average fan-out                             ; 3.16        ;
 +---------------------------------------------+-------------+
 
 
@@ -313,8 +313,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                    ; Library Name ;
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FFT                                           ; 1859 (0)          ; 589 (0)      ; 3648        ; 24           ; 0       ; 12        ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
-;    |SdfUnit2:SU4|                              ; 197 (97)          ; 67 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4                                                                                                      ; work         ;
+; |FFT                                           ; 1795 (0)          ; 589 (0)      ; 3648        ; 24           ; 0       ; 12        ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
+;    |SdfUnit2:SU4|                              ; 133 (33)          ; 67 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4                                                                                                      ; work         ;
 ;       |Butterfly:BF|                           ; 68 (68)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4|Butterfly:BF                                                                                         ; work         ;
 ;       |DelayBuffer:DB|                         ; 32 (32)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4|DelayBuffer:DB                                                                                       ; work         ;
 ;    |SdfUnit:SU1|                               ; 738 (146)         ; 167 (124)    ; 2944        ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
@@ -489,12 +489,12 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[3]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[14] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[15] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[7]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[9]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[1]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[2]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[1]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[6]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[1]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[7]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[13] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
 
 
@@ -1620,14 +1620,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     CLR SCLR          ; 63                          ;
 ;     SLD               ; 384                         ;
 ;     plain             ; 127                         ;
-; cycloneiii_lcell_comb ; 1859                        ;
+; cycloneiii_lcell_comb ; 1795                        ;
 ;     arith             ; 1044                        ;
 ;         2 data inputs ; 466                         ;
 ;         3 data inputs ; 578                         ;
-;     normal            ; 815                         ;
+;     normal            ; 751                         ;
 ;         0 data inputs ; 7                           ;
 ;         1 data inputs ; 39                          ;
-;         2 data inputs ; 148                         ;
+;         2 data inputs ; 84                          ;
 ;         3 data inputs ; 255                         ;
 ;         4 data inputs ; 366                         ;
 ; cycloneiii_mac_mult   ; 12                          ;
@@ -1635,7 +1635,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; cycloneiii_ram_block  ; 160                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.40                        ;
-; Average LUT depth     ; 3.16                        ;
+; Average LUT depth     ; 3.07                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1654,7 +1654,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Wed Aug 08 18:30:50 2018
+    Info: Processing started: Fri Aug 10 06:36:47 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft128.v
@@ -1874,16 +1874,16 @@ Info (12133): Instantiated megafunction "SdfUnit:SU3|lpm_mult:Mult0" with the fo
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 2155 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2091 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 35 input pins
     Info (21059): Implemented 33 output pins
-    Info (21061): Implemented 1903 logic cells
+    Info (21061): Implemented 1839 logic cells
     Info (21064): Implemented 160 RAM segments
     Info (21062): Implemented 24 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 12 warnings
-    Info: Peak virtual memory: 579 megabytes
-    Info: Processing ended: Wed Aug 08 18:31:06 2018
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:16
+    Info: Peak virtual memory: 567 megabytes
+    Info: Processing ended: Fri Aug 10 06:37:04 2018
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:15
 
 

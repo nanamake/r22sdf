@@ -45,11 +45,11 @@ always @(posedge clock or posedge reset) begin
     end
 end
 
-//  The following logic is redundant, but makes it easier to check the waveform.
-assign  x0_r = bf_en ? db_dout_r : {WIDTH{1'b0}};
-assign  x0_i = bf_en ? db_dout_i : {WIDTH{1'b0}};
-assign  x1_r = bf_en ? idata_r : {WIDTH{1'b0}};
-assign  x1_i = bf_en ? idata_i : {WIDTH{1'b0}};
+//  Set unknown value x for verification
+assign  x0_r = bf_en ? db_dout_r : {WIDTH{1'bx}};
+assign  x0_i = bf_en ? db_dout_i : {WIDTH{1'bx}};
+assign  x1_r = bf_en ? idata_r : {WIDTH{1'bx}};
+assign  x1_i = bf_en ? idata_i : {WIDTH{1'bx}};
 
 Butterfly #(.WIDTH(WIDTH)) BF (
     .x0_r   (x0_r   ),  //  i
