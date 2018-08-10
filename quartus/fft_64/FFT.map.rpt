@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Wed Aug 08 18:20:09 2018
+Sat Aug 11 05:26:17 2018
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -91,13 +91,13 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Aug 08 18:20:09 2018      ;
+; Analysis & Synthesis Status        ; Successful - Sat Aug 11 05:26:17 2018      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 1,411                                      ;
-;     Total combinational functions  ; 1,371                                      ;
+; Total logic elements               ; 1,267                                      ;
+;     Total combinational functions  ; 1,227                                      ;
 ;     Dedicated logic registers      ; 491                                        ;
 ; Total registers                    ; 491                                        ;
 ; Total pins                         ; 68                                         ;
@@ -268,17 +268,17 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 1,411       ;
+; Estimated Total logic elements              ; 1,267       ;
 ;                                             ;             ;
-; Total combinational functions               ; 1371        ;
+; Total combinational functions               ; 1227        ;
 ; Logic element usage by number of LUT inputs ;             ;
 ;     -- 4 input functions                    ; 219         ;
-;     -- 3 input functions                    ; 668         ;
-;     -- <=2 input functions                  ; 484         ;
+;     -- 3 input functions                    ; 656         ;
+;     -- <=2 input functions                  ; 352         ;
 ;                                             ;             ;
 ; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 502         ;
-;     -- arithmetic mode                      ; 869         ;
+;     -- normal mode                          ; 538         ;
+;     -- arithmetic mode                      ; 689         ;
 ;                                             ;             ;
 ; Total registers                             ; 491         ;
 ;     -- Dedicated logic registers            ; 491         ;
@@ -289,8 +289,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Embedded Multiplier 9-bit elements          ; 16          ;
 ; Maximum fan-out node                        ; clock~input ;
 ; Maximum fan-out                             ; 619         ;
-; Total fan-out                               ; 6557        ;
-; Average fan-out                             ; 3.06        ;
+; Total fan-out                               ; 6269        ;
+; Average fan-out                             ; 3.14        ;
 +---------------------------------------------+-------------+
 
 
@@ -299,9 +299,9 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                    ; Library Name ;
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FFT                                           ; 1371 (0)          ; 491 (0)      ; 1664        ; 16           ; 0       ; 8         ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
-;    |SdfUnit:SU1|                               ; 586 (140)         ; 162 (121)    ; 1408        ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 149 (149)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                         ; work         ;
+; |FFT                                           ; 1227 (0)          ; 491 (0)      ; 1664        ; 16           ; 0       ; 8         ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
+;    |SdfUnit:SU1|                               ; 538 (142)         ; 162 (121)    ; 1408        ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF2                                                                                         ; work         ;
 ;       |DelayBuffer:DB1|                        ; 12 (0)            ; 5 (0)        ; 960         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1                                                                                       ; work         ;
 ;          |altshift_taps:buf_r_rtl_0|           ; 12 (0)            ; 5 (0)        ; 960         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
@@ -330,8 +330,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |mpar_add:padder|                  ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
 ;                |lpm_add_sub:adder[0]|          ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
 ;                   |add_sub_jbh:auto_generated| ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_jbh:auto_generated     ; work         ;
-;    |SdfUnit:SU2|                               ; 460 (141)         ; 146 (121)    ; 256         ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 149 (149)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                         ; work         ;
+;    |SdfUnit:SU2|                               ; 412 (143)         ; 146 (121)    ; 256         ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF2                                                                                         ; work         ;
 ;       |DelayBuffer:DB1|                        ; 8 (0)             ; 3 (0)        ; 192         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1                                                                                       ; work         ;
 ;          |altshift_taps:buf_r_rtl_0|           ; 8 (0)             ; 3 (0)        ; 192         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
@@ -358,10 +358,10 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |mpar_add:padder|                  ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
 ;                |lpm_add_sub:adder[0]|          ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
 ;                   |add_sub_jbh:auto_generated| ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_jbh:auto_generated     ; work         ;
-;    |SdfUnit:SU3|                               ; 325 (108)         ; 183 (87)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 85 (85)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                         ; work         ;
+;    |SdfUnit:SU3|                               ; 277 (110)         ; 183 (87)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 68 (68)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 32 (32)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1                                                                                       ; work         ;
+;       |DelayBuffer:DB1|                        ; 34 (34)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1                                                                                       ; work         ;
 ;       |DelayBuffer:DB2|                        ; 32 (32)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2                                                                                       ; work         ;
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -451,12 +451,12 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[4]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[15] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[15] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[2]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[8]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[5]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[2]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[12] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[5]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[8]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[14] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[15] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
 
 
@@ -524,6 +524,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -545,6 +546,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -598,6 +600,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -619,6 +622,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -672,6 +676,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -693,6 +698,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1303,14 +1309,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     CLR SCLR          ; 54                          ;
 ;     SLD               ; 320                         ;
 ;     plain             ; 106                         ;
-; cycloneiii_lcell_comb ; 1371                        ;
-;     arith             ; 869                         ;
-;         2 data inputs ; 395                         ;
-;         3 data inputs ; 474                         ;
-;     normal            ; 502                         ;
+; cycloneiii_lcell_comb ; 1227                        ;
+;     arith             ; 689                         ;
+;         2 data inputs ; 227                         ;
+;         3 data inputs ; 462                         ;
+;     normal            ; 538                         ;
 ;         0 data inputs ; 6                           ;
-;         1 data inputs ; 34                          ;
-;         2 data inputs ; 49                          ;
+;         1 data inputs ; 22                          ;
+;         2 data inputs ; 97                          ;
 ;         3 data inputs ; 194                         ;
 ;         4 data inputs ; 219                         ;
 ; cycloneiii_mac_mult   ; 8                           ;
@@ -1318,7 +1324,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; cycloneiii_ram_block  ; 128                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 5.30                        ;
-; Average LUT depth     ; 3.03                        ;
+; Average LUT depth     ; 2.63                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1337,7 +1343,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Wed Aug 08 18:19:58 2018
+    Info: Processing started: Sat Aug 11 05:26:05 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft64.v
@@ -1356,11 +1362,16 @@ Info (12127): Elaborating entity "FFT" for the top level hierarchy
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU1"
 Warning (10230): Verilog HDL assignment warning at SdfUnit.v(230): truncated value with size 6 to match size of target (4)
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF1"
-Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 32 to match size of target (16)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB1"
+Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF2"
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 32 to match size of target (16)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB2"
 Info (12128): Elaborating entity "Twiddle" for hierarchy "SdfUnit:SU1|Twiddle:TW"
 Info (12128): Elaborating entity "Multiply" for hierarchy "SdfUnit:SU1|Multiply:MU"
@@ -1509,16 +1520,16 @@ Info (12133): Instantiated megafunction "SdfUnit:SU2|lpm_mult:Mult0" with the fo
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1624 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1480 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 35 input pins
     Info (21059): Implemented 33 output pins
-    Info (21061): Implemented 1412 logic cells
+    Info (21061): Implemented 1268 logic cells
     Info (21064): Implemented 128 RAM segments
     Info (21062): Implemented 16 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 12 warnings
-    Info: Peak virtual memory: 558 megabytes
-    Info: Processing ended: Wed Aug 08 18:20:09 2018
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:11
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 16 warnings
+    Info: Peak virtual memory: 567 megabytes
+    Info: Processing ended: Sat Aug 11 05:26:17 2018
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:10
 
 

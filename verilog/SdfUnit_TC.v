@@ -9,6 +9,8 @@ module SdfUnit #(
     parameter   T8_EN = 1,      //  Use TwiddleConvert8
     parameter   TW_FF = 1,      //  Use Twiddle Output Register
     parameter   TC_FF = 1,      //  Use TwiddleConvert Output Register
+    parameter   B1_RH = 0,      //  1st Butterfly Round Half Up
+    parameter   B2_RH = 1,      //  2nd Butterfly Round Half Up
     parameter   LP = 0          //  Power Saving
 )(
     input               clock,      //  Master Clock
@@ -136,7 +138,7 @@ assign  bf1_x0_i = bf1_bf ? db1_dout_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf1_x1_r = bf1_bf ? idata_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf1_x1_i = bf1_bf ? idata_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 
-Butterfly #(.WIDTH(WIDTH)) BF1 (
+Butterfly #(.WIDTH(WIDTH),.RH(B1_RH)) BF1 (
     .x0_r   (bf1_x0_r   ),  //  i
     .x0_i   (bf1_x0_i   ),  //  i
     .x1_r   (bf1_x1_r   ),  //  i
@@ -192,7 +194,7 @@ assign  bf2_x0_i = bf2_bf ? db2_dout_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf2_x1_r = bf2_bf ? bf1_odata_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf2_x1_i = bf2_bf ? bf1_odata_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 
-Butterfly #(.WIDTH(WIDTH)) BF2 (
+Butterfly #(.WIDTH(WIDTH),.RH(B2_RH)) BF2 (
     .x0_r   (bf2_x0_r   ),  //  i
     .x0_i   (bf2_x0_i   ),  //  i
     .x1_r   (bf2_x1_r   ),  //  i

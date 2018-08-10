@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Fri Aug 10 06:37:04 2018
+Sat Aug 11 05:39:40 2018
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -62,12 +62,12 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  54. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|Multiply:MU|lpm_mult:Mult0
  55. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|Multiply:MU|lpm_mult:Mult2
  56. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|Multiply:MU|lpm_mult:Mult1
- 57. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|lpm_mult:Mult0
- 58. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|lpm_mult:Mult0
- 59. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3
- 60. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0
- 61. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2
- 62. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1
+ 57. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3
+ 58. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0
+ 59. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2
+ 60. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1
+ 61. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|lpm_mult:Mult0
+ 62. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|lpm_mult:Mult0
  63. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|lpm_mult:Mult0
  64. altshift_taps Parameter Settings by Entity Instance
  65. lpm_mult Parameter Settings by Entity Instance
@@ -100,13 +100,13 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Aug 10 06:37:04 2018      ;
+; Analysis & Synthesis Status        ; Successful - Sat Aug 11 05:39:40 2018      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 1,838                                      ;
-;     Total combinational functions  ; 1,795                                      ;
+; Total logic elements               ; 1,630                                      ;
+;     Total combinational functions  ; 1,587                                      ;
 ;     Dedicated logic registers      ; 589                                        ;
 ; Total registers                    ; 589                                        ;
 ; Total pins                         ; 68                                         ;
@@ -282,17 +282,17 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 1,838       ;
+; Estimated Total logic elements              ; 1,630       ;
 ;                                             ;             ;
-; Total combinational functions               ; 1795        ;
+; Total combinational functions               ; 1587        ;
 ; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 366         ;
-;     -- 3 input functions                    ; 833         ;
-;     -- <=2 input functions                  ; 596         ;
+;     -- 4 input functions                    ; 365         ;
+;     -- 3 input functions                    ; 818         ;
+;     -- <=2 input functions                  ; 404         ;
 ;                                             ;             ;
 ; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 751         ;
-;     -- arithmetic mode                      ; 1044        ;
+;     -- normal mode                          ; 783         ;
+;     -- arithmetic mode                      ; 804         ;
 ;                                             ;             ;
 ; Total registers                             ; 589         ;
 ;     -- Dedicated logic registers            ; 589         ;
@@ -303,8 +303,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Embedded Multiplier 9-bit elements          ; 24          ;
 ; Maximum fan-out node                        ; clock~input ;
 ; Maximum fan-out                             ; 749         ;
-; Total fan-out                               ; 8556        ;
-; Average fan-out                             ; 3.16        ;
+; Total fan-out                               ; 8139        ;
+; Average fan-out                             ; 3.26        ;
 +---------------------------------------------+-------------+
 
 
@@ -313,12 +313,11 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                    ; Library Name ;
 +------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FFT                                           ; 1795 (0)          ; 589 (0)      ; 3648        ; 24           ; 0       ; 12        ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
-;    |SdfUnit2:SU4|                              ; 133 (33)          ; 67 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4                                                                                                      ; work         ;
-;       |Butterfly:BF|                           ; 68 (68)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4|Butterfly:BF                                                                                         ; work         ;
-;       |DelayBuffer:DB|                         ; 32 (32)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4|DelayBuffer:DB                                                                                       ; work         ;
-;    |SdfUnit:SU1|                               ; 738 (146)         ; 167 (124)    ; 2944        ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 149 (149)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                         ; work         ;
+; |FFT                                           ; 1587 (0)          ; 589 (0)      ; 3648        ; 24           ; 0       ; 12        ; 68   ; 0            ; |FFT                                                                                                                   ; work         ;
+;    |SdfUnit2:SU4|                              ; 69 (35)           ; 67 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4                                                                                                      ; work         ;
+;       |DelayBuffer:DB|                         ; 34 (34)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit2:SU4|DelayBuffer:DB                                                                                       ; work         ;
+;    |SdfUnit:SU1|                               ; 690 (148)         ; 167 (124)    ; 2944        ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF2                                                                                         ; work         ;
 ;       |DelayBuffer:DB1|                        ; 15 (0)            ; 6 (0)        ; 1984        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1                                                                                       ; work         ;
 ;          |altshift_taps:buf_r_rtl_0|           ; 15 (0)            ; 6 (0)        ; 1984        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
@@ -347,8 +346,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |mpar_add:padder|                  ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
 ;                |lpm_add_sub:adder[0]|          ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
 ;                   |add_sub_kbh:auto_generated| ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_kbh:auto_generated     ; work         ;
-;    |SdfUnit:SU2|                               ; 519 (147)         ; 163 (124)    ; 640         ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 149 (149)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                         ; work         ;
+;    |SdfUnit:SU2|                               ; 471 (149)         ; 163 (124)    ; 640         ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF2                                                                                         ; work         ;
 ;       |DelayBuffer:DB1|                        ; 10 (0)            ; 4 (0)        ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1                                                                                       ; work         ;
 ;          |altshift_taps:buf_r_rtl_0|           ; 10 (0)            ; 4 (0)        ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
@@ -376,8 +375,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |mpar_add:padder|                  ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
 ;                |lpm_add_sub:adder[0]|          ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
 ;                   |add_sub_kbh:auto_generated| ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_kbh:auto_generated     ; work         ;
-;    |SdfUnit:SU3|                               ; 405 (145)         ; 192 (123)    ; 64          ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 149 (149)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                         ; work         ;
+;    |SdfUnit:SU3|                               ; 357 (147)         ; 192 (123)    ; 64          ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                       ; work         ;
+;       |Butterfly:BF1|                          ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                         ; work         ;
 ;       |Butterfly:BF2|                          ; 68 (68)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF2                                                                                         ; work         ;
 ;       |DelayBuffer:DB1|                        ; 1 (0)             ; 1 (0)        ; 64          ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1                                                                                       ; work         ;
 ;          |altshift_taps:buf_r_rtl_0|           ; 1 (0)             ; 1 (0)        ; 64          ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
@@ -484,18 +483,18 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +-------------------------------------------------+-----------------------------------------+------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output       ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[2]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[1]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[6]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[1]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[7]  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[13] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[2] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[7] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[7] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[6] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[4] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[6] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
@@ -571,6 +570,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -592,6 +592,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -645,6 +646,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -666,6 +668,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -719,6 +722,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -740,6 +744,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 1     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -781,6 +786,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                             ;
 +----------------+-------+----------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                   ;
+; BF_RH          ; 0     ; Signed Integer                   ;
 +----------------+-------+----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -791,6 +797,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                          ;
 +----------------+-------+-----------------------------------------------+
 ; WIDTH          ; 16    ; Signed Integer                                ;
+; RH             ; 0     ; Signed Integer                                ;
 +----------------+-------+-----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1161,76 +1168,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|lpm_mult:Mult0         ;
-+------------------------------------------------+--------------+---------------------+
-; Parameter Name                                 ; Value        ; Type                ;
-+------------------------------------------------+--------------+---------------------+
-; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
-; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
-; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
-; LPM_WIDTHA                                     ; 5            ; Untyped             ;
-; LPM_WIDTHB                                     ; 2            ; Untyped             ;
-; LPM_WIDTHP                                     ; 7            ; Untyped             ;
-; LPM_WIDTHR                                     ; 7            ; Untyped             ;
-; LPM_WIDTHS                                     ; 1            ; Untyped             ;
-; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
-; LPM_PIPELINE                                   ; 0            ; Untyped             ;
-; LATENCY                                        ; 0            ; Untyped             ;
-; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
-; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
-; USE_EAB                                        ; OFF          ; Untyped             ;
-; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
-; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
-; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
-; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
-; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
-; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
-+------------------------------------------------+--------------+---------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|lpm_mult:Mult0         ;
-+------------------------------------------------+--------------+---------------------+
-; Parameter Name                                 ; Value        ; Type                ;
-+------------------------------------------------+--------------+---------------------+
-; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
-; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
-; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
-; LPM_WIDTHA                                     ; 5            ; Untyped             ;
-; LPM_WIDTHB                                     ; 2            ; Untyped             ;
-; LPM_WIDTHP                                     ; 7            ; Untyped             ;
-; LPM_WIDTHR                                     ; 7            ; Untyped             ;
-; LPM_WIDTHS                                     ; 1            ; Untyped             ;
-; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
-; LPM_PIPELINE                                   ; 0            ; Untyped             ;
-; LATENCY                                        ; 0            ; Untyped             ;
-; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
-; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
-; USE_EAB                                        ; OFF          ; Untyped             ;
-; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
-; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
-; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
-; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
-; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
-; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
-+------------------------------------------------+--------------+---------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-----------------------------------------------------------------------------------------+
 ; Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3 ;
 +------------------------------------------------+--------------+-------------------------+
@@ -1368,6 +1305,76 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped                 ;
 ; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped                 ;
 +------------------------------------------------+--------------+-------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|lpm_mult:Mult0         ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 5            ; Untyped             ;
+; LPM_WIDTHB                                     ; 2            ; Untyped             ;
+; LPM_WIDTHP                                     ; 7            ; Untyped             ;
+; LPM_WIDTHR                                     ; 7            ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|lpm_mult:Mult0         ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 5            ; Untyped             ;
+; LPM_WIDTHB                                     ; 2            ; Untyped             ;
+; LPM_WIDTHP                                     ; 7            ; Untyped             ;
+; LPM_WIDTHR                                     ; 7            ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1529,28 +1536,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
-; Entity Instance                       ; SdfUnit:SU1|lpm_mult:Mult0             ;
-;     -- LPM_WIDTHA                     ; 5                                      ;
-;     -- LPM_WIDTHB                     ; 2                                      ;
-;     -- LPM_WIDTHP                     ; 7                                      ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED                               ;
-;     -- INPUT_A_IS_CONSTANT            ; NO                                     ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                     ;
-;     -- USE_EAB                        ; OFF                                    ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
-; Entity Instance                       ; SdfUnit:SU2|lpm_mult:Mult0             ;
-;     -- LPM_WIDTHA                     ; 5                                      ;
-;     -- LPM_WIDTHB                     ; 2                                      ;
-;     -- LPM_WIDTHP                     ; 7                                      ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED                               ;
-;     -- INPUT_A_IS_CONSTANT            ; NO                                     ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                     ;
-;     -- USE_EAB                        ; OFF                                    ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
 ; Entity Instance                       ; SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3 ;
 ;     -- LPM_WIDTHA                     ; 16                                     ;
 ;     -- LPM_WIDTHB                     ; 16                                     ;
@@ -1595,6 +1580,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
+; Entity Instance                       ; SdfUnit:SU1|lpm_mult:Mult0             ;
+;     -- LPM_WIDTHA                     ; 5                                      ;
+;     -- LPM_WIDTHB                     ; 2                                      ;
+;     -- LPM_WIDTHP                     ; 7                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                               ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                     ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                     ;
+;     -- USE_EAB                        ; OFF                                    ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
+; Entity Instance                       ; SdfUnit:SU2|lpm_mult:Mult0             ;
+;     -- LPM_WIDTHA                     ; 5                                      ;
+;     -- LPM_WIDTHB                     ; 2                                      ;
+;     -- LPM_WIDTHP                     ; 7                                      ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                               ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                     ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                     ;
+;     -- USE_EAB                        ; OFF                                    ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                   ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                     ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                     ;
 ; Entity Instance                       ; SdfUnit:SU3|lpm_mult:Mult0             ;
 ;     -- LPM_WIDTHA                     ; 5                                      ;
 ;     -- LPM_WIDTHB                     ; 2                                      ;
@@ -1620,22 +1627,22 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     CLR SCLR          ; 63                          ;
 ;     SLD               ; 384                         ;
 ;     plain             ; 127                         ;
-; cycloneiii_lcell_comb ; 1795                        ;
-;     arith             ; 1044                        ;
-;         2 data inputs ; 466                         ;
-;         3 data inputs ; 578                         ;
-;     normal            ; 751                         ;
+; cycloneiii_lcell_comb ; 1587                        ;
+;     arith             ; 804                         ;
+;         2 data inputs ; 242                         ;
+;         3 data inputs ; 562                         ;
+;     normal            ; 783                         ;
 ;         0 data inputs ; 7                           ;
-;         1 data inputs ; 39                          ;
-;         2 data inputs ; 84                          ;
-;         3 data inputs ; 255                         ;
-;         4 data inputs ; 366                         ;
+;         1 data inputs ; 23                          ;
+;         2 data inputs ; 132                         ;
+;         3 data inputs ; 256                         ;
+;         4 data inputs ; 365                         ;
 ; cycloneiii_mac_mult   ; 12                          ;
 ; cycloneiii_mac_out    ; 12                          ;
 ; cycloneiii_ram_block  ; 160                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.40                        ;
-; Average LUT depth     ; 3.07                        ;
+; Average LUT depth     ; 2.66                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1644,7 +1651,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:12     ;
+; Top            ; 00:00:11     ;
 +----------------+--------------+
 
 
@@ -1654,7 +1661,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Fri Aug 10 06:36:47 2018
+    Info: Processing started: Sat Aug 11 05:39:25 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft128.v
@@ -1675,11 +1682,16 @@ Info (12127): Elaborating entity "FFT" for the top level hierarchy
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU1"
 Warning (10230): Verilog HDL assignment warning at SdfUnit.v(230): truncated value with size 7 to match size of target (5)
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF1"
-Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 32 to match size of target (16)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 32 to match size of target (16)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB1"
+Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF2"
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 32 to match size of target (16)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB2"
 Info (12128): Elaborating entity "Twiddle" for hierarchy "SdfUnit:SU1|Twiddle:TW"
 Info (12128): Elaborating entity "Multiply" for hierarchy "SdfUnit:SU1|Multiply:MU"
@@ -1727,12 +1739,12 @@ Info (278001): Inferred 15 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU2|Multiply:MU|Mult0"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU2|Multiply:MU|Mult2"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU2|Multiply:MU|Mult1"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU1|Mult0"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU2|Mult0"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU3|Multiply:MU|Mult3"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU3|Multiply:MU|Mult0"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU3|Multiply:MU|Mult2"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU3|Multiply:MU|Mult1"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU1|Mult0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU2|Mult0"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "SdfUnit:SU3|Mult0"
 Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0"
 Info (12133): Instantiated megafunction "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0" with the following parameter:
@@ -1810,6 +1822,28 @@ Info (12133): Instantiated megafunction "SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_36t.tdf
     Info (12023): Found entity 1: mult_36t
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3"
+Info (12133): Instantiated megafunction "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "16"
+    Info (12134): Parameter "LPM_WIDTHP" = "32"
+    Info (12134): Parameter "LPM_WIDTHR" = "32"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0"
+Info (12133): Instantiated megafunction "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "16"
+    Info (12134): Parameter "LPM_WIDTHP" = "32"
+    Info (12134): Parameter "LPM_WIDTHR" = "32"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|lpm_mult:Mult0"
 Info (12133): Instantiated megafunction "SdfUnit:SU1|lpm_mult:Mult0" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "5"
@@ -1838,28 +1872,6 @@ Info (12133): Instantiated megafunction "SdfUnit:SU2|lpm_mult:Mult0" with the fo
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3"
-Info (12133): Instantiated megafunction "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "16"
-    Info (12134): Parameter "LPM_WIDTHB" = "16"
-    Info (12134): Parameter "LPM_WIDTHP" = "32"
-    Info (12134): Parameter "LPM_WIDTHR" = "32"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0"
-Info (12133): Instantiated megafunction "SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "16"
-    Info (12134): Parameter "LPM_WIDTHB" = "16"
-    Info (12134): Parameter "LPM_WIDTHP" = "32"
-    Info (12134): Parameter "LPM_WIDTHR" = "32"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|lpm_mult:Mult0"
 Info (12133): Instantiated megafunction "SdfUnit:SU3|lpm_mult:Mult0" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "5"
@@ -1874,16 +1886,16 @@ Info (12133): Instantiated megafunction "SdfUnit:SU3|lpm_mult:Mult0" with the fo
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 2091 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1883 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 35 input pins
     Info (21059): Implemented 33 output pins
-    Info (21061): Implemented 1839 logic cells
+    Info (21061): Implemented 1631 logic cells
     Info (21064): Implemented 160 RAM segments
     Info (21062): Implemented 24 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 12 warnings
-    Info: Peak virtual memory: 567 megabytes
-    Info: Processing ended: Fri Aug 10 06:37:04 2018
-    Info: Elapsed time: 00:00:17
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 16 warnings
+    Info: Peak virtual memory: 570 megabytes
+    Info: Processing ended: Sat Aug 11 05:39:40 2018
+    Info: Elapsed time: 00:00:15
     Info: Total CPU time (on all processors): 00:00:15
 
 

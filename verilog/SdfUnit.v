@@ -115,7 +115,7 @@ assign  bf1_x0_i = bf1_bf ? db1_dout_i : {WIDTH{1'bx}};
 assign  bf1_x1_r = bf1_bf ? idata_r : {WIDTH{1'bx}};
 assign  bf1_x1_i = bf1_bf ? idata_i : {WIDTH{1'bx}};
 
-Butterfly #(.WIDTH(WIDTH)) BF1 (
+Butterfly #(.WIDTH(WIDTH),.RH(0)) BF1 (
     .x0_r   (bf1_x0_r   ),  //  i
     .x0_i   (bf1_x0_i   ),  //  i
     .x1_r   (bf1_x1_r   ),  //  i
@@ -170,7 +170,7 @@ assign  bf2_x0_i = bf2_bf ? db2_dout_i : {WIDTH{1'bx}};
 assign  bf2_x1_r = bf2_bf ? bf1_odata_r : {WIDTH{1'bx}};
 assign  bf2_x1_i = bf2_bf ? bf1_odata_i : {WIDTH{1'bx}};
 
-Butterfly #(.WIDTH(WIDTH)) BF2 (
+Butterfly #(.WIDTH(WIDTH),.RH(1)) BF2 (
     .x0_r   (bf2_x0_r   ),  //  i
     .x0_i   (bf2_x0_i   ),  //  i
     .x1_r   (bf2_x1_r   ),  //  i

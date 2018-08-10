@@ -2,7 +2,8 @@
 //  SdfUnit2: Radix-2 SDF Dedicated for Twiddle Resolution M = 2
 //----------------------------------------------------------------------
 module SdfUnit2 #(
-    parameter   WIDTH = 16      //  Data Bit Length
+    parameter   WIDTH = 16,     //  Data Bit Length
+    parameter   BF_RH = 0       //  Butterfly Round Half Up
 )(
     input                   clock,      //  Master Clock
     input                   reset,      //  Active High Asynchronous Reset
@@ -51,7 +52,7 @@ assign  x0_i = bf_en ? db_dout_i : {WIDTH{1'bx}};
 assign  x1_r = bf_en ? idata_r : {WIDTH{1'bx}};
 assign  x1_i = bf_en ? idata_i : {WIDTH{1'bx}};
 
-Butterfly #(.WIDTH(WIDTH)) BF (
+Butterfly #(.WIDTH(WIDTH),.RH(BF_RH)) BF (
     .x0_r   (x0_r   ),  //  i
     .x0_i   (x0_i   ),  //  i
     .x1_r   (x1_r   ),  //  i
