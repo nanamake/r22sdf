@@ -4,6 +4,7 @@ r22sdf
 Implementation of pipeline FFT described in Verilog HDL.
 
 * Radix-2<sup>2</sup> single-path delay feedback (R2<sup>2</sup>SDF) architecture
+* Scaled fixed-point arithmetic
 * Synthesizable with FPGA implementation software
 
 
@@ -24,8 +25,8 @@ Interface
 	);
 
 Data must be input consecutively in natural order.
-The result is output in bit-reversed order.
-The output latency differs depending on the number of FFT points.
+The result is scaled to 1/N and output in bit-reversed order.
+The output latency differs depending on the transform size.
 For 64-point FFT, it is 71 clock cycles.
 
 *64-point FFT timing diagram*

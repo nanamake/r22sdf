@@ -13,10 +13,12 @@ module FFT #(
     output  [WIDTH-1:0] odata_r,    //  Output Data (Real)
     output  [WIDTH-1:0] odata_i     //  Output Data (Imag)
 );
+//----------------------------------------------------------------------
+//  Data must be input consecutively in natural order.
+//  The result is scaled to 1/N and output in bit-reversed order.
+//  The output latency is 137 clock cycles.
+//----------------------------------------------------------------------
 
-//----------------------------------------------------------------------
-//  Internal Nets
-//----------------------------------------------------------------------
 wire            su1_odata_en;
 wire[WIDTH-1:0] su1_odata_r;
 wire[WIDTH-1:0] su1_odata_i;
@@ -27,9 +29,6 @@ wire            su3_odata_en;
 wire[WIDTH-1:0] su3_odata_r;
 wire[WIDTH-1:0] su3_odata_i;
 
-//----------------------------------------------------------------------
-//  Module Instances
-//----------------------------------------------------------------------
 SdfUnit #(.N(128),.M(128),.WIDTH(WIDTH)) SU1 (
     .clock      (clock          ),  //  i
     .reset      (reset          ),  //  i

@@ -194,6 +194,8 @@ assign  bf2_x0_i = bf2_bf ? db2_dout_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf2_x1_r = bf2_bf ? bf1_odata_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 assign  bf2_x1_i = bf2_bf ? bf1_odata_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 
+//  Negative bias occurs when RH=0 and positive bias occurs when RH=1.
+//  Using both alternately reduces the overall rounding error.
 Butterfly #(.WIDTH(WIDTH),.RH(B2_RH)) BF2 (
     .x0_r   (bf2_x0_r   ),  //  i
     .x0_i   (bf2_x0_i   ),  //  i

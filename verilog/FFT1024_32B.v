@@ -13,10 +13,11 @@ module FFT #(
     output  [WIDTH-1:0] odata_r,    //  Output Data (Real)
     output  [WIDTH-1:0] odata_i     //  Output Data (Imag)
 );
+//----------------------------------------------------------------------
+//  Data must be input consecutively in natural order.
+//  The result is scaled to 1/N and output in bit-reversed order.
+//----------------------------------------------------------------------
 
-//----------------------------------------------------------------------
-//  Internal Nets
-//----------------------------------------------------------------------
 wire            su1_odata_en;
 wire[WIDTH-1:0] su1_odata_r;
 wire[WIDTH-1:0] su1_odata_i;
@@ -30,9 +31,6 @@ wire            su4_odata_en;
 wire[WIDTH-1:0] su4_odata_r;
 wire[WIDTH-1:0] su4_odata_i;
 
-//----------------------------------------------------------------------
-//  Module Instances
-//----------------------------------------------------------------------
 SdfUnit #(.N(1024),.M(1024),.WIDTH(WIDTH)) SU1 (
     .clock      (clock          ),  //  i
     .reset      (reset          ),  //  i
