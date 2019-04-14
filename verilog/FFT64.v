@@ -4,14 +4,14 @@
 module FFT #(
     parameter   WIDTH = 16
 )(
-    input               clock,      //  Master Clock
-    input               reset,      //  Active High Asynchronous Reset
-    input               idata_en,   //  Input Data Enable
-    input   [WIDTH-1:0] idata_r,    //  Input Data (Real)
-    input   [WIDTH-1:0] idata_i,    //  Input Data (Imag)
-    output              odata_en,   //  Output Data Enable
-    output  [WIDTH-1:0] odata_r,    //  Output Data (Real)
-    output  [WIDTH-1:0] odata_i     //  Output Data (Imag)
+    input               clock,  //  Master Clock
+    input               reset,  //  Active High Asynchronous Reset
+    input               di_en,  //  Input Data Enable
+    input   [WIDTH-1:0] di_re,  //  Input Data (Real)
+    input   [WIDTH-1:0] di_im,  //  Input Data (Imag)
+    output              do_en,  //  Output Data Enable
+    output  [WIDTH-1:0] do_re,  //  Output Data (Real)
+    output  [WIDTH-1:0] do_im   //  Output Data (Imag)
 );
 //----------------------------------------------------------------------
 //  Data must be input consecutively in natural order.
@@ -19,44 +19,44 @@ module FFT #(
 //  The output latency is 71 clock cycles.
 //----------------------------------------------------------------------
 
-wire            su1_odata_en;
-wire[WIDTH-1:0] su1_odata_r;
-wire[WIDTH-1:0] su1_odata_i;
-wire            su2_odata_en;
-wire[WIDTH-1:0] su2_odata_r;
-wire[WIDTH-1:0] su2_odata_i;
+wire            su1_do_en;
+wire[WIDTH-1:0] su1_do_re;
+wire[WIDTH-1:0] su1_do_im;
+wire            su2_do_en;
+wire[WIDTH-1:0] su2_do_re;
+wire[WIDTH-1:0] su2_do_im;
 
 SdfUnit #(.N(64),.M(64),.WIDTH(WIDTH)) SU1 (
-    .clock      (clock          ),  //  i
-    .reset      (reset          ),  //  i
-    .idata_en   (idata_en       ),  //  i
-    .idata_r    (idata_r        ),  //  i
-    .idata_i    (idata_i        ),  //  i
-    .odata_en   (su1_odata_en   ),  //  o
-    .odata_r    (su1_odata_r    ),  //  o
-    .odata_i    (su1_odata_i    )   //  o
+    .clock  (clock      ),  //  i
+    .reset  (reset      ),  //  i
+    .di_en  (di_en      ),  //  i
+    .di_re  (di_re      ),  //  i
+    .di_im  (di_im      ),  //  i
+    .do_en  (su1_do_en  ),  //  o
+    .do_re  (su1_do_re  ),  //  o
+    .do_im  (su1_do_im  )   //  o
 );
 
 SdfUnit #(.N(64),.M(16),.WIDTH(WIDTH)) SU2 (
-    .clock      (clock          ),  //  i
-    .reset      (reset          ),  //  i
-    .idata_en   (su1_odata_en   ),  //  i
-    .idata_r    (su1_odata_r    ),  //  i
-    .idata_i    (su1_odata_i    ),  //  i
-    .odata_en   (su2_odata_en   ),  //  o
-    .odata_r    (su2_odata_r    ),  //  o
-    .odata_i    (su2_odata_i    )   //  o
+    .clock  (clock      ),  //  i
+    .reset  (reset      ),  //  i
+    .di_en  (su1_do_en  ),  //  i
+    .di_re  (su1_do_re  ),  //  i
+    .di_im  (su1_do_im  ),  //  i
+    .do_en  (su2_do_en  ),  //  o
+    .do_re  (su2_do_re  ),  //  o
+    .do_im  (su2_do_im  )   //  o
 );
 
 SdfUnit #(.N(64),.M(4),.WIDTH(WIDTH)) SU3 (
-    .clock      (clock          ),  //  i
-    .reset      (reset          ),  //  i
-    .idata_en   (su2_odata_en   ),  //  i
-    .idata_r    (su2_odata_r    ),  //  i
-    .idata_i    (su2_odata_i    ),  //  i
-    .odata_en   (odata_en       ),  //  o
-    .odata_r    (odata_r        ),  //  o
-    .odata_i    (odata_i        )   //  o
+    .clock  (clock      ),  //  i
+    .reset  (reset      ),  //  i
+    .di_en  (su2_do_en  ),  //  i
+    .di_re  (su2_do_re  ),  //  i
+    .di_im  (su2_do_im  ),  //  i
+    .do_en  (do_en      ),  //  o
+    .do_re  (do_re      ),  //  o
+    .do_im  (do_im      )   //  o
 );
 
 endmodule

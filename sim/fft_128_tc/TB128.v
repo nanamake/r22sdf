@@ -22,12 +22,12 @@ endfunction
 //	Internal Regs and Nets
 reg			clock;
 reg			reset;
-reg			idata_en;
-reg	[15:0]	idata_r;
-reg	[15:0]	idata_i;
-wire		odata_en;
-wire[15:0]	odata_r;
-wire[15:0]	odata_i;
+reg			di_en;
+reg	[15:0]	di_re;
+reg	[15:0]	di_im;
+wire		do_en;
+wire[15:0]	do_re;
+wire[15:0]	do_im;
 
 reg	[15:0]	imem[0:2*N-1];
 reg	[15:0]	omem[0:2*N-1];
@@ -35,12 +35,9 @@ reg	[15:0]	omem[0:2*N-1];
 //----------------------------------------------------------------------
 //	Clock and Reset
 //----------------------------------------------------------------------
-initial begin
+always begin
 	clock = 0; #10;
-	forever begin
-		clock = 1; #10;
-		clock = 0; #10;
-	end
+	clock = 1; #10;
 end
 
 initial begin
@@ -56,7 +53,7 @@ end
 //	Input Control Initialize
 initial begin
 	wait (reset == 1);
-	idata_en = 0;
+	di_en = 0;
 end
 
 //	Output Data Capture
@@ -64,10 +61,10 @@ initial begin : OCAP
 	integer		n;
 	forever begin
 		n = 0;
-		while (odata_en !== 1) @(negedge clock);
-		while ((odata_en == 1) && (n < N)) begin
-			omem[2*n  ] = odata_r;
-			omem[2*n+1] = odata_i;
+		while (do_en !== 1) @(negedge clock);
+		while ((do_en == 1) && (n < N)) begin
+			omem[2*n  ] = do_re;
+			omem[2*n+1] = do_im;
 			n = n + 1;
 			@(negedge clock);
 		end
@@ -87,15 +84,15 @@ endtask
 task GenerateInputWave;
 	integer	n;
 begin
-	idata_en <= 1;
+	di_en <= 1;
 	for (n = 0; n < N; n = n + 1) begin
-		idata_r <= imem[2*n];
-		idata_i <= imem[2*n+1];
+		di_re <= imem[2*n];
+		di_im <= imem[2*n+1];
 		@(posedge clock);
 	end
-	idata_en <= 0;
-	idata_r <= 'bx;
-	idata_i <= 'bx;
+	di_en <= 0;
+	di_re <= 'bx;
+	di_im <= 'bx;
 end
 endtask
 
@@ -117,14 +114,14 @@ endtask
 //	Module Instances
 //----------------------------------------------------------------------
 FFT FFT (
-	.clock		(clock		),	//	i
-	.reset		(reset		),	//	i
-	.idata_en	(idata_en	),	//	i
-	.idata_r	(idata_r	),	//	i
-	.idata_i	(idata_i	),	//	i
-	.odata_en	(odata_en	),	//	o
-	.odata_r	(odata_r	),	//	o
-	.odata_i	(odata_i	)	//	o
+	.clock	(clock	),	//	i
+	.reset	(reset	),	//	i
+	.di_en	(di_en	),	//	i
+	.di_re	(di_re	),	//	i
+	.di_im	(di_im	),	//	i
+	.do_en	(do_en	),	//	o
+	.do_re	(do_re	),	//	o
+	.do_im	(do_im	)	//	o
 );
 
 //----------------------------------------------------------------------

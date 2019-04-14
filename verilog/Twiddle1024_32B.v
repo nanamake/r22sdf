@@ -4,1062 +4,1061 @@
 module Twiddle #(
     parameter   TW_FF = 1   //  Use Output Register
 )(
-    input           clock,      //  Master Clock
-    input   [9:0]   addr,       //  Twiddle Factor Number
-    output  [31:0]  data_r,     //  Twiddle Factor Value (Real)
-    output  [31:0]  data_i      //  Twiddle Factor Value (Imag)
+    input           clock,  //  Master Clock
+    input   [9:0]   addr,   //  Twiddle Factor Number
+    output  [31:0]  tw_re,  //  Twiddle Factor (Real)
+    output  [31:0]  tw_im   //  Twiddle Factor (Imag)
 );
 
-wire[31:0]  wn_r[0:1023];   //  Data Array (Real)
-wire[31:0]  wn_i[0:1023];   //  Data Array (Imag)
-wire[31:0]  mx_data_r;
-wire[31:0]  mx_data_i;
-reg [31:0]  ff_data_r;
-reg [31:0]  ff_data_i;
+wire[31:0]  wn_re[0:1023];  //  Twiddle Table (Real)
+wire[31:0]  wn_im[0:1023];  //  Twiddle Table (Imag)
+wire[31:0]  mx_re;          //  Multiplexer output (Real)
+wire[31:0]  mx_im;          //  Multiplexer output (Imag)
+reg [31:0]  ff_re;          //  Register output (Real)
+reg [31:0]  ff_im;          //  Register output (Imag)
 
-//  Select value from table
-assign  mx_data_r = wn_r[addr];
-assign  mx_data_i = wn_i[addr];
+assign  mx_re = wn_re[addr];
+assign  mx_im = wn_im[addr];
 
 always @(posedge clock) begin
-    ff_data_r <= mx_data_r;
-    ff_data_i <= mx_data_i;
+    ff_re <= mx_re;
+    ff_im <= mx_im;
 end
 
-assign  data_r = TW_FF ? ff_data_r : mx_data_r;
-assign  data_i = TW_FF ? ff_data_i : mx_data_i;
+assign  tw_re = TW_FF ? ff_re : mx_re;
+assign  tw_im = TW_FF ? ff_im : mx_im;
 
 //----------------------------------------------------------------------
 //  Twiddle Factor Value
 //----------------------------------------------------------------------
-//  When twiddle number n is 0, multiplication is not performed.
-//  Setting wn_r[0] = 0 and wn_i[0] = 0 makes it easier to check the waveform.
+//  Multiplication is bypassed when twiddle address is 0.
+//  Setting wn_re[0] = 0 and wn_im[0] = 0 makes it easier to check the waveform.
 //  It may also reduce power consumption slightly.
 //
-//      wn_r = cos(-2pi*n/1024)             wn_i = sin(-2pi*n/1024)
-assign  wn_r[ 0] = 32'h 00000000;   assign  wn_i[ 0] = 32'h 00000000;   //  0  1.000 -0.000
-assign  wn_r[ 1] = 32'h 7FFF6216;   assign  wn_i[ 1] = 32'h FF36F078;   //  1  1.000 -0.006
-assign  wn_r[ 2] = 32'h 7FFD885A;   assign  wn_i[ 2] = 32'h FE6DE2E0;   //  2  1.000 -0.012
-assign  wn_r[ 3] = 32'h 7FFA72D1;   assign  wn_i[ 3] = 32'h FDA4D929;   //  3  1.000 -0.018
-assign  wn_r[ 4] = 32'h 7FF62182;   assign  wn_i[ 4] = 32'h FCDBD541;   //  4  1.000 -0.025
-assign  wn_r[ 5] = 32'h 7FF09478;   assign  wn_i[ 5] = 32'h FC12D91A;   //  5  1.000 -0.031
-assign  wn_r[ 6] = 32'h 7FE9CBC0;   assign  wn_i[ 6] = 32'h FB49E6A3;   //  6  0.999 -0.037
-assign  wn_r[ 7] = 32'h 7FE1C76B;   assign  wn_i[ 7] = 32'h FA80FFCB;   //  7  0.999 -0.043
-assign  wn_r[ 8] = 32'h 7FD8878E;   assign  wn_i[ 8] = 32'h F9B82684;   //  8  0.999 -0.049
-assign  wn_r[ 9] = 32'h 7FCE0C3E;   assign  wn_i[ 9] = 32'h F8EF5CBB;   //  9  0.998 -0.055
-assign  wn_r[10] = 32'h 7FC25596;   assign  wn_i[10] = 32'h F826A462;   // 10  0.998 -0.061
-assign  wn_r[11] = 32'h 7FB563B3;   assign  wn_i[11] = 32'h F75DFF66;   // 11  0.998 -0.067
-assign  wn_r[12] = 32'h 7FA736B4;   assign  wn_i[12] = 32'h F6956FB7;   // 12  0.997 -0.074
-assign  wn_r[13] = 32'h 7F97CEBD;   assign  wn_i[13] = 32'h F5CCF743;   // 13  0.997 -0.080
-assign  wn_r[14] = 32'h 7F872BF3;   assign  wn_i[14] = 32'h F50497FB;   // 14  0.996 -0.086
-assign  wn_r[15] = 32'h 7F754E80;   assign  wn_i[15] = 32'h F43C53CB;   // 15  0.996 -0.092
-assign  wn_r[16] = 32'h 7F62368F;   assign  wn_i[16] = 32'h F3742CA2;   // 16  0.995 -0.098
-assign  wn_r[17] = 32'h 7F4DE451;   assign  wn_i[17] = 32'h F2AC246E;   // 17  0.995 -0.104
-assign  wn_r[18] = 32'h 7F3857F6;   assign  wn_i[18] = 32'h F1E43D1C;   // 18  0.994 -0.110
-assign  wn_r[19] = 32'h 7F2191B4;   assign  wn_i[19] = 32'h F11C789A;   // 19  0.993 -0.116
-assign  wn_r[20] = 32'h 7F0991C4;   assign  wn_i[20] = 32'h F054D8D5;   // 20  0.992 -0.122
-assign  wn_r[21] = 32'h 7EF05860;   assign  wn_i[21] = 32'h EF8D5FB8;   // 21  0.992 -0.128
-assign  wn_r[22] = 32'h 7ED5E5C6;   assign  wn_i[22] = 32'h EEC60F31;   // 22  0.991 -0.135
-assign  wn_r[23] = 32'h 7EBA3A39;   assign  wn_i[23] = 32'h EDFEE92B;   // 23  0.990 -0.141
-assign  wn_r[24] = 32'h 7E9D55FC;   assign  wn_i[24] = 32'h ED37EF91;   // 24  0.989 -0.147
-assign  wn_r[25] = 32'h 7E7F3957;   assign  wn_i[25] = 32'h EC71244F;   // 25  0.988 -0.153
-assign  wn_r[26] = 32'h 7E5FE493;   assign  wn_i[26] = 32'h EBAA894F;   // 26  0.987 -0.159
-assign  wn_r[27] = 32'h 7E3F57FF;   assign  wn_i[27] = 32'h EAE4207A;   // 27  0.986 -0.165
-assign  wn_r[28] = 32'h 7E1D93EA;   assign  wn_i[28] = 32'h EA1DEBBB;   // 28  0.985 -0.171
-assign  wn_r[29] = 32'h 7DFA98A8;   assign  wn_i[29] = 32'h E957ECFB;   // 29  0.984 -0.177
-assign  wn_r[30] = 32'h 7DD6668F;   assign  wn_i[30] = 32'h E8922622;   // 30  0.983 -0.183
-assign  wn_r[31] = 32'h 7DB0FDF8;   assign  wn_i[31] = 32'h E7CC9917;   // 31  0.982 -0.189
-assign  wn_r[32] = 32'h 7D8A5F40;   assign  wn_i[32] = 32'h E70747C4;   // 32  0.981 -0.195
-assign  wn_r[33] = 32'h 7D628AC6;   assign  wn_i[33] = 32'h E642340D;   // 33  0.980 -0.201
-assign  wn_r[34] = 32'h 7D3980EC;   assign  wn_i[34] = 32'h E57D5FDA;   // 34  0.978 -0.207
-assign  wn_r[35] = 32'h 7D0F4218;   assign  wn_i[35] = 32'h E4B8CD11;   // 35  0.977 -0.213
-assign  wn_r[36] = 32'h 7CE3CEB2;   assign  wn_i[36] = 32'h E3F47D96;   // 36  0.976 -0.219
-assign  wn_r[37] = 32'h 7CB72724;   assign  wn_i[37] = 32'h E330734D;   // 37  0.974 -0.225
-assign  wn_r[38] = 32'h 7C894BDE;   assign  wn_i[38] = 32'h E26CB01B;   // 38  0.973 -0.231
-assign  wn_r[39] = 32'h 7C5A3D50;   assign  wn_i[39] = 32'h E1A935E2;   // 39  0.972 -0.237
-assign  wn_r[40] = 32'h 7C29FBEE;   assign  wn_i[40] = 32'h E0E60685;   // 40  0.970 -0.243
-assign  wn_r[41] = 32'h 7BF88830;   assign  wn_i[41] = 32'h E02323E5;   // 41  0.969 -0.249
-assign  wn_r[42] = 32'h 7BC5E290;   assign  wn_i[42] = 32'h DF608FE4;   // 42  0.967 -0.255
-assign  wn_r[43] = 32'h 7B920B89;   assign  wn_i[43] = 32'h DE9E4C60;   // 43  0.965 -0.261
-assign  wn_r[44] = 32'h 7B5D039E;   assign  wn_i[44] = 32'h DDDC5B3B;   // 44  0.964 -0.267
-assign  wn_r[45] = 32'h 7B26CB4F;   assign  wn_i[45] = 32'h DD1ABE51;   // 45  0.962 -0.273
-assign  wn_r[46] = 32'h 7AEF6323;   assign  wn_i[46] = 32'h DC597781;   // 46  0.960 -0.279
-assign  wn_r[47] = 32'h 7AB6CBA4;   assign  wn_i[47] = 32'h DB9888A8;   // 47  0.959 -0.284
-assign  wn_r[48] = 32'h 7A7D055B;   assign  wn_i[48] = 32'h DAD7F3A2;   // 48  0.957 -0.290
-assign  wn_r[49] = 32'h 7A4210D8;   assign  wn_i[49] = 32'h DA17BA4A;   // 49  0.955 -0.296
-assign  wn_r[50] = 32'h 7A05EEAD;   assign  wn_i[50] = 32'h D957DE7A;   // 50  0.953 -0.302
-assign  wn_r[51] = 32'h 79C89F6E;   assign  wn_i[51] = 32'h D898620C;   // 51  0.951 -0.308
-assign  wn_r[52] = 32'h 798A23B1;   assign  wn_i[52] = 32'h D7D946D8;   // 52  0.950 -0.314
-assign  wn_r[53] = 32'h 794A7C12;   assign  wn_i[53] = 32'h D71A8EB5;   // 53  0.948 -0.320
-assign  wn_r[54] = 32'h 7909A92D;   assign  wn_i[54] = 32'h D65C3B7B;   // 54  0.946 -0.325
-assign  wn_r[55] = 32'h 78C7ABA2;   assign  wn_i[55] = 32'h D59E4EFF;   // 55  0.944 -0.331
-assign  wn_r[56] = 32'h 78848414;   assign  wn_i[56] = 32'h D4E0CB15;   // 56  0.942 -0.337
-assign  wn_r[57] = 32'h 78403329;   assign  wn_i[57] = 32'h D423B191;   // 57  0.939 -0.343
-assign  wn_r[58] = 32'h 77FAB989;   assign  wn_i[58] = 32'h D3670446;   // 58  0.937 -0.348
-assign  wn_r[59] = 32'h 77B417DF;   assign  wn_i[59] = 32'h D2AAC504;   // 59  0.935 -0.354
-assign  wn_r[60] = 32'h 776C4EDB;   assign  wn_i[60] = 32'h D1EEF59E;   // 60  0.933 -0.360
-assign  wn_r[61] = 32'h 77235F2D;   assign  wn_i[61] = 32'h D13397E2;   // 61  0.931 -0.366
-assign  wn_r[62] = 32'h 76D94989;   assign  wn_i[62] = 32'h D078AD9E;   // 62  0.929 -0.371
-assign  wn_r[63] = 32'h 768E0EA6;   assign  wn_i[63] = 32'h CFBE389F;   // 63  0.926 -0.377
-assign  wn_r[64] = 32'h 7641AF3D;   assign  wn_i[64] = 32'h CF043AB3;   // 64  0.924 -0.383
-assign  wn_r[65] = 32'h 75F42C0B;   assign  wn_i[65] = 32'h CE4AB5A2;   // 65  0.922 -0.388
-assign  wn_r[66] = 32'h 75A585CF;   assign  wn_i[66] = 32'h CD91AB39;   // 66  0.919 -0.394
-assign  wn_r[67] = 32'h 7555BD4C;   assign  wn_i[67] = 32'h CCD91D3D;   // 67  0.917 -0.400
-assign  wn_r[68] = 32'h 7504D345;   assign  wn_i[68] = 32'h CC210D79;   // 68  0.914 -0.405
-assign  wn_r[69] = 32'h 74B2C884;   assign  wn_i[69] = 32'h CB697DB0;   // 69  0.912 -0.411
-assign  wn_r[70] = 32'h 745F9DD1;   assign  wn_i[70] = 32'h CAB26FA9;   // 70  0.909 -0.416
-assign  wn_r[71] = 32'h 740B53FB;   assign  wn_i[71] = 32'h C9FBE527;   // 71  0.907 -0.422
-assign  wn_r[72] = 32'h 73B5EBD1;   assign  wn_i[72] = 32'h C945DFEC;   // 72  0.904 -0.428
-assign  wn_r[73] = 32'h 735F6626;   assign  wn_i[73] = 32'h C89061BA;   // 73  0.901 -0.433
-assign  wn_r[74] = 32'h 7307C3D0;   assign  wn_i[74] = 32'h C7DB6C50;   // 74  0.899 -0.439
-assign  wn_r[75] = 32'h 72AF05A7;   assign  wn_i[75] = 32'h C727016D;   // 75  0.896 -0.444
-assign  wn_r[76] = 32'h 72552C85;   assign  wn_i[76] = 32'h C67322CE;   // 76  0.893 -0.450
-assign  wn_r[77] = 32'h 71FA3949;   assign  wn_i[77] = 32'h C5BFD22E;   // 77  0.890 -0.455
-assign  wn_r[78] = 32'h 719E2CD2;   assign  wn_i[78] = 32'h C50D1149;   // 78  0.888 -0.461
-assign  wn_r[79] = 32'h 71410805;   assign  wn_i[79] = 32'h C45AE1D7;   // 79  0.885 -0.466
-assign  wn_r[80] = 32'h 70E2CBC6;   assign  wn_i[80] = 32'h C3A94590;   // 80  0.882 -0.471
-assign  wn_r[81] = 32'h 708378FF;   assign  wn_i[81] = 32'h C2F83E2A;   // 81  0.879 -0.477
-assign  wn_r[82] = 32'h 7023109A;   assign  wn_i[82] = 32'h C247CD5A;   // 82  0.876 -0.482
-assign  wn_r[83] = 32'h 6FC19385;   assign  wn_i[83] = 32'h C197F4D4;   // 83  0.873 -0.488
-assign  wn_r[84] = 32'h 6F5F02B2;   assign  wn_i[84] = 32'h C0E8B648;   // 84  0.870 -0.493
-assign  wn_r[85] = 32'h 6EFB5F12;   assign  wn_i[85] = 32'h C03A1368;   // 85  0.867 -0.498
-assign  wn_r[86] = 32'h 6E96A99D;   assign  wn_i[86] = 32'h BF8C0DE3;   // 86  0.864 -0.504
-assign  wn_r[87] = 32'h 6E30E34A;   assign  wn_i[87] = 32'h BEDEA765;   // 87  0.861 -0.509
-assign  wn_r[88] = 32'h 6DCA0D14;   assign  wn_i[88] = 32'h BE31E19B;   // 88  0.858 -0.514
-assign  wn_r[89] = 32'h 6D6227FA;   assign  wn_i[89] = 32'h BD85BE30;   // 89  0.855 -0.519
-assign  wn_r[90] = 32'h 6CF934FC;   assign  wn_i[90] = 32'h BCDA3ECB;   // 90  0.851 -0.525
-assign  wn_r[91] = 32'h 6C8F351C;   assign  wn_i[91] = 32'h BC2F6513;   // 91  0.848 -0.530
-assign  wn_r[92] = 32'h 6C242960;   assign  wn_i[92] = 32'h BB8532B0;   // 92  0.845 -0.535
-assign  wn_r[93] = 32'h 6BB812D1;   assign  wn_i[93] = 32'h BADBA943;   // 93  0.842 -0.540
-assign  wn_r[94] = 32'h 6B4AF279;   assign  wn_i[94] = 32'h BA32CA71;   // 94  0.838 -0.545
-assign  wn_r[95] = 32'h 6ADCC964;   assign  wn_i[95] = 32'h B98A97D8;   // 95  0.835 -0.550
-assign  wn_r[96] = 32'h 6A6D98A4;   assign  wn_i[96] = 32'h B8E31319;   // 96  0.831 -0.556
-assign  wn_r[97] = 32'h 69FD614A;   assign  wn_i[97] = 32'h B83C3DD1;   // 97  0.828 -0.561
-assign  wn_r[98] = 32'h 698C246C;   assign  wn_i[98] = 32'h B796199B;   // 98  0.825 -0.566
-assign  wn_r[99] = 32'h 6919E320;   assign  wn_i[99] = 32'h B6F0A812;   // 99  0.821 -0.571
-assign  wn_r[100] = 32'h 68A69E81;   assign  wn_i[100] = 32'h B64BEACD;   // 100  0.818 -0.576
-assign  wn_r[101] = 32'h 683257AB;   assign  wn_i[101] = 32'h B5A7E362;   // 101  0.814 -0.581
-assign  wn_r[102] = 32'h 67BD0FBD;   assign  wn_i[102] = 32'h B5049368;   // 102  0.810 -0.586
-assign  wn_r[103] = 32'h 6746C7D8;   assign  wn_i[103] = 32'h B461FC70;   // 103  0.807 -0.591
-assign  wn_r[104] = 32'h 66CF8120;   assign  wn_i[104] = 32'h B3C0200C;   // 104  0.803 -0.596
-assign  wn_r[105] = 32'h 66573CBB;   assign  wn_i[105] = 32'h B31EFFCC;   // 105  0.800 -0.601
-assign  wn_r[106] = 32'h 65DDFBD3;   assign  wn_i[106] = 32'h B27E9D3C;   // 106  0.796 -0.606
-assign  wn_r[107] = 32'h 6563BF92;   assign  wn_i[107] = 32'h B1DEF9E9;   // 107  0.792 -0.610
-assign  wn_r[108] = 32'h 64E88926;   assign  wn_i[108] = 32'h B140175B;   // 108  0.788 -0.615
-assign  wn_r[109] = 32'h 646C59BF;   assign  wn_i[109] = 32'h B0A1F71D;   // 109  0.785 -0.620
-assign  wn_r[110] = 32'h 63EF3290;   assign  wn_i[110] = 32'h B0049AB3;   // 110  0.781 -0.625
-assign  wn_r[111] = 32'h 637114CC;   assign  wn_i[111] = 32'h AF6803A2;   // 111  0.777 -0.630
-assign  wn_r[112] = 32'h 62F201AC;   assign  wn_i[112] = 32'h AECC336C;   // 112  0.773 -0.634
-assign  wn_r[113] = 32'h 6271FA69;   assign  wn_i[113] = 32'h AE312B92;   // 113  0.769 -0.639
-assign  wn_r[114] = 32'h 61F1003F;   assign  wn_i[114] = 32'h AD96ED92;   // 114  0.765 -0.644
-assign  wn_r[115] = 32'h 616F146C;   assign  wn_i[115] = 32'h ACFD7AE8;   // 115  0.761 -0.649
-assign  wn_r[116] = 32'h 60EC3830;   assign  wn_i[116] = 32'h AC64D510;   // 116  0.757 -0.653
-assign  wn_r[117] = 32'h 60686CCF;   assign  wn_i[117] = 32'h ABCCFD83;   // 117  0.753 -0.658
-assign  wn_r[118] = 32'h 5FE3B38D;   assign  wn_i[118] = 32'h AB35F5B5;   // 118  0.749 -0.662
-assign  wn_r[119] = 32'h 5F5E0DB3;   assign  wn_i[119] = 32'h AA9FBF1E;   // 119  0.745 -0.667
-assign  wn_r[120] = 32'h 5ED77C8A;   assign  wn_i[120] = 32'h AA0A5B2E;   // 120  0.741 -0.672
-assign  wn_r[121] = 32'h 5E50015D;   assign  wn_i[121] = 32'h A975CB57;   // 121  0.737 -0.676
-assign  wn_r[122] = 32'h 5DC79D7C;   assign  wn_i[122] = 32'h A8E21106;   // 122  0.733 -0.681
-assign  wn_r[123] = 32'h 5D3E5237;   assign  wn_i[123] = 32'h A84F2DAA;   // 123  0.728 -0.685
-assign  wn_r[124] = 32'h 5CB420E0;   assign  wn_i[124] = 32'h A7BD22AC;   // 124  0.724 -0.690
-assign  wn_r[125] = 32'h 5C290ACC;   assign  wn_i[125] = 32'h A72BF174;   // 125  0.720 -0.694
-assign  wn_r[126] = 32'h 5B9D1154;   assign  wn_i[126] = 32'h A69B9B68;   // 126  0.716 -0.698
-assign  wn_r[127] = 32'h 5B1035CF;   assign  wn_i[127] = 32'h A60C21EE;   // 127  0.711 -0.703
-assign  wn_r[128] = 32'h 5A82799A;   assign  wn_i[128] = 32'h A57D8666;   // 128  0.707 -0.707
-assign  wn_r[129] = 32'h 59F3DE12;   assign  wn_i[129] = 32'h A4EFCA31;   // 129  0.703 -0.711
-assign  wn_r[130] = 32'h 59646498;   assign  wn_i[130] = 32'h A462EEAC;   // 130  0.698 -0.716
-assign  wn_r[131] = 32'h 58D40E8C;   assign  wn_i[131] = 32'h A3D6F534;   // 131  0.694 -0.720
-assign  wn_r[132] = 32'h 5842DD54;   assign  wn_i[132] = 32'h A34BDF20;   // 132  0.690 -0.724
-assign  wn_r[133] = 32'h 57B0D256;   assign  wn_i[133] = 32'h A2C1ADC9;   // 133  0.685 -0.728
-assign  wn_r[134] = 32'h 571DEEFA;   assign  wn_i[134] = 32'h A2386284;   // 134  0.681 -0.733
-assign  wn_r[135] = 32'h 568A34A9;   assign  wn_i[135] = 32'h A1AFFEA3;   // 135  0.676 -0.737
-assign  wn_r[136] = 32'h 55F5A4D2;   assign  wn_i[136] = 32'h A1288376;   // 136  0.672 -0.741
-assign  wn_r[137] = 32'h 556040E2;   assign  wn_i[137] = 32'h A0A1F24D;   // 137  0.667 -0.745
-assign  wn_r[138] = 32'h 54CA0A4B;   assign  wn_i[138] = 32'h A01C4C73;   // 138  0.662 -0.749
-assign  wn_r[139] = 32'h 5433027D;   assign  wn_i[139] = 32'h 9F979331;   // 139  0.658 -0.753
-assign  wn_r[140] = 32'h 539B2AF0;   assign  wn_i[140] = 32'h 9F13C7D0;   // 140  0.653 -0.757
-assign  wn_r[141] = 32'h 53028518;   assign  wn_i[141] = 32'h 9E90EB94;   // 141  0.649 -0.761
-assign  wn_r[142] = 32'h 5269126E;   assign  wn_i[142] = 32'h 9E0EFFC1;   // 142  0.644 -0.765
-assign  wn_r[143] = 32'h 51CED46E;   assign  wn_i[143] = 32'h 9D8E0597;   // 143  0.639 -0.769
-assign  wn_r[144] = 32'h 5133CC94;   assign  wn_i[144] = 32'h 9D0DFE54;   // 144  0.634 -0.773
-assign  wn_r[145] = 32'h 5097FC5E;   assign  wn_i[145] = 32'h 9C8EEB34;   // 145  0.630 -0.777
-assign  wn_r[146] = 32'h 4FFB654D;   assign  wn_i[146] = 32'h 9C10CD70;   // 146  0.625 -0.781
-assign  wn_r[147] = 32'h 4F5E08E3;   assign  wn_i[147] = 32'h 9B93A641;   // 147  0.620 -0.785
-assign  wn_r[148] = 32'h 4EBFE8A5;   assign  wn_i[148] = 32'h 9B1776DA;   // 148  0.615 -0.788
-assign  wn_r[149] = 32'h 4E210617;   assign  wn_i[149] = 32'h 9A9C406E;   // 149  0.610 -0.792
-assign  wn_r[150] = 32'h 4D8162C4;   assign  wn_i[150] = 32'h 9A22042D;   // 150  0.606 -0.796
-assign  wn_r[151] = 32'h 4CE10034;   assign  wn_i[151] = 32'h 99A8C345;   // 151  0.601 -0.800
-assign  wn_r[152] = 32'h 4C3FDFF4;   assign  wn_i[152] = 32'h 99307EE0;   // 152  0.596 -0.803
-assign  wn_r[153] = 32'h 4B9E0390;   assign  wn_i[153] = 32'h 98B93828;   // 153  0.591 -0.807
-assign  wn_r[154] = 32'h 4AFB6C98;   assign  wn_i[154] = 32'h 9842F043;   // 154  0.586 -0.810
-assign  wn_r[155] = 32'h 4A581C9E;   assign  wn_i[155] = 32'h 97CDA855;   // 155  0.581 -0.814
-assign  wn_r[156] = 32'h 49B41533;   assign  wn_i[156] = 32'h 9759617F;   // 156  0.576 -0.818
-assign  wn_r[157] = 32'h 490F57EE;   assign  wn_i[157] = 32'h 96E61CE0;   // 157  0.571 -0.821
-assign  wn_r[158] = 32'h 4869E665;   assign  wn_i[158] = 32'h 9673DB94;   // 158  0.566 -0.825
-assign  wn_r[159] = 32'h 47C3C22F;   assign  wn_i[159] = 32'h 96029EB6;   // 159  0.561 -0.828
-assign  wn_r[160] = 32'h 471CECE7;   assign  wn_i[160] = 32'h 9592675C;   // 160  0.556 -0.831
-assign  wn_r[161] = 32'h 46756828;   assign  wn_i[161] = 32'h 9523369C;   // 161  0.550 -0.835
-assign  wn_r[162] = 32'h 45CD358F;   assign  wn_i[162] = 32'h 94B50D87;   // 162  0.545 -0.838
-assign  wn_r[163] = 32'h 452456BD;   assign  wn_i[163] = 32'h 9447ED2F;   // 163  0.540 -0.842
-assign  wn_r[164] = 32'h 447ACD50;   assign  wn_i[164] = 32'h 93DBD6A0;   // 164  0.535 -0.845
-assign  wn_r[165] = 32'h 43D09AED;   assign  wn_i[165] = 32'h 9370CAE4;   // 165  0.530 -0.848
-assign  wn_r[166] = 32'h 4325C135;   assign  wn_i[166] = 32'h 9306CB04;   // 166  0.525 -0.851
-assign  wn_r[167] = 32'h 427A41D0;   assign  wn_i[167] = 32'h 929DD806;   // 167  0.519 -0.855
-assign  wn_r[168] = 32'h 41CE1E65;   assign  wn_i[168] = 32'h 9235F2EC;   // 168  0.514 -0.858
-assign  wn_r[169] = 32'h 4121589B;   assign  wn_i[169] = 32'h 91CF1CB6;   // 169  0.509 -0.861
-assign  wn_r[170] = 32'h 4073F21D;   assign  wn_i[170] = 32'h 91695663;   // 170  0.504 -0.864
-assign  wn_r[171] = 32'h 3FC5EC98;   assign  wn_i[171] = 32'h 9104A0EE;   // 171  0.498 -0.867
-assign  wn_r[172] = 32'h 3F1749B8;   assign  wn_i[172] = 32'h 90A0FD4E;   // 172  0.493 -0.870
-assign  wn_r[173] = 32'h 3E680B2C;   assign  wn_i[173] = 32'h 903E6C7B;   // 173  0.488 -0.873
-assign  wn_r[174] = 32'h 3DB832A6;   assign  wn_i[174] = 32'h 8FDCEF66;   // 174  0.482 -0.876
-assign  wn_r[175] = 32'h 3D07C1D6;   assign  wn_i[175] = 32'h 8F7C8701;   // 175  0.477 -0.879
-assign  wn_r[176] = 32'h 3C56BA70;   assign  wn_i[176] = 32'h 8F1D343A;   // 176  0.471 -0.882
-assign  wn_r[177] = 32'h 3BA51E29;   assign  wn_i[177] = 32'h 8EBEF7FB;   // 177  0.466 -0.885
-assign  wn_r[178] = 32'h 3AF2EEB7;   assign  wn_i[178] = 32'h 8E61D32E;   // 178  0.461 -0.888
-assign  wn_r[179] = 32'h 3A402DD2;   assign  wn_i[179] = 32'h 8E05C6B7;   // 179  0.455 -0.890
-assign  wn_r[180] = 32'h 398CDD32;   assign  wn_i[180] = 32'h 8DAAD37B;   // 180  0.450 -0.893
-assign  wn_r[181] = 32'h 38D8FE93;   assign  wn_i[181] = 32'h 8D50FA59;   // 181  0.444 -0.896
-assign  wn_r[182] = 32'h 382493B0;   assign  wn_i[182] = 32'h 8CF83C30;   // 182  0.439 -0.899
-assign  wn_r[183] = 32'h 376F9E46;   assign  wn_i[183] = 32'h 8CA099DA;   // 183  0.433 -0.901
-assign  wn_r[184] = 32'h 36BA2014;   assign  wn_i[184] = 32'h 8C4A142F;   // 184  0.428 -0.904
-assign  wn_r[185] = 32'h 36041AD9;   assign  wn_i[185] = 32'h 8BF4AC05;   // 185  0.422 -0.907
-assign  wn_r[186] = 32'h 354D9057;   assign  wn_i[186] = 32'h 8BA0622F;   // 186  0.416 -0.909
-assign  wn_r[187] = 32'h 34968250;   assign  wn_i[187] = 32'h 8B4D377C;   // 187  0.411 -0.912
-assign  wn_r[188] = 32'h 33DEF287;   assign  wn_i[188] = 32'h 8AFB2CBB;   // 188  0.405 -0.914
-assign  wn_r[189] = 32'h 3326E2C3;   assign  wn_i[189] = 32'h 8AAA42B4;   // 189  0.400 -0.917
-assign  wn_r[190] = 32'h 326E54C7;   assign  wn_i[190] = 32'h 8A5A7A31;   // 190  0.394 -0.919
-assign  wn_r[191] = 32'h 31B54A5E;   assign  wn_i[191] = 32'h 8A0BD3F5;   // 191  0.388 -0.922
-assign  wn_r[192] = 32'h 30FBC54D;   assign  wn_i[192] = 32'h 89BE50C3;   // 192  0.383 -0.924
-assign  wn_r[193] = 32'h 3041C761;   assign  wn_i[193] = 32'h 8971F15A;   // 193  0.377 -0.926
-assign  wn_r[194] = 32'h 2F875262;   assign  wn_i[194] = 32'h 8926B677;   // 194  0.371 -0.929
-assign  wn_r[195] = 32'h 2ECC681E;   assign  wn_i[195] = 32'h 88DCA0D3;   // 195  0.366 -0.931
-assign  wn_r[196] = 32'h 2E110A62;   assign  wn_i[196] = 32'h 8893B125;   // 196  0.360 -0.933
-assign  wn_r[197] = 32'h 2D553AFC;   assign  wn_i[197] = 32'h 884BE821;   // 197  0.354 -0.935
-assign  wn_r[198] = 32'h 2C98FBBA;   assign  wn_i[198] = 32'h 88054677;   // 198  0.348 -0.937
-assign  wn_r[199] = 32'h 2BDC4E6F;   assign  wn_i[199] = 32'h 87BFCCD7;   // 199  0.343 -0.939
-assign  wn_r[200] = 32'h 2B1F34EB;   assign  wn_i[200] = 32'h 877B7BEC;   // 200  0.337 -0.942
-assign  wn_r[201] = 32'h 2A61B101;   assign  wn_i[201] = 32'h 8738545E;   // 201  0.331 -0.944
-assign  wn_r[202] = 32'h 29A3C485;   assign  wn_i[202] = 32'h 86F656D3;   // 202  0.325 -0.946
-assign  wn_r[203] = 32'h 28E5714B;   assign  wn_i[203] = 32'h 86B583EE;   // 203  0.320 -0.948
-assign  wn_r[204] = 32'h 2826B928;   assign  wn_i[204] = 32'h 8675DC4F;   // 204  0.314 -0.950
-assign  wn_r[205] = 32'h 27679DF4;   assign  wn_i[205] = 32'h 86376092;   // 205  0.308 -0.951
-assign  wn_r[206] = 32'h 26A82186;   assign  wn_i[206] = 32'h 85FA1153;   // 206  0.302 -0.953
-assign  wn_r[207] = 32'h 25E845B6;   assign  wn_i[207] = 32'h 85BDEF28;   // 207  0.296 -0.955
-assign  wn_r[208] = 32'h 25280C5E;   assign  wn_i[208] = 32'h 8582FAA5;   // 208  0.290 -0.957
-assign  wn_r[209] = 32'h 24677758;   assign  wn_i[209] = 32'h 8549345C;   // 209  0.284 -0.959
-assign  wn_r[210] = 32'h 23A6887F;   assign  wn_i[210] = 32'h 85109CDD;   // 210  0.279 -0.960
-assign  wn_r[211] = 32'h 22E541AF;   assign  wn_i[211] = 32'h 84D934B1;   // 211  0.273 -0.962
-assign  wn_r[212] = 32'h 2223A4C5;   assign  wn_i[212] = 32'h 84A2FC62;   // 212  0.267 -0.964
-assign  wn_r[213] = 32'h 2161B3A0;   assign  wn_i[213] = 32'h 846DF477;   // 213  0.261 -0.965
-assign  wn_r[214] = 32'h 209F701C;   assign  wn_i[214] = 32'h 843A1D70;   // 214  0.255 -0.967
-assign  wn_r[215] = 32'h 1FDCDC1B;   assign  wn_i[215] = 32'h 840777D0;   // 215  0.249 -0.969
-assign  wn_r[216] = 32'h 1F19F97B;   assign  wn_i[216] = 32'h 83D60412;   // 216  0.243 -0.970
-assign  wn_r[217] = 32'h 1E56CA1E;   assign  wn_i[217] = 32'h 83A5C2B0;   // 217  0.237 -0.972
-assign  wn_r[218] = 32'h 1D934FE5;   assign  wn_i[218] = 32'h 8376B422;   // 218  0.231 -0.973
-assign  wn_r[219] = 32'h 1CCF8CB3;   assign  wn_i[219] = 32'h 8348D8DC;   // 219  0.225 -0.974
-assign  wn_r[220] = 32'h 1C0B826A;   assign  wn_i[220] = 32'h 831C314E;   // 220  0.219 -0.976
-assign  wn_r[221] = 32'h 1B4732EF;   assign  wn_i[221] = 32'h 82F0BDE8;   // 221  0.213 -0.977
-assign  wn_r[222] = 32'h 1A82A026;   assign  wn_i[222] = 32'h 82C67F14;   // 222  0.207 -0.978
-assign  wn_r[223] = 32'h 19BDCBF3;   assign  wn_i[223] = 32'h 829D753A;   // 223  0.201 -0.980
-assign  wn_r[224] = 32'h 18F8B83C;   assign  wn_i[224] = 32'h 8275A0C0;   // 224  0.195 -0.981
-assign  wn_r[225] = 32'h 183366E9;   assign  wn_i[225] = 32'h 824F0208;   // 225  0.189 -0.982
-assign  wn_r[226] = 32'h 176DD9DE;   assign  wn_i[226] = 32'h 82299971;   // 226  0.183 -0.983
-assign  wn_r[227] = 32'h 16A81305;   assign  wn_i[227] = 32'h 82056758;   // 227  0.177 -0.984
-assign  wn_r[228] = 32'h 15E21445;   assign  wn_i[228] = 32'h 81E26C16;   // 228  0.171 -0.985
-assign  wn_r[229] = 32'h 151BDF86;   assign  wn_i[229] = 32'h 81C0A801;   // 229  0.165 -0.986
-assign  wn_r[230] = 32'h 145576B1;   assign  wn_i[230] = 32'h 81A01B6D;   // 230  0.159 -0.987
-assign  wn_r[231] = 32'h 138EDBB1;   assign  wn_i[231] = 32'h 8180C6A9;   // 231  0.153 -0.988
-assign  wn_r[232] = 32'h 12C8106F;   assign  wn_i[232] = 32'h 8162AA04;   // 232  0.147 -0.989
-assign  wn_r[233] = 32'h 120116D5;   assign  wn_i[233] = 32'h 8145C5C7;   // 233  0.141 -0.990
-assign  wn_r[234] = 32'h 1139F0CF;   assign  wn_i[234] = 32'h 812A1A3A;   // 234  0.135 -0.991
-assign  wn_r[235] = 32'h 1072A048;   assign  wn_i[235] = 32'h 810FA7A0;   // 235  0.128 -0.992
-assign  wn_r[236] = 32'h 0FAB272B;   assign  wn_i[236] = 32'h 80F66E3C;   // 236  0.122 -0.992
-assign  wn_r[237] = 32'h 0EE38766;   assign  wn_i[237] = 32'h 80DE6E4C;   // 237  0.116 -0.993
-assign  wn_r[238] = 32'h 0E1BC2E4;   assign  wn_i[238] = 32'h 80C7A80A;   // 238  0.110 -0.994
-assign  wn_r[239] = 32'h 0D53DB92;   assign  wn_i[239] = 32'h 80B21BAF;   // 239  0.104 -0.995
-assign  wn_r[240] = 32'h 0C8BD35E;   assign  wn_i[240] = 32'h 809DC971;   // 240  0.098 -0.995
-assign  wn_r[241] = 32'h 0BC3AC35;   assign  wn_i[241] = 32'h 808AB180;   // 241  0.092 -0.996
-assign  wn_r[242] = 32'h 0AFB6805;   assign  wn_i[242] = 32'h 8078D40D;   // 242  0.086 -0.996
-assign  wn_r[243] = 32'h 0A3308BD;   assign  wn_i[243] = 32'h 80683143;   // 243  0.080 -0.997
-assign  wn_r[244] = 32'h 096A9049;   assign  wn_i[244] = 32'h 8058C94C;   // 244  0.074 -0.997
-assign  wn_r[245] = 32'h 08A2009A;   assign  wn_i[245] = 32'h 804A9C4D;   // 245  0.067 -0.998
-assign  wn_r[246] = 32'h 07D95B9E;   assign  wn_i[246] = 32'h 803DAA6A;   // 246  0.061 -0.998
-assign  wn_r[247] = 32'h 0710A345;   assign  wn_i[247] = 32'h 8031F3C2;   // 247  0.055 -0.998
-assign  wn_r[248] = 32'h 0647D97C;   assign  wn_i[248] = 32'h 80277872;   // 248  0.049 -0.999
-assign  wn_r[249] = 32'h 057F0035;   assign  wn_i[249] = 32'h 801E3895;   // 249  0.043 -0.999
-assign  wn_r[250] = 32'h 04B6195D;   assign  wn_i[250] = 32'h 80163440;   // 250  0.037 -0.999
-assign  wn_r[251] = 32'h 03ED26E6;   assign  wn_i[251] = 32'h 800F6B88;   // 251  0.031 -1.000
-assign  wn_r[252] = 32'h 03242ABF;   assign  wn_i[252] = 32'h 8009DE7E;   // 252  0.025 -1.000
-assign  wn_r[253] = 32'h 025B26D7;   assign  wn_i[253] = 32'h 80058D2F;   // 253  0.018 -1.000
-assign  wn_r[254] = 32'h 01921D20;   assign  wn_i[254] = 32'h 800277A6;   // 254  0.012 -1.000
-assign  wn_r[255] = 32'h 00C90F88;   assign  wn_i[255] = 32'h 80009DEA;   // 255  0.006 -1.000
-assign  wn_r[256] = 32'h 00000000;   assign  wn_i[256] = 32'h 80000000;   // 256  0.000 -1.000
-assign  wn_r[257] = 32'h xxxxxxxx;   assign  wn_i[257] = 32'h xxxxxxxx;   // 257 -0.006 -1.000
-assign  wn_r[258] = 32'h FE6DE2E0;   assign  wn_i[258] = 32'h 800277A6;   // 258 -0.012 -1.000
-assign  wn_r[259] = 32'h xxxxxxxx;   assign  wn_i[259] = 32'h xxxxxxxx;   // 259 -0.018 -1.000
-assign  wn_r[260] = 32'h FCDBD541;   assign  wn_i[260] = 32'h 8009DE7E;   // 260 -0.025 -1.000
-assign  wn_r[261] = 32'h FC12D91A;   assign  wn_i[261] = 32'h 800F6B88;   // 261 -0.031 -1.000
-assign  wn_r[262] = 32'h FB49E6A3;   assign  wn_i[262] = 32'h 80163440;   // 262 -0.037 -0.999
-assign  wn_r[263] = 32'h xxxxxxxx;   assign  wn_i[263] = 32'h xxxxxxxx;   // 263 -0.043 -0.999
-assign  wn_r[264] = 32'h F9B82684;   assign  wn_i[264] = 32'h 80277872;   // 264 -0.049 -0.999
-assign  wn_r[265] = 32'h xxxxxxxx;   assign  wn_i[265] = 32'h xxxxxxxx;   // 265 -0.055 -0.998
-assign  wn_r[266] = 32'h F826A462;   assign  wn_i[266] = 32'h 803DAA6A;   // 266 -0.061 -0.998
-assign  wn_r[267] = 32'h F75DFF66;   assign  wn_i[267] = 32'h 804A9C4D;   // 267 -0.067 -0.998
-assign  wn_r[268] = 32'h F6956FB7;   assign  wn_i[268] = 32'h 8058C94C;   // 268 -0.074 -0.997
-assign  wn_r[269] = 32'h xxxxxxxx;   assign  wn_i[269] = 32'h xxxxxxxx;   // 269 -0.080 -0.997
-assign  wn_r[270] = 32'h F50497FB;   assign  wn_i[270] = 32'h 8078D40D;   // 270 -0.086 -0.996
-assign  wn_r[271] = 32'h xxxxxxxx;   assign  wn_i[271] = 32'h xxxxxxxx;   // 271 -0.092 -0.996
-assign  wn_r[272] = 32'h F3742CA2;   assign  wn_i[272] = 32'h 809DC971;   // 272 -0.098 -0.995
-assign  wn_r[273] = 32'h F2AC246E;   assign  wn_i[273] = 32'h 80B21BAF;   // 273 -0.104 -0.995
-assign  wn_r[274] = 32'h F1E43D1C;   assign  wn_i[274] = 32'h 80C7A80A;   // 274 -0.110 -0.994
-assign  wn_r[275] = 32'h xxxxxxxx;   assign  wn_i[275] = 32'h xxxxxxxx;   // 275 -0.116 -0.993
-assign  wn_r[276] = 32'h F054D8D5;   assign  wn_i[276] = 32'h 80F66E3C;   // 276 -0.122 -0.992
-assign  wn_r[277] = 32'h xxxxxxxx;   assign  wn_i[277] = 32'h xxxxxxxx;   // 277 -0.128 -0.992
-assign  wn_r[278] = 32'h EEC60F31;   assign  wn_i[278] = 32'h 812A1A3A;   // 278 -0.135 -0.991
-assign  wn_r[279] = 32'h EDFEE92B;   assign  wn_i[279] = 32'h 8145C5C7;   // 279 -0.141 -0.990
-assign  wn_r[280] = 32'h ED37EF91;   assign  wn_i[280] = 32'h 8162AA04;   // 280 -0.147 -0.989
-assign  wn_r[281] = 32'h xxxxxxxx;   assign  wn_i[281] = 32'h xxxxxxxx;   // 281 -0.153 -0.988
-assign  wn_r[282] = 32'h EBAA894F;   assign  wn_i[282] = 32'h 81A01B6D;   // 282 -0.159 -0.987
-assign  wn_r[283] = 32'h xxxxxxxx;   assign  wn_i[283] = 32'h xxxxxxxx;   // 283 -0.165 -0.986
-assign  wn_r[284] = 32'h EA1DEBBB;   assign  wn_i[284] = 32'h 81E26C16;   // 284 -0.171 -0.985
-assign  wn_r[285] = 32'h E957ECFB;   assign  wn_i[285] = 32'h 82056758;   // 285 -0.177 -0.984
-assign  wn_r[286] = 32'h E8922622;   assign  wn_i[286] = 32'h 82299971;   // 286 -0.183 -0.983
-assign  wn_r[287] = 32'h xxxxxxxx;   assign  wn_i[287] = 32'h xxxxxxxx;   // 287 -0.189 -0.982
-assign  wn_r[288] = 32'h E70747C4;   assign  wn_i[288] = 32'h 8275A0C0;   // 288 -0.195 -0.981
-assign  wn_r[289] = 32'h xxxxxxxx;   assign  wn_i[289] = 32'h xxxxxxxx;   // 289 -0.201 -0.980
-assign  wn_r[290] = 32'h E57D5FDA;   assign  wn_i[290] = 32'h 82C67F14;   // 290 -0.207 -0.978
-assign  wn_r[291] = 32'h E4B8CD11;   assign  wn_i[291] = 32'h 82F0BDE8;   // 291 -0.213 -0.977
-assign  wn_r[292] = 32'h E3F47D96;   assign  wn_i[292] = 32'h 831C314E;   // 292 -0.219 -0.976
-assign  wn_r[293] = 32'h xxxxxxxx;   assign  wn_i[293] = 32'h xxxxxxxx;   // 293 -0.225 -0.974
-assign  wn_r[294] = 32'h E26CB01B;   assign  wn_i[294] = 32'h 8376B422;   // 294 -0.231 -0.973
-assign  wn_r[295] = 32'h xxxxxxxx;   assign  wn_i[295] = 32'h xxxxxxxx;   // 295 -0.237 -0.972
-assign  wn_r[296] = 32'h E0E60685;   assign  wn_i[296] = 32'h 83D60412;   // 296 -0.243 -0.970
-assign  wn_r[297] = 32'h E02323E5;   assign  wn_i[297] = 32'h 840777D0;   // 297 -0.249 -0.969
-assign  wn_r[298] = 32'h DF608FE4;   assign  wn_i[298] = 32'h 843A1D70;   // 298 -0.255 -0.967
-assign  wn_r[299] = 32'h xxxxxxxx;   assign  wn_i[299] = 32'h xxxxxxxx;   // 299 -0.261 -0.965
-assign  wn_r[300] = 32'h DDDC5B3B;   assign  wn_i[300] = 32'h 84A2FC62;   // 300 -0.267 -0.964
-assign  wn_r[301] = 32'h xxxxxxxx;   assign  wn_i[301] = 32'h xxxxxxxx;   // 301 -0.273 -0.962
-assign  wn_r[302] = 32'h DC597781;   assign  wn_i[302] = 32'h 85109CDD;   // 302 -0.279 -0.960
-assign  wn_r[303] = 32'h DB9888A8;   assign  wn_i[303] = 32'h 8549345C;   // 303 -0.284 -0.959
-assign  wn_r[304] = 32'h DAD7F3A2;   assign  wn_i[304] = 32'h 8582FAA5;   // 304 -0.290 -0.957
-assign  wn_r[305] = 32'h xxxxxxxx;   assign  wn_i[305] = 32'h xxxxxxxx;   // 305 -0.296 -0.955
-assign  wn_r[306] = 32'h D957DE7A;   assign  wn_i[306] = 32'h 85FA1153;   // 306 -0.302 -0.953
-assign  wn_r[307] = 32'h xxxxxxxx;   assign  wn_i[307] = 32'h xxxxxxxx;   // 307 -0.308 -0.951
-assign  wn_r[308] = 32'h D7D946D8;   assign  wn_i[308] = 32'h 8675DC4F;   // 308 -0.314 -0.950
-assign  wn_r[309] = 32'h D71A8EB5;   assign  wn_i[309] = 32'h 86B583EE;   // 309 -0.320 -0.948
-assign  wn_r[310] = 32'h D65C3B7B;   assign  wn_i[310] = 32'h 86F656D3;   // 310 -0.325 -0.946
-assign  wn_r[311] = 32'h xxxxxxxx;   assign  wn_i[311] = 32'h xxxxxxxx;   // 311 -0.331 -0.944
-assign  wn_r[312] = 32'h D4E0CB15;   assign  wn_i[312] = 32'h 877B7BEC;   // 312 -0.337 -0.942
-assign  wn_r[313] = 32'h xxxxxxxx;   assign  wn_i[313] = 32'h xxxxxxxx;   // 313 -0.343 -0.939
-assign  wn_r[314] = 32'h D3670446;   assign  wn_i[314] = 32'h 88054677;   // 314 -0.348 -0.937
-assign  wn_r[315] = 32'h D2AAC504;   assign  wn_i[315] = 32'h 884BE821;   // 315 -0.354 -0.935
-assign  wn_r[316] = 32'h D1EEF59E;   assign  wn_i[316] = 32'h 8893B125;   // 316 -0.360 -0.933
-assign  wn_r[317] = 32'h xxxxxxxx;   assign  wn_i[317] = 32'h xxxxxxxx;   // 317 -0.366 -0.931
-assign  wn_r[318] = 32'h D078AD9E;   assign  wn_i[318] = 32'h 8926B677;   // 318 -0.371 -0.929
-assign  wn_r[319] = 32'h xxxxxxxx;   assign  wn_i[319] = 32'h xxxxxxxx;   // 319 -0.377 -0.926
-assign  wn_r[320] = 32'h CF043AB3;   assign  wn_i[320] = 32'h 89BE50C3;   // 320 -0.383 -0.924
-assign  wn_r[321] = 32'h CE4AB5A2;   assign  wn_i[321] = 32'h 8A0BD3F5;   // 321 -0.388 -0.922
-assign  wn_r[322] = 32'h CD91AB39;   assign  wn_i[322] = 32'h 8A5A7A31;   // 322 -0.394 -0.919
-assign  wn_r[323] = 32'h xxxxxxxx;   assign  wn_i[323] = 32'h xxxxxxxx;   // 323 -0.400 -0.917
-assign  wn_r[324] = 32'h CC210D79;   assign  wn_i[324] = 32'h 8AFB2CBB;   // 324 -0.405 -0.914
-assign  wn_r[325] = 32'h xxxxxxxx;   assign  wn_i[325] = 32'h xxxxxxxx;   // 325 -0.411 -0.912
-assign  wn_r[326] = 32'h CAB26FA9;   assign  wn_i[326] = 32'h 8BA0622F;   // 326 -0.416 -0.909
-assign  wn_r[327] = 32'h C9FBE527;   assign  wn_i[327] = 32'h 8BF4AC05;   // 327 -0.422 -0.907
-assign  wn_r[328] = 32'h C945DFEC;   assign  wn_i[328] = 32'h 8C4A142F;   // 328 -0.428 -0.904
-assign  wn_r[329] = 32'h xxxxxxxx;   assign  wn_i[329] = 32'h xxxxxxxx;   // 329 -0.433 -0.901
-assign  wn_r[330] = 32'h C7DB6C50;   assign  wn_i[330] = 32'h 8CF83C30;   // 330 -0.439 -0.899
-assign  wn_r[331] = 32'h xxxxxxxx;   assign  wn_i[331] = 32'h xxxxxxxx;   // 331 -0.444 -0.896
-assign  wn_r[332] = 32'h C67322CE;   assign  wn_i[332] = 32'h 8DAAD37B;   // 332 -0.450 -0.893
-assign  wn_r[333] = 32'h C5BFD22E;   assign  wn_i[333] = 32'h 8E05C6B7;   // 333 -0.455 -0.890
-assign  wn_r[334] = 32'h C50D1149;   assign  wn_i[334] = 32'h 8E61D32E;   // 334 -0.461 -0.888
-assign  wn_r[335] = 32'h xxxxxxxx;   assign  wn_i[335] = 32'h xxxxxxxx;   // 335 -0.466 -0.885
-assign  wn_r[336] = 32'h C3A94590;   assign  wn_i[336] = 32'h 8F1D343A;   // 336 -0.471 -0.882
-assign  wn_r[337] = 32'h xxxxxxxx;   assign  wn_i[337] = 32'h xxxxxxxx;   // 337 -0.477 -0.879
-assign  wn_r[338] = 32'h C247CD5A;   assign  wn_i[338] = 32'h 8FDCEF66;   // 338 -0.482 -0.876
-assign  wn_r[339] = 32'h C197F4D4;   assign  wn_i[339] = 32'h 903E6C7B;   // 339 -0.488 -0.873
-assign  wn_r[340] = 32'h C0E8B648;   assign  wn_i[340] = 32'h 90A0FD4E;   // 340 -0.493 -0.870
-assign  wn_r[341] = 32'h xxxxxxxx;   assign  wn_i[341] = 32'h xxxxxxxx;   // 341 -0.498 -0.867
-assign  wn_r[342] = 32'h BF8C0DE3;   assign  wn_i[342] = 32'h 91695663;   // 342 -0.504 -0.864
-assign  wn_r[343] = 32'h xxxxxxxx;   assign  wn_i[343] = 32'h xxxxxxxx;   // 343 -0.509 -0.861
-assign  wn_r[344] = 32'h BE31E19B;   assign  wn_i[344] = 32'h 9235F2EC;   // 344 -0.514 -0.858
-assign  wn_r[345] = 32'h BD85BE30;   assign  wn_i[345] = 32'h 929DD806;   // 345 -0.519 -0.855
-assign  wn_r[346] = 32'h BCDA3ECB;   assign  wn_i[346] = 32'h 9306CB04;   // 346 -0.525 -0.851
-assign  wn_r[347] = 32'h xxxxxxxx;   assign  wn_i[347] = 32'h xxxxxxxx;   // 347 -0.530 -0.848
-assign  wn_r[348] = 32'h BB8532B0;   assign  wn_i[348] = 32'h 93DBD6A0;   // 348 -0.535 -0.845
-assign  wn_r[349] = 32'h xxxxxxxx;   assign  wn_i[349] = 32'h xxxxxxxx;   // 349 -0.540 -0.842
-assign  wn_r[350] = 32'h BA32CA71;   assign  wn_i[350] = 32'h 94B50D87;   // 350 -0.545 -0.838
-assign  wn_r[351] = 32'h B98A97D8;   assign  wn_i[351] = 32'h 9523369C;   // 351 -0.550 -0.835
-assign  wn_r[352] = 32'h B8E31319;   assign  wn_i[352] = 32'h 9592675C;   // 352 -0.556 -0.831
-assign  wn_r[353] = 32'h xxxxxxxx;   assign  wn_i[353] = 32'h xxxxxxxx;   // 353 -0.561 -0.828
-assign  wn_r[354] = 32'h B796199B;   assign  wn_i[354] = 32'h 9673DB94;   // 354 -0.566 -0.825
-assign  wn_r[355] = 32'h xxxxxxxx;   assign  wn_i[355] = 32'h xxxxxxxx;   // 355 -0.571 -0.821
-assign  wn_r[356] = 32'h B64BEACD;   assign  wn_i[356] = 32'h 9759617F;   // 356 -0.576 -0.818
-assign  wn_r[357] = 32'h B5A7E362;   assign  wn_i[357] = 32'h 97CDA855;   // 357 -0.581 -0.814
-assign  wn_r[358] = 32'h B5049368;   assign  wn_i[358] = 32'h 9842F043;   // 358 -0.586 -0.810
-assign  wn_r[359] = 32'h xxxxxxxx;   assign  wn_i[359] = 32'h xxxxxxxx;   // 359 -0.591 -0.807
-assign  wn_r[360] = 32'h B3C0200C;   assign  wn_i[360] = 32'h 99307EE0;   // 360 -0.596 -0.803
-assign  wn_r[361] = 32'h xxxxxxxx;   assign  wn_i[361] = 32'h xxxxxxxx;   // 361 -0.601 -0.800
-assign  wn_r[362] = 32'h B27E9D3C;   assign  wn_i[362] = 32'h 9A22042D;   // 362 -0.606 -0.796
-assign  wn_r[363] = 32'h B1DEF9E9;   assign  wn_i[363] = 32'h 9A9C406E;   // 363 -0.610 -0.792
-assign  wn_r[364] = 32'h B140175B;   assign  wn_i[364] = 32'h 9B1776DA;   // 364 -0.615 -0.788
-assign  wn_r[365] = 32'h xxxxxxxx;   assign  wn_i[365] = 32'h xxxxxxxx;   // 365 -0.620 -0.785
-assign  wn_r[366] = 32'h B0049AB3;   assign  wn_i[366] = 32'h 9C10CD70;   // 366 -0.625 -0.781
-assign  wn_r[367] = 32'h xxxxxxxx;   assign  wn_i[367] = 32'h xxxxxxxx;   // 367 -0.630 -0.777
-assign  wn_r[368] = 32'h AECC336C;   assign  wn_i[368] = 32'h 9D0DFE54;   // 368 -0.634 -0.773
-assign  wn_r[369] = 32'h AE312B92;   assign  wn_i[369] = 32'h 9D8E0597;   // 369 -0.639 -0.769
-assign  wn_r[370] = 32'h AD96ED92;   assign  wn_i[370] = 32'h 9E0EFFC1;   // 370 -0.644 -0.765
-assign  wn_r[371] = 32'h xxxxxxxx;   assign  wn_i[371] = 32'h xxxxxxxx;   // 371 -0.649 -0.761
-assign  wn_r[372] = 32'h AC64D510;   assign  wn_i[372] = 32'h 9F13C7D0;   // 372 -0.653 -0.757
-assign  wn_r[373] = 32'h xxxxxxxx;   assign  wn_i[373] = 32'h xxxxxxxx;   // 373 -0.658 -0.753
-assign  wn_r[374] = 32'h AB35F5B5;   assign  wn_i[374] = 32'h A01C4C73;   // 374 -0.662 -0.749
-assign  wn_r[375] = 32'h AA9FBF1E;   assign  wn_i[375] = 32'h A0A1F24D;   // 375 -0.667 -0.745
-assign  wn_r[376] = 32'h AA0A5B2E;   assign  wn_i[376] = 32'h A1288376;   // 376 -0.672 -0.741
-assign  wn_r[377] = 32'h xxxxxxxx;   assign  wn_i[377] = 32'h xxxxxxxx;   // 377 -0.676 -0.737
-assign  wn_r[378] = 32'h A8E21106;   assign  wn_i[378] = 32'h A2386284;   // 378 -0.681 -0.733
-assign  wn_r[379] = 32'h xxxxxxxx;   assign  wn_i[379] = 32'h xxxxxxxx;   // 379 -0.685 -0.728
-assign  wn_r[380] = 32'h A7BD22AC;   assign  wn_i[380] = 32'h A34BDF20;   // 380 -0.690 -0.724
-assign  wn_r[381] = 32'h A72BF174;   assign  wn_i[381] = 32'h A3D6F534;   // 381 -0.694 -0.720
-assign  wn_r[382] = 32'h A69B9B68;   assign  wn_i[382] = 32'h A462EEAC;   // 382 -0.698 -0.716
-assign  wn_r[383] = 32'h xxxxxxxx;   assign  wn_i[383] = 32'h xxxxxxxx;   // 383 -0.703 -0.711
-assign  wn_r[384] = 32'h A57D8666;   assign  wn_i[384] = 32'h A57D8666;   // 384 -0.707 -0.707
-assign  wn_r[385] = 32'h xxxxxxxx;   assign  wn_i[385] = 32'h xxxxxxxx;   // 385 -0.711 -0.703
-assign  wn_r[386] = 32'h A462EEAC;   assign  wn_i[386] = 32'h A69B9B68;   // 386 -0.716 -0.698
-assign  wn_r[387] = 32'h A3D6F534;   assign  wn_i[387] = 32'h A72BF174;   // 387 -0.720 -0.694
-assign  wn_r[388] = 32'h A34BDF20;   assign  wn_i[388] = 32'h A7BD22AC;   // 388 -0.724 -0.690
-assign  wn_r[389] = 32'h xxxxxxxx;   assign  wn_i[389] = 32'h xxxxxxxx;   // 389 -0.728 -0.685
-assign  wn_r[390] = 32'h A2386284;   assign  wn_i[390] = 32'h A8E21106;   // 390 -0.733 -0.681
-assign  wn_r[391] = 32'h xxxxxxxx;   assign  wn_i[391] = 32'h xxxxxxxx;   // 391 -0.737 -0.676
-assign  wn_r[392] = 32'h A1288376;   assign  wn_i[392] = 32'h AA0A5B2E;   // 392 -0.741 -0.672
-assign  wn_r[393] = 32'h A0A1F24D;   assign  wn_i[393] = 32'h AA9FBF1E;   // 393 -0.745 -0.667
-assign  wn_r[394] = 32'h A01C4C73;   assign  wn_i[394] = 32'h AB35F5B5;   // 394 -0.749 -0.662
-assign  wn_r[395] = 32'h xxxxxxxx;   assign  wn_i[395] = 32'h xxxxxxxx;   // 395 -0.753 -0.658
-assign  wn_r[396] = 32'h 9F13C7D0;   assign  wn_i[396] = 32'h AC64D510;   // 396 -0.757 -0.653
-assign  wn_r[397] = 32'h xxxxxxxx;   assign  wn_i[397] = 32'h xxxxxxxx;   // 397 -0.761 -0.649
-assign  wn_r[398] = 32'h 9E0EFFC1;   assign  wn_i[398] = 32'h AD96ED92;   // 398 -0.765 -0.644
-assign  wn_r[399] = 32'h 9D8E0597;   assign  wn_i[399] = 32'h AE312B92;   // 399 -0.769 -0.639
-assign  wn_r[400] = 32'h 9D0DFE54;   assign  wn_i[400] = 32'h AECC336C;   // 400 -0.773 -0.634
-assign  wn_r[401] = 32'h xxxxxxxx;   assign  wn_i[401] = 32'h xxxxxxxx;   // 401 -0.777 -0.630
-assign  wn_r[402] = 32'h 9C10CD70;   assign  wn_i[402] = 32'h B0049AB3;   // 402 -0.781 -0.625
-assign  wn_r[403] = 32'h xxxxxxxx;   assign  wn_i[403] = 32'h xxxxxxxx;   // 403 -0.785 -0.620
-assign  wn_r[404] = 32'h 9B1776DA;   assign  wn_i[404] = 32'h B140175B;   // 404 -0.788 -0.615
-assign  wn_r[405] = 32'h 9A9C406E;   assign  wn_i[405] = 32'h B1DEF9E9;   // 405 -0.792 -0.610
-assign  wn_r[406] = 32'h 9A22042D;   assign  wn_i[406] = 32'h B27E9D3C;   // 406 -0.796 -0.606
-assign  wn_r[407] = 32'h xxxxxxxx;   assign  wn_i[407] = 32'h xxxxxxxx;   // 407 -0.800 -0.601
-assign  wn_r[408] = 32'h 99307EE0;   assign  wn_i[408] = 32'h B3C0200C;   // 408 -0.803 -0.596
-assign  wn_r[409] = 32'h xxxxxxxx;   assign  wn_i[409] = 32'h xxxxxxxx;   // 409 -0.807 -0.591
-assign  wn_r[410] = 32'h 9842F043;   assign  wn_i[410] = 32'h B5049368;   // 410 -0.810 -0.586
-assign  wn_r[411] = 32'h 97CDA855;   assign  wn_i[411] = 32'h B5A7E362;   // 411 -0.814 -0.581
-assign  wn_r[412] = 32'h 9759617F;   assign  wn_i[412] = 32'h B64BEACD;   // 412 -0.818 -0.576
-assign  wn_r[413] = 32'h xxxxxxxx;   assign  wn_i[413] = 32'h xxxxxxxx;   // 413 -0.821 -0.571
-assign  wn_r[414] = 32'h 9673DB94;   assign  wn_i[414] = 32'h B796199B;   // 414 -0.825 -0.566
-assign  wn_r[415] = 32'h xxxxxxxx;   assign  wn_i[415] = 32'h xxxxxxxx;   // 415 -0.828 -0.561
-assign  wn_r[416] = 32'h 9592675C;   assign  wn_i[416] = 32'h B8E31319;   // 416 -0.831 -0.556
-assign  wn_r[417] = 32'h 9523369C;   assign  wn_i[417] = 32'h B98A97D8;   // 417 -0.835 -0.550
-assign  wn_r[418] = 32'h 94B50D87;   assign  wn_i[418] = 32'h BA32CA71;   // 418 -0.838 -0.545
-assign  wn_r[419] = 32'h xxxxxxxx;   assign  wn_i[419] = 32'h xxxxxxxx;   // 419 -0.842 -0.540
-assign  wn_r[420] = 32'h 93DBD6A0;   assign  wn_i[420] = 32'h BB8532B0;   // 420 -0.845 -0.535
-assign  wn_r[421] = 32'h xxxxxxxx;   assign  wn_i[421] = 32'h xxxxxxxx;   // 421 -0.848 -0.530
-assign  wn_r[422] = 32'h 9306CB04;   assign  wn_i[422] = 32'h BCDA3ECB;   // 422 -0.851 -0.525
-assign  wn_r[423] = 32'h 929DD806;   assign  wn_i[423] = 32'h BD85BE30;   // 423 -0.855 -0.519
-assign  wn_r[424] = 32'h 9235F2EC;   assign  wn_i[424] = 32'h BE31E19B;   // 424 -0.858 -0.514
-assign  wn_r[425] = 32'h xxxxxxxx;   assign  wn_i[425] = 32'h xxxxxxxx;   // 425 -0.861 -0.509
-assign  wn_r[426] = 32'h 91695663;   assign  wn_i[426] = 32'h BF8C0DE3;   // 426 -0.864 -0.504
-assign  wn_r[427] = 32'h xxxxxxxx;   assign  wn_i[427] = 32'h xxxxxxxx;   // 427 -0.867 -0.498
-assign  wn_r[428] = 32'h 90A0FD4E;   assign  wn_i[428] = 32'h C0E8B648;   // 428 -0.870 -0.493
-assign  wn_r[429] = 32'h 903E6C7B;   assign  wn_i[429] = 32'h C197F4D4;   // 429 -0.873 -0.488
-assign  wn_r[430] = 32'h 8FDCEF66;   assign  wn_i[430] = 32'h C247CD5A;   // 430 -0.876 -0.482
-assign  wn_r[431] = 32'h xxxxxxxx;   assign  wn_i[431] = 32'h xxxxxxxx;   // 431 -0.879 -0.477
-assign  wn_r[432] = 32'h 8F1D343A;   assign  wn_i[432] = 32'h C3A94590;   // 432 -0.882 -0.471
-assign  wn_r[433] = 32'h xxxxxxxx;   assign  wn_i[433] = 32'h xxxxxxxx;   // 433 -0.885 -0.466
-assign  wn_r[434] = 32'h 8E61D32E;   assign  wn_i[434] = 32'h C50D1149;   // 434 -0.888 -0.461
-assign  wn_r[435] = 32'h 8E05C6B7;   assign  wn_i[435] = 32'h C5BFD22E;   // 435 -0.890 -0.455
-assign  wn_r[436] = 32'h 8DAAD37B;   assign  wn_i[436] = 32'h C67322CE;   // 436 -0.893 -0.450
-assign  wn_r[437] = 32'h xxxxxxxx;   assign  wn_i[437] = 32'h xxxxxxxx;   // 437 -0.896 -0.444
-assign  wn_r[438] = 32'h 8CF83C30;   assign  wn_i[438] = 32'h C7DB6C50;   // 438 -0.899 -0.439
-assign  wn_r[439] = 32'h xxxxxxxx;   assign  wn_i[439] = 32'h xxxxxxxx;   // 439 -0.901 -0.433
-assign  wn_r[440] = 32'h 8C4A142F;   assign  wn_i[440] = 32'h C945DFEC;   // 440 -0.904 -0.428
-assign  wn_r[441] = 32'h 8BF4AC05;   assign  wn_i[441] = 32'h C9FBE527;   // 441 -0.907 -0.422
-assign  wn_r[442] = 32'h 8BA0622F;   assign  wn_i[442] = 32'h CAB26FA9;   // 442 -0.909 -0.416
-assign  wn_r[443] = 32'h xxxxxxxx;   assign  wn_i[443] = 32'h xxxxxxxx;   // 443 -0.912 -0.411
-assign  wn_r[444] = 32'h 8AFB2CBB;   assign  wn_i[444] = 32'h CC210D79;   // 444 -0.914 -0.405
-assign  wn_r[445] = 32'h xxxxxxxx;   assign  wn_i[445] = 32'h xxxxxxxx;   // 445 -0.917 -0.400
-assign  wn_r[446] = 32'h 8A5A7A31;   assign  wn_i[446] = 32'h CD91AB39;   // 446 -0.919 -0.394
-assign  wn_r[447] = 32'h 8A0BD3F5;   assign  wn_i[447] = 32'h CE4AB5A2;   // 447 -0.922 -0.388
-assign  wn_r[448] = 32'h 89BE50C3;   assign  wn_i[448] = 32'h CF043AB3;   // 448 -0.924 -0.383
-assign  wn_r[449] = 32'h xxxxxxxx;   assign  wn_i[449] = 32'h xxxxxxxx;   // 449 -0.926 -0.377
-assign  wn_r[450] = 32'h 8926B677;   assign  wn_i[450] = 32'h D078AD9E;   // 450 -0.929 -0.371
-assign  wn_r[451] = 32'h xxxxxxxx;   assign  wn_i[451] = 32'h xxxxxxxx;   // 451 -0.931 -0.366
-assign  wn_r[452] = 32'h 8893B125;   assign  wn_i[452] = 32'h D1EEF59E;   // 452 -0.933 -0.360
-assign  wn_r[453] = 32'h 884BE821;   assign  wn_i[453] = 32'h D2AAC504;   // 453 -0.935 -0.354
-assign  wn_r[454] = 32'h 88054677;   assign  wn_i[454] = 32'h D3670446;   // 454 -0.937 -0.348
-assign  wn_r[455] = 32'h xxxxxxxx;   assign  wn_i[455] = 32'h xxxxxxxx;   // 455 -0.939 -0.343
-assign  wn_r[456] = 32'h 877B7BEC;   assign  wn_i[456] = 32'h D4E0CB15;   // 456 -0.942 -0.337
-assign  wn_r[457] = 32'h xxxxxxxx;   assign  wn_i[457] = 32'h xxxxxxxx;   // 457 -0.944 -0.331
-assign  wn_r[458] = 32'h 86F656D3;   assign  wn_i[458] = 32'h D65C3B7B;   // 458 -0.946 -0.325
-assign  wn_r[459] = 32'h 86B583EE;   assign  wn_i[459] = 32'h D71A8EB5;   // 459 -0.948 -0.320
-assign  wn_r[460] = 32'h 8675DC4F;   assign  wn_i[460] = 32'h D7D946D8;   // 460 -0.950 -0.314
-assign  wn_r[461] = 32'h xxxxxxxx;   assign  wn_i[461] = 32'h xxxxxxxx;   // 461 -0.951 -0.308
-assign  wn_r[462] = 32'h 85FA1153;   assign  wn_i[462] = 32'h D957DE7A;   // 462 -0.953 -0.302
-assign  wn_r[463] = 32'h xxxxxxxx;   assign  wn_i[463] = 32'h xxxxxxxx;   // 463 -0.955 -0.296
-assign  wn_r[464] = 32'h 8582FAA5;   assign  wn_i[464] = 32'h DAD7F3A2;   // 464 -0.957 -0.290
-assign  wn_r[465] = 32'h 8549345C;   assign  wn_i[465] = 32'h DB9888A8;   // 465 -0.959 -0.284
-assign  wn_r[466] = 32'h 85109CDD;   assign  wn_i[466] = 32'h DC597781;   // 466 -0.960 -0.279
-assign  wn_r[467] = 32'h xxxxxxxx;   assign  wn_i[467] = 32'h xxxxxxxx;   // 467 -0.962 -0.273
-assign  wn_r[468] = 32'h 84A2FC62;   assign  wn_i[468] = 32'h DDDC5B3B;   // 468 -0.964 -0.267
-assign  wn_r[469] = 32'h xxxxxxxx;   assign  wn_i[469] = 32'h xxxxxxxx;   // 469 -0.965 -0.261
-assign  wn_r[470] = 32'h 843A1D70;   assign  wn_i[470] = 32'h DF608FE4;   // 470 -0.967 -0.255
-assign  wn_r[471] = 32'h 840777D0;   assign  wn_i[471] = 32'h E02323E5;   // 471 -0.969 -0.249
-assign  wn_r[472] = 32'h 83D60412;   assign  wn_i[472] = 32'h E0E60685;   // 472 -0.970 -0.243
-assign  wn_r[473] = 32'h xxxxxxxx;   assign  wn_i[473] = 32'h xxxxxxxx;   // 473 -0.972 -0.237
-assign  wn_r[474] = 32'h 8376B422;   assign  wn_i[474] = 32'h E26CB01B;   // 474 -0.973 -0.231
-assign  wn_r[475] = 32'h xxxxxxxx;   assign  wn_i[475] = 32'h xxxxxxxx;   // 475 -0.974 -0.225
-assign  wn_r[476] = 32'h 831C314E;   assign  wn_i[476] = 32'h E3F47D96;   // 476 -0.976 -0.219
-assign  wn_r[477] = 32'h 82F0BDE8;   assign  wn_i[477] = 32'h E4B8CD11;   // 477 -0.977 -0.213
-assign  wn_r[478] = 32'h 82C67F14;   assign  wn_i[478] = 32'h E57D5FDA;   // 478 -0.978 -0.207
-assign  wn_r[479] = 32'h xxxxxxxx;   assign  wn_i[479] = 32'h xxxxxxxx;   // 479 -0.980 -0.201
-assign  wn_r[480] = 32'h 8275A0C0;   assign  wn_i[480] = 32'h E70747C4;   // 480 -0.981 -0.195
-assign  wn_r[481] = 32'h xxxxxxxx;   assign  wn_i[481] = 32'h xxxxxxxx;   // 481 -0.982 -0.189
-assign  wn_r[482] = 32'h 82299971;   assign  wn_i[482] = 32'h E8922622;   // 482 -0.983 -0.183
-assign  wn_r[483] = 32'h 82056758;   assign  wn_i[483] = 32'h E957ECFB;   // 483 -0.984 -0.177
-assign  wn_r[484] = 32'h 81E26C16;   assign  wn_i[484] = 32'h EA1DEBBB;   // 484 -0.985 -0.171
-assign  wn_r[485] = 32'h xxxxxxxx;   assign  wn_i[485] = 32'h xxxxxxxx;   // 485 -0.986 -0.165
-assign  wn_r[486] = 32'h 81A01B6D;   assign  wn_i[486] = 32'h EBAA894F;   // 486 -0.987 -0.159
-assign  wn_r[487] = 32'h xxxxxxxx;   assign  wn_i[487] = 32'h xxxxxxxx;   // 487 -0.988 -0.153
-assign  wn_r[488] = 32'h 8162AA04;   assign  wn_i[488] = 32'h ED37EF91;   // 488 -0.989 -0.147
-assign  wn_r[489] = 32'h 8145C5C7;   assign  wn_i[489] = 32'h EDFEE92B;   // 489 -0.990 -0.141
-assign  wn_r[490] = 32'h 812A1A3A;   assign  wn_i[490] = 32'h EEC60F31;   // 490 -0.991 -0.135
-assign  wn_r[491] = 32'h xxxxxxxx;   assign  wn_i[491] = 32'h xxxxxxxx;   // 491 -0.992 -0.128
-assign  wn_r[492] = 32'h 80F66E3C;   assign  wn_i[492] = 32'h F054D8D5;   // 492 -0.992 -0.122
-assign  wn_r[493] = 32'h xxxxxxxx;   assign  wn_i[493] = 32'h xxxxxxxx;   // 493 -0.993 -0.116
-assign  wn_r[494] = 32'h 80C7A80A;   assign  wn_i[494] = 32'h F1E43D1C;   // 494 -0.994 -0.110
-assign  wn_r[495] = 32'h 80B21BAF;   assign  wn_i[495] = 32'h F2AC246E;   // 495 -0.995 -0.104
-assign  wn_r[496] = 32'h 809DC971;   assign  wn_i[496] = 32'h F3742CA2;   // 496 -0.995 -0.098
-assign  wn_r[497] = 32'h xxxxxxxx;   assign  wn_i[497] = 32'h xxxxxxxx;   // 497 -0.996 -0.092
-assign  wn_r[498] = 32'h 8078D40D;   assign  wn_i[498] = 32'h F50497FB;   // 498 -0.996 -0.086
-assign  wn_r[499] = 32'h xxxxxxxx;   assign  wn_i[499] = 32'h xxxxxxxx;   // 499 -0.997 -0.080
-assign  wn_r[500] = 32'h 8058C94C;   assign  wn_i[500] = 32'h F6956FB7;   // 500 -0.997 -0.074
-assign  wn_r[501] = 32'h 804A9C4D;   assign  wn_i[501] = 32'h F75DFF66;   // 501 -0.998 -0.067
-assign  wn_r[502] = 32'h 803DAA6A;   assign  wn_i[502] = 32'h F826A462;   // 502 -0.998 -0.061
-assign  wn_r[503] = 32'h xxxxxxxx;   assign  wn_i[503] = 32'h xxxxxxxx;   // 503 -0.998 -0.055
-assign  wn_r[504] = 32'h 80277872;   assign  wn_i[504] = 32'h F9B82684;   // 504 -0.999 -0.049
-assign  wn_r[505] = 32'h xxxxxxxx;   assign  wn_i[505] = 32'h xxxxxxxx;   // 505 -0.999 -0.043
-assign  wn_r[506] = 32'h 80163440;   assign  wn_i[506] = 32'h FB49E6A3;   // 506 -0.999 -0.037
-assign  wn_r[507] = 32'h 800F6B88;   assign  wn_i[507] = 32'h FC12D91A;   // 507 -1.000 -0.031
-assign  wn_r[508] = 32'h 8009DE7E;   assign  wn_i[508] = 32'h FCDBD541;   // 508 -1.000 -0.025
-assign  wn_r[509] = 32'h xxxxxxxx;   assign  wn_i[509] = 32'h xxxxxxxx;   // 509 -1.000 -0.018
-assign  wn_r[510] = 32'h 800277A6;   assign  wn_i[510] = 32'h FE6DE2E0;   // 510 -1.000 -0.012
-assign  wn_r[511] = 32'h xxxxxxxx;   assign  wn_i[511] = 32'h xxxxxxxx;   // 511 -1.000 -0.006
-assign  wn_r[512] = 32'h xxxxxxxx;   assign  wn_i[512] = 32'h xxxxxxxx;   // 512 -1.000 -0.000
-assign  wn_r[513] = 32'h 80009DEA;   assign  wn_i[513] = 32'h 00C90F88;   // 513 -1.000  0.006
-assign  wn_r[514] = 32'h xxxxxxxx;   assign  wn_i[514] = 32'h xxxxxxxx;   // 514 -1.000  0.012
-assign  wn_r[515] = 32'h xxxxxxxx;   assign  wn_i[515] = 32'h xxxxxxxx;   // 515 -1.000  0.018
-assign  wn_r[516] = 32'h 8009DE7E;   assign  wn_i[516] = 32'h 03242ABF;   // 516 -1.000  0.025
-assign  wn_r[517] = 32'h xxxxxxxx;   assign  wn_i[517] = 32'h xxxxxxxx;   // 517 -1.000  0.031
-assign  wn_r[518] = 32'h xxxxxxxx;   assign  wn_i[518] = 32'h xxxxxxxx;   // 518 -0.999  0.037
-assign  wn_r[519] = 32'h 801E3895;   assign  wn_i[519] = 32'h 057F0035;   // 519 -0.999  0.043
-assign  wn_r[520] = 32'h xxxxxxxx;   assign  wn_i[520] = 32'h xxxxxxxx;   // 520 -0.999  0.049
-assign  wn_r[521] = 32'h xxxxxxxx;   assign  wn_i[521] = 32'h xxxxxxxx;   // 521 -0.998  0.055
-assign  wn_r[522] = 32'h 803DAA6A;   assign  wn_i[522] = 32'h 07D95B9E;   // 522 -0.998  0.061
-assign  wn_r[523] = 32'h xxxxxxxx;   assign  wn_i[523] = 32'h xxxxxxxx;   // 523 -0.998  0.067
-assign  wn_r[524] = 32'h xxxxxxxx;   assign  wn_i[524] = 32'h xxxxxxxx;   // 524 -0.997  0.074
-assign  wn_r[525] = 32'h 80683143;   assign  wn_i[525] = 32'h 0A3308BD;   // 525 -0.997  0.080
-assign  wn_r[526] = 32'h xxxxxxxx;   assign  wn_i[526] = 32'h xxxxxxxx;   // 526 -0.996  0.086
-assign  wn_r[527] = 32'h xxxxxxxx;   assign  wn_i[527] = 32'h xxxxxxxx;   // 527 -0.996  0.092
-assign  wn_r[528] = 32'h 809DC971;   assign  wn_i[528] = 32'h 0C8BD35E;   // 528 -0.995  0.098
-assign  wn_r[529] = 32'h xxxxxxxx;   assign  wn_i[529] = 32'h xxxxxxxx;   // 529 -0.995  0.104
-assign  wn_r[530] = 32'h xxxxxxxx;   assign  wn_i[530] = 32'h xxxxxxxx;   // 530 -0.994  0.110
-assign  wn_r[531] = 32'h 80DE6E4C;   assign  wn_i[531] = 32'h 0EE38766;   // 531 -0.993  0.116
-assign  wn_r[532] = 32'h xxxxxxxx;   assign  wn_i[532] = 32'h xxxxxxxx;   // 532 -0.992  0.122
-assign  wn_r[533] = 32'h xxxxxxxx;   assign  wn_i[533] = 32'h xxxxxxxx;   // 533 -0.992  0.128
-assign  wn_r[534] = 32'h 812A1A3A;   assign  wn_i[534] = 32'h 1139F0CF;   // 534 -0.991  0.135
-assign  wn_r[535] = 32'h xxxxxxxx;   assign  wn_i[535] = 32'h xxxxxxxx;   // 535 -0.990  0.141
-assign  wn_r[536] = 32'h xxxxxxxx;   assign  wn_i[536] = 32'h xxxxxxxx;   // 536 -0.989  0.147
-assign  wn_r[537] = 32'h 8180C6A9;   assign  wn_i[537] = 32'h 138EDBB1;   // 537 -0.988  0.153
-assign  wn_r[538] = 32'h xxxxxxxx;   assign  wn_i[538] = 32'h xxxxxxxx;   // 538 -0.987  0.159
-assign  wn_r[539] = 32'h xxxxxxxx;   assign  wn_i[539] = 32'h xxxxxxxx;   // 539 -0.986  0.165
-assign  wn_r[540] = 32'h 81E26C16;   assign  wn_i[540] = 32'h 15E21445;   // 540 -0.985  0.171
-assign  wn_r[541] = 32'h xxxxxxxx;   assign  wn_i[541] = 32'h xxxxxxxx;   // 541 -0.984  0.177
-assign  wn_r[542] = 32'h xxxxxxxx;   assign  wn_i[542] = 32'h xxxxxxxx;   // 542 -0.983  0.183
-assign  wn_r[543] = 32'h 824F0208;   assign  wn_i[543] = 32'h 183366E9;   // 543 -0.982  0.189
-assign  wn_r[544] = 32'h xxxxxxxx;   assign  wn_i[544] = 32'h xxxxxxxx;   // 544 -0.981  0.195
-assign  wn_r[545] = 32'h xxxxxxxx;   assign  wn_i[545] = 32'h xxxxxxxx;   // 545 -0.980  0.201
-assign  wn_r[546] = 32'h 82C67F14;   assign  wn_i[546] = 32'h 1A82A026;   // 546 -0.978  0.207
-assign  wn_r[547] = 32'h xxxxxxxx;   assign  wn_i[547] = 32'h xxxxxxxx;   // 547 -0.977  0.213
-assign  wn_r[548] = 32'h xxxxxxxx;   assign  wn_i[548] = 32'h xxxxxxxx;   // 548 -0.976  0.219
-assign  wn_r[549] = 32'h 8348D8DC;   assign  wn_i[549] = 32'h 1CCF8CB3;   // 549 -0.974  0.225
-assign  wn_r[550] = 32'h xxxxxxxx;   assign  wn_i[550] = 32'h xxxxxxxx;   // 550 -0.973  0.231
-assign  wn_r[551] = 32'h xxxxxxxx;   assign  wn_i[551] = 32'h xxxxxxxx;   // 551 -0.972  0.237
-assign  wn_r[552] = 32'h 83D60412;   assign  wn_i[552] = 32'h 1F19F97B;   // 552 -0.970  0.243
-assign  wn_r[553] = 32'h xxxxxxxx;   assign  wn_i[553] = 32'h xxxxxxxx;   // 553 -0.969  0.249
-assign  wn_r[554] = 32'h xxxxxxxx;   assign  wn_i[554] = 32'h xxxxxxxx;   // 554 -0.967  0.255
-assign  wn_r[555] = 32'h 846DF477;   assign  wn_i[555] = 32'h 2161B3A0;   // 555 -0.965  0.261
-assign  wn_r[556] = 32'h xxxxxxxx;   assign  wn_i[556] = 32'h xxxxxxxx;   // 556 -0.964  0.267
-assign  wn_r[557] = 32'h xxxxxxxx;   assign  wn_i[557] = 32'h xxxxxxxx;   // 557 -0.962  0.273
-assign  wn_r[558] = 32'h 85109CDD;   assign  wn_i[558] = 32'h 23A6887F;   // 558 -0.960  0.279
-assign  wn_r[559] = 32'h xxxxxxxx;   assign  wn_i[559] = 32'h xxxxxxxx;   // 559 -0.959  0.284
-assign  wn_r[560] = 32'h xxxxxxxx;   assign  wn_i[560] = 32'h xxxxxxxx;   // 560 -0.957  0.290
-assign  wn_r[561] = 32'h 85BDEF28;   assign  wn_i[561] = 32'h 25E845B6;   // 561 -0.955  0.296
-assign  wn_r[562] = 32'h xxxxxxxx;   assign  wn_i[562] = 32'h xxxxxxxx;   // 562 -0.953  0.302
-assign  wn_r[563] = 32'h xxxxxxxx;   assign  wn_i[563] = 32'h xxxxxxxx;   // 563 -0.951  0.308
-assign  wn_r[564] = 32'h 8675DC4F;   assign  wn_i[564] = 32'h 2826B928;   // 564 -0.950  0.314
-assign  wn_r[565] = 32'h xxxxxxxx;   assign  wn_i[565] = 32'h xxxxxxxx;   // 565 -0.948  0.320
-assign  wn_r[566] = 32'h xxxxxxxx;   assign  wn_i[566] = 32'h xxxxxxxx;   // 566 -0.946  0.325
-assign  wn_r[567] = 32'h 8738545E;   assign  wn_i[567] = 32'h 2A61B101;   // 567 -0.944  0.331
-assign  wn_r[568] = 32'h xxxxxxxx;   assign  wn_i[568] = 32'h xxxxxxxx;   // 568 -0.942  0.337
-assign  wn_r[569] = 32'h xxxxxxxx;   assign  wn_i[569] = 32'h xxxxxxxx;   // 569 -0.939  0.343
-assign  wn_r[570] = 32'h 88054677;   assign  wn_i[570] = 32'h 2C98FBBA;   // 570 -0.937  0.348
-assign  wn_r[571] = 32'h xxxxxxxx;   assign  wn_i[571] = 32'h xxxxxxxx;   // 571 -0.935  0.354
-assign  wn_r[572] = 32'h xxxxxxxx;   assign  wn_i[572] = 32'h xxxxxxxx;   // 572 -0.933  0.360
-assign  wn_r[573] = 32'h 88DCA0D3;   assign  wn_i[573] = 32'h 2ECC681E;   // 573 -0.931  0.366
-assign  wn_r[574] = 32'h xxxxxxxx;   assign  wn_i[574] = 32'h xxxxxxxx;   // 574 -0.929  0.371
-assign  wn_r[575] = 32'h xxxxxxxx;   assign  wn_i[575] = 32'h xxxxxxxx;   // 575 -0.926  0.377
-assign  wn_r[576] = 32'h 89BE50C3;   assign  wn_i[576] = 32'h 30FBC54D;   // 576 -0.924  0.383
-assign  wn_r[577] = 32'h xxxxxxxx;   assign  wn_i[577] = 32'h xxxxxxxx;   // 577 -0.922  0.388
-assign  wn_r[578] = 32'h xxxxxxxx;   assign  wn_i[578] = 32'h xxxxxxxx;   // 578 -0.919  0.394
-assign  wn_r[579] = 32'h 8AAA42B4;   assign  wn_i[579] = 32'h 3326E2C3;   // 579 -0.917  0.400
-assign  wn_r[580] = 32'h xxxxxxxx;   assign  wn_i[580] = 32'h xxxxxxxx;   // 580 -0.914  0.405
-assign  wn_r[581] = 32'h xxxxxxxx;   assign  wn_i[581] = 32'h xxxxxxxx;   // 581 -0.912  0.411
-assign  wn_r[582] = 32'h 8BA0622F;   assign  wn_i[582] = 32'h 354D9057;   // 582 -0.909  0.416
-assign  wn_r[583] = 32'h xxxxxxxx;   assign  wn_i[583] = 32'h xxxxxxxx;   // 583 -0.907  0.422
-assign  wn_r[584] = 32'h xxxxxxxx;   assign  wn_i[584] = 32'h xxxxxxxx;   // 584 -0.904  0.428
-assign  wn_r[585] = 32'h 8CA099DA;   assign  wn_i[585] = 32'h 376F9E46;   // 585 -0.901  0.433
-assign  wn_r[586] = 32'h xxxxxxxx;   assign  wn_i[586] = 32'h xxxxxxxx;   // 586 -0.899  0.439
-assign  wn_r[587] = 32'h xxxxxxxx;   assign  wn_i[587] = 32'h xxxxxxxx;   // 587 -0.896  0.444
-assign  wn_r[588] = 32'h 8DAAD37B;   assign  wn_i[588] = 32'h 398CDD32;   // 588 -0.893  0.450
-assign  wn_r[589] = 32'h xxxxxxxx;   assign  wn_i[589] = 32'h xxxxxxxx;   // 589 -0.890  0.455
-assign  wn_r[590] = 32'h xxxxxxxx;   assign  wn_i[590] = 32'h xxxxxxxx;   // 590 -0.888  0.461
-assign  wn_r[591] = 32'h 8EBEF7FB;   assign  wn_i[591] = 32'h 3BA51E29;   // 591 -0.885  0.466
-assign  wn_r[592] = 32'h xxxxxxxx;   assign  wn_i[592] = 32'h xxxxxxxx;   // 592 -0.882  0.471
-assign  wn_r[593] = 32'h xxxxxxxx;   assign  wn_i[593] = 32'h xxxxxxxx;   // 593 -0.879  0.477
-assign  wn_r[594] = 32'h 8FDCEF66;   assign  wn_i[594] = 32'h 3DB832A6;   // 594 -0.876  0.482
-assign  wn_r[595] = 32'h xxxxxxxx;   assign  wn_i[595] = 32'h xxxxxxxx;   // 595 -0.873  0.488
-assign  wn_r[596] = 32'h xxxxxxxx;   assign  wn_i[596] = 32'h xxxxxxxx;   // 596 -0.870  0.493
-assign  wn_r[597] = 32'h 9104A0EE;   assign  wn_i[597] = 32'h 3FC5EC98;   // 597 -0.867  0.498
-assign  wn_r[598] = 32'h xxxxxxxx;   assign  wn_i[598] = 32'h xxxxxxxx;   // 598 -0.864  0.504
-assign  wn_r[599] = 32'h xxxxxxxx;   assign  wn_i[599] = 32'h xxxxxxxx;   // 599 -0.861  0.509
-assign  wn_r[600] = 32'h 9235F2EC;   assign  wn_i[600] = 32'h 41CE1E65;   // 600 -0.858  0.514
-assign  wn_r[601] = 32'h xxxxxxxx;   assign  wn_i[601] = 32'h xxxxxxxx;   // 601 -0.855  0.519
-assign  wn_r[602] = 32'h xxxxxxxx;   assign  wn_i[602] = 32'h xxxxxxxx;   // 602 -0.851  0.525
-assign  wn_r[603] = 32'h 9370CAE4;   assign  wn_i[603] = 32'h 43D09AED;   // 603 -0.848  0.530
-assign  wn_r[604] = 32'h xxxxxxxx;   assign  wn_i[604] = 32'h xxxxxxxx;   // 604 -0.845  0.535
-assign  wn_r[605] = 32'h xxxxxxxx;   assign  wn_i[605] = 32'h xxxxxxxx;   // 605 -0.842  0.540
-assign  wn_r[606] = 32'h 94B50D87;   assign  wn_i[606] = 32'h 45CD358F;   // 606 -0.838  0.545
-assign  wn_r[607] = 32'h xxxxxxxx;   assign  wn_i[607] = 32'h xxxxxxxx;   // 607 -0.835  0.550
-assign  wn_r[608] = 32'h xxxxxxxx;   assign  wn_i[608] = 32'h xxxxxxxx;   // 608 -0.831  0.556
-assign  wn_r[609] = 32'h 96029EB6;   assign  wn_i[609] = 32'h 47C3C22F;   // 609 -0.828  0.561
-assign  wn_r[610] = 32'h xxxxxxxx;   assign  wn_i[610] = 32'h xxxxxxxx;   // 610 -0.825  0.566
-assign  wn_r[611] = 32'h xxxxxxxx;   assign  wn_i[611] = 32'h xxxxxxxx;   // 611 -0.821  0.571
-assign  wn_r[612] = 32'h 9759617F;   assign  wn_i[612] = 32'h 49B41533;   // 612 -0.818  0.576
-assign  wn_r[613] = 32'h xxxxxxxx;   assign  wn_i[613] = 32'h xxxxxxxx;   // 613 -0.814  0.581
-assign  wn_r[614] = 32'h xxxxxxxx;   assign  wn_i[614] = 32'h xxxxxxxx;   // 614 -0.810  0.586
-assign  wn_r[615] = 32'h 98B93828;   assign  wn_i[615] = 32'h 4B9E0390;   // 615 -0.807  0.591
-assign  wn_r[616] = 32'h xxxxxxxx;   assign  wn_i[616] = 32'h xxxxxxxx;   // 616 -0.803  0.596
-assign  wn_r[617] = 32'h xxxxxxxx;   assign  wn_i[617] = 32'h xxxxxxxx;   // 617 -0.800  0.601
-assign  wn_r[618] = 32'h 9A22042D;   assign  wn_i[618] = 32'h 4D8162C4;   // 618 -0.796  0.606
-assign  wn_r[619] = 32'h xxxxxxxx;   assign  wn_i[619] = 32'h xxxxxxxx;   // 619 -0.792  0.610
-assign  wn_r[620] = 32'h xxxxxxxx;   assign  wn_i[620] = 32'h xxxxxxxx;   // 620 -0.788  0.615
-assign  wn_r[621] = 32'h 9B93A641;   assign  wn_i[621] = 32'h 4F5E08E3;   // 621 -0.785  0.620
-assign  wn_r[622] = 32'h xxxxxxxx;   assign  wn_i[622] = 32'h xxxxxxxx;   // 622 -0.781  0.625
-assign  wn_r[623] = 32'h xxxxxxxx;   assign  wn_i[623] = 32'h xxxxxxxx;   // 623 -0.777  0.630
-assign  wn_r[624] = 32'h 9D0DFE54;   assign  wn_i[624] = 32'h 5133CC94;   // 624 -0.773  0.634
-assign  wn_r[625] = 32'h xxxxxxxx;   assign  wn_i[625] = 32'h xxxxxxxx;   // 625 -0.769  0.639
-assign  wn_r[626] = 32'h xxxxxxxx;   assign  wn_i[626] = 32'h xxxxxxxx;   // 626 -0.765  0.644
-assign  wn_r[627] = 32'h 9E90EB94;   assign  wn_i[627] = 32'h 53028518;   // 627 -0.761  0.649
-assign  wn_r[628] = 32'h xxxxxxxx;   assign  wn_i[628] = 32'h xxxxxxxx;   // 628 -0.757  0.653
-assign  wn_r[629] = 32'h xxxxxxxx;   assign  wn_i[629] = 32'h xxxxxxxx;   // 629 -0.753  0.658
-assign  wn_r[630] = 32'h A01C4C73;   assign  wn_i[630] = 32'h 54CA0A4B;   // 630 -0.749  0.662
-assign  wn_r[631] = 32'h xxxxxxxx;   assign  wn_i[631] = 32'h xxxxxxxx;   // 631 -0.745  0.667
-assign  wn_r[632] = 32'h xxxxxxxx;   assign  wn_i[632] = 32'h xxxxxxxx;   // 632 -0.741  0.672
-assign  wn_r[633] = 32'h A1AFFEA3;   assign  wn_i[633] = 32'h 568A34A9;   // 633 -0.737  0.676
-assign  wn_r[634] = 32'h xxxxxxxx;   assign  wn_i[634] = 32'h xxxxxxxx;   // 634 -0.733  0.681
-assign  wn_r[635] = 32'h xxxxxxxx;   assign  wn_i[635] = 32'h xxxxxxxx;   // 635 -0.728  0.685
-assign  wn_r[636] = 32'h A34BDF20;   assign  wn_i[636] = 32'h 5842DD54;   // 636 -0.724  0.690
-assign  wn_r[637] = 32'h xxxxxxxx;   assign  wn_i[637] = 32'h xxxxxxxx;   // 637 -0.720  0.694
-assign  wn_r[638] = 32'h xxxxxxxx;   assign  wn_i[638] = 32'h xxxxxxxx;   // 638 -0.716  0.698
-assign  wn_r[639] = 32'h A4EFCA31;   assign  wn_i[639] = 32'h 59F3DE12;   // 639 -0.711  0.703
-assign  wn_r[640] = 32'h xxxxxxxx;   assign  wn_i[640] = 32'h xxxxxxxx;   // 640 -0.707  0.707
-assign  wn_r[641] = 32'h xxxxxxxx;   assign  wn_i[641] = 32'h xxxxxxxx;   // 641 -0.703  0.711
-assign  wn_r[642] = 32'h A69B9B68;   assign  wn_i[642] = 32'h 5B9D1154;   // 642 -0.698  0.716
-assign  wn_r[643] = 32'h xxxxxxxx;   assign  wn_i[643] = 32'h xxxxxxxx;   // 643 -0.694  0.720
-assign  wn_r[644] = 32'h xxxxxxxx;   assign  wn_i[644] = 32'h xxxxxxxx;   // 644 -0.690  0.724
-assign  wn_r[645] = 32'h A84F2DAA;   assign  wn_i[645] = 32'h 5D3E5237;   // 645 -0.685  0.728
-assign  wn_r[646] = 32'h xxxxxxxx;   assign  wn_i[646] = 32'h xxxxxxxx;   // 646 -0.681  0.733
-assign  wn_r[647] = 32'h xxxxxxxx;   assign  wn_i[647] = 32'h xxxxxxxx;   // 647 -0.676  0.737
-assign  wn_r[648] = 32'h AA0A5B2E;   assign  wn_i[648] = 32'h 5ED77C8A;   // 648 -0.672  0.741
-assign  wn_r[649] = 32'h xxxxxxxx;   assign  wn_i[649] = 32'h xxxxxxxx;   // 649 -0.667  0.745
-assign  wn_r[650] = 32'h xxxxxxxx;   assign  wn_i[650] = 32'h xxxxxxxx;   // 650 -0.662  0.749
-assign  wn_r[651] = 32'h ABCCFD83;   assign  wn_i[651] = 32'h 60686CCF;   // 651 -0.658  0.753
-assign  wn_r[652] = 32'h xxxxxxxx;   assign  wn_i[652] = 32'h xxxxxxxx;   // 652 -0.653  0.757
-assign  wn_r[653] = 32'h xxxxxxxx;   assign  wn_i[653] = 32'h xxxxxxxx;   // 653 -0.649  0.761
-assign  wn_r[654] = 32'h AD96ED92;   assign  wn_i[654] = 32'h 61F1003F;   // 654 -0.644  0.765
-assign  wn_r[655] = 32'h xxxxxxxx;   assign  wn_i[655] = 32'h xxxxxxxx;   // 655 -0.639  0.769
-assign  wn_r[656] = 32'h xxxxxxxx;   assign  wn_i[656] = 32'h xxxxxxxx;   // 656 -0.634  0.773
-assign  wn_r[657] = 32'h AF6803A2;   assign  wn_i[657] = 32'h 637114CC;   // 657 -0.630  0.777
-assign  wn_r[658] = 32'h xxxxxxxx;   assign  wn_i[658] = 32'h xxxxxxxx;   // 658 -0.625  0.781
-assign  wn_r[659] = 32'h xxxxxxxx;   assign  wn_i[659] = 32'h xxxxxxxx;   // 659 -0.620  0.785
-assign  wn_r[660] = 32'h B140175B;   assign  wn_i[660] = 32'h 64E88926;   // 660 -0.615  0.788
-assign  wn_r[661] = 32'h xxxxxxxx;   assign  wn_i[661] = 32'h xxxxxxxx;   // 661 -0.610  0.792
-assign  wn_r[662] = 32'h xxxxxxxx;   assign  wn_i[662] = 32'h xxxxxxxx;   // 662 -0.606  0.796
-assign  wn_r[663] = 32'h B31EFFCC;   assign  wn_i[663] = 32'h 66573CBB;   // 663 -0.601  0.800
-assign  wn_r[664] = 32'h xxxxxxxx;   assign  wn_i[664] = 32'h xxxxxxxx;   // 664 -0.596  0.803
-assign  wn_r[665] = 32'h xxxxxxxx;   assign  wn_i[665] = 32'h xxxxxxxx;   // 665 -0.591  0.807
-assign  wn_r[666] = 32'h B5049368;   assign  wn_i[666] = 32'h 67BD0FBD;   // 666 -0.586  0.810
-assign  wn_r[667] = 32'h xxxxxxxx;   assign  wn_i[667] = 32'h xxxxxxxx;   // 667 -0.581  0.814
-assign  wn_r[668] = 32'h xxxxxxxx;   assign  wn_i[668] = 32'h xxxxxxxx;   // 668 -0.576  0.818
-assign  wn_r[669] = 32'h B6F0A812;   assign  wn_i[669] = 32'h 6919E320;   // 669 -0.571  0.821
-assign  wn_r[670] = 32'h xxxxxxxx;   assign  wn_i[670] = 32'h xxxxxxxx;   // 670 -0.566  0.825
-assign  wn_r[671] = 32'h xxxxxxxx;   assign  wn_i[671] = 32'h xxxxxxxx;   // 671 -0.561  0.828
-assign  wn_r[672] = 32'h B8E31319;   assign  wn_i[672] = 32'h 6A6D98A4;   // 672 -0.556  0.831
-assign  wn_r[673] = 32'h xxxxxxxx;   assign  wn_i[673] = 32'h xxxxxxxx;   // 673 -0.550  0.835
-assign  wn_r[674] = 32'h xxxxxxxx;   assign  wn_i[674] = 32'h xxxxxxxx;   // 674 -0.545  0.838
-assign  wn_r[675] = 32'h BADBA943;   assign  wn_i[675] = 32'h 6BB812D1;   // 675 -0.540  0.842
-assign  wn_r[676] = 32'h xxxxxxxx;   assign  wn_i[676] = 32'h xxxxxxxx;   // 676 -0.535  0.845
-assign  wn_r[677] = 32'h xxxxxxxx;   assign  wn_i[677] = 32'h xxxxxxxx;   // 677 -0.530  0.848
-assign  wn_r[678] = 32'h BCDA3ECB;   assign  wn_i[678] = 32'h 6CF934FC;   // 678 -0.525  0.851
-assign  wn_r[679] = 32'h xxxxxxxx;   assign  wn_i[679] = 32'h xxxxxxxx;   // 679 -0.519  0.855
-assign  wn_r[680] = 32'h xxxxxxxx;   assign  wn_i[680] = 32'h xxxxxxxx;   // 680 -0.514  0.858
-assign  wn_r[681] = 32'h BEDEA765;   assign  wn_i[681] = 32'h 6E30E34A;   // 681 -0.509  0.861
-assign  wn_r[682] = 32'h xxxxxxxx;   assign  wn_i[682] = 32'h xxxxxxxx;   // 682 -0.504  0.864
-assign  wn_r[683] = 32'h xxxxxxxx;   assign  wn_i[683] = 32'h xxxxxxxx;   // 683 -0.498  0.867
-assign  wn_r[684] = 32'h C0E8B648;   assign  wn_i[684] = 32'h 6F5F02B2;   // 684 -0.493  0.870
-assign  wn_r[685] = 32'h xxxxxxxx;   assign  wn_i[685] = 32'h xxxxxxxx;   // 685 -0.488  0.873
-assign  wn_r[686] = 32'h xxxxxxxx;   assign  wn_i[686] = 32'h xxxxxxxx;   // 686 -0.482  0.876
-assign  wn_r[687] = 32'h C2F83E2A;   assign  wn_i[687] = 32'h 708378FF;   // 687 -0.477  0.879
-assign  wn_r[688] = 32'h xxxxxxxx;   assign  wn_i[688] = 32'h xxxxxxxx;   // 688 -0.471  0.882
-assign  wn_r[689] = 32'h xxxxxxxx;   assign  wn_i[689] = 32'h xxxxxxxx;   // 689 -0.466  0.885
-assign  wn_r[690] = 32'h C50D1149;   assign  wn_i[690] = 32'h 719E2CD2;   // 690 -0.461  0.888
-assign  wn_r[691] = 32'h xxxxxxxx;   assign  wn_i[691] = 32'h xxxxxxxx;   // 691 -0.455  0.890
-assign  wn_r[692] = 32'h xxxxxxxx;   assign  wn_i[692] = 32'h xxxxxxxx;   // 692 -0.450  0.893
-assign  wn_r[693] = 32'h C727016D;   assign  wn_i[693] = 32'h 72AF05A7;   // 693 -0.444  0.896
-assign  wn_r[694] = 32'h xxxxxxxx;   assign  wn_i[694] = 32'h xxxxxxxx;   // 694 -0.439  0.899
-assign  wn_r[695] = 32'h xxxxxxxx;   assign  wn_i[695] = 32'h xxxxxxxx;   // 695 -0.433  0.901
-assign  wn_r[696] = 32'h C945DFEC;   assign  wn_i[696] = 32'h 73B5EBD1;   // 696 -0.428  0.904
-assign  wn_r[697] = 32'h xxxxxxxx;   assign  wn_i[697] = 32'h xxxxxxxx;   // 697 -0.422  0.907
-assign  wn_r[698] = 32'h xxxxxxxx;   assign  wn_i[698] = 32'h xxxxxxxx;   // 698 -0.416  0.909
-assign  wn_r[699] = 32'h CB697DB0;   assign  wn_i[699] = 32'h 74B2C884;   // 699 -0.411  0.912
-assign  wn_r[700] = 32'h xxxxxxxx;   assign  wn_i[700] = 32'h xxxxxxxx;   // 700 -0.405  0.914
-assign  wn_r[701] = 32'h xxxxxxxx;   assign  wn_i[701] = 32'h xxxxxxxx;   // 701 -0.400  0.917
-assign  wn_r[702] = 32'h CD91AB39;   assign  wn_i[702] = 32'h 75A585CF;   // 702 -0.394  0.919
-assign  wn_r[703] = 32'h xxxxxxxx;   assign  wn_i[703] = 32'h xxxxxxxx;   // 703 -0.388  0.922
-assign  wn_r[704] = 32'h xxxxxxxx;   assign  wn_i[704] = 32'h xxxxxxxx;   // 704 -0.383  0.924
-assign  wn_r[705] = 32'h CFBE389F;   assign  wn_i[705] = 32'h 768E0EA6;   // 705 -0.377  0.926
-assign  wn_r[706] = 32'h xxxxxxxx;   assign  wn_i[706] = 32'h xxxxxxxx;   // 706 -0.371  0.929
-assign  wn_r[707] = 32'h xxxxxxxx;   assign  wn_i[707] = 32'h xxxxxxxx;   // 707 -0.366  0.931
-assign  wn_r[708] = 32'h D1EEF59E;   assign  wn_i[708] = 32'h 776C4EDB;   // 708 -0.360  0.933
-assign  wn_r[709] = 32'h xxxxxxxx;   assign  wn_i[709] = 32'h xxxxxxxx;   // 709 -0.354  0.935
-assign  wn_r[710] = 32'h xxxxxxxx;   assign  wn_i[710] = 32'h xxxxxxxx;   // 710 -0.348  0.937
-assign  wn_r[711] = 32'h D423B191;   assign  wn_i[711] = 32'h 78403329;   // 711 -0.343  0.939
-assign  wn_r[712] = 32'h xxxxxxxx;   assign  wn_i[712] = 32'h xxxxxxxx;   // 712 -0.337  0.942
-assign  wn_r[713] = 32'h xxxxxxxx;   assign  wn_i[713] = 32'h xxxxxxxx;   // 713 -0.331  0.944
-assign  wn_r[714] = 32'h D65C3B7B;   assign  wn_i[714] = 32'h 7909A92D;   // 714 -0.325  0.946
-assign  wn_r[715] = 32'h xxxxxxxx;   assign  wn_i[715] = 32'h xxxxxxxx;   // 715 -0.320  0.948
-assign  wn_r[716] = 32'h xxxxxxxx;   assign  wn_i[716] = 32'h xxxxxxxx;   // 716 -0.314  0.950
-assign  wn_r[717] = 32'h D898620C;   assign  wn_i[717] = 32'h 79C89F6E;   // 717 -0.308  0.951
-assign  wn_r[718] = 32'h xxxxxxxx;   assign  wn_i[718] = 32'h xxxxxxxx;   // 718 -0.302  0.953
-assign  wn_r[719] = 32'h xxxxxxxx;   assign  wn_i[719] = 32'h xxxxxxxx;   // 719 -0.296  0.955
-assign  wn_r[720] = 32'h DAD7F3A2;   assign  wn_i[720] = 32'h 7A7D055B;   // 720 -0.290  0.957
-assign  wn_r[721] = 32'h xxxxxxxx;   assign  wn_i[721] = 32'h xxxxxxxx;   // 721 -0.284  0.959
-assign  wn_r[722] = 32'h xxxxxxxx;   assign  wn_i[722] = 32'h xxxxxxxx;   // 722 -0.279  0.960
-assign  wn_r[723] = 32'h DD1ABE51;   assign  wn_i[723] = 32'h 7B26CB4F;   // 723 -0.273  0.962
-assign  wn_r[724] = 32'h xxxxxxxx;   assign  wn_i[724] = 32'h xxxxxxxx;   // 724 -0.267  0.964
-assign  wn_r[725] = 32'h xxxxxxxx;   assign  wn_i[725] = 32'h xxxxxxxx;   // 725 -0.261  0.965
-assign  wn_r[726] = 32'h DF608FE4;   assign  wn_i[726] = 32'h 7BC5E290;   // 726 -0.255  0.967
-assign  wn_r[727] = 32'h xxxxxxxx;   assign  wn_i[727] = 32'h xxxxxxxx;   // 727 -0.249  0.969
-assign  wn_r[728] = 32'h xxxxxxxx;   assign  wn_i[728] = 32'h xxxxxxxx;   // 728 -0.243  0.970
-assign  wn_r[729] = 32'h E1A935E2;   assign  wn_i[729] = 32'h 7C5A3D50;   // 729 -0.237  0.972
-assign  wn_r[730] = 32'h xxxxxxxx;   assign  wn_i[730] = 32'h xxxxxxxx;   // 730 -0.231  0.973
-assign  wn_r[731] = 32'h xxxxxxxx;   assign  wn_i[731] = 32'h xxxxxxxx;   // 731 -0.225  0.974
-assign  wn_r[732] = 32'h E3F47D96;   assign  wn_i[732] = 32'h 7CE3CEB2;   // 732 -0.219  0.976
-assign  wn_r[733] = 32'h xxxxxxxx;   assign  wn_i[733] = 32'h xxxxxxxx;   // 733 -0.213  0.977
-assign  wn_r[734] = 32'h xxxxxxxx;   assign  wn_i[734] = 32'h xxxxxxxx;   // 734 -0.207  0.978
-assign  wn_r[735] = 32'h E642340D;   assign  wn_i[735] = 32'h 7D628AC6;   // 735 -0.201  0.980
-assign  wn_r[736] = 32'h xxxxxxxx;   assign  wn_i[736] = 32'h xxxxxxxx;   // 736 -0.195  0.981
-assign  wn_r[737] = 32'h xxxxxxxx;   assign  wn_i[737] = 32'h xxxxxxxx;   // 737 -0.189  0.982
-assign  wn_r[738] = 32'h E8922622;   assign  wn_i[738] = 32'h 7DD6668F;   // 738 -0.183  0.983
-assign  wn_r[739] = 32'h xxxxxxxx;   assign  wn_i[739] = 32'h xxxxxxxx;   // 739 -0.177  0.984
-assign  wn_r[740] = 32'h xxxxxxxx;   assign  wn_i[740] = 32'h xxxxxxxx;   // 740 -0.171  0.985
-assign  wn_r[741] = 32'h EAE4207A;   assign  wn_i[741] = 32'h 7E3F57FF;   // 741 -0.165  0.986
-assign  wn_r[742] = 32'h xxxxxxxx;   assign  wn_i[742] = 32'h xxxxxxxx;   // 742 -0.159  0.987
-assign  wn_r[743] = 32'h xxxxxxxx;   assign  wn_i[743] = 32'h xxxxxxxx;   // 743 -0.153  0.988
-assign  wn_r[744] = 32'h ED37EF91;   assign  wn_i[744] = 32'h 7E9D55FC;   // 744 -0.147  0.989
-assign  wn_r[745] = 32'h xxxxxxxx;   assign  wn_i[745] = 32'h xxxxxxxx;   // 745 -0.141  0.990
-assign  wn_r[746] = 32'h xxxxxxxx;   assign  wn_i[746] = 32'h xxxxxxxx;   // 746 -0.135  0.991
-assign  wn_r[747] = 32'h EF8D5FB8;   assign  wn_i[747] = 32'h 7EF05860;   // 747 -0.128  0.992
-assign  wn_r[748] = 32'h xxxxxxxx;   assign  wn_i[748] = 32'h xxxxxxxx;   // 748 -0.122  0.992
-assign  wn_r[749] = 32'h xxxxxxxx;   assign  wn_i[749] = 32'h xxxxxxxx;   // 749 -0.116  0.993
-assign  wn_r[750] = 32'h F1E43D1C;   assign  wn_i[750] = 32'h 7F3857F6;   // 750 -0.110  0.994
-assign  wn_r[751] = 32'h xxxxxxxx;   assign  wn_i[751] = 32'h xxxxxxxx;   // 751 -0.104  0.995
-assign  wn_r[752] = 32'h xxxxxxxx;   assign  wn_i[752] = 32'h xxxxxxxx;   // 752 -0.098  0.995
-assign  wn_r[753] = 32'h F43C53CB;   assign  wn_i[753] = 32'h 7F754E80;   // 753 -0.092  0.996
-assign  wn_r[754] = 32'h xxxxxxxx;   assign  wn_i[754] = 32'h xxxxxxxx;   // 754 -0.086  0.996
-assign  wn_r[755] = 32'h xxxxxxxx;   assign  wn_i[755] = 32'h xxxxxxxx;   // 755 -0.080  0.997
-assign  wn_r[756] = 32'h F6956FB7;   assign  wn_i[756] = 32'h 7FA736B4;   // 756 -0.074  0.997
-assign  wn_r[757] = 32'h xxxxxxxx;   assign  wn_i[757] = 32'h xxxxxxxx;   // 757 -0.067  0.998
-assign  wn_r[758] = 32'h xxxxxxxx;   assign  wn_i[758] = 32'h xxxxxxxx;   // 758 -0.061  0.998
-assign  wn_r[759] = 32'h F8EF5CBB;   assign  wn_i[759] = 32'h 7FCE0C3E;   // 759 -0.055  0.998
-assign  wn_r[760] = 32'h xxxxxxxx;   assign  wn_i[760] = 32'h xxxxxxxx;   // 760 -0.049  0.999
-assign  wn_r[761] = 32'h xxxxxxxx;   assign  wn_i[761] = 32'h xxxxxxxx;   // 761 -0.043  0.999
-assign  wn_r[762] = 32'h FB49E6A3;   assign  wn_i[762] = 32'h 7FE9CBC0;   // 762 -0.037  0.999
-assign  wn_r[763] = 32'h xxxxxxxx;   assign  wn_i[763] = 32'h xxxxxxxx;   // 763 -0.031  1.000
-assign  wn_r[764] = 32'h xxxxxxxx;   assign  wn_i[764] = 32'h xxxxxxxx;   // 764 -0.025  1.000
-assign  wn_r[765] = 32'h FDA4D929;   assign  wn_i[765] = 32'h 7FFA72D1;   // 765 -0.018  1.000
-assign  wn_r[766] = 32'h xxxxxxxx;   assign  wn_i[766] = 32'h xxxxxxxx;   // 766 -0.012  1.000
-assign  wn_r[767] = 32'h xxxxxxxx;   assign  wn_i[767] = 32'h xxxxxxxx;   // 767 -0.006  1.000
-assign  wn_r[768] = 32'h xxxxxxxx;   assign  wn_i[768] = 32'h xxxxxxxx;   // 768 -0.000  1.000
-assign  wn_r[769] = 32'h xxxxxxxx;   assign  wn_i[769] = 32'h xxxxxxxx;   // 769  0.006  1.000
-assign  wn_r[770] = 32'h xxxxxxxx;   assign  wn_i[770] = 32'h xxxxxxxx;   // 770  0.012  1.000
-assign  wn_r[771] = 32'h xxxxxxxx;   assign  wn_i[771] = 32'h xxxxxxxx;   // 771  0.018  1.000
-assign  wn_r[772] = 32'h xxxxxxxx;   assign  wn_i[772] = 32'h xxxxxxxx;   // 772  0.025  1.000
-assign  wn_r[773] = 32'h xxxxxxxx;   assign  wn_i[773] = 32'h xxxxxxxx;   // 773  0.031  1.000
-assign  wn_r[774] = 32'h xxxxxxxx;   assign  wn_i[774] = 32'h xxxxxxxx;   // 774  0.037  0.999
-assign  wn_r[775] = 32'h xxxxxxxx;   assign  wn_i[775] = 32'h xxxxxxxx;   // 775  0.043  0.999
-assign  wn_r[776] = 32'h xxxxxxxx;   assign  wn_i[776] = 32'h xxxxxxxx;   // 776  0.049  0.999
-assign  wn_r[777] = 32'h xxxxxxxx;   assign  wn_i[777] = 32'h xxxxxxxx;   // 777  0.055  0.998
-assign  wn_r[778] = 32'h xxxxxxxx;   assign  wn_i[778] = 32'h xxxxxxxx;   // 778  0.061  0.998
-assign  wn_r[779] = 32'h xxxxxxxx;   assign  wn_i[779] = 32'h xxxxxxxx;   // 779  0.067  0.998
-assign  wn_r[780] = 32'h xxxxxxxx;   assign  wn_i[780] = 32'h xxxxxxxx;   // 780  0.074  0.997
-assign  wn_r[781] = 32'h xxxxxxxx;   assign  wn_i[781] = 32'h xxxxxxxx;   // 781  0.080  0.997
-assign  wn_r[782] = 32'h xxxxxxxx;   assign  wn_i[782] = 32'h xxxxxxxx;   // 782  0.086  0.996
-assign  wn_r[783] = 32'h xxxxxxxx;   assign  wn_i[783] = 32'h xxxxxxxx;   // 783  0.092  0.996
-assign  wn_r[784] = 32'h xxxxxxxx;   assign  wn_i[784] = 32'h xxxxxxxx;   // 784  0.098  0.995
-assign  wn_r[785] = 32'h xxxxxxxx;   assign  wn_i[785] = 32'h xxxxxxxx;   // 785  0.104  0.995
-assign  wn_r[786] = 32'h xxxxxxxx;   assign  wn_i[786] = 32'h xxxxxxxx;   // 786  0.110  0.994
-assign  wn_r[787] = 32'h xxxxxxxx;   assign  wn_i[787] = 32'h xxxxxxxx;   // 787  0.116  0.993
-assign  wn_r[788] = 32'h xxxxxxxx;   assign  wn_i[788] = 32'h xxxxxxxx;   // 788  0.122  0.992
-assign  wn_r[789] = 32'h xxxxxxxx;   assign  wn_i[789] = 32'h xxxxxxxx;   // 789  0.128  0.992
-assign  wn_r[790] = 32'h xxxxxxxx;   assign  wn_i[790] = 32'h xxxxxxxx;   // 790  0.135  0.991
-assign  wn_r[791] = 32'h xxxxxxxx;   assign  wn_i[791] = 32'h xxxxxxxx;   // 791  0.141  0.990
-assign  wn_r[792] = 32'h xxxxxxxx;   assign  wn_i[792] = 32'h xxxxxxxx;   // 792  0.147  0.989
-assign  wn_r[793] = 32'h xxxxxxxx;   assign  wn_i[793] = 32'h xxxxxxxx;   // 793  0.153  0.988
-assign  wn_r[794] = 32'h xxxxxxxx;   assign  wn_i[794] = 32'h xxxxxxxx;   // 794  0.159  0.987
-assign  wn_r[795] = 32'h xxxxxxxx;   assign  wn_i[795] = 32'h xxxxxxxx;   // 795  0.165  0.986
-assign  wn_r[796] = 32'h xxxxxxxx;   assign  wn_i[796] = 32'h xxxxxxxx;   // 796  0.171  0.985
-assign  wn_r[797] = 32'h xxxxxxxx;   assign  wn_i[797] = 32'h xxxxxxxx;   // 797  0.177  0.984
-assign  wn_r[798] = 32'h xxxxxxxx;   assign  wn_i[798] = 32'h xxxxxxxx;   // 798  0.183  0.983
-assign  wn_r[799] = 32'h xxxxxxxx;   assign  wn_i[799] = 32'h xxxxxxxx;   // 799  0.189  0.982
-assign  wn_r[800] = 32'h xxxxxxxx;   assign  wn_i[800] = 32'h xxxxxxxx;   // 800  0.195  0.981
-assign  wn_r[801] = 32'h xxxxxxxx;   assign  wn_i[801] = 32'h xxxxxxxx;   // 801  0.201  0.980
-assign  wn_r[802] = 32'h xxxxxxxx;   assign  wn_i[802] = 32'h xxxxxxxx;   // 802  0.207  0.978
-assign  wn_r[803] = 32'h xxxxxxxx;   assign  wn_i[803] = 32'h xxxxxxxx;   // 803  0.213  0.977
-assign  wn_r[804] = 32'h xxxxxxxx;   assign  wn_i[804] = 32'h xxxxxxxx;   // 804  0.219  0.976
-assign  wn_r[805] = 32'h xxxxxxxx;   assign  wn_i[805] = 32'h xxxxxxxx;   // 805  0.225  0.974
-assign  wn_r[806] = 32'h xxxxxxxx;   assign  wn_i[806] = 32'h xxxxxxxx;   // 806  0.231  0.973
-assign  wn_r[807] = 32'h xxxxxxxx;   assign  wn_i[807] = 32'h xxxxxxxx;   // 807  0.237  0.972
-assign  wn_r[808] = 32'h xxxxxxxx;   assign  wn_i[808] = 32'h xxxxxxxx;   // 808  0.243  0.970
-assign  wn_r[809] = 32'h xxxxxxxx;   assign  wn_i[809] = 32'h xxxxxxxx;   // 809  0.249  0.969
-assign  wn_r[810] = 32'h xxxxxxxx;   assign  wn_i[810] = 32'h xxxxxxxx;   // 810  0.255  0.967
-assign  wn_r[811] = 32'h xxxxxxxx;   assign  wn_i[811] = 32'h xxxxxxxx;   // 811  0.261  0.965
-assign  wn_r[812] = 32'h xxxxxxxx;   assign  wn_i[812] = 32'h xxxxxxxx;   // 812  0.267  0.964
-assign  wn_r[813] = 32'h xxxxxxxx;   assign  wn_i[813] = 32'h xxxxxxxx;   // 813  0.273  0.962
-assign  wn_r[814] = 32'h xxxxxxxx;   assign  wn_i[814] = 32'h xxxxxxxx;   // 814  0.279  0.960
-assign  wn_r[815] = 32'h xxxxxxxx;   assign  wn_i[815] = 32'h xxxxxxxx;   // 815  0.284  0.959
-assign  wn_r[816] = 32'h xxxxxxxx;   assign  wn_i[816] = 32'h xxxxxxxx;   // 816  0.290  0.957
-assign  wn_r[817] = 32'h xxxxxxxx;   assign  wn_i[817] = 32'h xxxxxxxx;   // 817  0.296  0.955
-assign  wn_r[818] = 32'h xxxxxxxx;   assign  wn_i[818] = 32'h xxxxxxxx;   // 818  0.302  0.953
-assign  wn_r[819] = 32'h xxxxxxxx;   assign  wn_i[819] = 32'h xxxxxxxx;   // 819  0.308  0.951
-assign  wn_r[820] = 32'h xxxxxxxx;   assign  wn_i[820] = 32'h xxxxxxxx;   // 820  0.314  0.950
-assign  wn_r[821] = 32'h xxxxxxxx;   assign  wn_i[821] = 32'h xxxxxxxx;   // 821  0.320  0.948
-assign  wn_r[822] = 32'h xxxxxxxx;   assign  wn_i[822] = 32'h xxxxxxxx;   // 822  0.325  0.946
-assign  wn_r[823] = 32'h xxxxxxxx;   assign  wn_i[823] = 32'h xxxxxxxx;   // 823  0.331  0.944
-assign  wn_r[824] = 32'h xxxxxxxx;   assign  wn_i[824] = 32'h xxxxxxxx;   // 824  0.337  0.942
-assign  wn_r[825] = 32'h xxxxxxxx;   assign  wn_i[825] = 32'h xxxxxxxx;   // 825  0.343  0.939
-assign  wn_r[826] = 32'h xxxxxxxx;   assign  wn_i[826] = 32'h xxxxxxxx;   // 826  0.348  0.937
-assign  wn_r[827] = 32'h xxxxxxxx;   assign  wn_i[827] = 32'h xxxxxxxx;   // 827  0.354  0.935
-assign  wn_r[828] = 32'h xxxxxxxx;   assign  wn_i[828] = 32'h xxxxxxxx;   // 828  0.360  0.933
-assign  wn_r[829] = 32'h xxxxxxxx;   assign  wn_i[829] = 32'h xxxxxxxx;   // 829  0.366  0.931
-assign  wn_r[830] = 32'h xxxxxxxx;   assign  wn_i[830] = 32'h xxxxxxxx;   // 830  0.371  0.929
-assign  wn_r[831] = 32'h xxxxxxxx;   assign  wn_i[831] = 32'h xxxxxxxx;   // 831  0.377  0.926
-assign  wn_r[832] = 32'h xxxxxxxx;   assign  wn_i[832] = 32'h xxxxxxxx;   // 832  0.383  0.924
-assign  wn_r[833] = 32'h xxxxxxxx;   assign  wn_i[833] = 32'h xxxxxxxx;   // 833  0.388  0.922
-assign  wn_r[834] = 32'h xxxxxxxx;   assign  wn_i[834] = 32'h xxxxxxxx;   // 834  0.394  0.919
-assign  wn_r[835] = 32'h xxxxxxxx;   assign  wn_i[835] = 32'h xxxxxxxx;   // 835  0.400  0.917
-assign  wn_r[836] = 32'h xxxxxxxx;   assign  wn_i[836] = 32'h xxxxxxxx;   // 836  0.405  0.914
-assign  wn_r[837] = 32'h xxxxxxxx;   assign  wn_i[837] = 32'h xxxxxxxx;   // 837  0.411  0.912
-assign  wn_r[838] = 32'h xxxxxxxx;   assign  wn_i[838] = 32'h xxxxxxxx;   // 838  0.416  0.909
-assign  wn_r[839] = 32'h xxxxxxxx;   assign  wn_i[839] = 32'h xxxxxxxx;   // 839  0.422  0.907
-assign  wn_r[840] = 32'h xxxxxxxx;   assign  wn_i[840] = 32'h xxxxxxxx;   // 840  0.428  0.904
-assign  wn_r[841] = 32'h xxxxxxxx;   assign  wn_i[841] = 32'h xxxxxxxx;   // 841  0.433  0.901
-assign  wn_r[842] = 32'h xxxxxxxx;   assign  wn_i[842] = 32'h xxxxxxxx;   // 842  0.439  0.899
-assign  wn_r[843] = 32'h xxxxxxxx;   assign  wn_i[843] = 32'h xxxxxxxx;   // 843  0.444  0.896
-assign  wn_r[844] = 32'h xxxxxxxx;   assign  wn_i[844] = 32'h xxxxxxxx;   // 844  0.450  0.893
-assign  wn_r[845] = 32'h xxxxxxxx;   assign  wn_i[845] = 32'h xxxxxxxx;   // 845  0.455  0.890
-assign  wn_r[846] = 32'h xxxxxxxx;   assign  wn_i[846] = 32'h xxxxxxxx;   // 846  0.461  0.888
-assign  wn_r[847] = 32'h xxxxxxxx;   assign  wn_i[847] = 32'h xxxxxxxx;   // 847  0.466  0.885
-assign  wn_r[848] = 32'h xxxxxxxx;   assign  wn_i[848] = 32'h xxxxxxxx;   // 848  0.471  0.882
-assign  wn_r[849] = 32'h xxxxxxxx;   assign  wn_i[849] = 32'h xxxxxxxx;   // 849  0.477  0.879
-assign  wn_r[850] = 32'h xxxxxxxx;   assign  wn_i[850] = 32'h xxxxxxxx;   // 850  0.482  0.876
-assign  wn_r[851] = 32'h xxxxxxxx;   assign  wn_i[851] = 32'h xxxxxxxx;   // 851  0.488  0.873
-assign  wn_r[852] = 32'h xxxxxxxx;   assign  wn_i[852] = 32'h xxxxxxxx;   // 852  0.493  0.870
-assign  wn_r[853] = 32'h xxxxxxxx;   assign  wn_i[853] = 32'h xxxxxxxx;   // 853  0.498  0.867
-assign  wn_r[854] = 32'h xxxxxxxx;   assign  wn_i[854] = 32'h xxxxxxxx;   // 854  0.504  0.864
-assign  wn_r[855] = 32'h xxxxxxxx;   assign  wn_i[855] = 32'h xxxxxxxx;   // 855  0.509  0.861
-assign  wn_r[856] = 32'h xxxxxxxx;   assign  wn_i[856] = 32'h xxxxxxxx;   // 856  0.514  0.858
-assign  wn_r[857] = 32'h xxxxxxxx;   assign  wn_i[857] = 32'h xxxxxxxx;   // 857  0.519  0.855
-assign  wn_r[858] = 32'h xxxxxxxx;   assign  wn_i[858] = 32'h xxxxxxxx;   // 858  0.525  0.851
-assign  wn_r[859] = 32'h xxxxxxxx;   assign  wn_i[859] = 32'h xxxxxxxx;   // 859  0.530  0.848
-assign  wn_r[860] = 32'h xxxxxxxx;   assign  wn_i[860] = 32'h xxxxxxxx;   // 860  0.535  0.845
-assign  wn_r[861] = 32'h xxxxxxxx;   assign  wn_i[861] = 32'h xxxxxxxx;   // 861  0.540  0.842
-assign  wn_r[862] = 32'h xxxxxxxx;   assign  wn_i[862] = 32'h xxxxxxxx;   // 862  0.545  0.838
-assign  wn_r[863] = 32'h xxxxxxxx;   assign  wn_i[863] = 32'h xxxxxxxx;   // 863  0.550  0.835
-assign  wn_r[864] = 32'h xxxxxxxx;   assign  wn_i[864] = 32'h xxxxxxxx;   // 864  0.556  0.831
-assign  wn_r[865] = 32'h xxxxxxxx;   assign  wn_i[865] = 32'h xxxxxxxx;   // 865  0.561  0.828
-assign  wn_r[866] = 32'h xxxxxxxx;   assign  wn_i[866] = 32'h xxxxxxxx;   // 866  0.566  0.825
-assign  wn_r[867] = 32'h xxxxxxxx;   assign  wn_i[867] = 32'h xxxxxxxx;   // 867  0.571  0.821
-assign  wn_r[868] = 32'h xxxxxxxx;   assign  wn_i[868] = 32'h xxxxxxxx;   // 868  0.576  0.818
-assign  wn_r[869] = 32'h xxxxxxxx;   assign  wn_i[869] = 32'h xxxxxxxx;   // 869  0.581  0.814
-assign  wn_r[870] = 32'h xxxxxxxx;   assign  wn_i[870] = 32'h xxxxxxxx;   // 870  0.586  0.810
-assign  wn_r[871] = 32'h xxxxxxxx;   assign  wn_i[871] = 32'h xxxxxxxx;   // 871  0.591  0.807
-assign  wn_r[872] = 32'h xxxxxxxx;   assign  wn_i[872] = 32'h xxxxxxxx;   // 872  0.596  0.803
-assign  wn_r[873] = 32'h xxxxxxxx;   assign  wn_i[873] = 32'h xxxxxxxx;   // 873  0.601  0.800
-assign  wn_r[874] = 32'h xxxxxxxx;   assign  wn_i[874] = 32'h xxxxxxxx;   // 874  0.606  0.796
-assign  wn_r[875] = 32'h xxxxxxxx;   assign  wn_i[875] = 32'h xxxxxxxx;   // 875  0.610  0.792
-assign  wn_r[876] = 32'h xxxxxxxx;   assign  wn_i[876] = 32'h xxxxxxxx;   // 876  0.615  0.788
-assign  wn_r[877] = 32'h xxxxxxxx;   assign  wn_i[877] = 32'h xxxxxxxx;   // 877  0.620  0.785
-assign  wn_r[878] = 32'h xxxxxxxx;   assign  wn_i[878] = 32'h xxxxxxxx;   // 878  0.625  0.781
-assign  wn_r[879] = 32'h xxxxxxxx;   assign  wn_i[879] = 32'h xxxxxxxx;   // 879  0.630  0.777
-assign  wn_r[880] = 32'h xxxxxxxx;   assign  wn_i[880] = 32'h xxxxxxxx;   // 880  0.634  0.773
-assign  wn_r[881] = 32'h xxxxxxxx;   assign  wn_i[881] = 32'h xxxxxxxx;   // 881  0.639  0.769
-assign  wn_r[882] = 32'h xxxxxxxx;   assign  wn_i[882] = 32'h xxxxxxxx;   // 882  0.644  0.765
-assign  wn_r[883] = 32'h xxxxxxxx;   assign  wn_i[883] = 32'h xxxxxxxx;   // 883  0.649  0.761
-assign  wn_r[884] = 32'h xxxxxxxx;   assign  wn_i[884] = 32'h xxxxxxxx;   // 884  0.653  0.757
-assign  wn_r[885] = 32'h xxxxxxxx;   assign  wn_i[885] = 32'h xxxxxxxx;   // 885  0.658  0.753
-assign  wn_r[886] = 32'h xxxxxxxx;   assign  wn_i[886] = 32'h xxxxxxxx;   // 886  0.662  0.749
-assign  wn_r[887] = 32'h xxxxxxxx;   assign  wn_i[887] = 32'h xxxxxxxx;   // 887  0.667  0.745
-assign  wn_r[888] = 32'h xxxxxxxx;   assign  wn_i[888] = 32'h xxxxxxxx;   // 888  0.672  0.741
-assign  wn_r[889] = 32'h xxxxxxxx;   assign  wn_i[889] = 32'h xxxxxxxx;   // 889  0.676  0.737
-assign  wn_r[890] = 32'h xxxxxxxx;   assign  wn_i[890] = 32'h xxxxxxxx;   // 890  0.681  0.733
-assign  wn_r[891] = 32'h xxxxxxxx;   assign  wn_i[891] = 32'h xxxxxxxx;   // 891  0.685  0.728
-assign  wn_r[892] = 32'h xxxxxxxx;   assign  wn_i[892] = 32'h xxxxxxxx;   // 892  0.690  0.724
-assign  wn_r[893] = 32'h xxxxxxxx;   assign  wn_i[893] = 32'h xxxxxxxx;   // 893  0.694  0.720
-assign  wn_r[894] = 32'h xxxxxxxx;   assign  wn_i[894] = 32'h xxxxxxxx;   // 894  0.698  0.716
-assign  wn_r[895] = 32'h xxxxxxxx;   assign  wn_i[895] = 32'h xxxxxxxx;   // 895  0.703  0.711
-assign  wn_r[896] = 32'h xxxxxxxx;   assign  wn_i[896] = 32'h xxxxxxxx;   // 896  0.707  0.707
-assign  wn_r[897] = 32'h xxxxxxxx;   assign  wn_i[897] = 32'h xxxxxxxx;   // 897  0.711  0.703
-assign  wn_r[898] = 32'h xxxxxxxx;   assign  wn_i[898] = 32'h xxxxxxxx;   // 898  0.716  0.698
-assign  wn_r[899] = 32'h xxxxxxxx;   assign  wn_i[899] = 32'h xxxxxxxx;   // 899  0.720  0.694
-assign  wn_r[900] = 32'h xxxxxxxx;   assign  wn_i[900] = 32'h xxxxxxxx;   // 900  0.724  0.690
-assign  wn_r[901] = 32'h xxxxxxxx;   assign  wn_i[901] = 32'h xxxxxxxx;   // 901  0.728  0.685
-assign  wn_r[902] = 32'h xxxxxxxx;   assign  wn_i[902] = 32'h xxxxxxxx;   // 902  0.733  0.681
-assign  wn_r[903] = 32'h xxxxxxxx;   assign  wn_i[903] = 32'h xxxxxxxx;   // 903  0.737  0.676
-assign  wn_r[904] = 32'h xxxxxxxx;   assign  wn_i[904] = 32'h xxxxxxxx;   // 904  0.741  0.672
-assign  wn_r[905] = 32'h xxxxxxxx;   assign  wn_i[905] = 32'h xxxxxxxx;   // 905  0.745  0.667
-assign  wn_r[906] = 32'h xxxxxxxx;   assign  wn_i[906] = 32'h xxxxxxxx;   // 906  0.749  0.662
-assign  wn_r[907] = 32'h xxxxxxxx;   assign  wn_i[907] = 32'h xxxxxxxx;   // 907  0.753  0.658
-assign  wn_r[908] = 32'h xxxxxxxx;   assign  wn_i[908] = 32'h xxxxxxxx;   // 908  0.757  0.653
-assign  wn_r[909] = 32'h xxxxxxxx;   assign  wn_i[909] = 32'h xxxxxxxx;   // 909  0.761  0.649
-assign  wn_r[910] = 32'h xxxxxxxx;   assign  wn_i[910] = 32'h xxxxxxxx;   // 910  0.765  0.644
-assign  wn_r[911] = 32'h xxxxxxxx;   assign  wn_i[911] = 32'h xxxxxxxx;   // 911  0.769  0.639
-assign  wn_r[912] = 32'h xxxxxxxx;   assign  wn_i[912] = 32'h xxxxxxxx;   // 912  0.773  0.634
-assign  wn_r[913] = 32'h xxxxxxxx;   assign  wn_i[913] = 32'h xxxxxxxx;   // 913  0.777  0.630
-assign  wn_r[914] = 32'h xxxxxxxx;   assign  wn_i[914] = 32'h xxxxxxxx;   // 914  0.781  0.625
-assign  wn_r[915] = 32'h xxxxxxxx;   assign  wn_i[915] = 32'h xxxxxxxx;   // 915  0.785  0.620
-assign  wn_r[916] = 32'h xxxxxxxx;   assign  wn_i[916] = 32'h xxxxxxxx;   // 916  0.788  0.615
-assign  wn_r[917] = 32'h xxxxxxxx;   assign  wn_i[917] = 32'h xxxxxxxx;   // 917  0.792  0.610
-assign  wn_r[918] = 32'h xxxxxxxx;   assign  wn_i[918] = 32'h xxxxxxxx;   // 918  0.796  0.606
-assign  wn_r[919] = 32'h xxxxxxxx;   assign  wn_i[919] = 32'h xxxxxxxx;   // 919  0.800  0.601
-assign  wn_r[920] = 32'h xxxxxxxx;   assign  wn_i[920] = 32'h xxxxxxxx;   // 920  0.803  0.596
-assign  wn_r[921] = 32'h xxxxxxxx;   assign  wn_i[921] = 32'h xxxxxxxx;   // 921  0.807  0.591
-assign  wn_r[922] = 32'h xxxxxxxx;   assign  wn_i[922] = 32'h xxxxxxxx;   // 922  0.810  0.586
-assign  wn_r[923] = 32'h xxxxxxxx;   assign  wn_i[923] = 32'h xxxxxxxx;   // 923  0.814  0.581
-assign  wn_r[924] = 32'h xxxxxxxx;   assign  wn_i[924] = 32'h xxxxxxxx;   // 924  0.818  0.576
-assign  wn_r[925] = 32'h xxxxxxxx;   assign  wn_i[925] = 32'h xxxxxxxx;   // 925  0.821  0.571
-assign  wn_r[926] = 32'h xxxxxxxx;   assign  wn_i[926] = 32'h xxxxxxxx;   // 926  0.825  0.566
-assign  wn_r[927] = 32'h xxxxxxxx;   assign  wn_i[927] = 32'h xxxxxxxx;   // 927  0.828  0.561
-assign  wn_r[928] = 32'h xxxxxxxx;   assign  wn_i[928] = 32'h xxxxxxxx;   // 928  0.831  0.556
-assign  wn_r[929] = 32'h xxxxxxxx;   assign  wn_i[929] = 32'h xxxxxxxx;   // 929  0.835  0.550
-assign  wn_r[930] = 32'h xxxxxxxx;   assign  wn_i[930] = 32'h xxxxxxxx;   // 930  0.838  0.545
-assign  wn_r[931] = 32'h xxxxxxxx;   assign  wn_i[931] = 32'h xxxxxxxx;   // 931  0.842  0.540
-assign  wn_r[932] = 32'h xxxxxxxx;   assign  wn_i[932] = 32'h xxxxxxxx;   // 932  0.845  0.535
-assign  wn_r[933] = 32'h xxxxxxxx;   assign  wn_i[933] = 32'h xxxxxxxx;   // 933  0.848  0.530
-assign  wn_r[934] = 32'h xxxxxxxx;   assign  wn_i[934] = 32'h xxxxxxxx;   // 934  0.851  0.525
-assign  wn_r[935] = 32'h xxxxxxxx;   assign  wn_i[935] = 32'h xxxxxxxx;   // 935  0.855  0.519
-assign  wn_r[936] = 32'h xxxxxxxx;   assign  wn_i[936] = 32'h xxxxxxxx;   // 936  0.858  0.514
-assign  wn_r[937] = 32'h xxxxxxxx;   assign  wn_i[937] = 32'h xxxxxxxx;   // 937  0.861  0.509
-assign  wn_r[938] = 32'h xxxxxxxx;   assign  wn_i[938] = 32'h xxxxxxxx;   // 938  0.864  0.504
-assign  wn_r[939] = 32'h xxxxxxxx;   assign  wn_i[939] = 32'h xxxxxxxx;   // 939  0.867  0.498
-assign  wn_r[940] = 32'h xxxxxxxx;   assign  wn_i[940] = 32'h xxxxxxxx;   // 940  0.870  0.493
-assign  wn_r[941] = 32'h xxxxxxxx;   assign  wn_i[941] = 32'h xxxxxxxx;   // 941  0.873  0.488
-assign  wn_r[942] = 32'h xxxxxxxx;   assign  wn_i[942] = 32'h xxxxxxxx;   // 942  0.876  0.482
-assign  wn_r[943] = 32'h xxxxxxxx;   assign  wn_i[943] = 32'h xxxxxxxx;   // 943  0.879  0.477
-assign  wn_r[944] = 32'h xxxxxxxx;   assign  wn_i[944] = 32'h xxxxxxxx;   // 944  0.882  0.471
-assign  wn_r[945] = 32'h xxxxxxxx;   assign  wn_i[945] = 32'h xxxxxxxx;   // 945  0.885  0.466
-assign  wn_r[946] = 32'h xxxxxxxx;   assign  wn_i[946] = 32'h xxxxxxxx;   // 946  0.888  0.461
-assign  wn_r[947] = 32'h xxxxxxxx;   assign  wn_i[947] = 32'h xxxxxxxx;   // 947  0.890  0.455
-assign  wn_r[948] = 32'h xxxxxxxx;   assign  wn_i[948] = 32'h xxxxxxxx;   // 948  0.893  0.450
-assign  wn_r[949] = 32'h xxxxxxxx;   assign  wn_i[949] = 32'h xxxxxxxx;   // 949  0.896  0.444
-assign  wn_r[950] = 32'h xxxxxxxx;   assign  wn_i[950] = 32'h xxxxxxxx;   // 950  0.899  0.439
-assign  wn_r[951] = 32'h xxxxxxxx;   assign  wn_i[951] = 32'h xxxxxxxx;   // 951  0.901  0.433
-assign  wn_r[952] = 32'h xxxxxxxx;   assign  wn_i[952] = 32'h xxxxxxxx;   // 952  0.904  0.428
-assign  wn_r[953] = 32'h xxxxxxxx;   assign  wn_i[953] = 32'h xxxxxxxx;   // 953  0.907  0.422
-assign  wn_r[954] = 32'h xxxxxxxx;   assign  wn_i[954] = 32'h xxxxxxxx;   // 954  0.909  0.416
-assign  wn_r[955] = 32'h xxxxxxxx;   assign  wn_i[955] = 32'h xxxxxxxx;   // 955  0.912  0.411
-assign  wn_r[956] = 32'h xxxxxxxx;   assign  wn_i[956] = 32'h xxxxxxxx;   // 956  0.914  0.405
-assign  wn_r[957] = 32'h xxxxxxxx;   assign  wn_i[957] = 32'h xxxxxxxx;   // 957  0.917  0.400
-assign  wn_r[958] = 32'h xxxxxxxx;   assign  wn_i[958] = 32'h xxxxxxxx;   // 958  0.919  0.394
-assign  wn_r[959] = 32'h xxxxxxxx;   assign  wn_i[959] = 32'h xxxxxxxx;   // 959  0.922  0.388
-assign  wn_r[960] = 32'h xxxxxxxx;   assign  wn_i[960] = 32'h xxxxxxxx;   // 960  0.924  0.383
-assign  wn_r[961] = 32'h xxxxxxxx;   assign  wn_i[961] = 32'h xxxxxxxx;   // 961  0.926  0.377
-assign  wn_r[962] = 32'h xxxxxxxx;   assign  wn_i[962] = 32'h xxxxxxxx;   // 962  0.929  0.371
-assign  wn_r[963] = 32'h xxxxxxxx;   assign  wn_i[963] = 32'h xxxxxxxx;   // 963  0.931  0.366
-assign  wn_r[964] = 32'h xxxxxxxx;   assign  wn_i[964] = 32'h xxxxxxxx;   // 964  0.933  0.360
-assign  wn_r[965] = 32'h xxxxxxxx;   assign  wn_i[965] = 32'h xxxxxxxx;   // 965  0.935  0.354
-assign  wn_r[966] = 32'h xxxxxxxx;   assign  wn_i[966] = 32'h xxxxxxxx;   // 966  0.937  0.348
-assign  wn_r[967] = 32'h xxxxxxxx;   assign  wn_i[967] = 32'h xxxxxxxx;   // 967  0.939  0.343
-assign  wn_r[968] = 32'h xxxxxxxx;   assign  wn_i[968] = 32'h xxxxxxxx;   // 968  0.942  0.337
-assign  wn_r[969] = 32'h xxxxxxxx;   assign  wn_i[969] = 32'h xxxxxxxx;   // 969  0.944  0.331
-assign  wn_r[970] = 32'h xxxxxxxx;   assign  wn_i[970] = 32'h xxxxxxxx;   // 970  0.946  0.325
-assign  wn_r[971] = 32'h xxxxxxxx;   assign  wn_i[971] = 32'h xxxxxxxx;   // 971  0.948  0.320
-assign  wn_r[972] = 32'h xxxxxxxx;   assign  wn_i[972] = 32'h xxxxxxxx;   // 972  0.950  0.314
-assign  wn_r[973] = 32'h xxxxxxxx;   assign  wn_i[973] = 32'h xxxxxxxx;   // 973  0.951  0.308
-assign  wn_r[974] = 32'h xxxxxxxx;   assign  wn_i[974] = 32'h xxxxxxxx;   // 974  0.953  0.302
-assign  wn_r[975] = 32'h xxxxxxxx;   assign  wn_i[975] = 32'h xxxxxxxx;   // 975  0.955  0.296
-assign  wn_r[976] = 32'h xxxxxxxx;   assign  wn_i[976] = 32'h xxxxxxxx;   // 976  0.957  0.290
-assign  wn_r[977] = 32'h xxxxxxxx;   assign  wn_i[977] = 32'h xxxxxxxx;   // 977  0.959  0.284
-assign  wn_r[978] = 32'h xxxxxxxx;   assign  wn_i[978] = 32'h xxxxxxxx;   // 978  0.960  0.279
-assign  wn_r[979] = 32'h xxxxxxxx;   assign  wn_i[979] = 32'h xxxxxxxx;   // 979  0.962  0.273
-assign  wn_r[980] = 32'h xxxxxxxx;   assign  wn_i[980] = 32'h xxxxxxxx;   // 980  0.964  0.267
-assign  wn_r[981] = 32'h xxxxxxxx;   assign  wn_i[981] = 32'h xxxxxxxx;   // 981  0.965  0.261
-assign  wn_r[982] = 32'h xxxxxxxx;   assign  wn_i[982] = 32'h xxxxxxxx;   // 982  0.967  0.255
-assign  wn_r[983] = 32'h xxxxxxxx;   assign  wn_i[983] = 32'h xxxxxxxx;   // 983  0.969  0.249
-assign  wn_r[984] = 32'h xxxxxxxx;   assign  wn_i[984] = 32'h xxxxxxxx;   // 984  0.970  0.243
-assign  wn_r[985] = 32'h xxxxxxxx;   assign  wn_i[985] = 32'h xxxxxxxx;   // 985  0.972  0.237
-assign  wn_r[986] = 32'h xxxxxxxx;   assign  wn_i[986] = 32'h xxxxxxxx;   // 986  0.973  0.231
-assign  wn_r[987] = 32'h xxxxxxxx;   assign  wn_i[987] = 32'h xxxxxxxx;   // 987  0.974  0.225
-assign  wn_r[988] = 32'h xxxxxxxx;   assign  wn_i[988] = 32'h xxxxxxxx;   // 988  0.976  0.219
-assign  wn_r[989] = 32'h xxxxxxxx;   assign  wn_i[989] = 32'h xxxxxxxx;   // 989  0.977  0.213
-assign  wn_r[990] = 32'h xxxxxxxx;   assign  wn_i[990] = 32'h xxxxxxxx;   // 990  0.978  0.207
-assign  wn_r[991] = 32'h xxxxxxxx;   assign  wn_i[991] = 32'h xxxxxxxx;   // 991  0.980  0.201
-assign  wn_r[992] = 32'h xxxxxxxx;   assign  wn_i[992] = 32'h xxxxxxxx;   // 992  0.981  0.195
-assign  wn_r[993] = 32'h xxxxxxxx;   assign  wn_i[993] = 32'h xxxxxxxx;   // 993  0.982  0.189
-assign  wn_r[994] = 32'h xxxxxxxx;   assign  wn_i[994] = 32'h xxxxxxxx;   // 994  0.983  0.183
-assign  wn_r[995] = 32'h xxxxxxxx;   assign  wn_i[995] = 32'h xxxxxxxx;   // 995  0.984  0.177
-assign  wn_r[996] = 32'h xxxxxxxx;   assign  wn_i[996] = 32'h xxxxxxxx;   // 996  0.985  0.171
-assign  wn_r[997] = 32'h xxxxxxxx;   assign  wn_i[997] = 32'h xxxxxxxx;   // 997  0.986  0.165
-assign  wn_r[998] = 32'h xxxxxxxx;   assign  wn_i[998] = 32'h xxxxxxxx;   // 998  0.987  0.159
-assign  wn_r[999] = 32'h xxxxxxxx;   assign  wn_i[999] = 32'h xxxxxxxx;   // 999  0.988  0.153
-assign  wn_r[1000] = 32'h xxxxxxxx;   assign  wn_i[1000] = 32'h xxxxxxxx;   // 1000  0.989  0.147
-assign  wn_r[1001] = 32'h xxxxxxxx;   assign  wn_i[1001] = 32'h xxxxxxxx;   // 1001  0.990  0.141
-assign  wn_r[1002] = 32'h xxxxxxxx;   assign  wn_i[1002] = 32'h xxxxxxxx;   // 1002  0.991  0.135
-assign  wn_r[1003] = 32'h xxxxxxxx;   assign  wn_i[1003] = 32'h xxxxxxxx;   // 1003  0.992  0.128
-assign  wn_r[1004] = 32'h xxxxxxxx;   assign  wn_i[1004] = 32'h xxxxxxxx;   // 1004  0.992  0.122
-assign  wn_r[1005] = 32'h xxxxxxxx;   assign  wn_i[1005] = 32'h xxxxxxxx;   // 1005  0.993  0.116
-assign  wn_r[1006] = 32'h xxxxxxxx;   assign  wn_i[1006] = 32'h xxxxxxxx;   // 1006  0.994  0.110
-assign  wn_r[1007] = 32'h xxxxxxxx;   assign  wn_i[1007] = 32'h xxxxxxxx;   // 1007  0.995  0.104
-assign  wn_r[1008] = 32'h xxxxxxxx;   assign  wn_i[1008] = 32'h xxxxxxxx;   // 1008  0.995  0.098
-assign  wn_r[1009] = 32'h xxxxxxxx;   assign  wn_i[1009] = 32'h xxxxxxxx;   // 1009  0.996  0.092
-assign  wn_r[1010] = 32'h xxxxxxxx;   assign  wn_i[1010] = 32'h xxxxxxxx;   // 1010  0.996  0.086
-assign  wn_r[1011] = 32'h xxxxxxxx;   assign  wn_i[1011] = 32'h xxxxxxxx;   // 1011  0.997  0.080
-assign  wn_r[1012] = 32'h xxxxxxxx;   assign  wn_i[1012] = 32'h xxxxxxxx;   // 1012  0.997  0.074
-assign  wn_r[1013] = 32'h xxxxxxxx;   assign  wn_i[1013] = 32'h xxxxxxxx;   // 1013  0.998  0.067
-assign  wn_r[1014] = 32'h xxxxxxxx;   assign  wn_i[1014] = 32'h xxxxxxxx;   // 1014  0.998  0.061
-assign  wn_r[1015] = 32'h xxxxxxxx;   assign  wn_i[1015] = 32'h xxxxxxxx;   // 1015  0.998  0.055
-assign  wn_r[1016] = 32'h xxxxxxxx;   assign  wn_i[1016] = 32'h xxxxxxxx;   // 1016  0.999  0.049
-assign  wn_r[1017] = 32'h xxxxxxxx;   assign  wn_i[1017] = 32'h xxxxxxxx;   // 1017  0.999  0.043
-assign  wn_r[1018] = 32'h xxxxxxxx;   assign  wn_i[1018] = 32'h xxxxxxxx;   // 1018  0.999  0.037
-assign  wn_r[1019] = 32'h xxxxxxxx;   assign  wn_i[1019] = 32'h xxxxxxxx;   // 1019  1.000  0.031
-assign  wn_r[1020] = 32'h xxxxxxxx;   assign  wn_i[1020] = 32'h xxxxxxxx;   // 1020  1.000  0.025
-assign  wn_r[1021] = 32'h xxxxxxxx;   assign  wn_i[1021] = 32'h xxxxxxxx;   // 1021  1.000  0.018
-assign  wn_r[1022] = 32'h xxxxxxxx;   assign  wn_i[1022] = 32'h xxxxxxxx;   // 1022  1.000  0.012
-assign  wn_r[1023] = 32'h xxxxxxxx;   assign  wn_i[1023] = 32'h xxxxxxxx;   // 1023  1.000  0.006
+//      wn_re = cos(-2pi*n/1024)            wn_im = sin(-2pi*n/1024)
+assign  wn_re[ 0] = 32'h00000000;   assign  wn_im[ 0] = 32'h00000000;   //  0  1.000 -0.000
+assign  wn_re[ 1] = 32'h7FFF6216;   assign  wn_im[ 1] = 32'hFF36F078;   //  1  1.000 -0.006
+assign  wn_re[ 2] = 32'h7FFD885A;   assign  wn_im[ 2] = 32'hFE6DE2E0;   //  2  1.000 -0.012
+assign  wn_re[ 3] = 32'h7FFA72D1;   assign  wn_im[ 3] = 32'hFDA4D929;   //  3  1.000 -0.018
+assign  wn_re[ 4] = 32'h7FF62182;   assign  wn_im[ 4] = 32'hFCDBD541;   //  4  1.000 -0.025
+assign  wn_re[ 5] = 32'h7FF09478;   assign  wn_im[ 5] = 32'hFC12D91A;   //  5  1.000 -0.031
+assign  wn_re[ 6] = 32'h7FE9CBC0;   assign  wn_im[ 6] = 32'hFB49E6A3;   //  6  0.999 -0.037
+assign  wn_re[ 7] = 32'h7FE1C76B;   assign  wn_im[ 7] = 32'hFA80FFCB;   //  7  0.999 -0.043
+assign  wn_re[ 8] = 32'h7FD8878E;   assign  wn_im[ 8] = 32'hF9B82684;   //  8  0.999 -0.049
+assign  wn_re[ 9] = 32'h7FCE0C3E;   assign  wn_im[ 9] = 32'hF8EF5CBB;   //  9  0.998 -0.055
+assign  wn_re[10] = 32'h7FC25596;   assign  wn_im[10] = 32'hF826A462;   // 10  0.998 -0.061
+assign  wn_re[11] = 32'h7FB563B3;   assign  wn_im[11] = 32'hF75DFF66;   // 11  0.998 -0.067
+assign  wn_re[12] = 32'h7FA736B4;   assign  wn_im[12] = 32'hF6956FB7;   // 12  0.997 -0.074
+assign  wn_re[13] = 32'h7F97CEBD;   assign  wn_im[13] = 32'hF5CCF743;   // 13  0.997 -0.080
+assign  wn_re[14] = 32'h7F872BF3;   assign  wn_im[14] = 32'hF50497FB;   // 14  0.996 -0.086
+assign  wn_re[15] = 32'h7F754E80;   assign  wn_im[15] = 32'hF43C53CB;   // 15  0.996 -0.092
+assign  wn_re[16] = 32'h7F62368F;   assign  wn_im[16] = 32'hF3742CA2;   // 16  0.995 -0.098
+assign  wn_re[17] = 32'h7F4DE451;   assign  wn_im[17] = 32'hF2AC246E;   // 17  0.995 -0.104
+assign  wn_re[18] = 32'h7F3857F6;   assign  wn_im[18] = 32'hF1E43D1C;   // 18  0.994 -0.110
+assign  wn_re[19] = 32'h7F2191B4;   assign  wn_im[19] = 32'hF11C789A;   // 19  0.993 -0.116
+assign  wn_re[20] = 32'h7F0991C4;   assign  wn_im[20] = 32'hF054D8D5;   // 20  0.992 -0.122
+assign  wn_re[21] = 32'h7EF05860;   assign  wn_im[21] = 32'hEF8D5FB8;   // 21  0.992 -0.128
+assign  wn_re[22] = 32'h7ED5E5C6;   assign  wn_im[22] = 32'hEEC60F31;   // 22  0.991 -0.135
+assign  wn_re[23] = 32'h7EBA3A39;   assign  wn_im[23] = 32'hEDFEE92B;   // 23  0.990 -0.141
+assign  wn_re[24] = 32'h7E9D55FC;   assign  wn_im[24] = 32'hED37EF91;   // 24  0.989 -0.147
+assign  wn_re[25] = 32'h7E7F3957;   assign  wn_im[25] = 32'hEC71244F;   // 25  0.988 -0.153
+assign  wn_re[26] = 32'h7E5FE493;   assign  wn_im[26] = 32'hEBAA894F;   // 26  0.987 -0.159
+assign  wn_re[27] = 32'h7E3F57FF;   assign  wn_im[27] = 32'hEAE4207A;   // 27  0.986 -0.165
+assign  wn_re[28] = 32'h7E1D93EA;   assign  wn_im[28] = 32'hEA1DEBBB;   // 28  0.985 -0.171
+assign  wn_re[29] = 32'h7DFA98A8;   assign  wn_im[29] = 32'hE957ECFB;   // 29  0.984 -0.177
+assign  wn_re[30] = 32'h7DD6668F;   assign  wn_im[30] = 32'hE8922622;   // 30  0.983 -0.183
+assign  wn_re[31] = 32'h7DB0FDF8;   assign  wn_im[31] = 32'hE7CC9917;   // 31  0.982 -0.189
+assign  wn_re[32] = 32'h7D8A5F40;   assign  wn_im[32] = 32'hE70747C4;   // 32  0.981 -0.195
+assign  wn_re[33] = 32'h7D628AC6;   assign  wn_im[33] = 32'hE642340D;   // 33  0.980 -0.201
+assign  wn_re[34] = 32'h7D3980EC;   assign  wn_im[34] = 32'hE57D5FDA;   // 34  0.978 -0.207
+assign  wn_re[35] = 32'h7D0F4218;   assign  wn_im[35] = 32'hE4B8CD11;   // 35  0.977 -0.213
+assign  wn_re[36] = 32'h7CE3CEB2;   assign  wn_im[36] = 32'hE3F47D96;   // 36  0.976 -0.219
+assign  wn_re[37] = 32'h7CB72724;   assign  wn_im[37] = 32'hE330734D;   // 37  0.974 -0.225
+assign  wn_re[38] = 32'h7C894BDE;   assign  wn_im[38] = 32'hE26CB01B;   // 38  0.973 -0.231
+assign  wn_re[39] = 32'h7C5A3D50;   assign  wn_im[39] = 32'hE1A935E2;   // 39  0.972 -0.237
+assign  wn_re[40] = 32'h7C29FBEE;   assign  wn_im[40] = 32'hE0E60685;   // 40  0.970 -0.243
+assign  wn_re[41] = 32'h7BF88830;   assign  wn_im[41] = 32'hE02323E5;   // 41  0.969 -0.249
+assign  wn_re[42] = 32'h7BC5E290;   assign  wn_im[42] = 32'hDF608FE4;   // 42  0.967 -0.255
+assign  wn_re[43] = 32'h7B920B89;   assign  wn_im[43] = 32'hDE9E4C60;   // 43  0.965 -0.261
+assign  wn_re[44] = 32'h7B5D039E;   assign  wn_im[44] = 32'hDDDC5B3B;   // 44  0.964 -0.267
+assign  wn_re[45] = 32'h7B26CB4F;   assign  wn_im[45] = 32'hDD1ABE51;   // 45  0.962 -0.273
+assign  wn_re[46] = 32'h7AEF6323;   assign  wn_im[46] = 32'hDC597781;   // 46  0.960 -0.279
+assign  wn_re[47] = 32'h7AB6CBA4;   assign  wn_im[47] = 32'hDB9888A8;   // 47  0.959 -0.284
+assign  wn_re[48] = 32'h7A7D055B;   assign  wn_im[48] = 32'hDAD7F3A2;   // 48  0.957 -0.290
+assign  wn_re[49] = 32'h7A4210D8;   assign  wn_im[49] = 32'hDA17BA4A;   // 49  0.955 -0.296
+assign  wn_re[50] = 32'h7A05EEAD;   assign  wn_im[50] = 32'hD957DE7A;   // 50  0.953 -0.302
+assign  wn_re[51] = 32'h79C89F6E;   assign  wn_im[51] = 32'hD898620C;   // 51  0.951 -0.308
+assign  wn_re[52] = 32'h798A23B1;   assign  wn_im[52] = 32'hD7D946D8;   // 52  0.950 -0.314
+assign  wn_re[53] = 32'h794A7C12;   assign  wn_im[53] = 32'hD71A8EB5;   // 53  0.948 -0.320
+assign  wn_re[54] = 32'h7909A92D;   assign  wn_im[54] = 32'hD65C3B7B;   // 54  0.946 -0.325
+assign  wn_re[55] = 32'h78C7ABA2;   assign  wn_im[55] = 32'hD59E4EFF;   // 55  0.944 -0.331
+assign  wn_re[56] = 32'h78848414;   assign  wn_im[56] = 32'hD4E0CB15;   // 56  0.942 -0.337
+assign  wn_re[57] = 32'h78403329;   assign  wn_im[57] = 32'hD423B191;   // 57  0.939 -0.343
+assign  wn_re[58] = 32'h77FAB989;   assign  wn_im[58] = 32'hD3670446;   // 58  0.937 -0.348
+assign  wn_re[59] = 32'h77B417DF;   assign  wn_im[59] = 32'hD2AAC504;   // 59  0.935 -0.354
+assign  wn_re[60] = 32'h776C4EDB;   assign  wn_im[60] = 32'hD1EEF59E;   // 60  0.933 -0.360
+assign  wn_re[61] = 32'h77235F2D;   assign  wn_im[61] = 32'hD13397E2;   // 61  0.931 -0.366
+assign  wn_re[62] = 32'h76D94989;   assign  wn_im[62] = 32'hD078AD9E;   // 62  0.929 -0.371
+assign  wn_re[63] = 32'h768E0EA6;   assign  wn_im[63] = 32'hCFBE389F;   // 63  0.926 -0.377
+assign  wn_re[64] = 32'h7641AF3D;   assign  wn_im[64] = 32'hCF043AB3;   // 64  0.924 -0.383
+assign  wn_re[65] = 32'h75F42C0B;   assign  wn_im[65] = 32'hCE4AB5A2;   // 65  0.922 -0.388
+assign  wn_re[66] = 32'h75A585CF;   assign  wn_im[66] = 32'hCD91AB39;   // 66  0.919 -0.394
+assign  wn_re[67] = 32'h7555BD4C;   assign  wn_im[67] = 32'hCCD91D3D;   // 67  0.917 -0.400
+assign  wn_re[68] = 32'h7504D345;   assign  wn_im[68] = 32'hCC210D79;   // 68  0.914 -0.405
+assign  wn_re[69] = 32'h74B2C884;   assign  wn_im[69] = 32'hCB697DB0;   // 69  0.912 -0.411
+assign  wn_re[70] = 32'h745F9DD1;   assign  wn_im[70] = 32'hCAB26FA9;   // 70  0.909 -0.416
+assign  wn_re[71] = 32'h740B53FB;   assign  wn_im[71] = 32'hC9FBE527;   // 71  0.907 -0.422
+assign  wn_re[72] = 32'h73B5EBD1;   assign  wn_im[72] = 32'hC945DFEC;   // 72  0.904 -0.428
+assign  wn_re[73] = 32'h735F6626;   assign  wn_im[73] = 32'hC89061BA;   // 73  0.901 -0.433
+assign  wn_re[74] = 32'h7307C3D0;   assign  wn_im[74] = 32'hC7DB6C50;   // 74  0.899 -0.439
+assign  wn_re[75] = 32'h72AF05A7;   assign  wn_im[75] = 32'hC727016D;   // 75  0.896 -0.444
+assign  wn_re[76] = 32'h72552C85;   assign  wn_im[76] = 32'hC67322CE;   // 76  0.893 -0.450
+assign  wn_re[77] = 32'h71FA3949;   assign  wn_im[77] = 32'hC5BFD22E;   // 77  0.890 -0.455
+assign  wn_re[78] = 32'h719E2CD2;   assign  wn_im[78] = 32'hC50D1149;   // 78  0.888 -0.461
+assign  wn_re[79] = 32'h71410805;   assign  wn_im[79] = 32'hC45AE1D7;   // 79  0.885 -0.466
+assign  wn_re[80] = 32'h70E2CBC6;   assign  wn_im[80] = 32'hC3A94590;   // 80  0.882 -0.471
+assign  wn_re[81] = 32'h708378FF;   assign  wn_im[81] = 32'hC2F83E2A;   // 81  0.879 -0.477
+assign  wn_re[82] = 32'h7023109A;   assign  wn_im[82] = 32'hC247CD5A;   // 82  0.876 -0.482
+assign  wn_re[83] = 32'h6FC19385;   assign  wn_im[83] = 32'hC197F4D4;   // 83  0.873 -0.488
+assign  wn_re[84] = 32'h6F5F02B2;   assign  wn_im[84] = 32'hC0E8B648;   // 84  0.870 -0.493
+assign  wn_re[85] = 32'h6EFB5F12;   assign  wn_im[85] = 32'hC03A1368;   // 85  0.867 -0.498
+assign  wn_re[86] = 32'h6E96A99D;   assign  wn_im[86] = 32'hBF8C0DE3;   // 86  0.864 -0.504
+assign  wn_re[87] = 32'h6E30E34A;   assign  wn_im[87] = 32'hBEDEA765;   // 87  0.861 -0.509
+assign  wn_re[88] = 32'h6DCA0D14;   assign  wn_im[88] = 32'hBE31E19B;   // 88  0.858 -0.514
+assign  wn_re[89] = 32'h6D6227FA;   assign  wn_im[89] = 32'hBD85BE30;   // 89  0.855 -0.519
+assign  wn_re[90] = 32'h6CF934FC;   assign  wn_im[90] = 32'hBCDA3ECB;   // 90  0.851 -0.525
+assign  wn_re[91] = 32'h6C8F351C;   assign  wn_im[91] = 32'hBC2F6513;   // 91  0.848 -0.530
+assign  wn_re[92] = 32'h6C242960;   assign  wn_im[92] = 32'hBB8532B0;   // 92  0.845 -0.535
+assign  wn_re[93] = 32'h6BB812D1;   assign  wn_im[93] = 32'hBADBA943;   // 93  0.842 -0.540
+assign  wn_re[94] = 32'h6B4AF279;   assign  wn_im[94] = 32'hBA32CA71;   // 94  0.838 -0.545
+assign  wn_re[95] = 32'h6ADCC964;   assign  wn_im[95] = 32'hB98A97D8;   // 95  0.835 -0.550
+assign  wn_re[96] = 32'h6A6D98A4;   assign  wn_im[96] = 32'hB8E31319;   // 96  0.831 -0.556
+assign  wn_re[97] = 32'h69FD614A;   assign  wn_im[97] = 32'hB83C3DD1;   // 97  0.828 -0.561
+assign  wn_re[98] = 32'h698C246C;   assign  wn_im[98] = 32'hB796199B;   // 98  0.825 -0.566
+assign  wn_re[99] = 32'h6919E320;   assign  wn_im[99] = 32'hB6F0A812;   // 99  0.821 -0.571
+assign  wn_re[100] = 32'h68A69E81;   assign  wn_im[100] = 32'hB64BEACD;   // 100  0.818 -0.576
+assign  wn_re[101] = 32'h683257AB;   assign  wn_im[101] = 32'hB5A7E362;   // 101  0.814 -0.581
+assign  wn_re[102] = 32'h67BD0FBD;   assign  wn_im[102] = 32'hB5049368;   // 102  0.810 -0.586
+assign  wn_re[103] = 32'h6746C7D8;   assign  wn_im[103] = 32'hB461FC70;   // 103  0.807 -0.591
+assign  wn_re[104] = 32'h66CF8120;   assign  wn_im[104] = 32'hB3C0200C;   // 104  0.803 -0.596
+assign  wn_re[105] = 32'h66573CBB;   assign  wn_im[105] = 32'hB31EFFCC;   // 105  0.800 -0.601
+assign  wn_re[106] = 32'h65DDFBD3;   assign  wn_im[106] = 32'hB27E9D3C;   // 106  0.796 -0.606
+assign  wn_re[107] = 32'h6563BF92;   assign  wn_im[107] = 32'hB1DEF9E9;   // 107  0.792 -0.610
+assign  wn_re[108] = 32'h64E88926;   assign  wn_im[108] = 32'hB140175B;   // 108  0.788 -0.615
+assign  wn_re[109] = 32'h646C59BF;   assign  wn_im[109] = 32'hB0A1F71D;   // 109  0.785 -0.620
+assign  wn_re[110] = 32'h63EF3290;   assign  wn_im[110] = 32'hB0049AB3;   // 110  0.781 -0.625
+assign  wn_re[111] = 32'h637114CC;   assign  wn_im[111] = 32'hAF6803A2;   // 111  0.777 -0.630
+assign  wn_re[112] = 32'h62F201AC;   assign  wn_im[112] = 32'hAECC336C;   // 112  0.773 -0.634
+assign  wn_re[113] = 32'h6271FA69;   assign  wn_im[113] = 32'hAE312B92;   // 113  0.769 -0.639
+assign  wn_re[114] = 32'h61F1003F;   assign  wn_im[114] = 32'hAD96ED92;   // 114  0.765 -0.644
+assign  wn_re[115] = 32'h616F146C;   assign  wn_im[115] = 32'hACFD7AE8;   // 115  0.761 -0.649
+assign  wn_re[116] = 32'h60EC3830;   assign  wn_im[116] = 32'hAC64D510;   // 116  0.757 -0.653
+assign  wn_re[117] = 32'h60686CCF;   assign  wn_im[117] = 32'hABCCFD83;   // 117  0.753 -0.658
+assign  wn_re[118] = 32'h5FE3B38D;   assign  wn_im[118] = 32'hAB35F5B5;   // 118  0.749 -0.662
+assign  wn_re[119] = 32'h5F5E0DB3;   assign  wn_im[119] = 32'hAA9FBF1E;   // 119  0.745 -0.667
+assign  wn_re[120] = 32'h5ED77C8A;   assign  wn_im[120] = 32'hAA0A5B2E;   // 120  0.741 -0.672
+assign  wn_re[121] = 32'h5E50015D;   assign  wn_im[121] = 32'hA975CB57;   // 121  0.737 -0.676
+assign  wn_re[122] = 32'h5DC79D7C;   assign  wn_im[122] = 32'hA8E21106;   // 122  0.733 -0.681
+assign  wn_re[123] = 32'h5D3E5237;   assign  wn_im[123] = 32'hA84F2DAA;   // 123  0.728 -0.685
+assign  wn_re[124] = 32'h5CB420E0;   assign  wn_im[124] = 32'hA7BD22AC;   // 124  0.724 -0.690
+assign  wn_re[125] = 32'h5C290ACC;   assign  wn_im[125] = 32'hA72BF174;   // 125  0.720 -0.694
+assign  wn_re[126] = 32'h5B9D1154;   assign  wn_im[126] = 32'hA69B9B68;   // 126  0.716 -0.698
+assign  wn_re[127] = 32'h5B1035CF;   assign  wn_im[127] = 32'hA60C21EE;   // 127  0.711 -0.703
+assign  wn_re[128] = 32'h5A82799A;   assign  wn_im[128] = 32'hA57D8666;   // 128  0.707 -0.707
+assign  wn_re[129] = 32'h59F3DE12;   assign  wn_im[129] = 32'hA4EFCA31;   // 129  0.703 -0.711
+assign  wn_re[130] = 32'h59646498;   assign  wn_im[130] = 32'hA462EEAC;   // 130  0.698 -0.716
+assign  wn_re[131] = 32'h58D40E8C;   assign  wn_im[131] = 32'hA3D6F534;   // 131  0.694 -0.720
+assign  wn_re[132] = 32'h5842DD54;   assign  wn_im[132] = 32'hA34BDF20;   // 132  0.690 -0.724
+assign  wn_re[133] = 32'h57B0D256;   assign  wn_im[133] = 32'hA2C1ADC9;   // 133  0.685 -0.728
+assign  wn_re[134] = 32'h571DEEFA;   assign  wn_im[134] = 32'hA2386284;   // 134  0.681 -0.733
+assign  wn_re[135] = 32'h568A34A9;   assign  wn_im[135] = 32'hA1AFFEA3;   // 135  0.676 -0.737
+assign  wn_re[136] = 32'h55F5A4D2;   assign  wn_im[136] = 32'hA1288376;   // 136  0.672 -0.741
+assign  wn_re[137] = 32'h556040E2;   assign  wn_im[137] = 32'hA0A1F24D;   // 137  0.667 -0.745
+assign  wn_re[138] = 32'h54CA0A4B;   assign  wn_im[138] = 32'hA01C4C73;   // 138  0.662 -0.749
+assign  wn_re[139] = 32'h5433027D;   assign  wn_im[139] = 32'h9F979331;   // 139  0.658 -0.753
+assign  wn_re[140] = 32'h539B2AF0;   assign  wn_im[140] = 32'h9F13C7D0;   // 140  0.653 -0.757
+assign  wn_re[141] = 32'h53028518;   assign  wn_im[141] = 32'h9E90EB94;   // 141  0.649 -0.761
+assign  wn_re[142] = 32'h5269126E;   assign  wn_im[142] = 32'h9E0EFFC1;   // 142  0.644 -0.765
+assign  wn_re[143] = 32'h51CED46E;   assign  wn_im[143] = 32'h9D8E0597;   // 143  0.639 -0.769
+assign  wn_re[144] = 32'h5133CC94;   assign  wn_im[144] = 32'h9D0DFE54;   // 144  0.634 -0.773
+assign  wn_re[145] = 32'h5097FC5E;   assign  wn_im[145] = 32'h9C8EEB34;   // 145  0.630 -0.777
+assign  wn_re[146] = 32'h4FFB654D;   assign  wn_im[146] = 32'h9C10CD70;   // 146  0.625 -0.781
+assign  wn_re[147] = 32'h4F5E08E3;   assign  wn_im[147] = 32'h9B93A641;   // 147  0.620 -0.785
+assign  wn_re[148] = 32'h4EBFE8A5;   assign  wn_im[148] = 32'h9B1776DA;   // 148  0.615 -0.788
+assign  wn_re[149] = 32'h4E210617;   assign  wn_im[149] = 32'h9A9C406E;   // 149  0.610 -0.792
+assign  wn_re[150] = 32'h4D8162C4;   assign  wn_im[150] = 32'h9A22042D;   // 150  0.606 -0.796
+assign  wn_re[151] = 32'h4CE10034;   assign  wn_im[151] = 32'h99A8C345;   // 151  0.601 -0.800
+assign  wn_re[152] = 32'h4C3FDFF4;   assign  wn_im[152] = 32'h99307EE0;   // 152  0.596 -0.803
+assign  wn_re[153] = 32'h4B9E0390;   assign  wn_im[153] = 32'h98B93828;   // 153  0.591 -0.807
+assign  wn_re[154] = 32'h4AFB6C98;   assign  wn_im[154] = 32'h9842F043;   // 154  0.586 -0.810
+assign  wn_re[155] = 32'h4A581C9E;   assign  wn_im[155] = 32'h97CDA855;   // 155  0.581 -0.814
+assign  wn_re[156] = 32'h49B41533;   assign  wn_im[156] = 32'h9759617F;   // 156  0.576 -0.818
+assign  wn_re[157] = 32'h490F57EE;   assign  wn_im[157] = 32'h96E61CE0;   // 157  0.571 -0.821
+assign  wn_re[158] = 32'h4869E665;   assign  wn_im[158] = 32'h9673DB94;   // 158  0.566 -0.825
+assign  wn_re[159] = 32'h47C3C22F;   assign  wn_im[159] = 32'h96029EB6;   // 159  0.561 -0.828
+assign  wn_re[160] = 32'h471CECE7;   assign  wn_im[160] = 32'h9592675C;   // 160  0.556 -0.831
+assign  wn_re[161] = 32'h46756828;   assign  wn_im[161] = 32'h9523369C;   // 161  0.550 -0.835
+assign  wn_re[162] = 32'h45CD358F;   assign  wn_im[162] = 32'h94B50D87;   // 162  0.545 -0.838
+assign  wn_re[163] = 32'h452456BD;   assign  wn_im[163] = 32'h9447ED2F;   // 163  0.540 -0.842
+assign  wn_re[164] = 32'h447ACD50;   assign  wn_im[164] = 32'h93DBD6A0;   // 164  0.535 -0.845
+assign  wn_re[165] = 32'h43D09AED;   assign  wn_im[165] = 32'h9370CAE4;   // 165  0.530 -0.848
+assign  wn_re[166] = 32'h4325C135;   assign  wn_im[166] = 32'h9306CB04;   // 166  0.525 -0.851
+assign  wn_re[167] = 32'h427A41D0;   assign  wn_im[167] = 32'h929DD806;   // 167  0.519 -0.855
+assign  wn_re[168] = 32'h41CE1E65;   assign  wn_im[168] = 32'h9235F2EC;   // 168  0.514 -0.858
+assign  wn_re[169] = 32'h4121589B;   assign  wn_im[169] = 32'h91CF1CB6;   // 169  0.509 -0.861
+assign  wn_re[170] = 32'h4073F21D;   assign  wn_im[170] = 32'h91695663;   // 170  0.504 -0.864
+assign  wn_re[171] = 32'h3FC5EC98;   assign  wn_im[171] = 32'h9104A0EE;   // 171  0.498 -0.867
+assign  wn_re[172] = 32'h3F1749B8;   assign  wn_im[172] = 32'h90A0FD4E;   // 172  0.493 -0.870
+assign  wn_re[173] = 32'h3E680B2C;   assign  wn_im[173] = 32'h903E6C7B;   // 173  0.488 -0.873
+assign  wn_re[174] = 32'h3DB832A6;   assign  wn_im[174] = 32'h8FDCEF66;   // 174  0.482 -0.876
+assign  wn_re[175] = 32'h3D07C1D6;   assign  wn_im[175] = 32'h8F7C8701;   // 175  0.477 -0.879
+assign  wn_re[176] = 32'h3C56BA70;   assign  wn_im[176] = 32'h8F1D343A;   // 176  0.471 -0.882
+assign  wn_re[177] = 32'h3BA51E29;   assign  wn_im[177] = 32'h8EBEF7FB;   // 177  0.466 -0.885
+assign  wn_re[178] = 32'h3AF2EEB7;   assign  wn_im[178] = 32'h8E61D32E;   // 178  0.461 -0.888
+assign  wn_re[179] = 32'h3A402DD2;   assign  wn_im[179] = 32'h8E05C6B7;   // 179  0.455 -0.890
+assign  wn_re[180] = 32'h398CDD32;   assign  wn_im[180] = 32'h8DAAD37B;   // 180  0.450 -0.893
+assign  wn_re[181] = 32'h38D8FE93;   assign  wn_im[181] = 32'h8D50FA59;   // 181  0.444 -0.896
+assign  wn_re[182] = 32'h382493B0;   assign  wn_im[182] = 32'h8CF83C30;   // 182  0.439 -0.899
+assign  wn_re[183] = 32'h376F9E46;   assign  wn_im[183] = 32'h8CA099DA;   // 183  0.433 -0.901
+assign  wn_re[184] = 32'h36BA2014;   assign  wn_im[184] = 32'h8C4A142F;   // 184  0.428 -0.904
+assign  wn_re[185] = 32'h36041AD9;   assign  wn_im[185] = 32'h8BF4AC05;   // 185  0.422 -0.907
+assign  wn_re[186] = 32'h354D9057;   assign  wn_im[186] = 32'h8BA0622F;   // 186  0.416 -0.909
+assign  wn_re[187] = 32'h34968250;   assign  wn_im[187] = 32'h8B4D377C;   // 187  0.411 -0.912
+assign  wn_re[188] = 32'h33DEF287;   assign  wn_im[188] = 32'h8AFB2CBB;   // 188  0.405 -0.914
+assign  wn_re[189] = 32'h3326E2C3;   assign  wn_im[189] = 32'h8AAA42B4;   // 189  0.400 -0.917
+assign  wn_re[190] = 32'h326E54C7;   assign  wn_im[190] = 32'h8A5A7A31;   // 190  0.394 -0.919
+assign  wn_re[191] = 32'h31B54A5E;   assign  wn_im[191] = 32'h8A0BD3F5;   // 191  0.388 -0.922
+assign  wn_re[192] = 32'h30FBC54D;   assign  wn_im[192] = 32'h89BE50C3;   // 192  0.383 -0.924
+assign  wn_re[193] = 32'h3041C761;   assign  wn_im[193] = 32'h8971F15A;   // 193  0.377 -0.926
+assign  wn_re[194] = 32'h2F875262;   assign  wn_im[194] = 32'h8926B677;   // 194  0.371 -0.929
+assign  wn_re[195] = 32'h2ECC681E;   assign  wn_im[195] = 32'h88DCA0D3;   // 195  0.366 -0.931
+assign  wn_re[196] = 32'h2E110A62;   assign  wn_im[196] = 32'h8893B125;   // 196  0.360 -0.933
+assign  wn_re[197] = 32'h2D553AFC;   assign  wn_im[197] = 32'h884BE821;   // 197  0.354 -0.935
+assign  wn_re[198] = 32'h2C98FBBA;   assign  wn_im[198] = 32'h88054677;   // 198  0.348 -0.937
+assign  wn_re[199] = 32'h2BDC4E6F;   assign  wn_im[199] = 32'h87BFCCD7;   // 199  0.343 -0.939
+assign  wn_re[200] = 32'h2B1F34EB;   assign  wn_im[200] = 32'h877B7BEC;   // 200  0.337 -0.942
+assign  wn_re[201] = 32'h2A61B101;   assign  wn_im[201] = 32'h8738545E;   // 201  0.331 -0.944
+assign  wn_re[202] = 32'h29A3C485;   assign  wn_im[202] = 32'h86F656D3;   // 202  0.325 -0.946
+assign  wn_re[203] = 32'h28E5714B;   assign  wn_im[203] = 32'h86B583EE;   // 203  0.320 -0.948
+assign  wn_re[204] = 32'h2826B928;   assign  wn_im[204] = 32'h8675DC4F;   // 204  0.314 -0.950
+assign  wn_re[205] = 32'h27679DF4;   assign  wn_im[205] = 32'h86376092;   // 205  0.308 -0.951
+assign  wn_re[206] = 32'h26A82186;   assign  wn_im[206] = 32'h85FA1153;   // 206  0.302 -0.953
+assign  wn_re[207] = 32'h25E845B6;   assign  wn_im[207] = 32'h85BDEF28;   // 207  0.296 -0.955
+assign  wn_re[208] = 32'h25280C5E;   assign  wn_im[208] = 32'h8582FAA5;   // 208  0.290 -0.957
+assign  wn_re[209] = 32'h24677758;   assign  wn_im[209] = 32'h8549345C;   // 209  0.284 -0.959
+assign  wn_re[210] = 32'h23A6887F;   assign  wn_im[210] = 32'h85109CDD;   // 210  0.279 -0.960
+assign  wn_re[211] = 32'h22E541AF;   assign  wn_im[211] = 32'h84D934B1;   // 211  0.273 -0.962
+assign  wn_re[212] = 32'h2223A4C5;   assign  wn_im[212] = 32'h84A2FC62;   // 212  0.267 -0.964
+assign  wn_re[213] = 32'h2161B3A0;   assign  wn_im[213] = 32'h846DF477;   // 213  0.261 -0.965
+assign  wn_re[214] = 32'h209F701C;   assign  wn_im[214] = 32'h843A1D70;   // 214  0.255 -0.967
+assign  wn_re[215] = 32'h1FDCDC1B;   assign  wn_im[215] = 32'h840777D0;   // 215  0.249 -0.969
+assign  wn_re[216] = 32'h1F19F97B;   assign  wn_im[216] = 32'h83D60412;   // 216  0.243 -0.970
+assign  wn_re[217] = 32'h1E56CA1E;   assign  wn_im[217] = 32'h83A5C2B0;   // 217  0.237 -0.972
+assign  wn_re[218] = 32'h1D934FE5;   assign  wn_im[218] = 32'h8376B422;   // 218  0.231 -0.973
+assign  wn_re[219] = 32'h1CCF8CB3;   assign  wn_im[219] = 32'h8348D8DC;   // 219  0.225 -0.974
+assign  wn_re[220] = 32'h1C0B826A;   assign  wn_im[220] = 32'h831C314E;   // 220  0.219 -0.976
+assign  wn_re[221] = 32'h1B4732EF;   assign  wn_im[221] = 32'h82F0BDE8;   // 221  0.213 -0.977
+assign  wn_re[222] = 32'h1A82A026;   assign  wn_im[222] = 32'h82C67F14;   // 222  0.207 -0.978
+assign  wn_re[223] = 32'h19BDCBF3;   assign  wn_im[223] = 32'h829D753A;   // 223  0.201 -0.980
+assign  wn_re[224] = 32'h18F8B83C;   assign  wn_im[224] = 32'h8275A0C0;   // 224  0.195 -0.981
+assign  wn_re[225] = 32'h183366E9;   assign  wn_im[225] = 32'h824F0208;   // 225  0.189 -0.982
+assign  wn_re[226] = 32'h176DD9DE;   assign  wn_im[226] = 32'h82299971;   // 226  0.183 -0.983
+assign  wn_re[227] = 32'h16A81305;   assign  wn_im[227] = 32'h82056758;   // 227  0.177 -0.984
+assign  wn_re[228] = 32'h15E21445;   assign  wn_im[228] = 32'h81E26C16;   // 228  0.171 -0.985
+assign  wn_re[229] = 32'h151BDF86;   assign  wn_im[229] = 32'h81C0A801;   // 229  0.165 -0.986
+assign  wn_re[230] = 32'h145576B1;   assign  wn_im[230] = 32'h81A01B6D;   // 230  0.159 -0.987
+assign  wn_re[231] = 32'h138EDBB1;   assign  wn_im[231] = 32'h8180C6A9;   // 231  0.153 -0.988
+assign  wn_re[232] = 32'h12C8106F;   assign  wn_im[232] = 32'h8162AA04;   // 232  0.147 -0.989
+assign  wn_re[233] = 32'h120116D5;   assign  wn_im[233] = 32'h8145C5C7;   // 233  0.141 -0.990
+assign  wn_re[234] = 32'h1139F0CF;   assign  wn_im[234] = 32'h812A1A3A;   // 234  0.135 -0.991
+assign  wn_re[235] = 32'h1072A048;   assign  wn_im[235] = 32'h810FA7A0;   // 235  0.128 -0.992
+assign  wn_re[236] = 32'h0FAB272B;   assign  wn_im[236] = 32'h80F66E3C;   // 236  0.122 -0.992
+assign  wn_re[237] = 32'h0EE38766;   assign  wn_im[237] = 32'h80DE6E4C;   // 237  0.116 -0.993
+assign  wn_re[238] = 32'h0E1BC2E4;   assign  wn_im[238] = 32'h80C7A80A;   // 238  0.110 -0.994
+assign  wn_re[239] = 32'h0D53DB92;   assign  wn_im[239] = 32'h80B21BAF;   // 239  0.104 -0.995
+assign  wn_re[240] = 32'h0C8BD35E;   assign  wn_im[240] = 32'h809DC971;   // 240  0.098 -0.995
+assign  wn_re[241] = 32'h0BC3AC35;   assign  wn_im[241] = 32'h808AB180;   // 241  0.092 -0.996
+assign  wn_re[242] = 32'h0AFB6805;   assign  wn_im[242] = 32'h8078D40D;   // 242  0.086 -0.996
+assign  wn_re[243] = 32'h0A3308BD;   assign  wn_im[243] = 32'h80683143;   // 243  0.080 -0.997
+assign  wn_re[244] = 32'h096A9049;   assign  wn_im[244] = 32'h8058C94C;   // 244  0.074 -0.997
+assign  wn_re[245] = 32'h08A2009A;   assign  wn_im[245] = 32'h804A9C4D;   // 245  0.067 -0.998
+assign  wn_re[246] = 32'h07D95B9E;   assign  wn_im[246] = 32'h803DAA6A;   // 246  0.061 -0.998
+assign  wn_re[247] = 32'h0710A345;   assign  wn_im[247] = 32'h8031F3C2;   // 247  0.055 -0.998
+assign  wn_re[248] = 32'h0647D97C;   assign  wn_im[248] = 32'h80277872;   // 248  0.049 -0.999
+assign  wn_re[249] = 32'h057F0035;   assign  wn_im[249] = 32'h801E3895;   // 249  0.043 -0.999
+assign  wn_re[250] = 32'h04B6195D;   assign  wn_im[250] = 32'h80163440;   // 250  0.037 -0.999
+assign  wn_re[251] = 32'h03ED26E6;   assign  wn_im[251] = 32'h800F6B88;   // 251  0.031 -1.000
+assign  wn_re[252] = 32'h03242ABF;   assign  wn_im[252] = 32'h8009DE7E;   // 252  0.025 -1.000
+assign  wn_re[253] = 32'h025B26D7;   assign  wn_im[253] = 32'h80058D2F;   // 253  0.018 -1.000
+assign  wn_re[254] = 32'h01921D20;   assign  wn_im[254] = 32'h800277A6;   // 254  0.012 -1.000
+assign  wn_re[255] = 32'h00C90F88;   assign  wn_im[255] = 32'h80009DEA;   // 255  0.006 -1.000
+assign  wn_re[256] = 32'h00000000;   assign  wn_im[256] = 32'h80000000;   // 256  0.000 -1.000
+assign  wn_re[257] = 32'hxxxxxxxx;   assign  wn_im[257] = 32'hxxxxxxxx;   // 257 -0.006 -1.000
+assign  wn_re[258] = 32'hFE6DE2E0;   assign  wn_im[258] = 32'h800277A6;   // 258 -0.012 -1.000
+assign  wn_re[259] = 32'hxxxxxxxx;   assign  wn_im[259] = 32'hxxxxxxxx;   // 259 -0.018 -1.000
+assign  wn_re[260] = 32'hFCDBD541;   assign  wn_im[260] = 32'h8009DE7E;   // 260 -0.025 -1.000
+assign  wn_re[261] = 32'hFC12D91A;   assign  wn_im[261] = 32'h800F6B88;   // 261 -0.031 -1.000
+assign  wn_re[262] = 32'hFB49E6A3;   assign  wn_im[262] = 32'h80163440;   // 262 -0.037 -0.999
+assign  wn_re[263] = 32'hxxxxxxxx;   assign  wn_im[263] = 32'hxxxxxxxx;   // 263 -0.043 -0.999
+assign  wn_re[264] = 32'hF9B82684;   assign  wn_im[264] = 32'h80277872;   // 264 -0.049 -0.999
+assign  wn_re[265] = 32'hxxxxxxxx;   assign  wn_im[265] = 32'hxxxxxxxx;   // 265 -0.055 -0.998
+assign  wn_re[266] = 32'hF826A462;   assign  wn_im[266] = 32'h803DAA6A;   // 266 -0.061 -0.998
+assign  wn_re[267] = 32'hF75DFF66;   assign  wn_im[267] = 32'h804A9C4D;   // 267 -0.067 -0.998
+assign  wn_re[268] = 32'hF6956FB7;   assign  wn_im[268] = 32'h8058C94C;   // 268 -0.074 -0.997
+assign  wn_re[269] = 32'hxxxxxxxx;   assign  wn_im[269] = 32'hxxxxxxxx;   // 269 -0.080 -0.997
+assign  wn_re[270] = 32'hF50497FB;   assign  wn_im[270] = 32'h8078D40D;   // 270 -0.086 -0.996
+assign  wn_re[271] = 32'hxxxxxxxx;   assign  wn_im[271] = 32'hxxxxxxxx;   // 271 -0.092 -0.996
+assign  wn_re[272] = 32'hF3742CA2;   assign  wn_im[272] = 32'h809DC971;   // 272 -0.098 -0.995
+assign  wn_re[273] = 32'hF2AC246E;   assign  wn_im[273] = 32'h80B21BAF;   // 273 -0.104 -0.995
+assign  wn_re[274] = 32'hF1E43D1C;   assign  wn_im[274] = 32'h80C7A80A;   // 274 -0.110 -0.994
+assign  wn_re[275] = 32'hxxxxxxxx;   assign  wn_im[275] = 32'hxxxxxxxx;   // 275 -0.116 -0.993
+assign  wn_re[276] = 32'hF054D8D5;   assign  wn_im[276] = 32'h80F66E3C;   // 276 -0.122 -0.992
+assign  wn_re[277] = 32'hxxxxxxxx;   assign  wn_im[277] = 32'hxxxxxxxx;   // 277 -0.128 -0.992
+assign  wn_re[278] = 32'hEEC60F31;   assign  wn_im[278] = 32'h812A1A3A;   // 278 -0.135 -0.991
+assign  wn_re[279] = 32'hEDFEE92B;   assign  wn_im[279] = 32'h8145C5C7;   // 279 -0.141 -0.990
+assign  wn_re[280] = 32'hED37EF91;   assign  wn_im[280] = 32'h8162AA04;   // 280 -0.147 -0.989
+assign  wn_re[281] = 32'hxxxxxxxx;   assign  wn_im[281] = 32'hxxxxxxxx;   // 281 -0.153 -0.988
+assign  wn_re[282] = 32'hEBAA894F;   assign  wn_im[282] = 32'h81A01B6D;   // 282 -0.159 -0.987
+assign  wn_re[283] = 32'hxxxxxxxx;   assign  wn_im[283] = 32'hxxxxxxxx;   // 283 -0.165 -0.986
+assign  wn_re[284] = 32'hEA1DEBBB;   assign  wn_im[284] = 32'h81E26C16;   // 284 -0.171 -0.985
+assign  wn_re[285] = 32'hE957ECFB;   assign  wn_im[285] = 32'h82056758;   // 285 -0.177 -0.984
+assign  wn_re[286] = 32'hE8922622;   assign  wn_im[286] = 32'h82299971;   // 286 -0.183 -0.983
+assign  wn_re[287] = 32'hxxxxxxxx;   assign  wn_im[287] = 32'hxxxxxxxx;   // 287 -0.189 -0.982
+assign  wn_re[288] = 32'hE70747C4;   assign  wn_im[288] = 32'h8275A0C0;   // 288 -0.195 -0.981
+assign  wn_re[289] = 32'hxxxxxxxx;   assign  wn_im[289] = 32'hxxxxxxxx;   // 289 -0.201 -0.980
+assign  wn_re[290] = 32'hE57D5FDA;   assign  wn_im[290] = 32'h82C67F14;   // 290 -0.207 -0.978
+assign  wn_re[291] = 32'hE4B8CD11;   assign  wn_im[291] = 32'h82F0BDE8;   // 291 -0.213 -0.977
+assign  wn_re[292] = 32'hE3F47D96;   assign  wn_im[292] = 32'h831C314E;   // 292 -0.219 -0.976
+assign  wn_re[293] = 32'hxxxxxxxx;   assign  wn_im[293] = 32'hxxxxxxxx;   // 293 -0.225 -0.974
+assign  wn_re[294] = 32'hE26CB01B;   assign  wn_im[294] = 32'h8376B422;   // 294 -0.231 -0.973
+assign  wn_re[295] = 32'hxxxxxxxx;   assign  wn_im[295] = 32'hxxxxxxxx;   // 295 -0.237 -0.972
+assign  wn_re[296] = 32'hE0E60685;   assign  wn_im[296] = 32'h83D60412;   // 296 -0.243 -0.970
+assign  wn_re[297] = 32'hE02323E5;   assign  wn_im[297] = 32'h840777D0;   // 297 -0.249 -0.969
+assign  wn_re[298] = 32'hDF608FE4;   assign  wn_im[298] = 32'h843A1D70;   // 298 -0.255 -0.967
+assign  wn_re[299] = 32'hxxxxxxxx;   assign  wn_im[299] = 32'hxxxxxxxx;   // 299 -0.261 -0.965
+assign  wn_re[300] = 32'hDDDC5B3B;   assign  wn_im[300] = 32'h84A2FC62;   // 300 -0.267 -0.964
+assign  wn_re[301] = 32'hxxxxxxxx;   assign  wn_im[301] = 32'hxxxxxxxx;   // 301 -0.273 -0.962
+assign  wn_re[302] = 32'hDC597781;   assign  wn_im[302] = 32'h85109CDD;   // 302 -0.279 -0.960
+assign  wn_re[303] = 32'hDB9888A8;   assign  wn_im[303] = 32'h8549345C;   // 303 -0.284 -0.959
+assign  wn_re[304] = 32'hDAD7F3A2;   assign  wn_im[304] = 32'h8582FAA5;   // 304 -0.290 -0.957
+assign  wn_re[305] = 32'hxxxxxxxx;   assign  wn_im[305] = 32'hxxxxxxxx;   // 305 -0.296 -0.955
+assign  wn_re[306] = 32'hD957DE7A;   assign  wn_im[306] = 32'h85FA1153;   // 306 -0.302 -0.953
+assign  wn_re[307] = 32'hxxxxxxxx;   assign  wn_im[307] = 32'hxxxxxxxx;   // 307 -0.308 -0.951
+assign  wn_re[308] = 32'hD7D946D8;   assign  wn_im[308] = 32'h8675DC4F;   // 308 -0.314 -0.950
+assign  wn_re[309] = 32'hD71A8EB5;   assign  wn_im[309] = 32'h86B583EE;   // 309 -0.320 -0.948
+assign  wn_re[310] = 32'hD65C3B7B;   assign  wn_im[310] = 32'h86F656D3;   // 310 -0.325 -0.946
+assign  wn_re[311] = 32'hxxxxxxxx;   assign  wn_im[311] = 32'hxxxxxxxx;   // 311 -0.331 -0.944
+assign  wn_re[312] = 32'hD4E0CB15;   assign  wn_im[312] = 32'h877B7BEC;   // 312 -0.337 -0.942
+assign  wn_re[313] = 32'hxxxxxxxx;   assign  wn_im[313] = 32'hxxxxxxxx;   // 313 -0.343 -0.939
+assign  wn_re[314] = 32'hD3670446;   assign  wn_im[314] = 32'h88054677;   // 314 -0.348 -0.937
+assign  wn_re[315] = 32'hD2AAC504;   assign  wn_im[315] = 32'h884BE821;   // 315 -0.354 -0.935
+assign  wn_re[316] = 32'hD1EEF59E;   assign  wn_im[316] = 32'h8893B125;   // 316 -0.360 -0.933
+assign  wn_re[317] = 32'hxxxxxxxx;   assign  wn_im[317] = 32'hxxxxxxxx;   // 317 -0.366 -0.931
+assign  wn_re[318] = 32'hD078AD9E;   assign  wn_im[318] = 32'h8926B677;   // 318 -0.371 -0.929
+assign  wn_re[319] = 32'hxxxxxxxx;   assign  wn_im[319] = 32'hxxxxxxxx;   // 319 -0.377 -0.926
+assign  wn_re[320] = 32'hCF043AB3;   assign  wn_im[320] = 32'h89BE50C3;   // 320 -0.383 -0.924
+assign  wn_re[321] = 32'hCE4AB5A2;   assign  wn_im[321] = 32'h8A0BD3F5;   // 321 -0.388 -0.922
+assign  wn_re[322] = 32'hCD91AB39;   assign  wn_im[322] = 32'h8A5A7A31;   // 322 -0.394 -0.919
+assign  wn_re[323] = 32'hxxxxxxxx;   assign  wn_im[323] = 32'hxxxxxxxx;   // 323 -0.400 -0.917
+assign  wn_re[324] = 32'hCC210D79;   assign  wn_im[324] = 32'h8AFB2CBB;   // 324 -0.405 -0.914
+assign  wn_re[325] = 32'hxxxxxxxx;   assign  wn_im[325] = 32'hxxxxxxxx;   // 325 -0.411 -0.912
+assign  wn_re[326] = 32'hCAB26FA9;   assign  wn_im[326] = 32'h8BA0622F;   // 326 -0.416 -0.909
+assign  wn_re[327] = 32'hC9FBE527;   assign  wn_im[327] = 32'h8BF4AC05;   // 327 -0.422 -0.907
+assign  wn_re[328] = 32'hC945DFEC;   assign  wn_im[328] = 32'h8C4A142F;   // 328 -0.428 -0.904
+assign  wn_re[329] = 32'hxxxxxxxx;   assign  wn_im[329] = 32'hxxxxxxxx;   // 329 -0.433 -0.901
+assign  wn_re[330] = 32'hC7DB6C50;   assign  wn_im[330] = 32'h8CF83C30;   // 330 -0.439 -0.899
+assign  wn_re[331] = 32'hxxxxxxxx;   assign  wn_im[331] = 32'hxxxxxxxx;   // 331 -0.444 -0.896
+assign  wn_re[332] = 32'hC67322CE;   assign  wn_im[332] = 32'h8DAAD37B;   // 332 -0.450 -0.893
+assign  wn_re[333] = 32'hC5BFD22E;   assign  wn_im[333] = 32'h8E05C6B7;   // 333 -0.455 -0.890
+assign  wn_re[334] = 32'hC50D1149;   assign  wn_im[334] = 32'h8E61D32E;   // 334 -0.461 -0.888
+assign  wn_re[335] = 32'hxxxxxxxx;   assign  wn_im[335] = 32'hxxxxxxxx;   // 335 -0.466 -0.885
+assign  wn_re[336] = 32'hC3A94590;   assign  wn_im[336] = 32'h8F1D343A;   // 336 -0.471 -0.882
+assign  wn_re[337] = 32'hxxxxxxxx;   assign  wn_im[337] = 32'hxxxxxxxx;   // 337 -0.477 -0.879
+assign  wn_re[338] = 32'hC247CD5A;   assign  wn_im[338] = 32'h8FDCEF66;   // 338 -0.482 -0.876
+assign  wn_re[339] = 32'hC197F4D4;   assign  wn_im[339] = 32'h903E6C7B;   // 339 -0.488 -0.873
+assign  wn_re[340] = 32'hC0E8B648;   assign  wn_im[340] = 32'h90A0FD4E;   // 340 -0.493 -0.870
+assign  wn_re[341] = 32'hxxxxxxxx;   assign  wn_im[341] = 32'hxxxxxxxx;   // 341 -0.498 -0.867
+assign  wn_re[342] = 32'hBF8C0DE3;   assign  wn_im[342] = 32'h91695663;   // 342 -0.504 -0.864
+assign  wn_re[343] = 32'hxxxxxxxx;   assign  wn_im[343] = 32'hxxxxxxxx;   // 343 -0.509 -0.861
+assign  wn_re[344] = 32'hBE31E19B;   assign  wn_im[344] = 32'h9235F2EC;   // 344 -0.514 -0.858
+assign  wn_re[345] = 32'hBD85BE30;   assign  wn_im[345] = 32'h929DD806;   // 345 -0.519 -0.855
+assign  wn_re[346] = 32'hBCDA3ECB;   assign  wn_im[346] = 32'h9306CB04;   // 346 -0.525 -0.851
+assign  wn_re[347] = 32'hxxxxxxxx;   assign  wn_im[347] = 32'hxxxxxxxx;   // 347 -0.530 -0.848
+assign  wn_re[348] = 32'hBB8532B0;   assign  wn_im[348] = 32'h93DBD6A0;   // 348 -0.535 -0.845
+assign  wn_re[349] = 32'hxxxxxxxx;   assign  wn_im[349] = 32'hxxxxxxxx;   // 349 -0.540 -0.842
+assign  wn_re[350] = 32'hBA32CA71;   assign  wn_im[350] = 32'h94B50D87;   // 350 -0.545 -0.838
+assign  wn_re[351] = 32'hB98A97D8;   assign  wn_im[351] = 32'h9523369C;   // 351 -0.550 -0.835
+assign  wn_re[352] = 32'hB8E31319;   assign  wn_im[352] = 32'h9592675C;   // 352 -0.556 -0.831
+assign  wn_re[353] = 32'hxxxxxxxx;   assign  wn_im[353] = 32'hxxxxxxxx;   // 353 -0.561 -0.828
+assign  wn_re[354] = 32'hB796199B;   assign  wn_im[354] = 32'h9673DB94;   // 354 -0.566 -0.825
+assign  wn_re[355] = 32'hxxxxxxxx;   assign  wn_im[355] = 32'hxxxxxxxx;   // 355 -0.571 -0.821
+assign  wn_re[356] = 32'hB64BEACD;   assign  wn_im[356] = 32'h9759617F;   // 356 -0.576 -0.818
+assign  wn_re[357] = 32'hB5A7E362;   assign  wn_im[357] = 32'h97CDA855;   // 357 -0.581 -0.814
+assign  wn_re[358] = 32'hB5049368;   assign  wn_im[358] = 32'h9842F043;   // 358 -0.586 -0.810
+assign  wn_re[359] = 32'hxxxxxxxx;   assign  wn_im[359] = 32'hxxxxxxxx;   // 359 -0.591 -0.807
+assign  wn_re[360] = 32'hB3C0200C;   assign  wn_im[360] = 32'h99307EE0;   // 360 -0.596 -0.803
+assign  wn_re[361] = 32'hxxxxxxxx;   assign  wn_im[361] = 32'hxxxxxxxx;   // 361 -0.601 -0.800
+assign  wn_re[362] = 32'hB27E9D3C;   assign  wn_im[362] = 32'h9A22042D;   // 362 -0.606 -0.796
+assign  wn_re[363] = 32'hB1DEF9E9;   assign  wn_im[363] = 32'h9A9C406E;   // 363 -0.610 -0.792
+assign  wn_re[364] = 32'hB140175B;   assign  wn_im[364] = 32'h9B1776DA;   // 364 -0.615 -0.788
+assign  wn_re[365] = 32'hxxxxxxxx;   assign  wn_im[365] = 32'hxxxxxxxx;   // 365 -0.620 -0.785
+assign  wn_re[366] = 32'hB0049AB3;   assign  wn_im[366] = 32'h9C10CD70;   // 366 -0.625 -0.781
+assign  wn_re[367] = 32'hxxxxxxxx;   assign  wn_im[367] = 32'hxxxxxxxx;   // 367 -0.630 -0.777
+assign  wn_re[368] = 32'hAECC336C;   assign  wn_im[368] = 32'h9D0DFE54;   // 368 -0.634 -0.773
+assign  wn_re[369] = 32'hAE312B92;   assign  wn_im[369] = 32'h9D8E0597;   // 369 -0.639 -0.769
+assign  wn_re[370] = 32'hAD96ED92;   assign  wn_im[370] = 32'h9E0EFFC1;   // 370 -0.644 -0.765
+assign  wn_re[371] = 32'hxxxxxxxx;   assign  wn_im[371] = 32'hxxxxxxxx;   // 371 -0.649 -0.761
+assign  wn_re[372] = 32'hAC64D510;   assign  wn_im[372] = 32'h9F13C7D0;   // 372 -0.653 -0.757
+assign  wn_re[373] = 32'hxxxxxxxx;   assign  wn_im[373] = 32'hxxxxxxxx;   // 373 -0.658 -0.753
+assign  wn_re[374] = 32'hAB35F5B5;   assign  wn_im[374] = 32'hA01C4C73;   // 374 -0.662 -0.749
+assign  wn_re[375] = 32'hAA9FBF1E;   assign  wn_im[375] = 32'hA0A1F24D;   // 375 -0.667 -0.745
+assign  wn_re[376] = 32'hAA0A5B2E;   assign  wn_im[376] = 32'hA1288376;   // 376 -0.672 -0.741
+assign  wn_re[377] = 32'hxxxxxxxx;   assign  wn_im[377] = 32'hxxxxxxxx;   // 377 -0.676 -0.737
+assign  wn_re[378] = 32'hA8E21106;   assign  wn_im[378] = 32'hA2386284;   // 378 -0.681 -0.733
+assign  wn_re[379] = 32'hxxxxxxxx;   assign  wn_im[379] = 32'hxxxxxxxx;   // 379 -0.685 -0.728
+assign  wn_re[380] = 32'hA7BD22AC;   assign  wn_im[380] = 32'hA34BDF20;   // 380 -0.690 -0.724
+assign  wn_re[381] = 32'hA72BF174;   assign  wn_im[381] = 32'hA3D6F534;   // 381 -0.694 -0.720
+assign  wn_re[382] = 32'hA69B9B68;   assign  wn_im[382] = 32'hA462EEAC;   // 382 -0.698 -0.716
+assign  wn_re[383] = 32'hxxxxxxxx;   assign  wn_im[383] = 32'hxxxxxxxx;   // 383 -0.703 -0.711
+assign  wn_re[384] = 32'hA57D8666;   assign  wn_im[384] = 32'hA57D8666;   // 384 -0.707 -0.707
+assign  wn_re[385] = 32'hxxxxxxxx;   assign  wn_im[385] = 32'hxxxxxxxx;   // 385 -0.711 -0.703
+assign  wn_re[386] = 32'hA462EEAC;   assign  wn_im[386] = 32'hA69B9B68;   // 386 -0.716 -0.698
+assign  wn_re[387] = 32'hA3D6F534;   assign  wn_im[387] = 32'hA72BF174;   // 387 -0.720 -0.694
+assign  wn_re[388] = 32'hA34BDF20;   assign  wn_im[388] = 32'hA7BD22AC;   // 388 -0.724 -0.690
+assign  wn_re[389] = 32'hxxxxxxxx;   assign  wn_im[389] = 32'hxxxxxxxx;   // 389 -0.728 -0.685
+assign  wn_re[390] = 32'hA2386284;   assign  wn_im[390] = 32'hA8E21106;   // 390 -0.733 -0.681
+assign  wn_re[391] = 32'hxxxxxxxx;   assign  wn_im[391] = 32'hxxxxxxxx;   // 391 -0.737 -0.676
+assign  wn_re[392] = 32'hA1288376;   assign  wn_im[392] = 32'hAA0A5B2E;   // 392 -0.741 -0.672
+assign  wn_re[393] = 32'hA0A1F24D;   assign  wn_im[393] = 32'hAA9FBF1E;   // 393 -0.745 -0.667
+assign  wn_re[394] = 32'hA01C4C73;   assign  wn_im[394] = 32'hAB35F5B5;   // 394 -0.749 -0.662
+assign  wn_re[395] = 32'hxxxxxxxx;   assign  wn_im[395] = 32'hxxxxxxxx;   // 395 -0.753 -0.658
+assign  wn_re[396] = 32'h9F13C7D0;   assign  wn_im[396] = 32'hAC64D510;   // 396 -0.757 -0.653
+assign  wn_re[397] = 32'hxxxxxxxx;   assign  wn_im[397] = 32'hxxxxxxxx;   // 397 -0.761 -0.649
+assign  wn_re[398] = 32'h9E0EFFC1;   assign  wn_im[398] = 32'hAD96ED92;   // 398 -0.765 -0.644
+assign  wn_re[399] = 32'h9D8E0597;   assign  wn_im[399] = 32'hAE312B92;   // 399 -0.769 -0.639
+assign  wn_re[400] = 32'h9D0DFE54;   assign  wn_im[400] = 32'hAECC336C;   // 400 -0.773 -0.634
+assign  wn_re[401] = 32'hxxxxxxxx;   assign  wn_im[401] = 32'hxxxxxxxx;   // 401 -0.777 -0.630
+assign  wn_re[402] = 32'h9C10CD70;   assign  wn_im[402] = 32'hB0049AB3;   // 402 -0.781 -0.625
+assign  wn_re[403] = 32'hxxxxxxxx;   assign  wn_im[403] = 32'hxxxxxxxx;   // 403 -0.785 -0.620
+assign  wn_re[404] = 32'h9B1776DA;   assign  wn_im[404] = 32'hB140175B;   // 404 -0.788 -0.615
+assign  wn_re[405] = 32'h9A9C406E;   assign  wn_im[405] = 32'hB1DEF9E9;   // 405 -0.792 -0.610
+assign  wn_re[406] = 32'h9A22042D;   assign  wn_im[406] = 32'hB27E9D3C;   // 406 -0.796 -0.606
+assign  wn_re[407] = 32'hxxxxxxxx;   assign  wn_im[407] = 32'hxxxxxxxx;   // 407 -0.800 -0.601
+assign  wn_re[408] = 32'h99307EE0;   assign  wn_im[408] = 32'hB3C0200C;   // 408 -0.803 -0.596
+assign  wn_re[409] = 32'hxxxxxxxx;   assign  wn_im[409] = 32'hxxxxxxxx;   // 409 -0.807 -0.591
+assign  wn_re[410] = 32'h9842F043;   assign  wn_im[410] = 32'hB5049368;   // 410 -0.810 -0.586
+assign  wn_re[411] = 32'h97CDA855;   assign  wn_im[411] = 32'hB5A7E362;   // 411 -0.814 -0.581
+assign  wn_re[412] = 32'h9759617F;   assign  wn_im[412] = 32'hB64BEACD;   // 412 -0.818 -0.576
+assign  wn_re[413] = 32'hxxxxxxxx;   assign  wn_im[413] = 32'hxxxxxxxx;   // 413 -0.821 -0.571
+assign  wn_re[414] = 32'h9673DB94;   assign  wn_im[414] = 32'hB796199B;   // 414 -0.825 -0.566
+assign  wn_re[415] = 32'hxxxxxxxx;   assign  wn_im[415] = 32'hxxxxxxxx;   // 415 -0.828 -0.561
+assign  wn_re[416] = 32'h9592675C;   assign  wn_im[416] = 32'hB8E31319;   // 416 -0.831 -0.556
+assign  wn_re[417] = 32'h9523369C;   assign  wn_im[417] = 32'hB98A97D8;   // 417 -0.835 -0.550
+assign  wn_re[418] = 32'h94B50D87;   assign  wn_im[418] = 32'hBA32CA71;   // 418 -0.838 -0.545
+assign  wn_re[419] = 32'hxxxxxxxx;   assign  wn_im[419] = 32'hxxxxxxxx;   // 419 -0.842 -0.540
+assign  wn_re[420] = 32'h93DBD6A0;   assign  wn_im[420] = 32'hBB8532B0;   // 420 -0.845 -0.535
+assign  wn_re[421] = 32'hxxxxxxxx;   assign  wn_im[421] = 32'hxxxxxxxx;   // 421 -0.848 -0.530
+assign  wn_re[422] = 32'h9306CB04;   assign  wn_im[422] = 32'hBCDA3ECB;   // 422 -0.851 -0.525
+assign  wn_re[423] = 32'h929DD806;   assign  wn_im[423] = 32'hBD85BE30;   // 423 -0.855 -0.519
+assign  wn_re[424] = 32'h9235F2EC;   assign  wn_im[424] = 32'hBE31E19B;   // 424 -0.858 -0.514
+assign  wn_re[425] = 32'hxxxxxxxx;   assign  wn_im[425] = 32'hxxxxxxxx;   // 425 -0.861 -0.509
+assign  wn_re[426] = 32'h91695663;   assign  wn_im[426] = 32'hBF8C0DE3;   // 426 -0.864 -0.504
+assign  wn_re[427] = 32'hxxxxxxxx;   assign  wn_im[427] = 32'hxxxxxxxx;   // 427 -0.867 -0.498
+assign  wn_re[428] = 32'h90A0FD4E;   assign  wn_im[428] = 32'hC0E8B648;   // 428 -0.870 -0.493
+assign  wn_re[429] = 32'h903E6C7B;   assign  wn_im[429] = 32'hC197F4D4;   // 429 -0.873 -0.488
+assign  wn_re[430] = 32'h8FDCEF66;   assign  wn_im[430] = 32'hC247CD5A;   // 430 -0.876 -0.482
+assign  wn_re[431] = 32'hxxxxxxxx;   assign  wn_im[431] = 32'hxxxxxxxx;   // 431 -0.879 -0.477
+assign  wn_re[432] = 32'h8F1D343A;   assign  wn_im[432] = 32'hC3A94590;   // 432 -0.882 -0.471
+assign  wn_re[433] = 32'hxxxxxxxx;   assign  wn_im[433] = 32'hxxxxxxxx;   // 433 -0.885 -0.466
+assign  wn_re[434] = 32'h8E61D32E;   assign  wn_im[434] = 32'hC50D1149;   // 434 -0.888 -0.461
+assign  wn_re[435] = 32'h8E05C6B7;   assign  wn_im[435] = 32'hC5BFD22E;   // 435 -0.890 -0.455
+assign  wn_re[436] = 32'h8DAAD37B;   assign  wn_im[436] = 32'hC67322CE;   // 436 -0.893 -0.450
+assign  wn_re[437] = 32'hxxxxxxxx;   assign  wn_im[437] = 32'hxxxxxxxx;   // 437 -0.896 -0.444
+assign  wn_re[438] = 32'h8CF83C30;   assign  wn_im[438] = 32'hC7DB6C50;   // 438 -0.899 -0.439
+assign  wn_re[439] = 32'hxxxxxxxx;   assign  wn_im[439] = 32'hxxxxxxxx;   // 439 -0.901 -0.433
+assign  wn_re[440] = 32'h8C4A142F;   assign  wn_im[440] = 32'hC945DFEC;   // 440 -0.904 -0.428
+assign  wn_re[441] = 32'h8BF4AC05;   assign  wn_im[441] = 32'hC9FBE527;   // 441 -0.907 -0.422
+assign  wn_re[442] = 32'h8BA0622F;   assign  wn_im[442] = 32'hCAB26FA9;   // 442 -0.909 -0.416
+assign  wn_re[443] = 32'hxxxxxxxx;   assign  wn_im[443] = 32'hxxxxxxxx;   // 443 -0.912 -0.411
+assign  wn_re[444] = 32'h8AFB2CBB;   assign  wn_im[444] = 32'hCC210D79;   // 444 -0.914 -0.405
+assign  wn_re[445] = 32'hxxxxxxxx;   assign  wn_im[445] = 32'hxxxxxxxx;   // 445 -0.917 -0.400
+assign  wn_re[446] = 32'h8A5A7A31;   assign  wn_im[446] = 32'hCD91AB39;   // 446 -0.919 -0.394
+assign  wn_re[447] = 32'h8A0BD3F5;   assign  wn_im[447] = 32'hCE4AB5A2;   // 447 -0.922 -0.388
+assign  wn_re[448] = 32'h89BE50C3;   assign  wn_im[448] = 32'hCF043AB3;   // 448 -0.924 -0.383
+assign  wn_re[449] = 32'hxxxxxxxx;   assign  wn_im[449] = 32'hxxxxxxxx;   // 449 -0.926 -0.377
+assign  wn_re[450] = 32'h8926B677;   assign  wn_im[450] = 32'hD078AD9E;   // 450 -0.929 -0.371
+assign  wn_re[451] = 32'hxxxxxxxx;   assign  wn_im[451] = 32'hxxxxxxxx;   // 451 -0.931 -0.366
+assign  wn_re[452] = 32'h8893B125;   assign  wn_im[452] = 32'hD1EEF59E;   // 452 -0.933 -0.360
+assign  wn_re[453] = 32'h884BE821;   assign  wn_im[453] = 32'hD2AAC504;   // 453 -0.935 -0.354
+assign  wn_re[454] = 32'h88054677;   assign  wn_im[454] = 32'hD3670446;   // 454 -0.937 -0.348
+assign  wn_re[455] = 32'hxxxxxxxx;   assign  wn_im[455] = 32'hxxxxxxxx;   // 455 -0.939 -0.343
+assign  wn_re[456] = 32'h877B7BEC;   assign  wn_im[456] = 32'hD4E0CB15;   // 456 -0.942 -0.337
+assign  wn_re[457] = 32'hxxxxxxxx;   assign  wn_im[457] = 32'hxxxxxxxx;   // 457 -0.944 -0.331
+assign  wn_re[458] = 32'h86F656D3;   assign  wn_im[458] = 32'hD65C3B7B;   // 458 -0.946 -0.325
+assign  wn_re[459] = 32'h86B583EE;   assign  wn_im[459] = 32'hD71A8EB5;   // 459 -0.948 -0.320
+assign  wn_re[460] = 32'h8675DC4F;   assign  wn_im[460] = 32'hD7D946D8;   // 460 -0.950 -0.314
+assign  wn_re[461] = 32'hxxxxxxxx;   assign  wn_im[461] = 32'hxxxxxxxx;   // 461 -0.951 -0.308
+assign  wn_re[462] = 32'h85FA1153;   assign  wn_im[462] = 32'hD957DE7A;   // 462 -0.953 -0.302
+assign  wn_re[463] = 32'hxxxxxxxx;   assign  wn_im[463] = 32'hxxxxxxxx;   // 463 -0.955 -0.296
+assign  wn_re[464] = 32'h8582FAA5;   assign  wn_im[464] = 32'hDAD7F3A2;   // 464 -0.957 -0.290
+assign  wn_re[465] = 32'h8549345C;   assign  wn_im[465] = 32'hDB9888A8;   // 465 -0.959 -0.284
+assign  wn_re[466] = 32'h85109CDD;   assign  wn_im[466] = 32'hDC597781;   // 466 -0.960 -0.279
+assign  wn_re[467] = 32'hxxxxxxxx;   assign  wn_im[467] = 32'hxxxxxxxx;   // 467 -0.962 -0.273
+assign  wn_re[468] = 32'h84A2FC62;   assign  wn_im[468] = 32'hDDDC5B3B;   // 468 -0.964 -0.267
+assign  wn_re[469] = 32'hxxxxxxxx;   assign  wn_im[469] = 32'hxxxxxxxx;   // 469 -0.965 -0.261
+assign  wn_re[470] = 32'h843A1D70;   assign  wn_im[470] = 32'hDF608FE4;   // 470 -0.967 -0.255
+assign  wn_re[471] = 32'h840777D0;   assign  wn_im[471] = 32'hE02323E5;   // 471 -0.969 -0.249
+assign  wn_re[472] = 32'h83D60412;   assign  wn_im[472] = 32'hE0E60685;   // 472 -0.970 -0.243
+assign  wn_re[473] = 32'hxxxxxxxx;   assign  wn_im[473] = 32'hxxxxxxxx;   // 473 -0.972 -0.237
+assign  wn_re[474] = 32'h8376B422;   assign  wn_im[474] = 32'hE26CB01B;   // 474 -0.973 -0.231
+assign  wn_re[475] = 32'hxxxxxxxx;   assign  wn_im[475] = 32'hxxxxxxxx;   // 475 -0.974 -0.225
+assign  wn_re[476] = 32'h831C314E;   assign  wn_im[476] = 32'hE3F47D96;   // 476 -0.976 -0.219
+assign  wn_re[477] = 32'h82F0BDE8;   assign  wn_im[477] = 32'hE4B8CD11;   // 477 -0.977 -0.213
+assign  wn_re[478] = 32'h82C67F14;   assign  wn_im[478] = 32'hE57D5FDA;   // 478 -0.978 -0.207
+assign  wn_re[479] = 32'hxxxxxxxx;   assign  wn_im[479] = 32'hxxxxxxxx;   // 479 -0.980 -0.201
+assign  wn_re[480] = 32'h8275A0C0;   assign  wn_im[480] = 32'hE70747C4;   // 480 -0.981 -0.195
+assign  wn_re[481] = 32'hxxxxxxxx;   assign  wn_im[481] = 32'hxxxxxxxx;   // 481 -0.982 -0.189
+assign  wn_re[482] = 32'h82299971;   assign  wn_im[482] = 32'hE8922622;   // 482 -0.983 -0.183
+assign  wn_re[483] = 32'h82056758;   assign  wn_im[483] = 32'hE957ECFB;   // 483 -0.984 -0.177
+assign  wn_re[484] = 32'h81E26C16;   assign  wn_im[484] = 32'hEA1DEBBB;   // 484 -0.985 -0.171
+assign  wn_re[485] = 32'hxxxxxxxx;   assign  wn_im[485] = 32'hxxxxxxxx;   // 485 -0.986 -0.165
+assign  wn_re[486] = 32'h81A01B6D;   assign  wn_im[486] = 32'hEBAA894F;   // 486 -0.987 -0.159
+assign  wn_re[487] = 32'hxxxxxxxx;   assign  wn_im[487] = 32'hxxxxxxxx;   // 487 -0.988 -0.153
+assign  wn_re[488] = 32'h8162AA04;   assign  wn_im[488] = 32'hED37EF91;   // 488 -0.989 -0.147
+assign  wn_re[489] = 32'h8145C5C7;   assign  wn_im[489] = 32'hEDFEE92B;   // 489 -0.990 -0.141
+assign  wn_re[490] = 32'h812A1A3A;   assign  wn_im[490] = 32'hEEC60F31;   // 490 -0.991 -0.135
+assign  wn_re[491] = 32'hxxxxxxxx;   assign  wn_im[491] = 32'hxxxxxxxx;   // 491 -0.992 -0.128
+assign  wn_re[492] = 32'h80F66E3C;   assign  wn_im[492] = 32'hF054D8D5;   // 492 -0.992 -0.122
+assign  wn_re[493] = 32'hxxxxxxxx;   assign  wn_im[493] = 32'hxxxxxxxx;   // 493 -0.993 -0.116
+assign  wn_re[494] = 32'h80C7A80A;   assign  wn_im[494] = 32'hF1E43D1C;   // 494 -0.994 -0.110
+assign  wn_re[495] = 32'h80B21BAF;   assign  wn_im[495] = 32'hF2AC246E;   // 495 -0.995 -0.104
+assign  wn_re[496] = 32'h809DC971;   assign  wn_im[496] = 32'hF3742CA2;   // 496 -0.995 -0.098
+assign  wn_re[497] = 32'hxxxxxxxx;   assign  wn_im[497] = 32'hxxxxxxxx;   // 497 -0.996 -0.092
+assign  wn_re[498] = 32'h8078D40D;   assign  wn_im[498] = 32'hF50497FB;   // 498 -0.996 -0.086
+assign  wn_re[499] = 32'hxxxxxxxx;   assign  wn_im[499] = 32'hxxxxxxxx;   // 499 -0.997 -0.080
+assign  wn_re[500] = 32'h8058C94C;   assign  wn_im[500] = 32'hF6956FB7;   // 500 -0.997 -0.074
+assign  wn_re[501] = 32'h804A9C4D;   assign  wn_im[501] = 32'hF75DFF66;   // 501 -0.998 -0.067
+assign  wn_re[502] = 32'h803DAA6A;   assign  wn_im[502] = 32'hF826A462;   // 502 -0.998 -0.061
+assign  wn_re[503] = 32'hxxxxxxxx;   assign  wn_im[503] = 32'hxxxxxxxx;   // 503 -0.998 -0.055
+assign  wn_re[504] = 32'h80277872;   assign  wn_im[504] = 32'hF9B82684;   // 504 -0.999 -0.049
+assign  wn_re[505] = 32'hxxxxxxxx;   assign  wn_im[505] = 32'hxxxxxxxx;   // 505 -0.999 -0.043
+assign  wn_re[506] = 32'h80163440;   assign  wn_im[506] = 32'hFB49E6A3;   // 506 -0.999 -0.037
+assign  wn_re[507] = 32'h800F6B88;   assign  wn_im[507] = 32'hFC12D91A;   // 507 -1.000 -0.031
+assign  wn_re[508] = 32'h8009DE7E;   assign  wn_im[508] = 32'hFCDBD541;   // 508 -1.000 -0.025
+assign  wn_re[509] = 32'hxxxxxxxx;   assign  wn_im[509] = 32'hxxxxxxxx;   // 509 -1.000 -0.018
+assign  wn_re[510] = 32'h800277A6;   assign  wn_im[510] = 32'hFE6DE2E0;   // 510 -1.000 -0.012
+assign  wn_re[511] = 32'hxxxxxxxx;   assign  wn_im[511] = 32'hxxxxxxxx;   // 511 -1.000 -0.006
+assign  wn_re[512] = 32'hxxxxxxxx;   assign  wn_im[512] = 32'hxxxxxxxx;   // 512 -1.000 -0.000
+assign  wn_re[513] = 32'h80009DEA;   assign  wn_im[513] = 32'h00C90F88;   // 513 -1.000  0.006
+assign  wn_re[514] = 32'hxxxxxxxx;   assign  wn_im[514] = 32'hxxxxxxxx;   // 514 -1.000  0.012
+assign  wn_re[515] = 32'hxxxxxxxx;   assign  wn_im[515] = 32'hxxxxxxxx;   // 515 -1.000  0.018
+assign  wn_re[516] = 32'h8009DE7E;   assign  wn_im[516] = 32'h03242ABF;   // 516 -1.000  0.025
+assign  wn_re[517] = 32'hxxxxxxxx;   assign  wn_im[517] = 32'hxxxxxxxx;   // 517 -1.000  0.031
+assign  wn_re[518] = 32'hxxxxxxxx;   assign  wn_im[518] = 32'hxxxxxxxx;   // 518 -0.999  0.037
+assign  wn_re[519] = 32'h801E3895;   assign  wn_im[519] = 32'h057F0035;   // 519 -0.999  0.043
+assign  wn_re[520] = 32'hxxxxxxxx;   assign  wn_im[520] = 32'hxxxxxxxx;   // 520 -0.999  0.049
+assign  wn_re[521] = 32'hxxxxxxxx;   assign  wn_im[521] = 32'hxxxxxxxx;   // 521 -0.998  0.055
+assign  wn_re[522] = 32'h803DAA6A;   assign  wn_im[522] = 32'h07D95B9E;   // 522 -0.998  0.061
+assign  wn_re[523] = 32'hxxxxxxxx;   assign  wn_im[523] = 32'hxxxxxxxx;   // 523 -0.998  0.067
+assign  wn_re[524] = 32'hxxxxxxxx;   assign  wn_im[524] = 32'hxxxxxxxx;   // 524 -0.997  0.074
+assign  wn_re[525] = 32'h80683143;   assign  wn_im[525] = 32'h0A3308BD;   // 525 -0.997  0.080
+assign  wn_re[526] = 32'hxxxxxxxx;   assign  wn_im[526] = 32'hxxxxxxxx;   // 526 -0.996  0.086
+assign  wn_re[527] = 32'hxxxxxxxx;   assign  wn_im[527] = 32'hxxxxxxxx;   // 527 -0.996  0.092
+assign  wn_re[528] = 32'h809DC971;   assign  wn_im[528] = 32'h0C8BD35E;   // 528 -0.995  0.098
+assign  wn_re[529] = 32'hxxxxxxxx;   assign  wn_im[529] = 32'hxxxxxxxx;   // 529 -0.995  0.104
+assign  wn_re[530] = 32'hxxxxxxxx;   assign  wn_im[530] = 32'hxxxxxxxx;   // 530 -0.994  0.110
+assign  wn_re[531] = 32'h80DE6E4C;   assign  wn_im[531] = 32'h0EE38766;   // 531 -0.993  0.116
+assign  wn_re[532] = 32'hxxxxxxxx;   assign  wn_im[532] = 32'hxxxxxxxx;   // 532 -0.992  0.122
+assign  wn_re[533] = 32'hxxxxxxxx;   assign  wn_im[533] = 32'hxxxxxxxx;   // 533 -0.992  0.128
+assign  wn_re[534] = 32'h812A1A3A;   assign  wn_im[534] = 32'h1139F0CF;   // 534 -0.991  0.135
+assign  wn_re[535] = 32'hxxxxxxxx;   assign  wn_im[535] = 32'hxxxxxxxx;   // 535 -0.990  0.141
+assign  wn_re[536] = 32'hxxxxxxxx;   assign  wn_im[536] = 32'hxxxxxxxx;   // 536 -0.989  0.147
+assign  wn_re[537] = 32'h8180C6A9;   assign  wn_im[537] = 32'h138EDBB1;   // 537 -0.988  0.153
+assign  wn_re[538] = 32'hxxxxxxxx;   assign  wn_im[538] = 32'hxxxxxxxx;   // 538 -0.987  0.159
+assign  wn_re[539] = 32'hxxxxxxxx;   assign  wn_im[539] = 32'hxxxxxxxx;   // 539 -0.986  0.165
+assign  wn_re[540] = 32'h81E26C16;   assign  wn_im[540] = 32'h15E21445;   // 540 -0.985  0.171
+assign  wn_re[541] = 32'hxxxxxxxx;   assign  wn_im[541] = 32'hxxxxxxxx;   // 541 -0.984  0.177
+assign  wn_re[542] = 32'hxxxxxxxx;   assign  wn_im[542] = 32'hxxxxxxxx;   // 542 -0.983  0.183
+assign  wn_re[543] = 32'h824F0208;   assign  wn_im[543] = 32'h183366E9;   // 543 -0.982  0.189
+assign  wn_re[544] = 32'hxxxxxxxx;   assign  wn_im[544] = 32'hxxxxxxxx;   // 544 -0.981  0.195
+assign  wn_re[545] = 32'hxxxxxxxx;   assign  wn_im[545] = 32'hxxxxxxxx;   // 545 -0.980  0.201
+assign  wn_re[546] = 32'h82C67F14;   assign  wn_im[546] = 32'h1A82A026;   // 546 -0.978  0.207
+assign  wn_re[547] = 32'hxxxxxxxx;   assign  wn_im[547] = 32'hxxxxxxxx;   // 547 -0.977  0.213
+assign  wn_re[548] = 32'hxxxxxxxx;   assign  wn_im[548] = 32'hxxxxxxxx;   // 548 -0.976  0.219
+assign  wn_re[549] = 32'h8348D8DC;   assign  wn_im[549] = 32'h1CCF8CB3;   // 549 -0.974  0.225
+assign  wn_re[550] = 32'hxxxxxxxx;   assign  wn_im[550] = 32'hxxxxxxxx;   // 550 -0.973  0.231
+assign  wn_re[551] = 32'hxxxxxxxx;   assign  wn_im[551] = 32'hxxxxxxxx;   // 551 -0.972  0.237
+assign  wn_re[552] = 32'h83D60412;   assign  wn_im[552] = 32'h1F19F97B;   // 552 -0.970  0.243
+assign  wn_re[553] = 32'hxxxxxxxx;   assign  wn_im[553] = 32'hxxxxxxxx;   // 553 -0.969  0.249
+assign  wn_re[554] = 32'hxxxxxxxx;   assign  wn_im[554] = 32'hxxxxxxxx;   // 554 -0.967  0.255
+assign  wn_re[555] = 32'h846DF477;   assign  wn_im[555] = 32'h2161B3A0;   // 555 -0.965  0.261
+assign  wn_re[556] = 32'hxxxxxxxx;   assign  wn_im[556] = 32'hxxxxxxxx;   // 556 -0.964  0.267
+assign  wn_re[557] = 32'hxxxxxxxx;   assign  wn_im[557] = 32'hxxxxxxxx;   // 557 -0.962  0.273
+assign  wn_re[558] = 32'h85109CDD;   assign  wn_im[558] = 32'h23A6887F;   // 558 -0.960  0.279
+assign  wn_re[559] = 32'hxxxxxxxx;   assign  wn_im[559] = 32'hxxxxxxxx;   // 559 -0.959  0.284
+assign  wn_re[560] = 32'hxxxxxxxx;   assign  wn_im[560] = 32'hxxxxxxxx;   // 560 -0.957  0.290
+assign  wn_re[561] = 32'h85BDEF28;   assign  wn_im[561] = 32'h25E845B6;   // 561 -0.955  0.296
+assign  wn_re[562] = 32'hxxxxxxxx;   assign  wn_im[562] = 32'hxxxxxxxx;   // 562 -0.953  0.302
+assign  wn_re[563] = 32'hxxxxxxxx;   assign  wn_im[563] = 32'hxxxxxxxx;   // 563 -0.951  0.308
+assign  wn_re[564] = 32'h8675DC4F;   assign  wn_im[564] = 32'h2826B928;   // 564 -0.950  0.314
+assign  wn_re[565] = 32'hxxxxxxxx;   assign  wn_im[565] = 32'hxxxxxxxx;   // 565 -0.948  0.320
+assign  wn_re[566] = 32'hxxxxxxxx;   assign  wn_im[566] = 32'hxxxxxxxx;   // 566 -0.946  0.325
+assign  wn_re[567] = 32'h8738545E;   assign  wn_im[567] = 32'h2A61B101;   // 567 -0.944  0.331
+assign  wn_re[568] = 32'hxxxxxxxx;   assign  wn_im[568] = 32'hxxxxxxxx;   // 568 -0.942  0.337
+assign  wn_re[569] = 32'hxxxxxxxx;   assign  wn_im[569] = 32'hxxxxxxxx;   // 569 -0.939  0.343
+assign  wn_re[570] = 32'h88054677;   assign  wn_im[570] = 32'h2C98FBBA;   // 570 -0.937  0.348
+assign  wn_re[571] = 32'hxxxxxxxx;   assign  wn_im[571] = 32'hxxxxxxxx;   // 571 -0.935  0.354
+assign  wn_re[572] = 32'hxxxxxxxx;   assign  wn_im[572] = 32'hxxxxxxxx;   // 572 -0.933  0.360
+assign  wn_re[573] = 32'h88DCA0D3;   assign  wn_im[573] = 32'h2ECC681E;   // 573 -0.931  0.366
+assign  wn_re[574] = 32'hxxxxxxxx;   assign  wn_im[574] = 32'hxxxxxxxx;   // 574 -0.929  0.371
+assign  wn_re[575] = 32'hxxxxxxxx;   assign  wn_im[575] = 32'hxxxxxxxx;   // 575 -0.926  0.377
+assign  wn_re[576] = 32'h89BE50C3;   assign  wn_im[576] = 32'h30FBC54D;   // 576 -0.924  0.383
+assign  wn_re[577] = 32'hxxxxxxxx;   assign  wn_im[577] = 32'hxxxxxxxx;   // 577 -0.922  0.388
+assign  wn_re[578] = 32'hxxxxxxxx;   assign  wn_im[578] = 32'hxxxxxxxx;   // 578 -0.919  0.394
+assign  wn_re[579] = 32'h8AAA42B4;   assign  wn_im[579] = 32'h3326E2C3;   // 579 -0.917  0.400
+assign  wn_re[580] = 32'hxxxxxxxx;   assign  wn_im[580] = 32'hxxxxxxxx;   // 580 -0.914  0.405
+assign  wn_re[581] = 32'hxxxxxxxx;   assign  wn_im[581] = 32'hxxxxxxxx;   // 581 -0.912  0.411
+assign  wn_re[582] = 32'h8BA0622F;   assign  wn_im[582] = 32'h354D9057;   // 582 -0.909  0.416
+assign  wn_re[583] = 32'hxxxxxxxx;   assign  wn_im[583] = 32'hxxxxxxxx;   // 583 -0.907  0.422
+assign  wn_re[584] = 32'hxxxxxxxx;   assign  wn_im[584] = 32'hxxxxxxxx;   // 584 -0.904  0.428
+assign  wn_re[585] = 32'h8CA099DA;   assign  wn_im[585] = 32'h376F9E46;   // 585 -0.901  0.433
+assign  wn_re[586] = 32'hxxxxxxxx;   assign  wn_im[586] = 32'hxxxxxxxx;   // 586 -0.899  0.439
+assign  wn_re[587] = 32'hxxxxxxxx;   assign  wn_im[587] = 32'hxxxxxxxx;   // 587 -0.896  0.444
+assign  wn_re[588] = 32'h8DAAD37B;   assign  wn_im[588] = 32'h398CDD32;   // 588 -0.893  0.450
+assign  wn_re[589] = 32'hxxxxxxxx;   assign  wn_im[589] = 32'hxxxxxxxx;   // 589 -0.890  0.455
+assign  wn_re[590] = 32'hxxxxxxxx;   assign  wn_im[590] = 32'hxxxxxxxx;   // 590 -0.888  0.461
+assign  wn_re[591] = 32'h8EBEF7FB;   assign  wn_im[591] = 32'h3BA51E29;   // 591 -0.885  0.466
+assign  wn_re[592] = 32'hxxxxxxxx;   assign  wn_im[592] = 32'hxxxxxxxx;   // 592 -0.882  0.471
+assign  wn_re[593] = 32'hxxxxxxxx;   assign  wn_im[593] = 32'hxxxxxxxx;   // 593 -0.879  0.477
+assign  wn_re[594] = 32'h8FDCEF66;   assign  wn_im[594] = 32'h3DB832A6;   // 594 -0.876  0.482
+assign  wn_re[595] = 32'hxxxxxxxx;   assign  wn_im[595] = 32'hxxxxxxxx;   // 595 -0.873  0.488
+assign  wn_re[596] = 32'hxxxxxxxx;   assign  wn_im[596] = 32'hxxxxxxxx;   // 596 -0.870  0.493
+assign  wn_re[597] = 32'h9104A0EE;   assign  wn_im[597] = 32'h3FC5EC98;   // 597 -0.867  0.498
+assign  wn_re[598] = 32'hxxxxxxxx;   assign  wn_im[598] = 32'hxxxxxxxx;   // 598 -0.864  0.504
+assign  wn_re[599] = 32'hxxxxxxxx;   assign  wn_im[599] = 32'hxxxxxxxx;   // 599 -0.861  0.509
+assign  wn_re[600] = 32'h9235F2EC;   assign  wn_im[600] = 32'h41CE1E65;   // 600 -0.858  0.514
+assign  wn_re[601] = 32'hxxxxxxxx;   assign  wn_im[601] = 32'hxxxxxxxx;   // 601 -0.855  0.519
+assign  wn_re[602] = 32'hxxxxxxxx;   assign  wn_im[602] = 32'hxxxxxxxx;   // 602 -0.851  0.525
+assign  wn_re[603] = 32'h9370CAE4;   assign  wn_im[603] = 32'h43D09AED;   // 603 -0.848  0.530
+assign  wn_re[604] = 32'hxxxxxxxx;   assign  wn_im[604] = 32'hxxxxxxxx;   // 604 -0.845  0.535
+assign  wn_re[605] = 32'hxxxxxxxx;   assign  wn_im[605] = 32'hxxxxxxxx;   // 605 -0.842  0.540
+assign  wn_re[606] = 32'h94B50D87;   assign  wn_im[606] = 32'h45CD358F;   // 606 -0.838  0.545
+assign  wn_re[607] = 32'hxxxxxxxx;   assign  wn_im[607] = 32'hxxxxxxxx;   // 607 -0.835  0.550
+assign  wn_re[608] = 32'hxxxxxxxx;   assign  wn_im[608] = 32'hxxxxxxxx;   // 608 -0.831  0.556
+assign  wn_re[609] = 32'h96029EB6;   assign  wn_im[609] = 32'h47C3C22F;   // 609 -0.828  0.561
+assign  wn_re[610] = 32'hxxxxxxxx;   assign  wn_im[610] = 32'hxxxxxxxx;   // 610 -0.825  0.566
+assign  wn_re[611] = 32'hxxxxxxxx;   assign  wn_im[611] = 32'hxxxxxxxx;   // 611 -0.821  0.571
+assign  wn_re[612] = 32'h9759617F;   assign  wn_im[612] = 32'h49B41533;   // 612 -0.818  0.576
+assign  wn_re[613] = 32'hxxxxxxxx;   assign  wn_im[613] = 32'hxxxxxxxx;   // 613 -0.814  0.581
+assign  wn_re[614] = 32'hxxxxxxxx;   assign  wn_im[614] = 32'hxxxxxxxx;   // 614 -0.810  0.586
+assign  wn_re[615] = 32'h98B93828;   assign  wn_im[615] = 32'h4B9E0390;   // 615 -0.807  0.591
+assign  wn_re[616] = 32'hxxxxxxxx;   assign  wn_im[616] = 32'hxxxxxxxx;   // 616 -0.803  0.596
+assign  wn_re[617] = 32'hxxxxxxxx;   assign  wn_im[617] = 32'hxxxxxxxx;   // 617 -0.800  0.601
+assign  wn_re[618] = 32'h9A22042D;   assign  wn_im[618] = 32'h4D8162C4;   // 618 -0.796  0.606
+assign  wn_re[619] = 32'hxxxxxxxx;   assign  wn_im[619] = 32'hxxxxxxxx;   // 619 -0.792  0.610
+assign  wn_re[620] = 32'hxxxxxxxx;   assign  wn_im[620] = 32'hxxxxxxxx;   // 620 -0.788  0.615
+assign  wn_re[621] = 32'h9B93A641;   assign  wn_im[621] = 32'h4F5E08E3;   // 621 -0.785  0.620
+assign  wn_re[622] = 32'hxxxxxxxx;   assign  wn_im[622] = 32'hxxxxxxxx;   // 622 -0.781  0.625
+assign  wn_re[623] = 32'hxxxxxxxx;   assign  wn_im[623] = 32'hxxxxxxxx;   // 623 -0.777  0.630
+assign  wn_re[624] = 32'h9D0DFE54;   assign  wn_im[624] = 32'h5133CC94;   // 624 -0.773  0.634
+assign  wn_re[625] = 32'hxxxxxxxx;   assign  wn_im[625] = 32'hxxxxxxxx;   // 625 -0.769  0.639
+assign  wn_re[626] = 32'hxxxxxxxx;   assign  wn_im[626] = 32'hxxxxxxxx;   // 626 -0.765  0.644
+assign  wn_re[627] = 32'h9E90EB94;   assign  wn_im[627] = 32'h53028518;   // 627 -0.761  0.649
+assign  wn_re[628] = 32'hxxxxxxxx;   assign  wn_im[628] = 32'hxxxxxxxx;   // 628 -0.757  0.653
+assign  wn_re[629] = 32'hxxxxxxxx;   assign  wn_im[629] = 32'hxxxxxxxx;   // 629 -0.753  0.658
+assign  wn_re[630] = 32'hA01C4C73;   assign  wn_im[630] = 32'h54CA0A4B;   // 630 -0.749  0.662
+assign  wn_re[631] = 32'hxxxxxxxx;   assign  wn_im[631] = 32'hxxxxxxxx;   // 631 -0.745  0.667
+assign  wn_re[632] = 32'hxxxxxxxx;   assign  wn_im[632] = 32'hxxxxxxxx;   // 632 -0.741  0.672
+assign  wn_re[633] = 32'hA1AFFEA3;   assign  wn_im[633] = 32'h568A34A9;   // 633 -0.737  0.676
+assign  wn_re[634] = 32'hxxxxxxxx;   assign  wn_im[634] = 32'hxxxxxxxx;   // 634 -0.733  0.681
+assign  wn_re[635] = 32'hxxxxxxxx;   assign  wn_im[635] = 32'hxxxxxxxx;   // 635 -0.728  0.685
+assign  wn_re[636] = 32'hA34BDF20;   assign  wn_im[636] = 32'h5842DD54;   // 636 -0.724  0.690
+assign  wn_re[637] = 32'hxxxxxxxx;   assign  wn_im[637] = 32'hxxxxxxxx;   // 637 -0.720  0.694
+assign  wn_re[638] = 32'hxxxxxxxx;   assign  wn_im[638] = 32'hxxxxxxxx;   // 638 -0.716  0.698
+assign  wn_re[639] = 32'hA4EFCA31;   assign  wn_im[639] = 32'h59F3DE12;   // 639 -0.711  0.703
+assign  wn_re[640] = 32'hxxxxxxxx;   assign  wn_im[640] = 32'hxxxxxxxx;   // 640 -0.707  0.707
+assign  wn_re[641] = 32'hxxxxxxxx;   assign  wn_im[641] = 32'hxxxxxxxx;   // 641 -0.703  0.711
+assign  wn_re[642] = 32'hA69B9B68;   assign  wn_im[642] = 32'h5B9D1154;   // 642 -0.698  0.716
+assign  wn_re[643] = 32'hxxxxxxxx;   assign  wn_im[643] = 32'hxxxxxxxx;   // 643 -0.694  0.720
+assign  wn_re[644] = 32'hxxxxxxxx;   assign  wn_im[644] = 32'hxxxxxxxx;   // 644 -0.690  0.724
+assign  wn_re[645] = 32'hA84F2DAA;   assign  wn_im[645] = 32'h5D3E5237;   // 645 -0.685  0.728
+assign  wn_re[646] = 32'hxxxxxxxx;   assign  wn_im[646] = 32'hxxxxxxxx;   // 646 -0.681  0.733
+assign  wn_re[647] = 32'hxxxxxxxx;   assign  wn_im[647] = 32'hxxxxxxxx;   // 647 -0.676  0.737
+assign  wn_re[648] = 32'hAA0A5B2E;   assign  wn_im[648] = 32'h5ED77C8A;   // 648 -0.672  0.741
+assign  wn_re[649] = 32'hxxxxxxxx;   assign  wn_im[649] = 32'hxxxxxxxx;   // 649 -0.667  0.745
+assign  wn_re[650] = 32'hxxxxxxxx;   assign  wn_im[650] = 32'hxxxxxxxx;   // 650 -0.662  0.749
+assign  wn_re[651] = 32'hABCCFD83;   assign  wn_im[651] = 32'h60686CCF;   // 651 -0.658  0.753
+assign  wn_re[652] = 32'hxxxxxxxx;   assign  wn_im[652] = 32'hxxxxxxxx;   // 652 -0.653  0.757
+assign  wn_re[653] = 32'hxxxxxxxx;   assign  wn_im[653] = 32'hxxxxxxxx;   // 653 -0.649  0.761
+assign  wn_re[654] = 32'hAD96ED92;   assign  wn_im[654] = 32'h61F1003F;   // 654 -0.644  0.765
+assign  wn_re[655] = 32'hxxxxxxxx;   assign  wn_im[655] = 32'hxxxxxxxx;   // 655 -0.639  0.769
+assign  wn_re[656] = 32'hxxxxxxxx;   assign  wn_im[656] = 32'hxxxxxxxx;   // 656 -0.634  0.773
+assign  wn_re[657] = 32'hAF6803A2;   assign  wn_im[657] = 32'h637114CC;   // 657 -0.630  0.777
+assign  wn_re[658] = 32'hxxxxxxxx;   assign  wn_im[658] = 32'hxxxxxxxx;   // 658 -0.625  0.781
+assign  wn_re[659] = 32'hxxxxxxxx;   assign  wn_im[659] = 32'hxxxxxxxx;   // 659 -0.620  0.785
+assign  wn_re[660] = 32'hB140175B;   assign  wn_im[660] = 32'h64E88926;   // 660 -0.615  0.788
+assign  wn_re[661] = 32'hxxxxxxxx;   assign  wn_im[661] = 32'hxxxxxxxx;   // 661 -0.610  0.792
+assign  wn_re[662] = 32'hxxxxxxxx;   assign  wn_im[662] = 32'hxxxxxxxx;   // 662 -0.606  0.796
+assign  wn_re[663] = 32'hB31EFFCC;   assign  wn_im[663] = 32'h66573CBB;   // 663 -0.601  0.800
+assign  wn_re[664] = 32'hxxxxxxxx;   assign  wn_im[664] = 32'hxxxxxxxx;   // 664 -0.596  0.803
+assign  wn_re[665] = 32'hxxxxxxxx;   assign  wn_im[665] = 32'hxxxxxxxx;   // 665 -0.591  0.807
+assign  wn_re[666] = 32'hB5049368;   assign  wn_im[666] = 32'h67BD0FBD;   // 666 -0.586  0.810
+assign  wn_re[667] = 32'hxxxxxxxx;   assign  wn_im[667] = 32'hxxxxxxxx;   // 667 -0.581  0.814
+assign  wn_re[668] = 32'hxxxxxxxx;   assign  wn_im[668] = 32'hxxxxxxxx;   // 668 -0.576  0.818
+assign  wn_re[669] = 32'hB6F0A812;   assign  wn_im[669] = 32'h6919E320;   // 669 -0.571  0.821
+assign  wn_re[670] = 32'hxxxxxxxx;   assign  wn_im[670] = 32'hxxxxxxxx;   // 670 -0.566  0.825
+assign  wn_re[671] = 32'hxxxxxxxx;   assign  wn_im[671] = 32'hxxxxxxxx;   // 671 -0.561  0.828
+assign  wn_re[672] = 32'hB8E31319;   assign  wn_im[672] = 32'h6A6D98A4;   // 672 -0.556  0.831
+assign  wn_re[673] = 32'hxxxxxxxx;   assign  wn_im[673] = 32'hxxxxxxxx;   // 673 -0.550  0.835
+assign  wn_re[674] = 32'hxxxxxxxx;   assign  wn_im[674] = 32'hxxxxxxxx;   // 674 -0.545  0.838
+assign  wn_re[675] = 32'hBADBA943;   assign  wn_im[675] = 32'h6BB812D1;   // 675 -0.540  0.842
+assign  wn_re[676] = 32'hxxxxxxxx;   assign  wn_im[676] = 32'hxxxxxxxx;   // 676 -0.535  0.845
+assign  wn_re[677] = 32'hxxxxxxxx;   assign  wn_im[677] = 32'hxxxxxxxx;   // 677 -0.530  0.848
+assign  wn_re[678] = 32'hBCDA3ECB;   assign  wn_im[678] = 32'h6CF934FC;   // 678 -0.525  0.851
+assign  wn_re[679] = 32'hxxxxxxxx;   assign  wn_im[679] = 32'hxxxxxxxx;   // 679 -0.519  0.855
+assign  wn_re[680] = 32'hxxxxxxxx;   assign  wn_im[680] = 32'hxxxxxxxx;   // 680 -0.514  0.858
+assign  wn_re[681] = 32'hBEDEA765;   assign  wn_im[681] = 32'h6E30E34A;   // 681 -0.509  0.861
+assign  wn_re[682] = 32'hxxxxxxxx;   assign  wn_im[682] = 32'hxxxxxxxx;   // 682 -0.504  0.864
+assign  wn_re[683] = 32'hxxxxxxxx;   assign  wn_im[683] = 32'hxxxxxxxx;   // 683 -0.498  0.867
+assign  wn_re[684] = 32'hC0E8B648;   assign  wn_im[684] = 32'h6F5F02B2;   // 684 -0.493  0.870
+assign  wn_re[685] = 32'hxxxxxxxx;   assign  wn_im[685] = 32'hxxxxxxxx;   // 685 -0.488  0.873
+assign  wn_re[686] = 32'hxxxxxxxx;   assign  wn_im[686] = 32'hxxxxxxxx;   // 686 -0.482  0.876
+assign  wn_re[687] = 32'hC2F83E2A;   assign  wn_im[687] = 32'h708378FF;   // 687 -0.477  0.879
+assign  wn_re[688] = 32'hxxxxxxxx;   assign  wn_im[688] = 32'hxxxxxxxx;   // 688 -0.471  0.882
+assign  wn_re[689] = 32'hxxxxxxxx;   assign  wn_im[689] = 32'hxxxxxxxx;   // 689 -0.466  0.885
+assign  wn_re[690] = 32'hC50D1149;   assign  wn_im[690] = 32'h719E2CD2;   // 690 -0.461  0.888
+assign  wn_re[691] = 32'hxxxxxxxx;   assign  wn_im[691] = 32'hxxxxxxxx;   // 691 -0.455  0.890
+assign  wn_re[692] = 32'hxxxxxxxx;   assign  wn_im[692] = 32'hxxxxxxxx;   // 692 -0.450  0.893
+assign  wn_re[693] = 32'hC727016D;   assign  wn_im[693] = 32'h72AF05A7;   // 693 -0.444  0.896
+assign  wn_re[694] = 32'hxxxxxxxx;   assign  wn_im[694] = 32'hxxxxxxxx;   // 694 -0.439  0.899
+assign  wn_re[695] = 32'hxxxxxxxx;   assign  wn_im[695] = 32'hxxxxxxxx;   // 695 -0.433  0.901
+assign  wn_re[696] = 32'hC945DFEC;   assign  wn_im[696] = 32'h73B5EBD1;   // 696 -0.428  0.904
+assign  wn_re[697] = 32'hxxxxxxxx;   assign  wn_im[697] = 32'hxxxxxxxx;   // 697 -0.422  0.907
+assign  wn_re[698] = 32'hxxxxxxxx;   assign  wn_im[698] = 32'hxxxxxxxx;   // 698 -0.416  0.909
+assign  wn_re[699] = 32'hCB697DB0;   assign  wn_im[699] = 32'h74B2C884;   // 699 -0.411  0.912
+assign  wn_re[700] = 32'hxxxxxxxx;   assign  wn_im[700] = 32'hxxxxxxxx;   // 700 -0.405  0.914
+assign  wn_re[701] = 32'hxxxxxxxx;   assign  wn_im[701] = 32'hxxxxxxxx;   // 701 -0.400  0.917
+assign  wn_re[702] = 32'hCD91AB39;   assign  wn_im[702] = 32'h75A585CF;   // 702 -0.394  0.919
+assign  wn_re[703] = 32'hxxxxxxxx;   assign  wn_im[703] = 32'hxxxxxxxx;   // 703 -0.388  0.922
+assign  wn_re[704] = 32'hxxxxxxxx;   assign  wn_im[704] = 32'hxxxxxxxx;   // 704 -0.383  0.924
+assign  wn_re[705] = 32'hCFBE389F;   assign  wn_im[705] = 32'h768E0EA6;   // 705 -0.377  0.926
+assign  wn_re[706] = 32'hxxxxxxxx;   assign  wn_im[706] = 32'hxxxxxxxx;   // 706 -0.371  0.929
+assign  wn_re[707] = 32'hxxxxxxxx;   assign  wn_im[707] = 32'hxxxxxxxx;   // 707 -0.366  0.931
+assign  wn_re[708] = 32'hD1EEF59E;   assign  wn_im[708] = 32'h776C4EDB;   // 708 -0.360  0.933
+assign  wn_re[709] = 32'hxxxxxxxx;   assign  wn_im[709] = 32'hxxxxxxxx;   // 709 -0.354  0.935
+assign  wn_re[710] = 32'hxxxxxxxx;   assign  wn_im[710] = 32'hxxxxxxxx;   // 710 -0.348  0.937
+assign  wn_re[711] = 32'hD423B191;   assign  wn_im[711] = 32'h78403329;   // 711 -0.343  0.939
+assign  wn_re[712] = 32'hxxxxxxxx;   assign  wn_im[712] = 32'hxxxxxxxx;   // 712 -0.337  0.942
+assign  wn_re[713] = 32'hxxxxxxxx;   assign  wn_im[713] = 32'hxxxxxxxx;   // 713 -0.331  0.944
+assign  wn_re[714] = 32'hD65C3B7B;   assign  wn_im[714] = 32'h7909A92D;   // 714 -0.325  0.946
+assign  wn_re[715] = 32'hxxxxxxxx;   assign  wn_im[715] = 32'hxxxxxxxx;   // 715 -0.320  0.948
+assign  wn_re[716] = 32'hxxxxxxxx;   assign  wn_im[716] = 32'hxxxxxxxx;   // 716 -0.314  0.950
+assign  wn_re[717] = 32'hD898620C;   assign  wn_im[717] = 32'h79C89F6E;   // 717 -0.308  0.951
+assign  wn_re[718] = 32'hxxxxxxxx;   assign  wn_im[718] = 32'hxxxxxxxx;   // 718 -0.302  0.953
+assign  wn_re[719] = 32'hxxxxxxxx;   assign  wn_im[719] = 32'hxxxxxxxx;   // 719 -0.296  0.955
+assign  wn_re[720] = 32'hDAD7F3A2;   assign  wn_im[720] = 32'h7A7D055B;   // 720 -0.290  0.957
+assign  wn_re[721] = 32'hxxxxxxxx;   assign  wn_im[721] = 32'hxxxxxxxx;   // 721 -0.284  0.959
+assign  wn_re[722] = 32'hxxxxxxxx;   assign  wn_im[722] = 32'hxxxxxxxx;   // 722 -0.279  0.960
+assign  wn_re[723] = 32'hDD1ABE51;   assign  wn_im[723] = 32'h7B26CB4F;   // 723 -0.273  0.962
+assign  wn_re[724] = 32'hxxxxxxxx;   assign  wn_im[724] = 32'hxxxxxxxx;   // 724 -0.267  0.964
+assign  wn_re[725] = 32'hxxxxxxxx;   assign  wn_im[725] = 32'hxxxxxxxx;   // 725 -0.261  0.965
+assign  wn_re[726] = 32'hDF608FE4;   assign  wn_im[726] = 32'h7BC5E290;   // 726 -0.255  0.967
+assign  wn_re[727] = 32'hxxxxxxxx;   assign  wn_im[727] = 32'hxxxxxxxx;   // 727 -0.249  0.969
+assign  wn_re[728] = 32'hxxxxxxxx;   assign  wn_im[728] = 32'hxxxxxxxx;   // 728 -0.243  0.970
+assign  wn_re[729] = 32'hE1A935E2;   assign  wn_im[729] = 32'h7C5A3D50;   // 729 -0.237  0.972
+assign  wn_re[730] = 32'hxxxxxxxx;   assign  wn_im[730] = 32'hxxxxxxxx;   // 730 -0.231  0.973
+assign  wn_re[731] = 32'hxxxxxxxx;   assign  wn_im[731] = 32'hxxxxxxxx;   // 731 -0.225  0.974
+assign  wn_re[732] = 32'hE3F47D96;   assign  wn_im[732] = 32'h7CE3CEB2;   // 732 -0.219  0.976
+assign  wn_re[733] = 32'hxxxxxxxx;   assign  wn_im[733] = 32'hxxxxxxxx;   // 733 -0.213  0.977
+assign  wn_re[734] = 32'hxxxxxxxx;   assign  wn_im[734] = 32'hxxxxxxxx;   // 734 -0.207  0.978
+assign  wn_re[735] = 32'hE642340D;   assign  wn_im[735] = 32'h7D628AC6;   // 735 -0.201  0.980
+assign  wn_re[736] = 32'hxxxxxxxx;   assign  wn_im[736] = 32'hxxxxxxxx;   // 736 -0.195  0.981
+assign  wn_re[737] = 32'hxxxxxxxx;   assign  wn_im[737] = 32'hxxxxxxxx;   // 737 -0.189  0.982
+assign  wn_re[738] = 32'hE8922622;   assign  wn_im[738] = 32'h7DD6668F;   // 738 -0.183  0.983
+assign  wn_re[739] = 32'hxxxxxxxx;   assign  wn_im[739] = 32'hxxxxxxxx;   // 739 -0.177  0.984
+assign  wn_re[740] = 32'hxxxxxxxx;   assign  wn_im[740] = 32'hxxxxxxxx;   // 740 -0.171  0.985
+assign  wn_re[741] = 32'hEAE4207A;   assign  wn_im[741] = 32'h7E3F57FF;   // 741 -0.165  0.986
+assign  wn_re[742] = 32'hxxxxxxxx;   assign  wn_im[742] = 32'hxxxxxxxx;   // 742 -0.159  0.987
+assign  wn_re[743] = 32'hxxxxxxxx;   assign  wn_im[743] = 32'hxxxxxxxx;   // 743 -0.153  0.988
+assign  wn_re[744] = 32'hED37EF91;   assign  wn_im[744] = 32'h7E9D55FC;   // 744 -0.147  0.989
+assign  wn_re[745] = 32'hxxxxxxxx;   assign  wn_im[745] = 32'hxxxxxxxx;   // 745 -0.141  0.990
+assign  wn_re[746] = 32'hxxxxxxxx;   assign  wn_im[746] = 32'hxxxxxxxx;   // 746 -0.135  0.991
+assign  wn_re[747] = 32'hEF8D5FB8;   assign  wn_im[747] = 32'h7EF05860;   // 747 -0.128  0.992
+assign  wn_re[748] = 32'hxxxxxxxx;   assign  wn_im[748] = 32'hxxxxxxxx;   // 748 -0.122  0.992
+assign  wn_re[749] = 32'hxxxxxxxx;   assign  wn_im[749] = 32'hxxxxxxxx;   // 749 -0.116  0.993
+assign  wn_re[750] = 32'hF1E43D1C;   assign  wn_im[750] = 32'h7F3857F6;   // 750 -0.110  0.994
+assign  wn_re[751] = 32'hxxxxxxxx;   assign  wn_im[751] = 32'hxxxxxxxx;   // 751 -0.104  0.995
+assign  wn_re[752] = 32'hxxxxxxxx;   assign  wn_im[752] = 32'hxxxxxxxx;   // 752 -0.098  0.995
+assign  wn_re[753] = 32'hF43C53CB;   assign  wn_im[753] = 32'h7F754E80;   // 753 -0.092  0.996
+assign  wn_re[754] = 32'hxxxxxxxx;   assign  wn_im[754] = 32'hxxxxxxxx;   // 754 -0.086  0.996
+assign  wn_re[755] = 32'hxxxxxxxx;   assign  wn_im[755] = 32'hxxxxxxxx;   // 755 -0.080  0.997
+assign  wn_re[756] = 32'hF6956FB7;   assign  wn_im[756] = 32'h7FA736B4;   // 756 -0.074  0.997
+assign  wn_re[757] = 32'hxxxxxxxx;   assign  wn_im[757] = 32'hxxxxxxxx;   // 757 -0.067  0.998
+assign  wn_re[758] = 32'hxxxxxxxx;   assign  wn_im[758] = 32'hxxxxxxxx;   // 758 -0.061  0.998
+assign  wn_re[759] = 32'hF8EF5CBB;   assign  wn_im[759] = 32'h7FCE0C3E;   // 759 -0.055  0.998
+assign  wn_re[760] = 32'hxxxxxxxx;   assign  wn_im[760] = 32'hxxxxxxxx;   // 760 -0.049  0.999
+assign  wn_re[761] = 32'hxxxxxxxx;   assign  wn_im[761] = 32'hxxxxxxxx;   // 761 -0.043  0.999
+assign  wn_re[762] = 32'hFB49E6A3;   assign  wn_im[762] = 32'h7FE9CBC0;   // 762 -0.037  0.999
+assign  wn_re[763] = 32'hxxxxxxxx;   assign  wn_im[763] = 32'hxxxxxxxx;   // 763 -0.031  1.000
+assign  wn_re[764] = 32'hxxxxxxxx;   assign  wn_im[764] = 32'hxxxxxxxx;   // 764 -0.025  1.000
+assign  wn_re[765] = 32'hFDA4D929;   assign  wn_im[765] = 32'h7FFA72D1;   // 765 -0.018  1.000
+assign  wn_re[766] = 32'hxxxxxxxx;   assign  wn_im[766] = 32'hxxxxxxxx;   // 766 -0.012  1.000
+assign  wn_re[767] = 32'hxxxxxxxx;   assign  wn_im[767] = 32'hxxxxxxxx;   // 767 -0.006  1.000
+assign  wn_re[768] = 32'hxxxxxxxx;   assign  wn_im[768] = 32'hxxxxxxxx;   // 768 -0.000  1.000
+assign  wn_re[769] = 32'hxxxxxxxx;   assign  wn_im[769] = 32'hxxxxxxxx;   // 769  0.006  1.000
+assign  wn_re[770] = 32'hxxxxxxxx;   assign  wn_im[770] = 32'hxxxxxxxx;   // 770  0.012  1.000
+assign  wn_re[771] = 32'hxxxxxxxx;   assign  wn_im[771] = 32'hxxxxxxxx;   // 771  0.018  1.000
+assign  wn_re[772] = 32'hxxxxxxxx;   assign  wn_im[772] = 32'hxxxxxxxx;   // 772  0.025  1.000
+assign  wn_re[773] = 32'hxxxxxxxx;   assign  wn_im[773] = 32'hxxxxxxxx;   // 773  0.031  1.000
+assign  wn_re[774] = 32'hxxxxxxxx;   assign  wn_im[774] = 32'hxxxxxxxx;   // 774  0.037  0.999
+assign  wn_re[775] = 32'hxxxxxxxx;   assign  wn_im[775] = 32'hxxxxxxxx;   // 775  0.043  0.999
+assign  wn_re[776] = 32'hxxxxxxxx;   assign  wn_im[776] = 32'hxxxxxxxx;   // 776  0.049  0.999
+assign  wn_re[777] = 32'hxxxxxxxx;   assign  wn_im[777] = 32'hxxxxxxxx;   // 777  0.055  0.998
+assign  wn_re[778] = 32'hxxxxxxxx;   assign  wn_im[778] = 32'hxxxxxxxx;   // 778  0.061  0.998
+assign  wn_re[779] = 32'hxxxxxxxx;   assign  wn_im[779] = 32'hxxxxxxxx;   // 779  0.067  0.998
+assign  wn_re[780] = 32'hxxxxxxxx;   assign  wn_im[780] = 32'hxxxxxxxx;   // 780  0.074  0.997
+assign  wn_re[781] = 32'hxxxxxxxx;   assign  wn_im[781] = 32'hxxxxxxxx;   // 781  0.080  0.997
+assign  wn_re[782] = 32'hxxxxxxxx;   assign  wn_im[782] = 32'hxxxxxxxx;   // 782  0.086  0.996
+assign  wn_re[783] = 32'hxxxxxxxx;   assign  wn_im[783] = 32'hxxxxxxxx;   // 783  0.092  0.996
+assign  wn_re[784] = 32'hxxxxxxxx;   assign  wn_im[784] = 32'hxxxxxxxx;   // 784  0.098  0.995
+assign  wn_re[785] = 32'hxxxxxxxx;   assign  wn_im[785] = 32'hxxxxxxxx;   // 785  0.104  0.995
+assign  wn_re[786] = 32'hxxxxxxxx;   assign  wn_im[786] = 32'hxxxxxxxx;   // 786  0.110  0.994
+assign  wn_re[787] = 32'hxxxxxxxx;   assign  wn_im[787] = 32'hxxxxxxxx;   // 787  0.116  0.993
+assign  wn_re[788] = 32'hxxxxxxxx;   assign  wn_im[788] = 32'hxxxxxxxx;   // 788  0.122  0.992
+assign  wn_re[789] = 32'hxxxxxxxx;   assign  wn_im[789] = 32'hxxxxxxxx;   // 789  0.128  0.992
+assign  wn_re[790] = 32'hxxxxxxxx;   assign  wn_im[790] = 32'hxxxxxxxx;   // 790  0.135  0.991
+assign  wn_re[791] = 32'hxxxxxxxx;   assign  wn_im[791] = 32'hxxxxxxxx;   // 791  0.141  0.990
+assign  wn_re[792] = 32'hxxxxxxxx;   assign  wn_im[792] = 32'hxxxxxxxx;   // 792  0.147  0.989
+assign  wn_re[793] = 32'hxxxxxxxx;   assign  wn_im[793] = 32'hxxxxxxxx;   // 793  0.153  0.988
+assign  wn_re[794] = 32'hxxxxxxxx;   assign  wn_im[794] = 32'hxxxxxxxx;   // 794  0.159  0.987
+assign  wn_re[795] = 32'hxxxxxxxx;   assign  wn_im[795] = 32'hxxxxxxxx;   // 795  0.165  0.986
+assign  wn_re[796] = 32'hxxxxxxxx;   assign  wn_im[796] = 32'hxxxxxxxx;   // 796  0.171  0.985
+assign  wn_re[797] = 32'hxxxxxxxx;   assign  wn_im[797] = 32'hxxxxxxxx;   // 797  0.177  0.984
+assign  wn_re[798] = 32'hxxxxxxxx;   assign  wn_im[798] = 32'hxxxxxxxx;   // 798  0.183  0.983
+assign  wn_re[799] = 32'hxxxxxxxx;   assign  wn_im[799] = 32'hxxxxxxxx;   // 799  0.189  0.982
+assign  wn_re[800] = 32'hxxxxxxxx;   assign  wn_im[800] = 32'hxxxxxxxx;   // 800  0.195  0.981
+assign  wn_re[801] = 32'hxxxxxxxx;   assign  wn_im[801] = 32'hxxxxxxxx;   // 801  0.201  0.980
+assign  wn_re[802] = 32'hxxxxxxxx;   assign  wn_im[802] = 32'hxxxxxxxx;   // 802  0.207  0.978
+assign  wn_re[803] = 32'hxxxxxxxx;   assign  wn_im[803] = 32'hxxxxxxxx;   // 803  0.213  0.977
+assign  wn_re[804] = 32'hxxxxxxxx;   assign  wn_im[804] = 32'hxxxxxxxx;   // 804  0.219  0.976
+assign  wn_re[805] = 32'hxxxxxxxx;   assign  wn_im[805] = 32'hxxxxxxxx;   // 805  0.225  0.974
+assign  wn_re[806] = 32'hxxxxxxxx;   assign  wn_im[806] = 32'hxxxxxxxx;   // 806  0.231  0.973
+assign  wn_re[807] = 32'hxxxxxxxx;   assign  wn_im[807] = 32'hxxxxxxxx;   // 807  0.237  0.972
+assign  wn_re[808] = 32'hxxxxxxxx;   assign  wn_im[808] = 32'hxxxxxxxx;   // 808  0.243  0.970
+assign  wn_re[809] = 32'hxxxxxxxx;   assign  wn_im[809] = 32'hxxxxxxxx;   // 809  0.249  0.969
+assign  wn_re[810] = 32'hxxxxxxxx;   assign  wn_im[810] = 32'hxxxxxxxx;   // 810  0.255  0.967
+assign  wn_re[811] = 32'hxxxxxxxx;   assign  wn_im[811] = 32'hxxxxxxxx;   // 811  0.261  0.965
+assign  wn_re[812] = 32'hxxxxxxxx;   assign  wn_im[812] = 32'hxxxxxxxx;   // 812  0.267  0.964
+assign  wn_re[813] = 32'hxxxxxxxx;   assign  wn_im[813] = 32'hxxxxxxxx;   // 813  0.273  0.962
+assign  wn_re[814] = 32'hxxxxxxxx;   assign  wn_im[814] = 32'hxxxxxxxx;   // 814  0.279  0.960
+assign  wn_re[815] = 32'hxxxxxxxx;   assign  wn_im[815] = 32'hxxxxxxxx;   // 815  0.284  0.959
+assign  wn_re[816] = 32'hxxxxxxxx;   assign  wn_im[816] = 32'hxxxxxxxx;   // 816  0.290  0.957
+assign  wn_re[817] = 32'hxxxxxxxx;   assign  wn_im[817] = 32'hxxxxxxxx;   // 817  0.296  0.955
+assign  wn_re[818] = 32'hxxxxxxxx;   assign  wn_im[818] = 32'hxxxxxxxx;   // 818  0.302  0.953
+assign  wn_re[819] = 32'hxxxxxxxx;   assign  wn_im[819] = 32'hxxxxxxxx;   // 819  0.308  0.951
+assign  wn_re[820] = 32'hxxxxxxxx;   assign  wn_im[820] = 32'hxxxxxxxx;   // 820  0.314  0.950
+assign  wn_re[821] = 32'hxxxxxxxx;   assign  wn_im[821] = 32'hxxxxxxxx;   // 821  0.320  0.948
+assign  wn_re[822] = 32'hxxxxxxxx;   assign  wn_im[822] = 32'hxxxxxxxx;   // 822  0.325  0.946
+assign  wn_re[823] = 32'hxxxxxxxx;   assign  wn_im[823] = 32'hxxxxxxxx;   // 823  0.331  0.944
+assign  wn_re[824] = 32'hxxxxxxxx;   assign  wn_im[824] = 32'hxxxxxxxx;   // 824  0.337  0.942
+assign  wn_re[825] = 32'hxxxxxxxx;   assign  wn_im[825] = 32'hxxxxxxxx;   // 825  0.343  0.939
+assign  wn_re[826] = 32'hxxxxxxxx;   assign  wn_im[826] = 32'hxxxxxxxx;   // 826  0.348  0.937
+assign  wn_re[827] = 32'hxxxxxxxx;   assign  wn_im[827] = 32'hxxxxxxxx;   // 827  0.354  0.935
+assign  wn_re[828] = 32'hxxxxxxxx;   assign  wn_im[828] = 32'hxxxxxxxx;   // 828  0.360  0.933
+assign  wn_re[829] = 32'hxxxxxxxx;   assign  wn_im[829] = 32'hxxxxxxxx;   // 829  0.366  0.931
+assign  wn_re[830] = 32'hxxxxxxxx;   assign  wn_im[830] = 32'hxxxxxxxx;   // 830  0.371  0.929
+assign  wn_re[831] = 32'hxxxxxxxx;   assign  wn_im[831] = 32'hxxxxxxxx;   // 831  0.377  0.926
+assign  wn_re[832] = 32'hxxxxxxxx;   assign  wn_im[832] = 32'hxxxxxxxx;   // 832  0.383  0.924
+assign  wn_re[833] = 32'hxxxxxxxx;   assign  wn_im[833] = 32'hxxxxxxxx;   // 833  0.388  0.922
+assign  wn_re[834] = 32'hxxxxxxxx;   assign  wn_im[834] = 32'hxxxxxxxx;   // 834  0.394  0.919
+assign  wn_re[835] = 32'hxxxxxxxx;   assign  wn_im[835] = 32'hxxxxxxxx;   // 835  0.400  0.917
+assign  wn_re[836] = 32'hxxxxxxxx;   assign  wn_im[836] = 32'hxxxxxxxx;   // 836  0.405  0.914
+assign  wn_re[837] = 32'hxxxxxxxx;   assign  wn_im[837] = 32'hxxxxxxxx;   // 837  0.411  0.912
+assign  wn_re[838] = 32'hxxxxxxxx;   assign  wn_im[838] = 32'hxxxxxxxx;   // 838  0.416  0.909
+assign  wn_re[839] = 32'hxxxxxxxx;   assign  wn_im[839] = 32'hxxxxxxxx;   // 839  0.422  0.907
+assign  wn_re[840] = 32'hxxxxxxxx;   assign  wn_im[840] = 32'hxxxxxxxx;   // 840  0.428  0.904
+assign  wn_re[841] = 32'hxxxxxxxx;   assign  wn_im[841] = 32'hxxxxxxxx;   // 841  0.433  0.901
+assign  wn_re[842] = 32'hxxxxxxxx;   assign  wn_im[842] = 32'hxxxxxxxx;   // 842  0.439  0.899
+assign  wn_re[843] = 32'hxxxxxxxx;   assign  wn_im[843] = 32'hxxxxxxxx;   // 843  0.444  0.896
+assign  wn_re[844] = 32'hxxxxxxxx;   assign  wn_im[844] = 32'hxxxxxxxx;   // 844  0.450  0.893
+assign  wn_re[845] = 32'hxxxxxxxx;   assign  wn_im[845] = 32'hxxxxxxxx;   // 845  0.455  0.890
+assign  wn_re[846] = 32'hxxxxxxxx;   assign  wn_im[846] = 32'hxxxxxxxx;   // 846  0.461  0.888
+assign  wn_re[847] = 32'hxxxxxxxx;   assign  wn_im[847] = 32'hxxxxxxxx;   // 847  0.466  0.885
+assign  wn_re[848] = 32'hxxxxxxxx;   assign  wn_im[848] = 32'hxxxxxxxx;   // 848  0.471  0.882
+assign  wn_re[849] = 32'hxxxxxxxx;   assign  wn_im[849] = 32'hxxxxxxxx;   // 849  0.477  0.879
+assign  wn_re[850] = 32'hxxxxxxxx;   assign  wn_im[850] = 32'hxxxxxxxx;   // 850  0.482  0.876
+assign  wn_re[851] = 32'hxxxxxxxx;   assign  wn_im[851] = 32'hxxxxxxxx;   // 851  0.488  0.873
+assign  wn_re[852] = 32'hxxxxxxxx;   assign  wn_im[852] = 32'hxxxxxxxx;   // 852  0.493  0.870
+assign  wn_re[853] = 32'hxxxxxxxx;   assign  wn_im[853] = 32'hxxxxxxxx;   // 853  0.498  0.867
+assign  wn_re[854] = 32'hxxxxxxxx;   assign  wn_im[854] = 32'hxxxxxxxx;   // 854  0.504  0.864
+assign  wn_re[855] = 32'hxxxxxxxx;   assign  wn_im[855] = 32'hxxxxxxxx;   // 855  0.509  0.861
+assign  wn_re[856] = 32'hxxxxxxxx;   assign  wn_im[856] = 32'hxxxxxxxx;   // 856  0.514  0.858
+assign  wn_re[857] = 32'hxxxxxxxx;   assign  wn_im[857] = 32'hxxxxxxxx;   // 857  0.519  0.855
+assign  wn_re[858] = 32'hxxxxxxxx;   assign  wn_im[858] = 32'hxxxxxxxx;   // 858  0.525  0.851
+assign  wn_re[859] = 32'hxxxxxxxx;   assign  wn_im[859] = 32'hxxxxxxxx;   // 859  0.530  0.848
+assign  wn_re[860] = 32'hxxxxxxxx;   assign  wn_im[860] = 32'hxxxxxxxx;   // 860  0.535  0.845
+assign  wn_re[861] = 32'hxxxxxxxx;   assign  wn_im[861] = 32'hxxxxxxxx;   // 861  0.540  0.842
+assign  wn_re[862] = 32'hxxxxxxxx;   assign  wn_im[862] = 32'hxxxxxxxx;   // 862  0.545  0.838
+assign  wn_re[863] = 32'hxxxxxxxx;   assign  wn_im[863] = 32'hxxxxxxxx;   // 863  0.550  0.835
+assign  wn_re[864] = 32'hxxxxxxxx;   assign  wn_im[864] = 32'hxxxxxxxx;   // 864  0.556  0.831
+assign  wn_re[865] = 32'hxxxxxxxx;   assign  wn_im[865] = 32'hxxxxxxxx;   // 865  0.561  0.828
+assign  wn_re[866] = 32'hxxxxxxxx;   assign  wn_im[866] = 32'hxxxxxxxx;   // 866  0.566  0.825
+assign  wn_re[867] = 32'hxxxxxxxx;   assign  wn_im[867] = 32'hxxxxxxxx;   // 867  0.571  0.821
+assign  wn_re[868] = 32'hxxxxxxxx;   assign  wn_im[868] = 32'hxxxxxxxx;   // 868  0.576  0.818
+assign  wn_re[869] = 32'hxxxxxxxx;   assign  wn_im[869] = 32'hxxxxxxxx;   // 869  0.581  0.814
+assign  wn_re[870] = 32'hxxxxxxxx;   assign  wn_im[870] = 32'hxxxxxxxx;   // 870  0.586  0.810
+assign  wn_re[871] = 32'hxxxxxxxx;   assign  wn_im[871] = 32'hxxxxxxxx;   // 871  0.591  0.807
+assign  wn_re[872] = 32'hxxxxxxxx;   assign  wn_im[872] = 32'hxxxxxxxx;   // 872  0.596  0.803
+assign  wn_re[873] = 32'hxxxxxxxx;   assign  wn_im[873] = 32'hxxxxxxxx;   // 873  0.601  0.800
+assign  wn_re[874] = 32'hxxxxxxxx;   assign  wn_im[874] = 32'hxxxxxxxx;   // 874  0.606  0.796
+assign  wn_re[875] = 32'hxxxxxxxx;   assign  wn_im[875] = 32'hxxxxxxxx;   // 875  0.610  0.792
+assign  wn_re[876] = 32'hxxxxxxxx;   assign  wn_im[876] = 32'hxxxxxxxx;   // 876  0.615  0.788
+assign  wn_re[877] = 32'hxxxxxxxx;   assign  wn_im[877] = 32'hxxxxxxxx;   // 877  0.620  0.785
+assign  wn_re[878] = 32'hxxxxxxxx;   assign  wn_im[878] = 32'hxxxxxxxx;   // 878  0.625  0.781
+assign  wn_re[879] = 32'hxxxxxxxx;   assign  wn_im[879] = 32'hxxxxxxxx;   // 879  0.630  0.777
+assign  wn_re[880] = 32'hxxxxxxxx;   assign  wn_im[880] = 32'hxxxxxxxx;   // 880  0.634  0.773
+assign  wn_re[881] = 32'hxxxxxxxx;   assign  wn_im[881] = 32'hxxxxxxxx;   // 881  0.639  0.769
+assign  wn_re[882] = 32'hxxxxxxxx;   assign  wn_im[882] = 32'hxxxxxxxx;   // 882  0.644  0.765
+assign  wn_re[883] = 32'hxxxxxxxx;   assign  wn_im[883] = 32'hxxxxxxxx;   // 883  0.649  0.761
+assign  wn_re[884] = 32'hxxxxxxxx;   assign  wn_im[884] = 32'hxxxxxxxx;   // 884  0.653  0.757
+assign  wn_re[885] = 32'hxxxxxxxx;   assign  wn_im[885] = 32'hxxxxxxxx;   // 885  0.658  0.753
+assign  wn_re[886] = 32'hxxxxxxxx;   assign  wn_im[886] = 32'hxxxxxxxx;   // 886  0.662  0.749
+assign  wn_re[887] = 32'hxxxxxxxx;   assign  wn_im[887] = 32'hxxxxxxxx;   // 887  0.667  0.745
+assign  wn_re[888] = 32'hxxxxxxxx;   assign  wn_im[888] = 32'hxxxxxxxx;   // 888  0.672  0.741
+assign  wn_re[889] = 32'hxxxxxxxx;   assign  wn_im[889] = 32'hxxxxxxxx;   // 889  0.676  0.737
+assign  wn_re[890] = 32'hxxxxxxxx;   assign  wn_im[890] = 32'hxxxxxxxx;   // 890  0.681  0.733
+assign  wn_re[891] = 32'hxxxxxxxx;   assign  wn_im[891] = 32'hxxxxxxxx;   // 891  0.685  0.728
+assign  wn_re[892] = 32'hxxxxxxxx;   assign  wn_im[892] = 32'hxxxxxxxx;   // 892  0.690  0.724
+assign  wn_re[893] = 32'hxxxxxxxx;   assign  wn_im[893] = 32'hxxxxxxxx;   // 893  0.694  0.720
+assign  wn_re[894] = 32'hxxxxxxxx;   assign  wn_im[894] = 32'hxxxxxxxx;   // 894  0.698  0.716
+assign  wn_re[895] = 32'hxxxxxxxx;   assign  wn_im[895] = 32'hxxxxxxxx;   // 895  0.703  0.711
+assign  wn_re[896] = 32'hxxxxxxxx;   assign  wn_im[896] = 32'hxxxxxxxx;   // 896  0.707  0.707
+assign  wn_re[897] = 32'hxxxxxxxx;   assign  wn_im[897] = 32'hxxxxxxxx;   // 897  0.711  0.703
+assign  wn_re[898] = 32'hxxxxxxxx;   assign  wn_im[898] = 32'hxxxxxxxx;   // 898  0.716  0.698
+assign  wn_re[899] = 32'hxxxxxxxx;   assign  wn_im[899] = 32'hxxxxxxxx;   // 899  0.720  0.694
+assign  wn_re[900] = 32'hxxxxxxxx;   assign  wn_im[900] = 32'hxxxxxxxx;   // 900  0.724  0.690
+assign  wn_re[901] = 32'hxxxxxxxx;   assign  wn_im[901] = 32'hxxxxxxxx;   // 901  0.728  0.685
+assign  wn_re[902] = 32'hxxxxxxxx;   assign  wn_im[902] = 32'hxxxxxxxx;   // 902  0.733  0.681
+assign  wn_re[903] = 32'hxxxxxxxx;   assign  wn_im[903] = 32'hxxxxxxxx;   // 903  0.737  0.676
+assign  wn_re[904] = 32'hxxxxxxxx;   assign  wn_im[904] = 32'hxxxxxxxx;   // 904  0.741  0.672
+assign  wn_re[905] = 32'hxxxxxxxx;   assign  wn_im[905] = 32'hxxxxxxxx;   // 905  0.745  0.667
+assign  wn_re[906] = 32'hxxxxxxxx;   assign  wn_im[906] = 32'hxxxxxxxx;   // 906  0.749  0.662
+assign  wn_re[907] = 32'hxxxxxxxx;   assign  wn_im[907] = 32'hxxxxxxxx;   // 907  0.753  0.658
+assign  wn_re[908] = 32'hxxxxxxxx;   assign  wn_im[908] = 32'hxxxxxxxx;   // 908  0.757  0.653
+assign  wn_re[909] = 32'hxxxxxxxx;   assign  wn_im[909] = 32'hxxxxxxxx;   // 909  0.761  0.649
+assign  wn_re[910] = 32'hxxxxxxxx;   assign  wn_im[910] = 32'hxxxxxxxx;   // 910  0.765  0.644
+assign  wn_re[911] = 32'hxxxxxxxx;   assign  wn_im[911] = 32'hxxxxxxxx;   // 911  0.769  0.639
+assign  wn_re[912] = 32'hxxxxxxxx;   assign  wn_im[912] = 32'hxxxxxxxx;   // 912  0.773  0.634
+assign  wn_re[913] = 32'hxxxxxxxx;   assign  wn_im[913] = 32'hxxxxxxxx;   // 913  0.777  0.630
+assign  wn_re[914] = 32'hxxxxxxxx;   assign  wn_im[914] = 32'hxxxxxxxx;   // 914  0.781  0.625
+assign  wn_re[915] = 32'hxxxxxxxx;   assign  wn_im[915] = 32'hxxxxxxxx;   // 915  0.785  0.620
+assign  wn_re[916] = 32'hxxxxxxxx;   assign  wn_im[916] = 32'hxxxxxxxx;   // 916  0.788  0.615
+assign  wn_re[917] = 32'hxxxxxxxx;   assign  wn_im[917] = 32'hxxxxxxxx;   // 917  0.792  0.610
+assign  wn_re[918] = 32'hxxxxxxxx;   assign  wn_im[918] = 32'hxxxxxxxx;   // 918  0.796  0.606
+assign  wn_re[919] = 32'hxxxxxxxx;   assign  wn_im[919] = 32'hxxxxxxxx;   // 919  0.800  0.601
+assign  wn_re[920] = 32'hxxxxxxxx;   assign  wn_im[920] = 32'hxxxxxxxx;   // 920  0.803  0.596
+assign  wn_re[921] = 32'hxxxxxxxx;   assign  wn_im[921] = 32'hxxxxxxxx;   // 921  0.807  0.591
+assign  wn_re[922] = 32'hxxxxxxxx;   assign  wn_im[922] = 32'hxxxxxxxx;   // 922  0.810  0.586
+assign  wn_re[923] = 32'hxxxxxxxx;   assign  wn_im[923] = 32'hxxxxxxxx;   // 923  0.814  0.581
+assign  wn_re[924] = 32'hxxxxxxxx;   assign  wn_im[924] = 32'hxxxxxxxx;   // 924  0.818  0.576
+assign  wn_re[925] = 32'hxxxxxxxx;   assign  wn_im[925] = 32'hxxxxxxxx;   // 925  0.821  0.571
+assign  wn_re[926] = 32'hxxxxxxxx;   assign  wn_im[926] = 32'hxxxxxxxx;   // 926  0.825  0.566
+assign  wn_re[927] = 32'hxxxxxxxx;   assign  wn_im[927] = 32'hxxxxxxxx;   // 927  0.828  0.561
+assign  wn_re[928] = 32'hxxxxxxxx;   assign  wn_im[928] = 32'hxxxxxxxx;   // 928  0.831  0.556
+assign  wn_re[929] = 32'hxxxxxxxx;   assign  wn_im[929] = 32'hxxxxxxxx;   // 929  0.835  0.550
+assign  wn_re[930] = 32'hxxxxxxxx;   assign  wn_im[930] = 32'hxxxxxxxx;   // 930  0.838  0.545
+assign  wn_re[931] = 32'hxxxxxxxx;   assign  wn_im[931] = 32'hxxxxxxxx;   // 931  0.842  0.540
+assign  wn_re[932] = 32'hxxxxxxxx;   assign  wn_im[932] = 32'hxxxxxxxx;   // 932  0.845  0.535
+assign  wn_re[933] = 32'hxxxxxxxx;   assign  wn_im[933] = 32'hxxxxxxxx;   // 933  0.848  0.530
+assign  wn_re[934] = 32'hxxxxxxxx;   assign  wn_im[934] = 32'hxxxxxxxx;   // 934  0.851  0.525
+assign  wn_re[935] = 32'hxxxxxxxx;   assign  wn_im[935] = 32'hxxxxxxxx;   // 935  0.855  0.519
+assign  wn_re[936] = 32'hxxxxxxxx;   assign  wn_im[936] = 32'hxxxxxxxx;   // 936  0.858  0.514
+assign  wn_re[937] = 32'hxxxxxxxx;   assign  wn_im[937] = 32'hxxxxxxxx;   // 937  0.861  0.509
+assign  wn_re[938] = 32'hxxxxxxxx;   assign  wn_im[938] = 32'hxxxxxxxx;   // 938  0.864  0.504
+assign  wn_re[939] = 32'hxxxxxxxx;   assign  wn_im[939] = 32'hxxxxxxxx;   // 939  0.867  0.498
+assign  wn_re[940] = 32'hxxxxxxxx;   assign  wn_im[940] = 32'hxxxxxxxx;   // 940  0.870  0.493
+assign  wn_re[941] = 32'hxxxxxxxx;   assign  wn_im[941] = 32'hxxxxxxxx;   // 941  0.873  0.488
+assign  wn_re[942] = 32'hxxxxxxxx;   assign  wn_im[942] = 32'hxxxxxxxx;   // 942  0.876  0.482
+assign  wn_re[943] = 32'hxxxxxxxx;   assign  wn_im[943] = 32'hxxxxxxxx;   // 943  0.879  0.477
+assign  wn_re[944] = 32'hxxxxxxxx;   assign  wn_im[944] = 32'hxxxxxxxx;   // 944  0.882  0.471
+assign  wn_re[945] = 32'hxxxxxxxx;   assign  wn_im[945] = 32'hxxxxxxxx;   // 945  0.885  0.466
+assign  wn_re[946] = 32'hxxxxxxxx;   assign  wn_im[946] = 32'hxxxxxxxx;   // 946  0.888  0.461
+assign  wn_re[947] = 32'hxxxxxxxx;   assign  wn_im[947] = 32'hxxxxxxxx;   // 947  0.890  0.455
+assign  wn_re[948] = 32'hxxxxxxxx;   assign  wn_im[948] = 32'hxxxxxxxx;   // 948  0.893  0.450
+assign  wn_re[949] = 32'hxxxxxxxx;   assign  wn_im[949] = 32'hxxxxxxxx;   // 949  0.896  0.444
+assign  wn_re[950] = 32'hxxxxxxxx;   assign  wn_im[950] = 32'hxxxxxxxx;   // 950  0.899  0.439
+assign  wn_re[951] = 32'hxxxxxxxx;   assign  wn_im[951] = 32'hxxxxxxxx;   // 951  0.901  0.433
+assign  wn_re[952] = 32'hxxxxxxxx;   assign  wn_im[952] = 32'hxxxxxxxx;   // 952  0.904  0.428
+assign  wn_re[953] = 32'hxxxxxxxx;   assign  wn_im[953] = 32'hxxxxxxxx;   // 953  0.907  0.422
+assign  wn_re[954] = 32'hxxxxxxxx;   assign  wn_im[954] = 32'hxxxxxxxx;   // 954  0.909  0.416
+assign  wn_re[955] = 32'hxxxxxxxx;   assign  wn_im[955] = 32'hxxxxxxxx;   // 955  0.912  0.411
+assign  wn_re[956] = 32'hxxxxxxxx;   assign  wn_im[956] = 32'hxxxxxxxx;   // 956  0.914  0.405
+assign  wn_re[957] = 32'hxxxxxxxx;   assign  wn_im[957] = 32'hxxxxxxxx;   // 957  0.917  0.400
+assign  wn_re[958] = 32'hxxxxxxxx;   assign  wn_im[958] = 32'hxxxxxxxx;   // 958  0.919  0.394
+assign  wn_re[959] = 32'hxxxxxxxx;   assign  wn_im[959] = 32'hxxxxxxxx;   // 959  0.922  0.388
+assign  wn_re[960] = 32'hxxxxxxxx;   assign  wn_im[960] = 32'hxxxxxxxx;   // 960  0.924  0.383
+assign  wn_re[961] = 32'hxxxxxxxx;   assign  wn_im[961] = 32'hxxxxxxxx;   // 961  0.926  0.377
+assign  wn_re[962] = 32'hxxxxxxxx;   assign  wn_im[962] = 32'hxxxxxxxx;   // 962  0.929  0.371
+assign  wn_re[963] = 32'hxxxxxxxx;   assign  wn_im[963] = 32'hxxxxxxxx;   // 963  0.931  0.366
+assign  wn_re[964] = 32'hxxxxxxxx;   assign  wn_im[964] = 32'hxxxxxxxx;   // 964  0.933  0.360
+assign  wn_re[965] = 32'hxxxxxxxx;   assign  wn_im[965] = 32'hxxxxxxxx;   // 965  0.935  0.354
+assign  wn_re[966] = 32'hxxxxxxxx;   assign  wn_im[966] = 32'hxxxxxxxx;   // 966  0.937  0.348
+assign  wn_re[967] = 32'hxxxxxxxx;   assign  wn_im[967] = 32'hxxxxxxxx;   // 967  0.939  0.343
+assign  wn_re[968] = 32'hxxxxxxxx;   assign  wn_im[968] = 32'hxxxxxxxx;   // 968  0.942  0.337
+assign  wn_re[969] = 32'hxxxxxxxx;   assign  wn_im[969] = 32'hxxxxxxxx;   // 969  0.944  0.331
+assign  wn_re[970] = 32'hxxxxxxxx;   assign  wn_im[970] = 32'hxxxxxxxx;   // 970  0.946  0.325
+assign  wn_re[971] = 32'hxxxxxxxx;   assign  wn_im[971] = 32'hxxxxxxxx;   // 971  0.948  0.320
+assign  wn_re[972] = 32'hxxxxxxxx;   assign  wn_im[972] = 32'hxxxxxxxx;   // 972  0.950  0.314
+assign  wn_re[973] = 32'hxxxxxxxx;   assign  wn_im[973] = 32'hxxxxxxxx;   // 973  0.951  0.308
+assign  wn_re[974] = 32'hxxxxxxxx;   assign  wn_im[974] = 32'hxxxxxxxx;   // 974  0.953  0.302
+assign  wn_re[975] = 32'hxxxxxxxx;   assign  wn_im[975] = 32'hxxxxxxxx;   // 975  0.955  0.296
+assign  wn_re[976] = 32'hxxxxxxxx;   assign  wn_im[976] = 32'hxxxxxxxx;   // 976  0.957  0.290
+assign  wn_re[977] = 32'hxxxxxxxx;   assign  wn_im[977] = 32'hxxxxxxxx;   // 977  0.959  0.284
+assign  wn_re[978] = 32'hxxxxxxxx;   assign  wn_im[978] = 32'hxxxxxxxx;   // 978  0.960  0.279
+assign  wn_re[979] = 32'hxxxxxxxx;   assign  wn_im[979] = 32'hxxxxxxxx;   // 979  0.962  0.273
+assign  wn_re[980] = 32'hxxxxxxxx;   assign  wn_im[980] = 32'hxxxxxxxx;   // 980  0.964  0.267
+assign  wn_re[981] = 32'hxxxxxxxx;   assign  wn_im[981] = 32'hxxxxxxxx;   // 981  0.965  0.261
+assign  wn_re[982] = 32'hxxxxxxxx;   assign  wn_im[982] = 32'hxxxxxxxx;   // 982  0.967  0.255
+assign  wn_re[983] = 32'hxxxxxxxx;   assign  wn_im[983] = 32'hxxxxxxxx;   // 983  0.969  0.249
+assign  wn_re[984] = 32'hxxxxxxxx;   assign  wn_im[984] = 32'hxxxxxxxx;   // 984  0.970  0.243
+assign  wn_re[985] = 32'hxxxxxxxx;   assign  wn_im[985] = 32'hxxxxxxxx;   // 985  0.972  0.237
+assign  wn_re[986] = 32'hxxxxxxxx;   assign  wn_im[986] = 32'hxxxxxxxx;   // 986  0.973  0.231
+assign  wn_re[987] = 32'hxxxxxxxx;   assign  wn_im[987] = 32'hxxxxxxxx;   // 987  0.974  0.225
+assign  wn_re[988] = 32'hxxxxxxxx;   assign  wn_im[988] = 32'hxxxxxxxx;   // 988  0.976  0.219
+assign  wn_re[989] = 32'hxxxxxxxx;   assign  wn_im[989] = 32'hxxxxxxxx;   // 989  0.977  0.213
+assign  wn_re[990] = 32'hxxxxxxxx;   assign  wn_im[990] = 32'hxxxxxxxx;   // 990  0.978  0.207
+assign  wn_re[991] = 32'hxxxxxxxx;   assign  wn_im[991] = 32'hxxxxxxxx;   // 991  0.980  0.201
+assign  wn_re[992] = 32'hxxxxxxxx;   assign  wn_im[992] = 32'hxxxxxxxx;   // 992  0.981  0.195
+assign  wn_re[993] = 32'hxxxxxxxx;   assign  wn_im[993] = 32'hxxxxxxxx;   // 993  0.982  0.189
+assign  wn_re[994] = 32'hxxxxxxxx;   assign  wn_im[994] = 32'hxxxxxxxx;   // 994  0.983  0.183
+assign  wn_re[995] = 32'hxxxxxxxx;   assign  wn_im[995] = 32'hxxxxxxxx;   // 995  0.984  0.177
+assign  wn_re[996] = 32'hxxxxxxxx;   assign  wn_im[996] = 32'hxxxxxxxx;   // 996  0.985  0.171
+assign  wn_re[997] = 32'hxxxxxxxx;   assign  wn_im[997] = 32'hxxxxxxxx;   // 997  0.986  0.165
+assign  wn_re[998] = 32'hxxxxxxxx;   assign  wn_im[998] = 32'hxxxxxxxx;   // 998  0.987  0.159
+assign  wn_re[999] = 32'hxxxxxxxx;   assign  wn_im[999] = 32'hxxxxxxxx;   // 999  0.988  0.153
+assign  wn_re[1000] = 32'hxxxxxxxx;   assign  wn_im[1000] = 32'hxxxxxxxx;   // 1000  0.989  0.147
+assign  wn_re[1001] = 32'hxxxxxxxx;   assign  wn_im[1001] = 32'hxxxxxxxx;   // 1001  0.990  0.141
+assign  wn_re[1002] = 32'hxxxxxxxx;   assign  wn_im[1002] = 32'hxxxxxxxx;   // 1002  0.991  0.135
+assign  wn_re[1003] = 32'hxxxxxxxx;   assign  wn_im[1003] = 32'hxxxxxxxx;   // 1003  0.992  0.128
+assign  wn_re[1004] = 32'hxxxxxxxx;   assign  wn_im[1004] = 32'hxxxxxxxx;   // 1004  0.992  0.122
+assign  wn_re[1005] = 32'hxxxxxxxx;   assign  wn_im[1005] = 32'hxxxxxxxx;   // 1005  0.993  0.116
+assign  wn_re[1006] = 32'hxxxxxxxx;   assign  wn_im[1006] = 32'hxxxxxxxx;   // 1006  0.994  0.110
+assign  wn_re[1007] = 32'hxxxxxxxx;   assign  wn_im[1007] = 32'hxxxxxxxx;   // 1007  0.995  0.104
+assign  wn_re[1008] = 32'hxxxxxxxx;   assign  wn_im[1008] = 32'hxxxxxxxx;   // 1008  0.995  0.098
+assign  wn_re[1009] = 32'hxxxxxxxx;   assign  wn_im[1009] = 32'hxxxxxxxx;   // 1009  0.996  0.092
+assign  wn_re[1010] = 32'hxxxxxxxx;   assign  wn_im[1010] = 32'hxxxxxxxx;   // 1010  0.996  0.086
+assign  wn_re[1011] = 32'hxxxxxxxx;   assign  wn_im[1011] = 32'hxxxxxxxx;   // 1011  0.997  0.080
+assign  wn_re[1012] = 32'hxxxxxxxx;   assign  wn_im[1012] = 32'hxxxxxxxx;   // 1012  0.997  0.074
+assign  wn_re[1013] = 32'hxxxxxxxx;   assign  wn_im[1013] = 32'hxxxxxxxx;   // 1013  0.998  0.067
+assign  wn_re[1014] = 32'hxxxxxxxx;   assign  wn_im[1014] = 32'hxxxxxxxx;   // 1014  0.998  0.061
+assign  wn_re[1015] = 32'hxxxxxxxx;   assign  wn_im[1015] = 32'hxxxxxxxx;   // 1015  0.998  0.055
+assign  wn_re[1016] = 32'hxxxxxxxx;   assign  wn_im[1016] = 32'hxxxxxxxx;   // 1016  0.999  0.049
+assign  wn_re[1017] = 32'hxxxxxxxx;   assign  wn_im[1017] = 32'hxxxxxxxx;   // 1017  0.999  0.043
+assign  wn_re[1018] = 32'hxxxxxxxx;   assign  wn_im[1018] = 32'hxxxxxxxx;   // 1018  0.999  0.037
+assign  wn_re[1019] = 32'hxxxxxxxx;   assign  wn_im[1019] = 32'hxxxxxxxx;   // 1019  1.000  0.031
+assign  wn_re[1020] = 32'hxxxxxxxx;   assign  wn_im[1020] = 32'hxxxxxxxx;   // 1020  1.000  0.025
+assign  wn_re[1021] = 32'hxxxxxxxx;   assign  wn_im[1021] = 32'hxxxxxxxx;   // 1021  1.000  0.018
+assign  wn_re[1022] = 32'hxxxxxxxx;   assign  wn_im[1022] = 32'hxxxxxxxx;   // 1022  1.000  0.012
+assign  wn_re[1023] = 32'hxxxxxxxx;   assign  wn_im[1023] = 32'hxxxxxxxx;   // 1023  1.000  0.006
 
 endmodule

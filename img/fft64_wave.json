@@ -1,9 +1,9 @@
 { signal: [
-  { name: 'idata_en' , wave: '0.1...|.0.........', node: '..a...............' },
-  { name: 'idata_r/i', wave: 'x.===x|=x.........', data: 'D0 D1 D2 D63' },
-  {                                                node: '..b.......c.......' },
-  { name: 'odata_en' , wave: '0........|1...|.0.', node: '..........d.......' },
-  { name: 'odata_r/i', wave: 'x........|===x|=x.', data: 'D0 D1 D2 D63' },
+  { name: 'di_en'   , wave: '0.1...|.0.........', node: '..a...............' },
+  { name: 'di_re/im', wave: 'x.===x|=x.........', data: 'D0 D1 D2 D63' },
+  {                                               node: '..b.......c.......' },
+  { name: 'do_en'   , wave: '0........|1...|.0.', node: '..........d.......' },
+  { name: 'do_re/im', wave: 'x........|===x|=x.', data: 'D0 D1 D2 D63' },
   ],
   edge: ['a|b', 'b<->c 71 clock cycles', 'c|d'],
 }

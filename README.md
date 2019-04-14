@@ -14,14 +14,14 @@ Interface
 	module FFT #(
 	    parameter   WIDTH = 16
 	)(
-	    input               clock,      //  Master Clock
-	    input               reset,      //  Active High Asynchronous Reset
-	    input               idata_en,   //  Input Data Enable
-	    input   [WIDTH-1:0] idata_r,    //  Input Data (Real)
-	    input   [WIDTH-1:0] idata_i,    //  Input Data (Imag)
-	    output              odata_en,   //  Output Data Enable
-	    output  [WIDTH-1:0] odata_r,    //  Output Data (Real)
-	    output  [WIDTH-1:0] odata_i     //  Output Data (Imag)
+	    input               clock,  //  Master Clock
+	    input               reset,  //  Active High Asynchronous Reset
+	    input               di_en,  //  Input Data Enable
+	    input   [WIDTH-1:0] di_re,  //  Input Data (Real)
+	    input   [WIDTH-1:0] di_im,  //  Input Data (Imag)
+	    output              do_en,  //  Output Data Enable
+	    output  [WIDTH-1:0] do_re,  //  Output Data (Real)
+	    output  [WIDTH-1:0] do_im   //  Output Data (Imag)
 	);
 
 Data must be input consecutively in natural order.

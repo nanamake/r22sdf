@@ -15,11 +15,11 @@ initial begin : STIM
 			GenerateInputWave;
 		end
 		begin
-			wait (odata_en == 1);
+			wait (do_en == 1);
 			repeat(64) @(posedge clock);
 			SaveOutputData("output4.txt");
 			@(negedge clock);
-			wait (odata_en == 1);
+			wait (do_en == 1);
 			repeat(64) @(posedge clock);
 			SaveOutputData("output5.txt");
 		end

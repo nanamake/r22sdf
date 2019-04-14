@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FFT
-Sat Aug 11 05:53:27 2018
+Sun Apr 14 11:28:14 2019
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
 
 
@@ -21,14 +21,14 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  13. Multiplexer Restructuring Statistics (Restructuring Performed)
  14. Source assignments for SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated
  15. Source assignments for SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated
- 16. Source assignments for SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2
- 17. Source assignments for SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2
- 18. Source assignments for SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2
- 19. Source assignments for SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2
- 20. Source assignments for SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2
- 21. Source assignments for SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2
- 22. Source assignments for SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2
- 23. Source assignments for SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2
+ 16. Source assignments for SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2
+ 17. Source assignments for SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2
+ 18. Source assignments for SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2
+ 19. Source assignments for SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2
+ 20. Source assignments for SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2
+ 21. Source assignments for SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2
+ 22. Source assignments for SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2
+ 23. Source assignments for SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2
  24. Parameter Settings for User Entity Instance: Top-level Entity: |FFT
  25. Parameter Settings for User Entity Instance: SdfUnit:SU1
  26. Parameter Settings for User Entity Instance: SdfUnit:SU1|Butterfly:BF1
@@ -72,14 +72,14 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
  64. Parameter Settings for User Entity Instance: SdfUnit:SU5|Multiply:MU
  65. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0
  66. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0
- 67. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0
- 68. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0
- 69. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0
- 70. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0
- 71. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0
- 72. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0
- 73. Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0
- 74. Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0
+ 67. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0
+ 68. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0
+ 69. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0
+ 70. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0
+ 71. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0
+ 72. Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0
+ 73. Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0
+ 74. Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0
  75. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|lpm_mult:Mult0
  76. Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|lpm_mult:Mult0
  77. Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3
@@ -133,7 +133,7 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Aug 11 05:53:27 2018      ;
+; Analysis & Synthesis Status        ; Successful - Sun Apr 14 11:28:14 2019      ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Web Edition ;
 ; Revision Name                      ; FFT                                        ;
 ; Top-level Entity Name              ; FFT                                        ;
@@ -359,167 +359,167 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Embedded Multiplier 9-bit elements          ; 128         ;
 ; Maximum fan-out node                        ; clock~input ;
 ; Maximum fan-out                             ; 2242        ;
-; Total fan-out                               ; 29780       ;
+; Total fan-out                               ; 29775       ;
 ; Average fan-out                             ; 3.40        ;
 +---------------------------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                ;
-+------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                    ; Library Name ;
-+------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
-; |FFT                                           ; 6131 (0)          ; 1608 (0)     ; 74016       ; 128          ; 0       ; 64        ; 132  ; 0            ; |FFT                                                                                                                   ; work         ;
-;    |SdfUnit:SU1|                               ; 1490 (272)        ; 322 (230)    ; 56704       ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                         ; work         ;
-;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_k9m:auto_generated|    ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated                               ; work         ;
-;                |altsyncram_sk81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2   ; work         ;
-;                |cntr_gsf:cntr1|                ; 22 (20)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|cntr_gsf:cntr1                ; work         ;
-;                   |cmpr_vgc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|cntr_gsf:cntr1|cmpr_vgc:cmpr4 ; work         ;
-;       |DelayBuffer:DB2|                        ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_p9m:auto_generated|    ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated                               ; work         ;
-;                |altsyncram_4l81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2   ; work         ;
-;                |cntr_ksf:cntr1|                ; 19 (17)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|cntr_ksf:cntr1                ; work         ;
-;                   |cmpr_ugc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|cntr_ksf:cntr1|cmpr_ugc:cmpr4 ; work         ;
-;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU                                                                                           ; work         ;
-;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult0                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult1                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult2                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
-;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW                                                                                            ; work         ;
-;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                     ; work         ;
-;             |altsyncram_3qu:auto_generated|    ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated                                       ; work         ;
-;       |TwiddleConvert8:TC|                     ; 335 (335)         ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC                                                                                    ; work         ;
-;       |lpm_mult:Mult0|                         ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0                                                                                        ; work         ;
-;          |multcore:mult_core|                  ; 25 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
-;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
-;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
-;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated     ; work         ;
-;    |SdfUnit:SU2|                               ; 1477 (272)        ; 316 (230)    ; 13984       ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                         ; work         ;
-;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_n9m:auto_generated|    ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated                               ; work         ;
-;                |altsyncram_uk81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2   ; work         ;
-;                |cntr_hsf:cntr1|                ; 17 (15)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|cntr_hsf:cntr1                ; work         ;
-;                   |cmpr_tgc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|cntr_hsf:cntr1|cmpr_tgc:cmpr4 ; work         ;
-;       |DelayBuffer:DB2|                        ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_68m:auto_generated|    ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated                               ; work         ;
-;                |altsyncram_qh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2   ; work         ;
-;                |cntr_vqf:cntr1|                ; 15 (14)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|cntr_vqf:cntr1                ; work         ;
-;                   |cmpr_sgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|cntr_vqf:cntr1|cmpr_sgc:cmpr4 ; work         ;
-;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU                                                                                           ; work         ;
-;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult0                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult1                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult2                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
-;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW                                                                                            ; work         ;
-;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                     ; work         ;
-;             |altsyncram_cou:auto_generated|    ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated                                       ; work         ;
-;       |TwiddleConvert8:TC|                     ; 334 (334)         ; 72 (72)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC                                                                                    ; work         ;
-;       |lpm_mult:Mult0|                         ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0                                                                                        ; work         ;
-;          |multcore:mult_core|                  ; 22 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
-;             |mpar_add:padder|                  ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
-;                |lpm_add_sub:adder[0]|          ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
-;                   |add_sub_nbh:auto_generated| ; 10 (10)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated     ; work         ;
-;    |SdfUnit:SU3|                               ; 1507 (272)        ; 358 (230)    ; 2816        ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                         ; work         ;
-;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_18m:auto_generated|    ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated                               ; work         ;
-;                |altsyncram_eh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2   ; work         ;
-;                |cntr_pqf:cntr1|                ; 12 (11)           ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|cntr_pqf:cntr1                ; work         ;
-;                   |cmpr_rgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|cntr_pqf:cntr1|cmpr_rgc:cmpr4 ; work         ;
-;       |DelayBuffer:DB2|                        ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_38m:auto_generated|    ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated                               ; work         ;
-;                |altsyncram_gh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2   ; work         ;
-;                |cntr_qqf:cntr1|                ; 10 (9)            ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|cntr_qqf:cntr1                ; work         ;
-;                   |cmpr_qgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|cntr_qqf:cntr1|cmpr_qgc:cmpr4 ; work         ;
-;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU                                                                                           ; work         ;
-;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
-;       |Twiddle:TW|                             ; 50 (50)           ; 49 (49)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Twiddle:TW                                                                                            ; work         ;
-;       |TwiddleConvert8:TC|                     ; 331 (331)         ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC                                                                                    ; work         ;
-;       |lpm_mult:Mult0|                         ; 17 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0                                                                                        ; work         ;
-;          |multcore:mult_core|                  ; 17 (8)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
-;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
-;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
-;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated     ; work         ;
-;    |SdfUnit:SU4|                               ; 1123 (272)        ; 257 (230)    ; 512         ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU4                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Butterfly:BF1                                                                                         ; work         ;
-;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_k6m:auto_generated|    ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated                               ; work         ;
-;                |altsyncram_ge81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2   ; work         ;
-;                |cntr_apf:cntr1|                ; 8 (8)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated|cntr_apf:cntr1                ; work         ;
-;       |DelayBuffer:DB2|                        ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2                                                                                       ; work         ;
-;          |altshift_taps:buf_r_rtl_0|           ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0                                                             ; work         ;
-;             |shift_taps_g6m:auto_generated|    ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated                               ; work         ;
-;                |altsyncram_4e81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2   ; work         ;
-;                |cntr_4pf:cntr1|                ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated|cntr_4pf:cntr1                ; work         ;
-;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU                                                                                           ; work         ;
-;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult0                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult1                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult2                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                    ; work         ;
-;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3                                                                            ; work         ;
-;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                    ; work         ;
-;       |TwiddleConvert8:TC|                     ; 14 (14)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC                                                                                    ; work         ;
-;       |lpm_mult:Mult0|                         ; 13 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0                                                                                        ; work         ;
-;          |multcore:mult_core|                  ; 13 (4)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core                                                                     ; work         ;
-;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; work         ;
-;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; work         ;
-;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated     ; work         ;
-;    |SdfUnit:SU5|                               ; 534 (207)         ; 355 (163)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5                                                                                                       ; work         ;
-;       |Butterfly:BF1|                          ; 65 (65)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|Butterfly:BF1                                                                                         ; work         ;
-;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|Butterfly:BF2                                                                                         ; work         ;
-;       |DelayBuffer:DB1|                        ; 66 (66)           ; 128 (128)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|DelayBuffer:DB1                                                                                       ; work         ;
-;       |DelayBuffer:DB2|                        ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|DelayBuffer:DB2                                                                                       ; work         ;
-+------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                 ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                     ; Library Name ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+--------------+
+; |FFT                                           ; 6131 (0)          ; 1608 (0)     ; 74016       ; 128          ; 0       ; 64        ; 132  ; 0            ; |FFT                                                                                                                    ; work         ;
+;    |SdfUnit:SU1|                               ; 1490 (272)        ; 322 (230)    ; 56704       ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU1                                                                                                        ; work         ;
+;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF1                                                                                          ; work         ;
+;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Butterfly:BF2                                                                                          ; work         ;
+;       |DelayBuffer:DB1|                        ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_k9m:auto_generated|    ; 22 (0)            ; 9 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated                               ; work         ;
+;                |altsyncram_sk81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 32640       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2   ; work         ;
+;                |cntr_gsf:cntr1|                ; 22 (20)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|cntr_gsf:cntr1                ; work         ;
+;                   |cmpr_vgc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|cntr_gsf:cntr1|cmpr_vgc:cmpr4 ; work         ;
+;       |DelayBuffer:DB2|                        ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_p9m:auto_generated|    ; 19 (0)            ; 8 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated                               ; work         ;
+;                |altsyncram_4l81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 16256       ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2   ; work         ;
+;                |cntr_ksf:cntr1|                ; 19 (17)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|cntr_ksf:cntr1                ; work         ;
+;                   |cmpr_ugc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|cntr_ksf:cntr1|cmpr_ugc:cmpr4 ; work         ;
+;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU                                                                                            ; work         ;
+;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult0                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult1                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult2                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                     ; work         ;
+;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW                                                                                             ; work         ;
+;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                      ; work         ;
+;             |altsyncram_3qu:auto_generated|    ; 0 (0)             ; 0 (0)        ; 7808        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated                                        ; work         ;
+;       |TwiddleConvert8:TC|                     ; 335 (335)         ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC                                                                                     ; work         ;
+;       |lpm_mult:Mult0|                         ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0                                                                                         ; work         ;
+;          |multcore:mult_core|                  ; 25 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core                                                                      ; work         ;
+;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                      ; work         ;
+;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                 ; work         ;
+;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU1|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated      ; work         ;
+;    |SdfUnit:SU2|                               ; 1477 (272)        ; 316 (230)    ; 13984       ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU2                                                                                                        ; work         ;
+;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF1                                                                                          ; work         ;
+;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Butterfly:BF2                                                                                          ; work         ;
+;       |DelayBuffer:DB1|                        ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_n9m:auto_generated|    ; 17 (0)            ; 7 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated                               ; work         ;
+;                |altsyncram_uk81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 8064        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2   ; work         ;
+;                |cntr_hsf:cntr1|                ; 17 (15)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|cntr_hsf:cntr1                ; work         ;
+;                   |cmpr_tgc:cmpr4|             ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|cntr_hsf:cntr1|cmpr_tgc:cmpr4 ; work         ;
+;       |DelayBuffer:DB2|                        ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_68m:auto_generated|    ; 15 (0)            ; 6 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated                               ; work         ;
+;                |altsyncram_qh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 3968        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2   ; work         ;
+;                |cntr_vqf:cntr1|                ; 15 (14)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|cntr_vqf:cntr1                ; work         ;
+;                   |cmpr_sgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|cntr_vqf:cntr1|cmpr_sgc:cmpr4 ; work         ;
+;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU                                                                                            ; work         ;
+;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult0                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult1                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult2                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult3                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                     ; work         ;
+;       |Twiddle:TW|                             ; 2 (2)             ; 1 (1)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW                                                                                             ; work         ;
+;          |altsyncram:Mux63_rtl_0|              ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0                                                                      ; work         ;
+;             |altsyncram_cou:auto_generated|    ; 0 (0)             ; 0 (0)        ; 1952        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated                                        ; work         ;
+;       |TwiddleConvert8:TC|                     ; 334 (334)         ; 72 (72)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC                                                                                     ; work         ;
+;       |lpm_mult:Mult0|                         ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0                                                                                         ; work         ;
+;          |multcore:mult_core|                  ; 22 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core                                                                      ; work         ;
+;             |mpar_add:padder|                  ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                      ; work         ;
+;                |lpm_add_sub:adder[0]|          ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                 ; work         ;
+;                   |add_sub_nbh:auto_generated| ; 10 (10)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU2|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated      ; work         ;
+;    |SdfUnit:SU3|                               ; 1507 (272)        ; 358 (230)    ; 2816        ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU3                                                                                                        ; work         ;
+;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF1                                                                                          ; work         ;
+;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Butterfly:BF2                                                                                          ; work         ;
+;       |DelayBuffer:DB1|                        ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_18m:auto_generated|    ; 12 (0)            ; 5 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated                               ; work         ;
+;                |altsyncram_eh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 1920        ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2   ; work         ;
+;                |cntr_pqf:cntr1|                ; 12 (11)           ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|cntr_pqf:cntr1                ; work         ;
+;                   |cmpr_rgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|cntr_pqf:cntr1|cmpr_rgc:cmpr4 ; work         ;
+;       |DelayBuffer:DB2|                        ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_38m:auto_generated|    ; 10 (0)            ; 4 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated                               ; work         ;
+;                |altsyncram_gh81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 896         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2   ; work         ;
+;                |cntr_qqf:cntr1|                ; 10 (9)            ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|cntr_qqf:cntr1                ; work         ;
+;                   |cmpr_qgc:cmpr4|             ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|cntr_qqf:cntr1|cmpr_qgc:cmpr4 ; work         ;
+;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU                                                                                            ; work         ;
+;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                     ; work         ;
+;       |Twiddle:TW|                             ; 50 (50)           ; 49 (49)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|Twiddle:TW                                                                                             ; work         ;
+;       |TwiddleConvert8:TC|                     ; 331 (331)         ; 70 (70)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC                                                                                     ; work         ;
+;       |lpm_mult:Mult0|                         ; 17 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0                                                                                         ; work         ;
+;          |multcore:mult_core|                  ; 17 (8)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core                                                                      ; work         ;
+;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                      ; work         ;
+;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                 ; work         ;
+;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated      ; work         ;
+;    |SdfUnit:SU4|                               ; 1123 (272)        ; 257 (230)    ; 512         ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU4                                                                                                        ; work         ;
+;       |Butterfly:BF1|                          ; 195 (195)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Butterfly:BF1                                                                                          ; work         ;
+;       |Butterfly:BF2|                          ; 260 (260)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Butterfly:BF2                                                                                          ; work         ;
+;       |DelayBuffer:DB1|                        ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_k6m:auto_generated|    ; 8 (0)             ; 3 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated                               ; work         ;
+;                |altsyncram_ge81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 384         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2   ; work         ;
+;                |cntr_apf:cntr1|                ; 8 (8)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated|cntr_apf:cntr1                ; work         ;
+;       |DelayBuffer:DB2|                        ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2                                                                                        ; work         ;
+;          |altshift_taps:buf_re_rtl_0|          ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0                                                             ; work         ;
+;             |shift_taps_g6m:auto_generated|    ; 1 (0)             ; 1 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated                               ; work         ;
+;                |altsyncram_4e81:altsyncram2|   ; 0 (0)             ; 0 (0)        ; 128         ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2   ; work         ;
+;                |cntr_4pf:cntr1|                ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated|cntr_4pf:cntr1                ; work         ;
+;       |Multiply:MU|                            ; 360 (0)           ; 0 (0)        ; 0           ; 32           ; 0       ; 16        ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU                                                                                            ; work         ;
+;          |lpm_mult:Mult0|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult0                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult0|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult1|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult1                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult1|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult2|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult2                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult2|mult_46t:auto_generated                                                     ; work         ;
+;          |lpm_mult:Mult3|                      ; 90 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3                                                                             ; work         ;
+;             |mult_46t:auto_generated|          ; 90 (90)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |FFT|SdfUnit:SU4|Multiply:MU|lpm_mult:Mult3|mult_46t:auto_generated                                                     ; work         ;
+;       |TwiddleConvert8:TC|                     ; 14 (14)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC                                                                                     ; work         ;
+;       |lpm_mult:Mult0|                         ; 13 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0                                                                                         ; work         ;
+;          |multcore:mult_core|                  ; 13 (4)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core                                                                      ; work         ;
+;             |mpar_add:padder|                  ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                      ; work         ;
+;                |lpm_add_sub:adder[0]|          ; 9 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                 ; work         ;
+;                   |add_sub_nbh:auto_generated| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU4|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_nbh:auto_generated      ; work         ;
+;    |SdfUnit:SU5|                               ; 534 (207)         ; 355 (163)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5                                                                                                        ; work         ;
+;       |Butterfly:BF1|                          ; 65 (65)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|Butterfly:BF1                                                                                          ; work         ;
+;       |Butterfly:BF2|                          ; 132 (132)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|Butterfly:BF2                                                                                          ; work         ;
+;       |DelayBuffer:DB1|                        ; 66 (66)           ; 128 (128)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|DelayBuffer:DB1                                                                                        ; work         ;
+;       |DelayBuffer:DB2|                        ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |FFT|SdfUnit:SU5|DelayBuffer:DB2                                                                                        ; work         ;
++------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                                            ;
-+----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
-; Name                                                                                                                       ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF              ;
-+----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
-; SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 510          ; 64           ; 510          ; 64           ; 32640 ; None             ;
-; SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 64           ; 254          ; 64           ; 16256 ; None             ;
-; SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated|ALTSYNCRAM                                     ; AUTO ; ROM              ; 128          ; 61           ; --           ; --           ; 7808  ; FFT.FFT0.rtl.mif ;
-; SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 126          ; 64           ; 126          ; 64           ; 8064  ; None             ;
-; SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 62           ; 64           ; 62           ; 64           ; 3968  ; None             ;
-; SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated|ALTSYNCRAM                                     ; AUTO ; ROM              ; 32           ; 61           ; --           ; --           ; 1952  ; FFT.FFT1.rtl.mif ;
-; SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 30           ; 64           ; 30           ; 64           ; 1920  ; None             ;
-; SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 14           ; 64           ; 14           ; 64           ; 896   ; None             ;
-; SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 6            ; 64           ; 6            ; 64           ; 384   ; None             ;
-; SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 2            ; 64           ; 2            ; 64           ; 128   ; None             ;
-+----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                             ;
++-----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
+; Name                                                                                                                        ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF              ;
++-----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
+; SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 510          ; 64           ; 510          ; 64           ; 32640 ; None             ;
+; SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 64           ; 254          ; 64           ; 16256 ; None             ;
+; SdfUnit:SU1|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_3qu:auto_generated|ALTSYNCRAM                                      ; AUTO ; ROM              ; 128          ; 61           ; --           ; --           ; 7808  ; FFT.FFT0.rtl.mif ;
+; SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 126          ; 64           ; 126          ; 64           ; 8064  ; None             ;
+; SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 62           ; 64           ; 62           ; 64           ; 3968  ; None             ;
+; SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63_rtl_0|altsyncram_cou:auto_generated|ALTSYNCRAM                                      ; AUTO ; ROM              ; 32           ; 61           ; --           ; --           ; 1952  ; FFT.FFT1.rtl.mif ;
+; SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 30           ; 64           ; 30           ; 64           ; 1920  ; None             ;
+; SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 14           ; 64           ; 14           ; 64           ; 896   ; None             ;
+; SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 6            ; 64           ; 6            ; 64           ; 384   ; None             ;
+; SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 2            ; 64           ; 2            ; 64           ; 128   ; None             ;
++-----------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------------------+
 
 
 +-----------------------------------------------------+
@@ -540,68 +540,68 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                          ;
-+-----------------------------------------------------------------+-----------------------------------------------------------+
-; Register name                                                   ; Reason for Removal                                        ;
-+-----------------------------------------------------------------+-----------------------------------------------------------+
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_data_i[31]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]          ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_data_i[31]          ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_data_i[31]          ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[31]                            ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU2|TwiddleConvert8:TC|ff_iaddr[0]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU2|TwiddleConvert8:TC|ff_iaddr[1]                      ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[2,3]                    ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU3|TwiddleConvert8:TC|ff_iaddr[2,3]                    ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[4,5]                    ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_r[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
-; SdfUnit:SU4|Twiddle:TW|ff_data_i[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_iaddr[6]    ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[1]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[2]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[4]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[5]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[7]           ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[11]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_i[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[12]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[14]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[17]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[24]          ;
-; SdfUnit:SU3|Twiddle:TW|ff_data_r[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_data_i[31]          ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[18,24]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[31] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[4,11,13,25]           ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[30] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[2,10,15,16,22]        ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[29] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[3,8]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[28] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[7,12]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[27] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[5,9]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[26] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[14,17]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[23] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[6,19,20]              ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[21] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[0]                    ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[0]  ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[4,11,13,25]           ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[30] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[2,10,15,16,22]        ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[29] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[3,8]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[28] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[7,12]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[27] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[5,9]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[26] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[1,18]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[24] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[14,17]                ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[23] ;
-; SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[6,19,20]              ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[21] ;
-; Total Number of Removed Registers = 140                         ;                                                           ;
-+-----------------------------------------------------------------+-----------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                  ;
++-------------------------------------------------------------+-------------------------------------------------------+
+; Register name                                               ; Reason for Removal                                    ;
++-------------------------------------------------------------+-------------------------------------------------------+
+; SdfUnit:SU4|Twiddle:TW|ff_re[30]                            ; Merged with SdfUnit:SU4|Twiddle:TW|ff_im[31]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[31]          ;
+; SdfUnit:SU2|Twiddle:TW|ff_re[30]                            ; Merged with SdfUnit:SU2|Twiddle:TW|ff_im[31]          ;
+; SdfUnit:SU1|Twiddle:TW|ff_re[30]                            ; Merged with SdfUnit:SU1|Twiddle:TW|ff_im[31]          ;
+; SdfUnit:SU4|Twiddle:TW|ff_re[31]                            ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[31]                            ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU2|Twiddle:TW|ff_re[31]                            ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU1|Twiddle:TW|ff_re[31]                            ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[0]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_addr[0]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU2|TwiddleConvert8:TC|ff_addr[0]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[1]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_addr[1]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU2|TwiddleConvert8:TC|ff_addr[1]                   ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[2,3]                 ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU3|TwiddleConvert8:TC|ff_addr[2,3]                 ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[4,5]                 ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|Twiddle:TW|ff_im[8,15..17,19,20,29]             ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|Twiddle:TW|ff_re[1,12,19,20,27]                 ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|Twiddle:TW|ff_im[2,3,6,10,14,21..23,28]         ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|Twiddle:TW|ff_re[6,7,14,17,18,21,23,24]         ; Stuck at GND due to stuck port data_in                ;
+; SdfUnit:SU4|Twiddle:TW|ff_re[2,5,15,16,22,25]               ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[6] ;
+; SdfUnit:SU4|Twiddle:TW|ff_im[0,4,12,27]                     ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[6] ;
+; SdfUnit:SU4|Twiddle:TW|ff_re[0,3,4,8..11,13,26,28,29]       ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[6] ;
+; SdfUnit:SU4|Twiddle:TW|ff_im[1,5,7,9,11,13,18,24..26,30,31] ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_addr[6] ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[0]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[1]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_im[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[2]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[15]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[4]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[3]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[5]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_im[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[5]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[28]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[7]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_im[30]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[7]           ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[13]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[11]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_im[27]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[12]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[6]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[14]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[19]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[17]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[9]                             ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[24]          ;
+; SdfUnit:SU3|Twiddle:TW|ff_re[29]                            ; Merged with SdfUnit:SU3|Twiddle:TW|ff_im[31]          ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[18,24]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[31]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[30]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[29]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[28]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[27]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[26]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[23]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_re[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[21]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[0]                     ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_re[0]   ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[4,11,13,25]            ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[30]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[2,10,15,16,22]         ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[29]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[3,8]                   ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[28]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[7,12]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[27]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[5,9]                   ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[26]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[1,18]                  ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[24]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[14,17]                 ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[23]  ;
+; SdfUnit:SU4|TwiddleConvert8:TC|ff_im[6,19,20]               ; Merged with SdfUnit:SU4|TwiddleConvert8:TC|ff_im[21]  ;
+; Total Number of Removed Registers = 140                     ;                                                       ;
++-------------------------------------------------------------+-------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -612,71 +612,71 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; Total registers                              ; 1608  ;
 ; Number of registers using Synchronous Clear  ; 153   ;
 ; Number of registers using Synchronous Load   ; 1030  ;
-; Number of registers using Asynchronous Clear ; 174   ;
+; Number of registers using Asynchronous Clear ; 169   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Registers Packed Into Inferred Megafunctions                                                            ;
-+--------------------------------------------------+-----------------------------------------+------------+
-; Register Name                                    ; Megafunction                            ; Type       ;
-+--------------------------------------------------+-----------------------------------------+------------+
-; SdfUnit:SU1|Twiddle:TW|ff_data_i[0..30]          ; SdfUnit:SU1|Twiddle:TW|Mux63_rtl_0      ; ROM        ;
-; SdfUnit:SU1|Twiddle:TW|ff_data_r[0..29]          ; SdfUnit:SU1|Twiddle:TW|Mux63_rtl_0      ; ROM        ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_i[0..30]          ; SdfUnit:SU2|Twiddle:TW|Mux63_rtl_0      ; ROM        ;
-; SdfUnit:SU2|Twiddle:TW|ff_data_r[0..29]          ; SdfUnit:SU2|Twiddle:TW|Mux63_rtl_0      ; ROM        ;
-; SdfUnit:SU1|DelayBuffer:DB1|buf_r[0..511][0..31] ; SdfUnit:SU1|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU1|DelayBuffer:DB1|buf_i[0..511][0..31] ; SdfUnit:SU1|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU1|DelayBuffer:DB2|buf_r[0..255][0..31] ; SdfUnit:SU1|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU1|DelayBuffer:DB2|buf_i[0..255][0..31] ; SdfUnit:SU1|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU2|DelayBuffer:DB1|buf_r[0..127][0..31] ; SdfUnit:SU2|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU2|DelayBuffer:DB1|buf_i[0..127][0..31] ; SdfUnit:SU2|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU2|DelayBuffer:DB2|buf_r[0..63][0..31]  ; SdfUnit:SU2|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU2|DelayBuffer:DB2|buf_i[0..63][0..31]  ; SdfUnit:SU2|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU3|DelayBuffer:DB1|buf_r[0..31][0..31]  ; SdfUnit:SU3|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU3|DelayBuffer:DB1|buf_i[0..31][0..31]  ; SdfUnit:SU3|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU3|DelayBuffer:DB2|buf_r[0..15][0..31]  ; SdfUnit:SU3|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU3|DelayBuffer:DB2|buf_i[0..15][0..31]  ; SdfUnit:SU3|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU4|DelayBuffer:DB1|buf_r[0..7][0..31]   ; SdfUnit:SU4|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU4|DelayBuffer:DB1|buf_i[0..7][0..31]   ; SdfUnit:SU4|DelayBuffer:DB1|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU4|DelayBuffer:DB2|buf_r[0..3][0..31]   ; SdfUnit:SU4|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-; SdfUnit:SU4|DelayBuffer:DB2|buf_i[0..3][0..31]   ; SdfUnit:SU4|DelayBuffer:DB2|buf_r_rtl_0 ; SHIFT_TAPS ;
-+--------------------------------------------------+-----------------------------------------+------------+
++-----------------------------------------------------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions                                                              ;
++---------------------------------------------------+------------------------------------------+------------+
+; Register Name                                     ; Megafunction                             ; Type       ;
++---------------------------------------------------+------------------------------------------+------------+
+; SdfUnit:SU1|Twiddle:TW|ff_im[0..30]               ; SdfUnit:SU1|Twiddle:TW|Mux63_rtl_0       ; ROM        ;
+; SdfUnit:SU1|Twiddle:TW|ff_re[0..29]               ; SdfUnit:SU1|Twiddle:TW|Mux63_rtl_0       ; ROM        ;
+; SdfUnit:SU2|Twiddle:TW|ff_im[0..30]               ; SdfUnit:SU2|Twiddle:TW|Mux63_rtl_0       ; ROM        ;
+; SdfUnit:SU2|Twiddle:TW|ff_re[0..29]               ; SdfUnit:SU2|Twiddle:TW|Mux63_rtl_0       ; ROM        ;
+; SdfUnit:SU1|DelayBuffer:DB1|buf_re[0..511][0..31] ; SdfUnit:SU1|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU1|DelayBuffer:DB1|buf_im[0..511][0..31] ; SdfUnit:SU1|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU1|DelayBuffer:DB2|buf_re[0..255][0..31] ; SdfUnit:SU1|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU1|DelayBuffer:DB2|buf_im[0..255][0..31] ; SdfUnit:SU1|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU2|DelayBuffer:DB1|buf_re[0..127][0..31] ; SdfUnit:SU2|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU2|DelayBuffer:DB1|buf_im[0..127][0..31] ; SdfUnit:SU2|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU2|DelayBuffer:DB2|buf_re[0..63][0..31]  ; SdfUnit:SU2|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU2|DelayBuffer:DB2|buf_im[0..63][0..31]  ; SdfUnit:SU2|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU3|DelayBuffer:DB1|buf_re[0..31][0..31]  ; SdfUnit:SU3|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU3|DelayBuffer:DB1|buf_im[0..31][0..31]  ; SdfUnit:SU3|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU3|DelayBuffer:DB2|buf_re[0..15][0..31]  ; SdfUnit:SU3|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU3|DelayBuffer:DB2|buf_im[0..15][0..31]  ; SdfUnit:SU3|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU4|DelayBuffer:DB1|buf_re[0..7][0..31]   ; SdfUnit:SU4|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU4|DelayBuffer:DB1|buf_im[0..7][0..31]   ; SdfUnit:SU4|DelayBuffer:DB1|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU4|DelayBuffer:DB2|buf_re[0..3][0..31]   ; SdfUnit:SU4|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
+; SdfUnit:SU4|DelayBuffer:DB2|buf_im[0..3][0..31]   ; SdfUnit:SU4|DelayBuffer:DB2|buf_re_rtl_0 ; SHIFT_TAPS ;
++---------------------------------------------------+------------------------------------------+------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_i[28]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_odata_r[30]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_i[2]                    ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_odata_r[19]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_i[3]                    ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_odata_r[24]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_i[30]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_odata_r[15]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_i[22]                   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_odata_r[19]                   ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[28] ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[0]  ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[7]  ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_r[16] ;
-; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_odata_i[19] ;
-; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_r[2]  ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_i[26] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_odata_i[3]  ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_r[14] ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_i[24] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_odata_i[7]  ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_r[1]  ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_i[22] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_odata_i[3]  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU5|bf1_do_im[28]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU5|bf1_do_re[30]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU4|bf1_do_im[2]                 ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|bf1_do_re[19]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU3|bf1_do_im[3]                 ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|bf1_do_re[24]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU2|bf1_do_im[30]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|bf1_do_re[15]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |FFT|SdfUnit:SU1|bf1_do_im[22]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|bf1_do_re[19]                ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_im[28] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_im[0]  ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_im[7]  ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_re[16] ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU4|TwiddleConvert8:TC|ff_im[19] ;
+; 5:1                ; 29 bits   ; 87 LEs        ; 87 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_re[2]  ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_im[26] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU3|TwiddleConvert8:TC|ff_im[3]  ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_re[14] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_im[24] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU2|TwiddleConvert8:TC|ff_im[7]  ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_re[1]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_im[22] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 45 LEs               ; 0 LEs                  ; Yes        ; |FFT|SdfUnit:SU1|TwiddleConvert8:TC|ff_im[3]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -697,76 +697,76 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +---------------------------------+--------------------+------+--------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k9m:auto_generated|altsyncram_sk81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_p9m:auto_generated|altsyncram_4l81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_n9m:auto_generated|altsyncram_uk81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_68m:auto_generated|altsyncram_qh81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_18m:auto_generated|altsyncram_eh81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_38m:auto_generated|altsyncram_gh81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0|shift_taps_k6m:auto_generated|altsyncram_ge81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2 ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                       ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                        ;
-+---------------------------------+--------------------+------+--------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0|shift_taps_g6m:auto_generated|altsyncram_4e81:altsyncram2 ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                        ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                         ;
++---------------------------------+--------------------+------+---------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------+
@@ -1381,123 +1381,123 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 512            ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_k9m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 512            ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_k9m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 256            ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_p9m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 256            ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_p9m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 128            ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_n9m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 128            ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_n9m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 64             ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_68m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 64             ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_68m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 32             ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_18m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 32             ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_18m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 16             ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_38m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 16             ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_38m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 8              ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_k6m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 8              ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_k6m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; Parameter Name ; Value          ; Type                                                                 ;
-+----------------+----------------+----------------------------------------------------------------------+
-; WIDTH_BYTEENA  ; 1              ; Untyped                                                              ;
-; NUMBER_OF_TAPS ; 1              ; Untyped                                                              ;
-; TAP_DISTANCE   ; 4              ; Untyped                                                              ;
-; WIDTH          ; 64             ; Untyped                                                              ;
-; POWER_UP_STATE ; CLEARED        ; Untyped                                                              ;
-; CBXI_PARAMETER ; shift_taps_g6m ; Untyped                                                              ;
-+----------------+----------------+----------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
++----------------+----------------+-----------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                  ;
++----------------+----------------+-----------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                               ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                               ;
+; TAP_DISTANCE   ; 4              ; Untyped                                                               ;
+; WIDTH          ; 64             ; Untyped                                                               ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                               ;
+; CBXI_PARAMETER ; shift_taps_g6m ; Untyped                                                               ;
++----------------+----------------+-----------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -2232,45 +2232,45 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+-----------------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; altshift_taps Parameter Settings by Entity Instance                                ;
-+----------------------------+-------------------------------------------------------+
-; Name                       ; Value                                                 ;
-+----------------------------+-------------------------------------------------------+
-; Number of entity instances ; 8                                                     ;
-; Entity Instance            ; SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 512                                                   ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 256                                                   ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 128                                                   ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 64                                                    ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 32                                                    ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 16                                                    ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 8                                                     ;
-;     -- WIDTH               ; 64                                                    ;
-; Entity Instance            ; SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0 ;
-;     -- NUMBER_OF_TAPS      ; 1                                                     ;
-;     -- TAP_DISTANCE        ; 4                                                     ;
-;     -- WIDTH               ; 64                                                    ;
-+----------------------------+-------------------------------------------------------+
++-------------------------------------------------------------------------------------+
+; altshift_taps Parameter Settings by Entity Instance                                 ;
++----------------------------+--------------------------------------------------------+
+; Name                       ; Value                                                  ;
++----------------------------+--------------------------------------------------------+
+; Number of entity instances ; 8                                                      ;
+; Entity Instance            ; SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 512                                                    ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 256                                                    ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 128                                                    ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 64                                                     ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 32                                                     ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 16                                                     ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 8                                                      ;
+;     -- WIDTH               ; 64                                                     ;
+; Entity Instance            ; SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0 ;
+;     -- NUMBER_OF_TAPS      ; 1                                                      ;
+;     -- TAP_DISTANCE        ; 4                                                      ;
+;     -- WIDTH               ; 64                                                     ;
++----------------------------+--------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------+
@@ -2507,8 +2507,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port ; Type   ; Severity ; Details                                                                             ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
-; mr   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; mi   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; m_re ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; m_im ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -2519,11 +2519,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; boundary_port         ; 132                         ;
 ; cycloneiii_ff         ; 1608                        ;
-;     CLR               ; 24                          ;
+;     CLR               ; 19                          ;
 ;     CLR SCLR          ; 150                         ;
 ;     SCLR              ; 3                           ;
 ;     SLD               ; 1030                        ;
-;     plain             ; 401                         ;
+;     plain             ; 406                         ;
 ; cycloneiii_lcell_comb ; 6131                        ;
 ;     arith             ; 3961                        ;
 ;         2 data inputs ; 1351                        ;
@@ -2548,7 +2548,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:43     ;
+; Top            ; 00:00:47     ;
 +----------------+--------------+
 
 
@@ -2558,7 +2558,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Web Edition
-    Info: Processing started: Sat Aug 11 05:52:27 2018
+    Info: Processing started: Sun Apr 14 11:27:03 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FFT -c FFT
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/fft1024_32b.v
@@ -2577,40 +2577,40 @@ Info (12021): Found 1 design units, including 1 entities, in source file rtl/twi
     Info (12023): Found entity 1: Twiddle
 Info (12127): Elaborating entity "FFT" for the top level hierarchy
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU1"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(259): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(265): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF1"
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 33 to match size of target (32)
-Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 33 to match size of target (32)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB1"
 Info (12128): Elaborating entity "Butterfly" for hierarchy "SdfUnit:SU1|Butterfly:BF2"
+Warning (10230): Verilog HDL assignment warning at Butterfly.v(27): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(28): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(29): truncated value with size 33 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Butterfly.v(30): truncated value with size 33 to match size of target (32)
-Warning (10230): Verilog HDL assignment warning at Butterfly.v(31): truncated value with size 33 to match size of target (32)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU1|DelayBuffer:DB2"
 Info (12128): Elaborating entity "Twiddle" for hierarchy "SdfUnit:SU1|Twiddle:TW"
 Info (12128): Elaborating entity "TwiddleConvert8" for hierarchy "SdfUnit:SU1|TwiddleConvert8:TC"
 Info (12128): Elaborating entity "Multiply" for hierarchy "SdfUnit:SU1|Multiply:MU"
+Warning (10230): Verilog HDL assignment warning at Multiply.v(25): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(26): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(27): truncated value with size 64 to match size of target (32)
 Warning (10230): Verilog HDL assignment warning at Multiply.v(28): truncated value with size 64 to match size of target (32)
-Warning (10230): Verilog HDL assignment warning at Multiply.v(29): truncated value with size 64 to match size of target (32)
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU2"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(259): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(265): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU2|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU3"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(259): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(265): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU3|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU4"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(259): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(265): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU4|DelayBuffer:DB2"
 Info (12128): Elaborating entity "SdfUnit" for hierarchy "SdfUnit:SU5"
-Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(259): truncated value with size 10 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at SdfUnit_TC.v(265): truncated value with size 10 to match size of target (8)
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB1"
 Info (12128): Elaborating entity "DelayBuffer" for hierarchy "SdfUnit:SU5|DelayBuffer:DB2"
 Info (19000): Inferred 10 megafunctions from design logic
@@ -2630,35 +2630,35 @@ Info (19000): Inferred 10 megafunctions from design logic
         Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
         Info (286033): Parameter RAM_BLOCK_TYPE set to AUTO
         Info (286033): Parameter INIT_FILE set to FFT.FFT1.rtl.mif
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU1|DelayBuffer:DB1|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU1|DelayBuffer:DB1|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 512
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU1|DelayBuffer:DB2|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU1|DelayBuffer:DB2|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 256
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU2|DelayBuffer:DB1|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU2|DelayBuffer:DB1|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 128
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU2|DelayBuffer:DB2|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU2|DelayBuffer:DB2|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 64
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU3|DelayBuffer:DB1|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU3|DelayBuffer:DB1|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 32
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU3|DelayBuffer:DB2|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU3|DelayBuffer:DB2|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 16
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU4|DelayBuffer:DB1|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU4|DelayBuffer:DB1|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 8
         Info (286033): Parameter WIDTH set to 64
-    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU4|DelayBuffer:DB2|buf_r_rtl_0"
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "SdfUnit:SU4|DelayBuffer:DB2|buf_re_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 4
         Info (286033): Parameter WIDTH set to 64
@@ -2705,8 +2705,8 @@ Info (12133): Instantiated megafunction "SdfUnit:SU2|Twiddle:TW|altsyncram:Mux63
     Info (12134): Parameter "INIT_FILE" = "FFT.FFT1.rtl.mif"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_cou.tdf
     Info (12023): Found entity 1: altsyncram_cou
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU1|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "512"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2718,8 +2718,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_gsf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_vgc.tdf
     Info (12023): Found entity 1: cmpr_vgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU1|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "256"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2731,8 +2731,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_ksf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ugc.tdf
     Info (12023): Found entity 1: cmpr_ugc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU2|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "128"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2744,8 +2744,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_hsf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_tgc.tdf
     Info (12023): Found entity 1: cmpr_tgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU2|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "64"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2757,8 +2757,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_vqf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_sgc.tdf
     Info (12023): Found entity 1: cmpr_sgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU3|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "32"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2770,8 +2770,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_pqf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_rgc.tdf
     Info (12023): Found entity 1: cmpr_rgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU3|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "16"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2783,8 +2783,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_qqf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_qgc.tdf
     Info (12023): Found entity 1: cmpr_qgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU4|DelayBuffer:DB1|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "8"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2796,8 +2796,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/cntr
     Info (12023): Found entity 1: cntr_apf
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_pgc.tdf
     Info (12023): Found entity 1: cmpr_pgc
-Info (12130): Elaborated megafunction instantiation "SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0"
-Info (12133): Instantiated megafunction "SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_r_rtl_0" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0"
+Info (12133): Instantiated megafunction "SdfUnit:SU4|DelayBuffer:DB2|altshift_taps:buf_re_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
     Info (12134): Parameter "TAP_DISTANCE" = "4"
     Info (12134): Parameter "WIDTH" = "64"
@@ -2882,9 +2882,9 @@ Info (21057): Implemented 7153 device resources after synthesis - the final reso
     Info (21064): Implemented 634 RAM segments
     Info (21062): Implemented 128 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 794 megabytes
-    Info: Processing ended: Sat Aug 11 05:53:27 2018
-    Info: Elapsed time: 00:01:00
-    Info: Total CPU time (on all processors): 00:00:59
+    Info: Peak virtual memory: 818 megabytes
+    Info: Processing ended: Sun Apr 14 11:28:14 2019
+    Info: Elapsed time: 00:01:11
+    Info: Total CPU time (on all processors): 00:01:09
 
 

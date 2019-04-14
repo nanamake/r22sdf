@@ -14,8 +14,8 @@ my $NX = int(($NB + 3) / 4);	# Number of Hexadecimal Digits
 
 my $XX = "x" x $NX;	# Hexadecimal Unknown Value String
 
-printf("//      wn_r = cos(-2pi*n/%2d)   ", $N);
-printf("        wn_i = sin(-2pi*n/%2d)\n", $N);
+printf("//      wn_re = cos(-2pi*n/%2d)  ", $N);
+printf("        wn_im = sin(-2pi*n/%2d)\n", $N);
 
 for (my $n = 0; $n < $N; ++$n) {
 	my $wr = cos(-2 * $pi * $n / $N);
@@ -36,8 +36,8 @@ for (my $n = 0; $n < $N; ++$n) {
 	$wr_u = 0 if ($n == 0);
 	my $wr_s = ($dontcare) ? $XX : sprintf("%0${NX}X", $wr_u);
 	my $wi_s = ($dontcare) ? $XX : sprintf("%0${NX}X", $wi_u);
-	printf("assign  wn_r[%2d] = ${NB}'h $wr_s;   ", $n);
-	printf("assign  wn_i[%2d] = ${NB}'h $wi_s;   ", $n);
+	printf("assign  wn_re[%2d] = ${NB}'h$wr_s;   ", $n);
+	printf("assign  wn_im[%2d] = ${NB}'h$wi_s;   ", $n);
 	printf("// %2d", $n);
 	printf(" % .3f % .3f", $wr, $wi);
 	print "\n";

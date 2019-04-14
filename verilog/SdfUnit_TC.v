@@ -2,25 +2,25 @@
 //  SdfUnit: Radix-2^2 SDF Unit with Twiddle Conversion
 //----------------------------------------------------------------------
 module SdfUnit #(
-    parameter   N = 64,         //  Number of FFT Point
-    parameter   M = 64,         //  Twiddle Resolution
-    parameter   WIDTH = 16,     //  Data Bit Length
-    parameter   T4_EN = 0,      //  Use TwiddleConvert4
-    parameter   T8_EN = 1,      //  Use TwiddleConvert8
-    parameter   TW_FF = 1,      //  Use Twiddle Output Register
-    parameter   TC_FF = 1,      //  Use TwiddleConvert Output Register
-    parameter   B1_RH = 0,      //  1st Butterfly Round Half Up
-    parameter   B2_RH = 1,      //  2nd Butterfly Round Half Up
-    parameter   LP = 0          //  Power Saving
+    parameter   N = 64,     //  Number of FFT Point
+    parameter   M = 64,     //  Twiddle Resolution
+    parameter   WIDTH = 16, //  Data Bit Length
+    parameter   T4_EN = 0,  //  Use TwiddleConvert4
+    parameter   T8_EN = 1,  //  Use TwiddleConvert8
+    parameter   TW_FF = 1,  //  Use Twiddle Output Register
+    parameter   TC_FF = 1,  //  Use TwiddleConvert Output Register
+    parameter   B1_RH = 0,  //  1st Butterfly Round Half Up
+    parameter   B2_RH = 1,  //  2nd Butterfly Round Half Up
+    parameter   LP = 0      //  Power Saving
 )(
-    input               clock,      //  Master Clock
-    input               reset,      //  Active High Asynchronous Reset
-    input               idata_en,   //  Input Data Enable
-    input   [WIDTH-1:0] idata_r,    //  Input Data (Real)
-    input   [WIDTH-1:0] idata_i,    //  Input Data (Imag)
-    output              odata_en,   //  Output Data Enable
-    output  [WIDTH-1:0] odata_r,    //  Output Data (Real)
-    output  [WIDTH-1:0] odata_i     //  Output Data (Imag)
+    input               clock,  //  Master Clock
+    input               reset,  //  Active High Asynchronous Reset
+    input               di_en,  //  Input Data Enable
+    input   [WIDTH-1:0] di_re,  //  Input Data (Real)
+    input   [WIDTH-1:0] di_im,  //  Input Data (Imag)
+    output              do_en,  //  Output Data Enable
+    output  [WIDTH-1:0] do_re,  //  Output Data (Real)
+    output  [WIDTH-1:0] do_im   //  Output Data (Imag)
 );
 
 //  log2 constant function
@@ -45,139 +45,140 @@ localparam  EARLY = TC_EN & TW_FF & TC_FF;
 //  Internal Regs and Nets
 //----------------------------------------------------------------------
 //  1st Butterfly
-reg [LOG_N-1:0] idata_count;    //  Input Data Count
-wire            bf1_bf;         //  Butterfly Add/Sub Enable
-wire[WIDTH-1:0] bf1_x0_r;       //  Data #0 to Butterfly (Real)
-wire[WIDTH-1:0] bf1_x0_i;       //  Data #0 to Butterfly (Imag)
-wire[WIDTH-1:0] bf1_x1_r;       //  Data #1 to Butterfly (Real)
-wire[WIDTH-1:0] bf1_x1_i;       //  Data #1 to Butterfly (Imag)
-wire[WIDTH-1:0] bf1_y0_r;       //  Data #0 from Butterfly (Real)
-wire[WIDTH-1:0] bf1_y0_i;       //  Data #0 from Butterfly (Imag)
-wire[WIDTH-1:0] bf1_y1_r;       //  Data #1 from Butterfly (Real)
-wire[WIDTH-1:0] bf1_y1_i;       //  Data #1 from Butterfly (Imag)
-wire[WIDTH-1:0] db1_din_r;      //  Data to DelayBuffer (Real)
-wire[WIDTH-1:0] db1_din_i;      //  Data to DelayBuffer (Imag)
-wire[WIDTH-1:0] db1_dout_r;     //  Data from DelayBuffer (Real)
-wire[WIDTH-1:0] db1_dout_i;     //  Data from DelayBuffer (Imag)
-wire[WIDTH-1:0] bf1_sdout_r;    //  Single-Path Data Output (Real)
-wire[WIDTH-1:0] bf1_sdout_i;    //  Single-Path Data Output (Imag)
-reg             bf1_count_en;   //  Single-Path Data Count Enable
-reg [LOG_N-1:0] bf1_count;      //  Single-Path Data Count
-wire            bf1_start;      //  Single-Path Output Trigger
-wire            bf1_end;        //  End of Single-Path Data
-wire            bf1_mj;         //  Twiddle (-j) Enable
-reg [WIDTH-1:0] bf1_odata_r;    //  1st Butterfly Output Data (Real)
-reg [WIDTH-1:0] bf1_odata_i;    //  1st Butterfly Output Data (Imag)
+reg [LOG_N-1:0] di_count;   //  Input Data Count
+wire            bf1_bf;     //  Butterfly Add/Sub Enable
+wire[WIDTH-1:0] bf1_x0_re;  //  Data #0 to Butterfly (Real)
+wire[WIDTH-1:0] bf1_x0_im;  //  Data #0 to Butterfly (Imag)
+wire[WIDTH-1:0] bf1_x1_re;  //  Data #1 to Butterfly (Real)
+wire[WIDTH-1:0] bf1_x1_im;  //  Data #1 to Butterfly (Imag)
+wire[WIDTH-1:0] bf1_y0_re;  //  Data #0 from Butterfly (Real)
+wire[WIDTH-1:0] bf1_y0_im;  //  Data #0 from Butterfly (Imag)
+wire[WIDTH-1:0] bf1_y1_re;  //  Data #1 from Butterfly (Real)
+wire[WIDTH-1:0] bf1_y1_im;  //  Data #1 from Butterfly (Imag)
+wire[WIDTH-1:0] db1_di_re;  //  Data to DelayBuffer (Real)
+wire[WIDTH-1:0] db1_di_im;  //  Data to DelayBuffer (Imag)
+wire[WIDTH-1:0] db1_do_re;  //  Data from DelayBuffer (Real)
+wire[WIDTH-1:0] db1_do_im;  //  Data from DelayBuffer (Imag)
+wire[WIDTH-1:0] bf1_sp_re;  //  Single-Path Data Output (Real)
+wire[WIDTH-1:0] bf1_sp_im;  //  Single-Path Data Output (Imag)
+reg             bf1_sp_en;  //  Single-Path Data Enable
+reg [LOG_N-1:0] bf1_count;  //  Single-Path Data Count
+wire            bf1_start;  //  Single-Path Output Trigger
+wire            bf1_end;    //  End of Single-Path Data
+wire            bf1_mj;     //  Twiddle (-j) Enable
+reg [WIDTH-1:0] bf1_do_re;  //  1st Butterfly Output Data (Real)
+reg [WIDTH-1:0] bf1_do_im;  //  1st Butterfly Output Data (Imag)
 
 //  2nd Butterfly
-reg             bf2_bf;         //  Butterfly Add/Sub Enable
-wire[WIDTH-1:0] bf2_x0_r;       //  Data #0 to Butterfly (Real)
-wire[WIDTH-1:0] bf2_x0_i;       //  Data #0 to Butterfly (Imag)
-wire[WIDTH-1:0] bf2_x1_r;       //  Data #1 to Butterfly (Real)
-wire[WIDTH-1:0] bf2_x1_i;       //  Data #1 to Butterfly (Imag)
-wire[WIDTH-1:0] bf2_y0_r;       //  Data #0 from Butterfly (Real)
-wire[WIDTH-1:0] bf2_y0_i;       //  Data #0 from Butterfly (Imag)
-wire[WIDTH-1:0] bf2_y1_r;       //  Data #1 from Butterfly (Real)
-wire[WIDTH-1:0] bf2_y1_i;       //  Data #1 from Butterfly (Imag)
-wire[WIDTH-1:0] db2_din_r;      //  Data to DelayBuffer (Real)
-wire[WIDTH-1:0] db2_din_i;      //  Data to DelayBuffer (Imag)
-wire[WIDTH-1:0] db2_dout_r;     //  Data from DelayBuffer (Real)
-wire[WIDTH-1:0] db2_dout_i;     //  Data from DelayBuffer (Imag)
-wire[WIDTH-1:0] bf2_sdout_r;    //  Single-Path Data Output (Real)
-wire[WIDTH-1:0] bf2_sdout_i;    //  Single-Path Data Output (Imag)
-reg             bf2_count_en;   //  Single-Path Data Count Enable
-reg [LOG_N-1:0] bf2_count;      //  Single-Path Data Count
-wire            bf2_start_comb; //  Single-Path Output Trigger
-reg             bf2_start_ff;   //  Single-Path Output Trigger
-wire            bf2_start;      //  Single-Path Output Trigger
-wire            bf2_end;        //  End of Single-Path Data
-reg [WIDTH-1:0] bf2_odata_r;    //  2nd Butterfly Output Data (Real)
-reg [WIDTH-1:0] bf2_odata_i;    //  2nd Butterfly Output Data (Imag)
-reg             bf2_odata_en;   //  2nd Butterfly Output Data Enable
-reg             bf2_count_en_1d;//  Single-Path Data Enable When Using TC
+reg             bf2_bf;     //  Butterfly Add/Sub Enable
+wire[WIDTH-1:0] bf2_x0_re;  //  Data #0 to Butterfly (Real)
+wire[WIDTH-1:0] bf2_x0_im;  //  Data #0 to Butterfly (Imag)
+wire[WIDTH-1:0] bf2_x1_re;  //  Data #1 to Butterfly (Real)
+wire[WIDTH-1:0] bf2_x1_im;  //  Data #1 to Butterfly (Imag)
+wire[WIDTH-1:0] bf2_y0_re;  //  Data #0 from Butterfly (Real)
+wire[WIDTH-1:0] bf2_y0_im;  //  Data #0 from Butterfly (Imag)
+wire[WIDTH-1:0] bf2_y1_re;  //  Data #1 from Butterfly (Real)
+wire[WIDTH-1:0] bf2_y1_im;  //  Data #1 from Butterfly (Imag)
+wire[WIDTH-1:0] db2_di_re;  //  Data to DelayBuffer (Real)
+wire[WIDTH-1:0] db2_di_im;  //  Data to DelayBuffer (Imag)
+wire[WIDTH-1:0] db2_do_re;  //  Data from DelayBuffer (Real)
+wire[WIDTH-1:0] db2_do_im;  //  Data from DelayBuffer (Imag)
+wire[WIDTH-1:0] bf2_sp_re;  //  Single-Path Data Output (Real)
+wire[WIDTH-1:0] bf2_sp_im;  //  Single-Path Data Output (Imag)
+reg             bf2_ct_en;  //  Single-Path Data Count Enable
+reg [LOG_N-1:0] bf2_count;  //  Single-Path Data Count
+wire            bf2_start_0t;// Single-Path Output Trigger
+reg             bf2_start_1t;// Single-Path Output Trigger
+wire            bf2_start;  //  Single-Path Output Trigger
+wire            bf2_end;    //  End of Single-Path Data
+reg             bf2_ct_en_1d;// Single-Path Data Enable When Using TC
+wire            bf2_sp_en;  //  Single-Path Data Enable
+reg [WIDTH-1:0] bf2_do_re;  //  2nd Butterfly Output Data (Real)
+reg [WIDTH-1:0] bf2_do_im;  //  2nd Butterfly Output Data (Imag)
+reg             bf2_do_en;  //  2nd Butterfly Output Data Enable
 
 //  Multiplication
-wire[1:0]       tw_sel;         //  Twiddle Select (2n/n/3n)
-wire[LOG_N-3:0] tw_num;         //  Twiddle Number (n)
-wire[LOG_N-1:0] tw_addr;        //  Twiddle Table Address
-wire[LOG_N-1:0] tc_oaddr;       //  Twiddle Address from TwiddleConvert
-wire[LOG_N-1:0] tw_addr_tc;     //  Twiddle Address after TC_EN Switch
-wire[WIDTH-1:0] tw_data_r;      //  Twiddle Data from Table (Real)
-wire[WIDTH-1:0] tw_data_i;      //  Twiddle Data from Table (Imag)
-wire[WIDTH-1:0] tc_odata_r;     //  Twiddle Data from TwiddleConvert (Real)
-wire[WIDTH-1:0] tc_odata_i;     //  Twiddle Data from TwiddleConvert (Imag)
-reg             tw_addr_nz;     //  Multiplication Enable
-reg             tw_addr_nz_1d;  //  Multiplication Enable
-wire            mu_addr_nz;     //  Multiplication Enable
-wire[WIDTH-1:0] mu_idata_r;     //  Multiplier Input (Real)
-wire[WIDTH-1:0] mu_idata_i;     //  Multiplier Input (Imag)
-wire[WIDTH-1:0] mu_tdata_r;     //  Twiddle Data to Multiplier (Real)
-wire[WIDTH-1:0] mu_tdata_i;     //  Twiddle Data to Multiplier (Imag)
-wire[WIDTH-1:0] mu_mdata_r;     //  Multiplier Output (Real)
-wire[WIDTH-1:0] mu_mdata_i;     //  Multiplier Output (Imag)
-reg [WIDTH-1:0] mu_odata_r;     //  Multiplication Output Data (Real)
-reg [WIDTH-1:0] mu_odata_i;     //  Multiplication Output Data (Imag)
-reg             mu_odata_en;    //  Multiplication Output Data Enable
+wire[1:0]       tw_sel;     //  Twiddle Select (2n/n/3n)
+wire[LOG_N-3:0] tw_num;     //  Twiddle Number (n)
+wire[LOG_N-1:0] tw_addr;    //  Twiddle Table Address
+wire[LOG_N-1:0] tc_addr;    //  Twiddle Address from TwiddleConvert
+wire[LOG_N-1:0] tw_addr_tc; //  Twiddle Address after TC_EN Switch
+wire[WIDTH-1:0] tw_re;      //  Twiddle Data from Table (Real)
+wire[WIDTH-1:0] tw_im;      //  Twiddle Data from Table (Imag)
+wire[WIDTH-1:0] tc_re;      //  Twiddle Data from TwiddleConvert (Real)
+wire[WIDTH-1:0] tc_im;      //  Twiddle Data from TwiddleConvert (Imag)
+reg             tw_nz;      //  Multiplication Enable
+reg             tw_nz_1d;   //  Multiplication Enable
+wire            mu_en;      //  Multiplication Enable
+wire[WIDTH-1:0] mu_a_re;    //  Multiplier Input (Real)
+wire[WIDTH-1:0] mu_a_im;    //  Multiplier Input (Imag)
+wire[WIDTH-1:0] mu_b_re;    //  Twiddle Data to Multiplier (Real)
+wire[WIDTH-1:0] mu_b_im;    //  Twiddle Data to Multiplier (Imag)
+wire[WIDTH-1:0] mu_m_re;    //  Multiplier Output (Real)
+wire[WIDTH-1:0] mu_m_im;    //  Multiplier Output (Imag)
+reg [WIDTH-1:0] mu_do_re;   //  Multiplication Output Data (Real)
+reg [WIDTH-1:0] mu_do_im;   //  Multiplication Output Data (Imag)
+reg             mu_do_en;   //  Multiplication Output Data Enable
 
 //----------------------------------------------------------------------
 //  1st Butterfly
 //----------------------------------------------------------------------
 always @(posedge clock or posedge reset) begin
     if (reset) begin
-        idata_count <= {LOG_N{1'b0}};
+        di_count <= {LOG_N{1'b0}};
     end else begin
-        idata_count <= idata_en ? (idata_count + 1'b1) : {LOG_N{1'b0}};
+        di_count <= di_en ? (di_count + 1'b1) : {LOG_N{1'b0}};
     end
 end
-assign  bf1_bf = idata_count[LOG_M-1];
+assign  bf1_bf = di_count[LOG_M-1];
 
 //  Reducing signal changes may reduce power consumption
 //  Set unknown value x for verification
-assign  bf1_x0_r = bf1_bf ? db1_dout_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf1_x0_i = bf1_bf ? db1_dout_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf1_x1_r = bf1_bf ? idata_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf1_x1_i = bf1_bf ? idata_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf1_x0_re = bf1_bf ? db1_do_re : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf1_x0_im = bf1_bf ? db1_do_im : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf1_x1_re = bf1_bf ? di_re : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf1_x1_im = bf1_bf ? di_im : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 
 Butterfly #(.WIDTH(WIDTH),.RH(B1_RH)) BF1 (
-    .x0_r   (bf1_x0_r   ),  //  i
-    .x0_i   (bf1_x0_i   ),  //  i
-    .x1_r   (bf1_x1_r   ),  //  i
-    .x1_i   (bf1_x1_i   ),  //  i
-    .y0_r   (bf1_y0_r   ),  //  o
-    .y0_i   (bf1_y0_i   ),  //  o
-    .y1_r   (bf1_y1_r   ),  //  o
-    .y1_i   (bf1_y1_i   )   //  o
+    .x0_re  (bf1_x0_re  ),  //  i
+    .x0_im  (bf1_x0_im  ),  //  i
+    .x1_re  (bf1_x1_re  ),  //  i
+    .x1_im  (bf1_x1_im  ),  //  i
+    .y0_re  (bf1_y0_re  ),  //  o
+    .y0_im  (bf1_y0_im  ),  //  o
+    .y1_re  (bf1_y1_re  ),  //  o
+    .y1_im  (bf1_y1_im  )   //  o
 );
 
 DelayBuffer #(.DEPTH(2**(LOG_M-1)),.WIDTH(WIDTH)) DB1 (
     .clock  (clock      ),  //  i
-    .din_r  (db1_din_r  ),  //  i
-    .din_i  (db1_din_i  ),  //  i
-    .dout_r (db1_dout_r ),  //  o
-    .dout_i (db1_dout_i )   //  o
+    .di_re  (db1_di_re  ),  //  i
+    .di_im  (db1_di_im  ),  //  i
+    .do_re  (db1_do_re  ),  //  o
+    .do_im  (db1_do_im  )   //  o
 );
 
-assign  db1_din_r = bf1_bf ? bf1_y1_r : idata_r;
-assign  db1_din_i = bf1_bf ? bf1_y1_i : idata_i;
-assign  bf1_sdout_r = bf1_bf ? bf1_y0_r : bf1_mj ?  db1_dout_i : db1_dout_r;
-assign  bf1_sdout_i = bf1_bf ? bf1_y0_i : bf1_mj ? -db1_dout_r : db1_dout_i;
+assign  db1_di_re = bf1_bf ? bf1_y1_re : di_re;
+assign  db1_di_im = bf1_bf ? bf1_y1_im : di_im;
+assign  bf1_sp_re = bf1_bf ? bf1_y0_re : bf1_mj ?  db1_do_im : db1_do_re;
+assign  bf1_sp_im = bf1_bf ? bf1_y0_im : bf1_mj ? -db1_do_re : db1_do_im;
 
 always @(posedge clock or posedge reset) begin
     if (reset) begin
-        bf1_count_en <= 1'b0;
-        bf1_count    <= {LOG_N{1'b0}};
+        bf1_sp_en <= 1'b0;
+        bf1_count <= {LOG_N{1'b0}};
     end else begin
-        bf1_count_en <= bf1_start ? 1'b1 : bf1_end ? 1'b0 : bf1_count_en;
-        bf1_count    <= bf1_count_en ? (bf1_count + 1'b1) : {LOG_N{1'b0}};
+        bf1_sp_en <= bf1_start ? 1'b1 : bf1_end ? 1'b0 : bf1_sp_en;
+        bf1_count <= bf1_sp_en ? (bf1_count + 1'b1) : {LOG_N{1'b0}};
     end
 end
-assign  bf1_start = (idata_count == (2**(LOG_M-1)-1));
+assign  bf1_start = (di_count == (2**(LOG_M-1)-1));
 assign  bf1_end = (bf1_count == (2**LOG_N-1));
 assign  bf1_mj = (bf1_count[LOG_M-1:LOG_M-2] == 2'd3);
 
 always @(posedge clock) begin
-    bf1_odata_r <= bf1_sdout_r;
-    bf1_odata_i <= bf1_sdout_i;
+    bf1_do_re <= bf1_sp_re;
+    bf1_do_im <= bf1_sp_im;
 end
 
 //----------------------------------------------------------------------
@@ -189,67 +190,70 @@ end
 
 //  Reducing signal changes may reduce power consumption
 //  Set unknown value x for verification
-assign  bf2_x0_r = bf2_bf ? db2_dout_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf2_x0_i = bf2_bf ? db2_dout_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf2_x1_r = bf2_bf ? bf1_odata_r : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
-assign  bf2_x1_i = bf2_bf ? bf1_odata_i : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf2_x0_re = bf2_bf ? db2_do_re : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf2_x0_im = bf2_bf ? db2_do_im : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf2_x1_re = bf2_bf ? bf1_do_re : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
+assign  bf2_x1_im = bf2_bf ? bf1_do_im : LP ? {WIDTH{1'b0}} : {WIDTH{1'bx}};
 
 //  Negative bias occurs when RH=0 and positive bias occurs when RH=1.
 //  Using both alternately reduces the overall rounding error.
 Butterfly #(.WIDTH(WIDTH),.RH(B2_RH)) BF2 (
-    .x0_r   (bf2_x0_r   ),  //  i
-    .x0_i   (bf2_x0_i   ),  //  i
-    .x1_r   (bf2_x1_r   ),  //  i
-    .x1_i   (bf2_x1_i   ),  //  i
-    .y0_r   (bf2_y0_r   ),  //  o
-    .y0_i   (bf2_y0_i   ),  //  o
-    .y1_r   (bf2_y1_r   ),  //  o
-    .y1_i   (bf2_y1_i   )   //  o
+    .x0_re  (bf2_x0_re  ),  //  i
+    .x0_im  (bf2_x0_im  ),  //  i
+    .x1_re  (bf2_x1_re  ),  //  i
+    .x1_im  (bf2_x1_im  ),  //  i
+    .y0_re  (bf2_y0_re  ),  //  o
+    .y0_im  (bf2_y0_im  ),  //  o
+    .y1_re  (bf2_y1_re  ),  //  o
+    .y1_im  (bf2_y1_im  )   //  o
 );
 
 DelayBuffer #(.DEPTH(2**(LOG_M-2)),.WIDTH(WIDTH)) DB2 (
     .clock  (clock      ),  //  i
-    .din_r  (db2_din_r  ),  //  i
-    .din_i  (db2_din_i  ),  //  i
-    .dout_r (db2_dout_r ),  //  o
-    .dout_i (db2_dout_i )   //  o
+    .di_re  (db2_di_re  ),  //  i
+    .di_im  (db2_di_im  ),  //  i
+    .do_re  (db2_do_re  ),  //  o
+    .do_im  (db2_do_im  )   //  o
 );
 
-assign  db2_din_r = bf2_bf ? bf2_y1_r : bf1_odata_r;
-assign  db2_din_i = bf2_bf ? bf2_y1_i : bf1_odata_i;
-assign  bf2_sdout_r = bf2_bf ? bf2_y0_r : db2_dout_r;
-assign  bf2_sdout_i = bf2_bf ? bf2_y0_i : db2_dout_i;
+assign  db2_di_re = bf2_bf ? bf2_y1_re : bf1_do_re;
+assign  db2_di_im = bf2_bf ? bf2_y1_im : bf1_do_im;
+assign  bf2_sp_re = bf2_bf ? bf2_y0_re : db2_do_re;
+assign  bf2_sp_im = bf2_bf ? bf2_y0_im : db2_do_im;
 
 always @(posedge clock or posedge reset) begin
     if (reset) begin
-        bf2_count_en <= 1'b0;
-        bf2_count    <= {LOG_N{1'b0}};
+        bf2_ct_en <= 1'b0;
+        bf2_count <= {LOG_N{1'b0}};
     end else begin
-        bf2_count_en <= bf2_start ? 1'b1 : bf2_end ? 1'b0 : bf2_count_en;
-        bf2_count    <= bf2_count_en ? (bf2_count + 1'b1) : {LOG_N{1'b0}};
+        bf2_ct_en <= bf2_start ? 1'b1 : bf2_end ? 1'b0 : bf2_ct_en;
+        bf2_count <= bf2_ct_en ? (bf2_count + 1'b1) : {LOG_N{1'b0}};
     end
 end
 
-assign  bf2_start_comb = (bf1_count == (2**(LOG_M-2)-1)) & bf1_count_en;
-always @(posedge clock) begin
-    bf2_start_ff <= bf2_start_comb;
-end
 //  When using Twiddle Conversion, start counting 1T earlier
-assign  bf2_start = EARLY ? bf2_start_comb : bf2_start_ff;
+assign  bf2_start_0t = (bf1_count == (2**(LOG_M-2)-1)) & bf1_sp_en;
+always @(posedge clock) begin
+    bf2_start_1t <= bf2_start_0t;
+end
+assign  bf2_start = EARLY ? bf2_start_0t : bf2_start_1t;
 assign  bf2_end = (bf2_count == (2**LOG_N-1));
 
 always @(posedge clock) begin
-    bf2_odata_r  <= bf2_sdout_r;
-    bf2_odata_i  <= bf2_sdout_i;
+    bf2_ct_en_1d <= bf2_ct_en;
+end
+assign  bf2_sp_en = EARLY ? bf2_ct_en_1d : bf2_ct_en;
+
+always @(posedge clock) begin
+    bf2_do_re <= bf2_sp_re;
+    bf2_do_im <= bf2_sp_im;
 end
 
 always @(posedge clock or posedge reset) begin
     if (reset) begin
-        bf2_count_en_1d <= 1'b0;
-        bf2_odata_en <= 1'b0;
+        bf2_do_en <= 1'b0;
     end else begin
-        bf2_count_en_1d <= bf2_count_en;
-        bf2_odata_en <= EARLY ? bf2_count_en_1d : bf2_count_en;
+        bf2_do_en <= bf2_sp_en;
     end
 end
 
@@ -264,77 +268,77 @@ assign  tw_addr = tw_num * tw_sel;
 Twiddle #(.TW_FF(TW_FF)) TW (
     .clock  (clock      ),  //  i
     .addr   (tw_addr_tc ),  //  i
-    .data_r (tw_data_r  ),  //  o
-    .data_i (tw_data_i  )   //  o
+    .tw_re  (tw_re      ),  //  o
+    .tw_im  (tw_im      )   //  o
 );
 
 generate if (T4_EN) begin
     TwiddleConvert4 #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
-        .clock  (clock      ),  //  i
-        .iaddr  (tw_addr    ),  //  i
-        .idata_r(tw_data_r  ),  //  i
-        .idata_i(tw_data_i  ),  //  i
-        .oaddr  (tc_oaddr   ),  //  o
-        .odata_r(tc_odata_r ),  //  o
-        .odata_i(tc_odata_i )   //  o
+        .clock      (clock  ),  //  i
+        .tw_addr    (tw_addr),  //  i
+        .tw_re      (tw_re  ),  //  i
+        .tw_im      (tw_im  ),  //  i
+        .tc_addr    (tc_addr),  //  o
+        .tc_re      (tc_re  ),  //  o
+        .tc_im      (tc_im  )   //  o
     );
 end else if (T8_EN) begin
     TwiddleConvert8 #(.LOG_N(LOG_N),.WIDTH(WIDTH),.TW_FF(TW_FF),.TC_FF(TC_FF)) TC (
-        .clock  (clock      ),  //  i
-        .iaddr  (tw_addr    ),  //  i
-        .idata_r(tw_data_r  ),  //  i
-        .idata_i(tw_data_i  ),  //  i
-        .oaddr  (tc_oaddr   ),  //  o
-        .odata_r(tc_odata_r ),  //  o
-        .odata_i(tc_odata_i )   //  o
+        .clock      (clock  ),  //  i
+        .tw_addr    (tw_addr),  //  i
+        .tw_re      (tw_re  ),  //  i
+        .tw_im      (tw_im  ),  //  i
+        .tc_addr    (tc_addr),  //  o
+        .tc_re      (tc_re  ),  //  o
+        .tc_im      (tc_im  )   //  o
     );
 end else begin
-    assign  tc_oaddr = {LOG_N{1'bx}};
-    assign  tc_odata_r = {WIDTH{1'bx}};
-    assign  tc_odata_i = {WIDTH{1'bx}};
+    assign  tc_addr = {LOG_N{1'bx}};
+    assign  tc_re = {WIDTH{1'bx}};
+    assign  tc_im = {WIDTH{1'bx}};
 end endgenerate
 
-assign  tw_addr_tc = TC_EN ? tc_oaddr : tw_addr;
-assign  mu_tdata_r = TC_EN ? tc_odata_r : tw_data_r;
-assign  mu_tdata_i = TC_EN ? tc_odata_i : tw_data_i;
+assign  tw_addr_tc = TC_EN ? tc_addr : tw_addr;
+assign  mu_b_re = TC_EN ? tc_re : tw_re;
+assign  mu_b_im = TC_EN ? tc_im : tw_im;
 
-//  When using Twiddle Conversion, address generated 1T Earlier
+//  Multiplication is bypassed when twiddle address is 0.
 always @(posedge clock) begin
-    tw_addr_nz <= (tw_addr != {LOG_N{1'b0}});
-    tw_addr_nz_1d <= tw_addr_nz;
+    tw_nz <= (tw_addr != {LOG_N{1'b0}});
+    tw_nz_1d <= tw_nz;
 end
-assign  mu_addr_nz = EARLY ? tw_addr_nz_1d : tw_addr_nz;
+//  When using Twiddle Conversion, address generated 1T Earlier
+assign  mu_en = EARLY ? tw_nz_1d : tw_nz;
 
 //  Set unknown value x for verification
-assign  mu_idata_r = mu_addr_nz ? bf2_odata_r : {WIDTH{1'bx}};
-assign  mu_idata_i = mu_addr_nz ? bf2_odata_i : {WIDTH{1'bx}};
+assign  mu_a_re = mu_en ? bf2_do_re : {WIDTH{1'bx}};
+assign  mu_a_im = mu_en ? bf2_do_im : {WIDTH{1'bx}};
 
 Multiply #(.WIDTH(WIDTH)) MU (
-    .ar (mu_idata_r ),  //  i
-    .ai (mu_idata_i ),  //  i
-    .br (mu_tdata_r ),  //  i
-    .bi (mu_tdata_i ),  //  i
-    .mr (mu_mdata_r ),  //  o
-    .mi (mu_mdata_i )   //  o
+    .a_re   (mu_a_re),  //  i
+    .a_im   (mu_a_im),  //  i
+    .b_re   (mu_b_re),  //  i
+    .b_im   (mu_b_im),  //  i
+    .m_re   (mu_m_re),  //  o
+    .m_im   (mu_m_im)   //  o
 );
 
-//  When twiddle number n is not 0, multiplication is performed.
 always @(posedge clock) begin
-    mu_odata_r <= mu_addr_nz ? mu_mdata_r : bf2_odata_r;
-    mu_odata_i <= mu_addr_nz ? mu_mdata_i : bf2_odata_i;
+    mu_do_re <= mu_en ? mu_m_re : bf2_do_re;
+    mu_do_im <= mu_en ? mu_m_im : bf2_do_im;
 end
 
 always @(posedge clock or posedge reset) begin
     if (reset) begin
-        mu_odata_en <= 1'b0;
+        mu_do_en <= 1'b0;
     end else begin
-        mu_odata_en <= bf2_odata_en;
+        mu_do_en <= bf2_do_en;
     end
 end
 
 //  No multiplication required at final stage
-assign  odata_en = (LOG_M == 2) ? bf2_odata_en : mu_odata_en;
-assign  odata_r  = (LOG_M == 2) ? bf2_odata_r  : mu_odata_r;
-assign  odata_i  = (LOG_M == 2) ? bf2_odata_i  : mu_odata_i;
+assign  do_en = (LOG_M == 2) ? bf2_do_en : mu_do_en;
+assign  do_re = (LOG_M == 2) ? bf2_do_re : mu_do_re;
+assign  do_im = (LOG_M == 2) ? bf2_do_im : mu_do_im;
 
 endmodule
